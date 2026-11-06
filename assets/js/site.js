@@ -222,3 +222,12 @@ if (sim) {
     if (window.gsap && !matchMedia('(prefers-reduced-motion: reduce)').matches) gsap.fromTo(why, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: .35 });
   }));
 })();
+
+/* ---------- REFORMULAÇÃO DE COMPRAS: blueprint ---------- */
+(() => {
+  const why = document.getElementById('bpWhy'); if (!why) return;
+  const hots = [...document.querySelectorAll('.bp-hot')];
+  const show = h => { hots.forEach(x => x.classList.toggle('on', x === h)); why.innerHTML = document.getElementById(h.dataset.h).innerHTML;
+    if (window.gsap && !matchMedia('(prefers-reduced-motion: reduce)').matches) gsap.fromTo(why, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: .35 }); };
+  hots.forEach(h => { h.addEventListener('click', () => show(h)); h.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(h); } }); });
+})();

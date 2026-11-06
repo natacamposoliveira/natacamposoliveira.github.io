@@ -398,3 +398,46 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .place .tagdot{transform-box:fill-box;transform-origin:center;transform:scale(0);transition:transform .5s cubic-bezier(.34,1.56,.64,1)}
 .place.lit .tagdot{transform:scale(1)}
 .place.lit .tagdot.d2{transition-delay:.15s}.place.lit .tagdot.d3{transition-delay:.3s}.place.lit .tagdot.d4{transition-delay:.45s}
+
+/* Reformulação de Compras: antes e depois, blueprint e portal */
+.pil{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}
+.pil-c{background:var(--card);border-radius:18px;padding:22px 22px 24px;border-top:6px solid var(--kraft);transition:transform .3s var(--ease),border-color .3s}
+.pil-c:hover{transform:translateY(-4px);border-color:var(--orange)}
+.pil-c b{font-family:var(--fd);font-size:13px;color:var(--orange);letter-spacing:.06em}
+.pil-c h3{font-size:19px;margin:6px 0 8px}
+.pil-c p{color:var(--mute);font-size:16px;line-height:1.5}
+.bp{background:var(--card);border-radius:var(--r);margin-top:22px;overflow:hidden;box-shadow:0 1px 0 var(--line)}
+.bp-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.bp svg{min-width:760px;width:100%;height:auto;font-family:var(--fb)}
+.bp-ln text{font-size:11px;font-weight:800;fill:var(--mute);letter-spacing:.05em}
+.bp-ln text:nth-child(even){font-size:13px;fill:var(--steel);letter-spacing:0;font-weight:700}
+.bp-lt text{font-size:11px;fill:#9AA6B2;font-style:italic}
+.bp-n rect,.bp-n .dia{fill:#fff;stroke:var(--steel);stroke-width:2}
+.bp-n .dia{fill:#FFF6E5;stroke:var(--warn)}
+.bp-n text{font-size:12.5px;font-weight:700;fill:var(--steel);text-anchor:middle}
+.bp-no{font-size:12px;font-weight:800;fill:var(--orange)}
+.bp-yes{font-size:12px;font-weight:800;fill:var(--ok)}
+.bp-gap{stroke-dashoffset:0;animation:bpdash 1.2s linear infinite}
+@keyframes bpdash{to{stroke-dashoffset:-26}}
+.bp-hot{cursor:pointer}
+.bp-hot circle{fill:var(--orange);stroke:#fff;stroke-width:3;transition:transform .25s;transform-box:fill-box;transform-origin:center}
+.bp-hot text{fill:#fff;font-weight:900;font-size:16px;text-anchor:middle;pointer-events:none}
+.bp-hot:hover circle,.bp-hot.on circle,.bp-hot:focus-visible circle{transform:scale(1.18)}
+.bp-hot.on circle{fill:var(--steel)}
+.bp-why{padding:18px 20px 22px;border-top:1px solid var(--line);min-height:92px}
+.bp-why h3{font-size:18px;margin-bottom:6px}
+.bp-why p{color:var(--mute);font-size:16px}
+.pf{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:22px;counter-reset:pf}
+.pf-s{background:var(--card);border-radius:18px;padding:18px;position:relative}
+.pf-s b{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--kraft);font-family:var(--fd);font-size:15px;margin-bottom:10px}
+.pf-s h4{font-size:16px;margin-bottom:6px}
+.pf-s p{color:var(--mute);font-size:15px;line-height:1.45}
+.pf-s:not(:last-child)::after{content:"→";position:absolute;right:-12px;top:22px;font-weight:900;color:var(--orange);z-index:1}
+@media (max-width:900px){.pf{grid-template-columns:1fr 1fr}.pf-s::after{display:none}}
+@media (max-width:900px){.pil{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.pil{grid-template-columns:1fr}.pf{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.bp-gap{animation:none}}
+.bp-hint{display:none;padding:10px 16px 0;font-size:13px;font-weight:800;color:var(--orange)}
+@media (max-width:760px){.bp-hint{display:block}}
+.place .flowln path{stroke-dasharray:40;stroke-dashoffset:40;transition:stroke-dashoffset .9s var(--ease) .1s}
+.place.lit .flowln path{stroke-dashoffset:0}
