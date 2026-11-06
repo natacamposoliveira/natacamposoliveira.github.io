@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Saúde do estoque: classificação ESA · caso de Natã Campos de Oliveira</title>
+<meta name="description" content="Classificação ESA: metodologia criada por Natã Campos de Oliveira na Cogra para medir a saúde do estoque em quatro níveis, cruzando giro, cobertura, última venda, clientes e estoque histórico para não confundir encalhe com ruptura.">
+<link rel="canonical" href="https://natacamposoliveira.github.io/casos/saude-do-estoque.html">
+<meta property="og:type" content="article"><meta property="og:title" content="Saúde do estoque: classificação ESA · Natã Campos de Oliveira"><meta property="og:description" content="Quatro níveis de saúde do estoque e uma regra para não confundir produto encalhado com produto em falta.">
+<meta property="og:image" content="https://natacamposoliveira.github.io/assets/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#EDF0F3">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/site.css?v=c28dabd4">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"CreativeWork","name":"Saúde do estoque: classificação ESA","author":{"@type":"Person","name":"Natã Campos de Oliveira","url":"https://natacamposoliveira.github.io/"},"about":"Metodologia de classificação da saúde do estoque em quatro níveis, cruzando giro, cobertura, recência de venda, quantidade de clientes e estoque histórico, automatizada em Excel e VBA.","dateCreated":"2025-10","inLanguage":"pt-BR"}
+</script>
+</head>
+<body>
+<div class="progress" aria-hidden="true"></div>
+<header class="nav"><div class="wrap">
+  <a class="brand" href="../index.html"><i aria-hidden="true"></i>Natã Campos de Oliveira</a>
+  <button class="burger" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span></button>
+  <ul><li><a href="#resumo">Resumo</a></li><li><a href="#niveis">Os níveis</a></li><li><a href="#planilha">Na prática</a></li><li><a href="#papel">Meu papel</a></li><li><a href="../index.html#contato">Contato</a></li></ul>
+</div></header>
+
+<main class="wrap">
+<section class="ch" id="resumo">
+  <a class="crumb" href="../index.html#casos">← Todos os casos</a>
+  <h1 data-split="now">Saúde do estoque: separar o produto encalhado do produto que faltou</h1>
+  <p class="lead" data-rise>Numa distribuidora do mercado de impressão, o índice de giro sozinho não dizia se um produto estava parado, em falta ou só começando a vender. Criei uma classificação em quatro níveis que cruza cinco sinais de cada produto e automatizei o cálculo em Excel e VBA.</p>
+  <div class="meta" data-rise><span>Cogra · Compras e planejamento</span><span>Projeto individual</span><span>Excel · VBA · Qlik Sense</span><span>out. 2025</span></div>
+  <div class="kpis">
+    <div class="kpi" data-rise><b data-count="4">4</b><span>níveis de saúde, do verde ao roxo</span></div>
+    <div class="kpi" data-rise><b data-count="5">5</b><span>sinais cruzados em cada produto</span></div>
+    <div class="kpi" data-rise><b data-count="44">44</b><span>colunas do relatório reduzidas ao que decide a classificação</span></div>
+    <div class="kpi" data-rise><b data-count="3" data-suf=" meses">3 meses</b><span>de vendas e estoque lidos mês a mês</span></div>
+  </div>
+  <div class="quick">
+    <div data-rise><small>Problema</small><p>Um produto com poucas vendas pode estar encalhado, ter ficado sem estoque, ser novo ou ter poucos compradores. Olhando só o giro, todos parecem iguais, e a decisão de compra ou de ação comercial sai errada.</p></div>
+    <div data-rise><small>O que eu fiz</small><p>Investiguei como o giro do relatório era calculado, montei uma base com vendas e estoque mês a mês e defini as regras dos quatro níveis, com o giro como eixo principal.</p></div>
+    <div data-rise><small>Resultado</small><p>Regras dos quatro níveis aprovadas e uma macro que classifica cada produto ao lado da classificação original do relatório, para comparar as duas.</p></div>
+  </div>
+</section>
+
+<section class="block" id="niveis">
+  <h2 data-split>Quatro níveis de saúde</h2>
+  <p class="sub">Cada produto com estoque disponível recebe um nível. O nível diz onde agir primeiro.</p>
+  <div class="esa-levels">
+    <div class="esa-lv g" data-rise><b>Verde</b><h3>Saudável</h3><p>Vende com frequência, para vários clientes, com estoque na medida.</p></div>
+    <div class="esa-lv y" data-rise><b>Amarelo</b><h3>Atenção</h3><p>Algum sinal de risco: venda mais lenta, estoque crescendo ou poucos compradores.</p></div>
+    <div class="esa-lv r" data-rise><b>Vermelho</b><h3>Encalhado</h3><p>Perdeu velocidade e tem estoque para muito tempo, mas ainda dá para recuperar.</p></div>
+    <div class="esa-lv p" data-rise><b>Roxo</b><h3>Crítico</h3><p>Quase sem movimento e sem compradores. Pede decisão, não espera.</p></div>
+  </div>
+</section>
+
+<section class="block" id="planilha">
+  <h2 data-split>Na prática: cinco produtos, cinco histórias</h2>
+  <p class="sub">Reconstrução ilustrativa da planilha, com produtos e situações fictícios. Toque em classificar e depois num produto para ver por que ele ficou naquele nível. O último mostra a regra que evita o falso encalhe.</p>
+  <div class="esa" data-rise>
+    <div class="esa-bar"><span>Base de classificação · produtos fictícios</span><button class="btn" type="button" id="esaRun">Classificar</button></div>
+    <div class="esa-head" aria-hidden="true"><span>Produto</span><span>Giro</span><span>Cobertura</span><span>Última venda</span><span>Clientes</span><span>Tinha estoque antes?</span><span>Nível</span></div>
+    <button class="esa-row" type="button" data-c="g" data-r="esa-1"><span class="pn"><b>Toner preto</b><small>Fabricante A</small></span><span data-l="Giro"><i class="mb" style="--v:.9"></i>alto</span><span data-l="Cobertura">na medida</span><span data-l="Última venda">esta semana</span><span data-l="Clientes">muitos</span><span data-l="Tinha estoque antes?">sim</span><span class="res" data-l="Nível"><em>Verde</em></span></button>
+    <button class="esa-row" type="button" data-c="y" data-r="esa-2"><span class="pn"><b>Cartucho colorido</b><small>Fabricante B</small></span><span data-l="Giro"><i class="mb" style="--v:.62"></i>bom</span><span data-l="Cobertura">na medida</span><span data-l="Última venda">esta semana</span><span data-l="Clientes">poucos</span><span data-l="Tinha estoque antes?">sim</span><span class="res" data-l="Nível"><em>Amarelo</em></span></button>
+    <button class="esa-row" type="button" data-c="r" data-r="esa-3"><span class="pn"><b>Cilindro</b><small>Fabricante C</small></span><span data-l="Giro"><i class="mb" style="--v:.28"></i>baixo</span><span data-l="Cobertura">meses</span><span data-l="Última venda">há meses</span><span data-l="Clientes">poucos</span><span data-l="Tinha estoque antes?">sim</span><span class="res" data-l="Nível"><em>Vermelho</em></span></button>
+    <button class="esa-row" type="button" data-c="p" data-r="esa-4"><span class="pn"><b>Papel fotográfico</b><small>Fabricante A</small></span><span data-l="Giro"><i class="mb" style="--v:.06"></i>quase nulo</span><span data-l="Cobertura">muito longa</span><span data-l="Última venda">há muito tempo</span><span data-l="Clientes">nenhum</span><span data-l="Tinha estoque antes?">sim</span><span class="res" data-l="Nível"><em>Roxo</em></span></button>
+    <button class="esa-row" type="button" data-c="n" data-r="esa-5"><span class="pn"><b>Unidade fusora</b><small>Fabricante D</small></span><span data-l="Giro"><i class="mb" style="--v:.3"></i>baixo</span><span data-l="Cobertura">acabou de chegar</span><span data-l="Última venda">há semanas</span><span data-l="Clientes">vários</span><span data-l="Tinha estoque antes?">não</span><span class="res" data-l="Nível"><em>Ruptura, não encalhe</em></span></button>
+    <div class="esa-why" id="esaWhy" aria-live="polite"><p>Toque em <b>Classificar</b> para a macro preencher a última coluna.</p></div>
+  </div>
+  <template id="esa-1"><h3>Toner preto: <span class="tg g">Verde</span></h3><p>Todos os sinais apontam para o mesmo lado: gira bem, vende toda semana para muitos clientes e o estoque cobre o tempo certo. Nada a fazer além de manter a reposição.</p></template>
+  <template id="esa-2"><h3>Cartucho colorido: <span class="tg y">Amarelo</span></h3><p>Gira bem e não está sobrando, mas depende de poucos compradores. Se um deles parar de comprar, o produto encalha. Vale acompanhar antes que o problema apareça.</p></template>
+  <template id="esa-3"><h3>Cilindro: <span class="tg r">Vermelho</span></h3><p>Perdeu velocidade, está há meses sem vender e tem estoque para muito tempo. Ainda tem clientes que conhecem o produto, então dá para recuperar com ação comercial antes de virar roxo.</p></template>
+  <template id="esa-4"><h3>Papel fotográfico: <span class="tg p">Roxo</span></h3><p>Quase não gira, ninguém comprou no período e o estoque daria para muito tempo. É o grupo de criticidade extrema: precisa de decisão, como uma ação de saída ou uma negociação com o fabricante.</p></template>
+  <template id="esa-5"><h3>Unidade fusora: <span class="tg n">Ruptura, não encalhe</span></h3><p>Está há semanas sem vender, mas não tinha estoque nos meses anteriores: o cliente não comprou porque não havia o que comprar. Por isso o tempo sem venda não conta contra o produto, e o nível sai dos outros sinais. Sem essa regra, ele seria marcado como encalhado e poderia até deixar de ser comprado.</p></template>
+</section>
+
+<section class="block">
+  <h2 data-split>Como eu construí</h2>
+  <p class="sub">Toque em cada etapa para ver o detalhe.</p>
+  <div class="steps">
+    <div class="step" role="button" tabindex="0" aria-expanded="false"><span class="n"></span><span><h4>Entender o giro antes de usar</h4><p>Abri a conta do índice de giro do relatório do Qlik Sense para saber o que ele mede de verdade.</p><span class="x"><p>Investiguei quais movimentos entravam no cálculo, o período usado e como o estoque médio era formado, e conferi o comportamento do saldo no Kardex. Também separei o giro em vezes de um índice percentual e decidi não descartar valores acima de 100%, que o relatório produz.</p></span></span></div>
+    <div class="step" role="button" tabindex="0" aria-expanded="false"><span class="n"></span><span><h4>Montar a base certa</h4><p>Do relatório de 44 colunas, fiquei com o que decide a classificação.</p><span class="x"><p>Fabricante, linha, produto, giro, vendas e estoque de cada mês, estoque vendável, cobertura em dias, clientes, última compra e última venda. Os outros campos não foram descartados, só saíram do caminho da regra.</p></span></span></div>
+    <div class="step" role="button" tabindex="0" aria-expanded="false"><span class="n"></span><span><h4>Não confundir zero com vazio</h4><p>No relatório, o hífen quer dizer "sem registro", e zero quer dizer zero.</p><span class="x"><p>Tratar os dois como iguais distorce médias e datas. A regra preserva o zero como dado real e trata o hífen como ausência de informação.</p></span></span></div>
+    <div class="step" role="button" tabindex="0" aria-expanded="false"><span class="n"></span><span><h4>Separar encalhe de falta de estoque</h4><p>Produto sem estoque disponível não entra na classificação de risco.</p><span class="x"><p>E o tempo sem venda só conta contra o produto se ele tinha estoque nos meses anteriores. Assim, uma ruptura não vira um falso encalhe.</p></span></span></div>
+    <div class="step" role="button" tabindex="0" aria-expanded="false"><span class="n"></span><span><h4>Regras dos quatro níveis</h4><p>Comecei pelo amarelo e depois defini verde, vermelho e roxo.</p><span class="x"><p>O giro é o eixo principal, mas nenhum sinal decide sozinho: cobertura, última venda, clientes e estoque histórico entram com pesos próprios, para um número isolado não mudar o diagnóstico.</p></span></span></div>
+    <div class="step" role="button" tabindex="0" aria-expanded="false"><span class="n"></span><span><h4>Automatizar em VBA</h4><p>Uma macro classifica cada produto e escreve o resultado na mesma linha.</p><span class="x"><p>A classificação original do relatório fica intacta, ao lado da calculada, para comparar as duas. A macro localiza sozinha os meses de estoque mais recentes pelo título da coluna, para servir aos relatórios dos meses seguintes.</p></span></span></div>
+  </div>
+</section>
+
+<section class="block" id="papel">
+  <h2 data-split>Meu papel</h2>
+  <div class="cols">
+    <div class="panelc" data-rise><h3>O que eu fiz</h3><ul><li>Identifiquei o problema: o giro sozinho não explicava a saúde do estoque</li><li>Investiguei o cálculo do índice de giro e o histórico de saldos</li><li>Defini os sinais, as regras e os quatro níveis da classificação</li><li>Montei a base e automatizei a classificação em Excel e VBA</li></ul><div class="tags"><span>Gestão de estoque</span><span>Análise de dados</span><span>Regras de negócio</span></div></div>
+    <div class="panelc" data-rise><h3>Ferramentas</h3><ul><li>Relatórios do Qlik Sense e Kardex como fonte de dados</li><li>Excel com fórmulas avançadas para a base e as regras</li><li>VBA para aplicar a classificação a cada novo relatório</li></ul><div class="tags"><span>Excel</span><span>VBA</span><span>Qlik Sense</span></div></div>
+  </div>
+  <p style="margin-top:18px;font-size:15px;color:var(--mute)">As faixas e os pesos de cada nível ficam fora desta página. Eu mostro a metodologia completa numa conversa.</p>
+  <p style="margin-top:14px"><a class="btn" href="https://wa.me/5511967020373?text=Ol%C3%A1%2C%20Nat%C3%A3!%20Vi%20o%20caso%20da%20sa%C3%BAde%20do%20estoque%20no%20seu%20portf%C3%B3lio%20e%20quero%20conversar." target="_blank" rel="noopener">Quero conversar sobre isso</a></p>
+</section>
+
+<nav class="next" aria-label="Navegação entre casos"><a class="btn ghost" href="consulting-hub.html">← Caso anterior: Consulting Hub</a><a class="btn" href="iqf.html">Próximo caso: IQF →</a></nav>
+</main>
+
+<footer><div class="wrap"><span>© 2026 Natã Campos de Oliveira</span><span><a href="https://wa.me/5511967020373?text=Ol%C3%A1%2C%20Nat%C3%A3!%20Vi%20seu%20portf%C3%B3lio%20e%20quero%20conversar." target="_blank" rel="noopener">WhatsApp</a> · <a href="mailto:natacamposoliveira@gmail.com">E-mail</a> · <a href="https://www.linkedin.com/in/natacamposoliveira/">LinkedIn</a></span></div></footer>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="../assets/js/site.js?v=c28dabd4"></script>
+</body>
+</html>

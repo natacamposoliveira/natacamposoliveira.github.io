@@ -206,3 +206,19 @@ if (sim) {
   nodes.forEach(n => n.addEventListener('click', () => show(n)));
   show(nodes[0]);
 })();
+
+/* ---------- SAÚDE DO ESTOQUE: planilha ilustrativa ---------- */
+(() => {
+  const box = document.querySelector('.esa'); if (!box) return;
+  const run = document.getElementById('esaRun'), why = document.getElementById('esaWhy');
+  const rows = [...box.querySelectorAll('.esa-row')];
+  rows.forEach((r, k) => r.querySelector('.res').style.setProperty('--k', k));
+  const classify = () => { if (box.classList.contains('done')) return; box.classList.add('done'); run.textContent = 'Classificado'; run.disabled = true; why.innerHTML = '<p>Pronto. Toque num produto para ver por que ele ficou nesse nível.</p>'; };
+  run.addEventListener('click', classify);
+  rows.forEach(r => r.addEventListener('click', () => {
+    classify();
+    rows.forEach(x => x.classList.toggle('on', x === r));
+    why.innerHTML = document.getElementById(r.dataset.r).innerHTML;
+    if (window.gsap && !matchMedia('(prefers-reduced-motion: reduce)').matches) gsap.fromTo(why, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: .35 });
+  }));
+})();
