@@ -28,8 +28,11 @@ const onScroll = () => {
 addEventListener('scroll', onScroll, { passive: true }); onScroll();
 $('.burger')?.addEventListener('click', () => { nav.classList.toggle('menu'); $('.burger').setAttribute('aria-expanded', nav.classList.contains('menu')); });
 const secs = $$('section[id]'), links = $$('.nav ul a');
-if (hasG) secs.forEach(s => ScrollTrigger.create({ trigger: s, start: 'top 50%', end: 'bottom 50%',
-  onToggle: st => st.isActive && links.forEach(l => l.classList.toggle('on', l.getAttribute('href') === '#' + s.id)) }));
+
+function navSpy() { if (!hasG) return;
+  secs.forEach(s => { const t = s.parentElement && s.parentElement.classList.contains('pin-spacer') ? s.parentElement : s;
+    ScrollTrigger.create({ trigger: t, start: 'top 50%', end: 'bottom 50%', onToggle: st => st.isActive && links.forEach(l => l.classList.toggle('on', l.getAttribute('href') === '#' + s.id)) }); });
+  ScrollTrigger.refresh(); }
 
 /* textos que entram */
 document.fonts.ready.then(() => {
@@ -41,7 +44,7 @@ document.fonts.ready.then(() => {
   });
   $$('[data-rise]').forEach(el => gsap.from(el, { y: 36, opacity: 0, duration: .9, ease: 'expo.out',
     scrollTrigger: { trigger: el, start: 'top 88%' } }));
-  initRoute();
+  initRoute(); navSpy();
 });
 
 /* ---------- ESTEIRA ---------- */
@@ -114,20 +117,28 @@ function initRoute() {
   const build = () => {
     tl && tl.scrollTrigger && tl.scrollTrigger.kill(); tl && tl.kill();
     const u = Math.min(innerHeight / 100, innerWidth * (innerWidth < 700 ? .022 : .013));
-    const step = u * 30, start = Math.max(innerWidth * .5, u * 60), n = Math.max(...places.map(p => +p.dataset.i)) + 1;
+    const step = u * 30, start = Math.max(innerWidth * .5, u * 60), tw = u * 12;
+    // a rota termina no último lugar, seja trabalho ou projeto; novos lugares estendem a rota sozinhos
+    const lastI = Math.max(...places.map(p => +p.dataset.i));
     places.forEach(p => p.style.left = (start + +p.dataset.i * step) + 'px');
-    const total = start + n * step + u * 30; lanes.forEach(l => l.style.width = total + 'px'); world.style.width = total + 'px';
-    const dist = Math.max(0, total - innerWidth), t0 = innerWidth * .1, t1 = Math.max(t0, start + (n - 1) * step - dist - u * 16);
-    const light = p => { const tx = t0 + (t1 - t0) * p + u * 10; places.forEach(pl => pl.classList.toggle('lit', start + +pl.dataset.i * step - dist * p <= tx)); };
+    const total = start + lastI * step + innerWidth * .25;
+    lanes.forEach(l => l.style.width = total + 'px'); world.style.width = total + 'px';
+    const dist = Math.max(0, total - innerWidth), lastX = start + lastI * step - dist;
+    const t0 = innerWidth * .08, t1 = Math.max(t0, lastX - tw * .5);
+    // acende cada lugar quando a frente do caminhão passa por ele
+    const light = p => { const front = t0 + (t1 - t0) * p + tw * .9; places.forEach(pl => pl.classList.toggle('lit', start + +pl.dataset.i * step - dist * p <= front)); };
     if (!hasG || reduce) { light(1); return; }
     gsap.set(world, { x: 0 }); gsap.set(truck, { x: t0 });
-    tl = gsap.timeline({ scrollTrigger: { trigger: route, pin: true, scrub: 1, end: () => '+=' + (dist + innerWidth * .3), onUpdate: s => light(s.progress) } })
-      .to(world, { x: -dist, ease: 'none' }, 0)
-      .to(truck, { x: t1, ease: 'none' }, 0)
-      .to('#truck .wheel', { rotation: 360 * 14, ease: 'none' }, 0);
+    const drive = 1, park = .25; // percurso inteiro e depois uma pausa com o caminhão estacionado no fim
+    tl = gsap.timeline({ scrollTrigger: { trigger: route, pin: true, scrub: 1, end: () => '+=' + Math.max(innerHeight * 1.2, (dist + t1 - t0) * 1.25),
+        onUpdate: s => light(Math.min(1, s.progress * (drive + park) / drive)) } })
+      .to(world, { x: -dist, ease: 'none', duration: drive }, 0)
+      .to(truck, { x: t1, ease: 'none', duration: drive }, 0)
+      .to('#truck .wheel', { rotation: 360 * 14, ease: 'none', duration: drive }, 0)
+      .to({}, { duration: park });
     light(0);
   };
-  build();
+  build(); ScrollTrigger.refresh();
   let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { build(); ScrollTrigger.refresh(); }, 250); });
 }
 
