@@ -6,14 +6,14 @@
 <title>Gestão de Consultores · caso de Natã Campos de Oliveira</title>
 <meta name="description" content="Gestão de Consultores: aplicação em Google Apps Script criada por Natã Campos de Oliveira para recomendar, com explicação, quais consultores alocar em cada projeto de implantação de ERP, integrando Google Sheets, Calendar e Maps.">
 <link rel="canonical" href="https://natacamposoliveira.github.io/casos/gestao-consultores.html">
-<meta property="og:type" content="article"><meta property="og:title" content="Gestão de Consultores · Natã Campos de Oliveira"><meta property="og:description" content="Quem colocar em cada projeto, e por quê: recomendação explicável de equipes em Google Apps Script."><meta property="og:image" content="https://natacamposoliveira.github.io/casos/media/gestao-consultores-poster.jpg">
+<meta property="og:type" content="article"><meta property="og:title" content="Gestão de Consultores · Natã Campos de Oliveira"><meta property="og:description" content="Quem colocar em cada projeto, e por quê: recomendação explicável de equipes em Google Apps Script."><meta property="og:image" content="https://natacamposoliveira.github.io/casos/media/gestao-consultores-v2-poster.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#EDF0F3">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/css/site.css?v=b1099816">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Gestão de Consultores","applicationCategory":"BusinessApplication","operatingSystem":"Web (Google Apps Script)","author":{"@type":"Person","name":"Natã Campos de Oliveira","url":"https://natacamposoliveira.github.io/"},"description":"Aplicação de planejamento e alocação de consultores em projetos de implantação de ERP, com recomendação explicável por regras e pesos configuráveis, integrada a Google Sheets, Calendar e Maps.","softwareVersion":"1.4.0-rc1","dateCreated":"2026","inLanguage":"pt-BR"}
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Gestão de Consultores","applicationCategory":"BusinessApplication","operatingSystem":"Web (Google Apps Script)","author":{"@type":"Person","name":"Natã Campos de Oliveira","url":"https://natacamposoliveira.github.io/"},"description":"Aplicação de planejamento e alocação de consultores em projetos de implantação de ERP, com recomendação explicável, integrada a Google Sheets, Calendar e Maps.","softwareVersion":"1.4.0-rc1","dateCreated":"2026","inLanguage":"pt-BR"}
 </script>
 </head>
 <body>
@@ -21,7 +21,7 @@
 <header class="nav"><div class="wrap">
   <a class="brand" href="../index.html"><i aria-hidden="true"></i>Natã Campos de Oliveira</a>
   <button class="burger" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span></button>
-  <ul><li><a href="#resumo">Resumo</a></li><li><a href="#demo">Experimente</a></li><li><a href="#fluxo">Como funciona</a></li><li><a href="#papel">Meu papel</a></li><li><a href="../index.html#contato">Contato</a></li></ul>
+  <ul><li><a href="#resumo">Resumo</a></li><li><a href="#video">Vídeo</a></li><li><a href="#fluxo">O que resolve</a></li><li><a href="#papel">Meu papel</a></li><li><a href="../index.html#contato">Contato</a></li></ul>
 </div></header>
 
 <main class="wrap">
@@ -32,60 +32,40 @@
   <div class="meta" data-rise><span>Projeto autoral</span><span>Google Apps Script</span><span>2026</span><span>Versão 1.4 publicada</span></div>
   <div class="kpis">
     <div class="kpi" data-rise><b data-count="39">39</b><span>tabelas no banco de dados, em Google Sheets</span></div>
-    <div class="kpi" data-rise><b data-count="8">8</b><span>critérios na recomendação, com pesos configuráveis</span></div>
+    <div class="kpi" data-rise><b data-count="8">8</b><span>critérios avaliados em cada recomendação</span></div>
     <div class="kpi" data-rise><b data-count="5">5</b><span>perfis de acesso, cada um com a sua alçada</span></div>
-    <div class="kpi" data-rise><b data-count="73">73</b><span>ações no servidor, todas com checagem de permissão</span></div>
+    <div class="kpi" data-rise><b data-count="73">73</b><span>operações no servidor, todas com checagem de permissão</span></div>
   </div>
   <div class="quick">
     <div data-rise><small>Problema</small><p>Escolher consultores dependia de agendas soltas e do conhecimento de poucas pessoas. Quem estava livre nem sempre dominava o módulo, e quem dominava podia estar sobrecarregado ou longe do cliente.</p></div>
-    <div data-rise><small>O que eu fiz</small><p>Transformei essa dor em regras, modelei os dados, desenhei a interface e integrei Calendar e Maps, com controle de acesso, auditoria e proteção contra duas pessoas alterarem a mesma coisa ao mesmo tempo.</p></div>
-    <div data-rise><small>Resultado</small><p>Uma aplicação completa, publicada na versão 1.4: 12 telas, do planejamento à auditoria, integrada a Sheets, Calendar e Maps. A recomendação explica cada nota e a decisão final continua humana.</p></div>
+    <div data-rise><small>O que eu fiz</small><p>Transformei essa dor em produto: defini as regras, modelei os dados, desenhei as telas e integrei Calendar e Maps, com controle de acesso e auditoria.</p></div>
+    <div data-rise><small>Resultado</small><p>Uma aplicação completa, publicada na versão 1.4: 12 telas, do planejamento à auditoria, integrada a Sheets, Calendar e Maps. Cada recomendação vem explicada e a decisão final continua humana.</p></div>
   </div>
 </section>
 
 <section class="block" id="video">
-  <h2 data-split>O sistema em 80 segundos</h2>
-  <p class="sub">Demonstração recriada com consultores, clientes e projetos fictícios. O sistema original roda em ambiente corporativo.</p>
-  <div class="media wide" data-rise><video src="media/gestao-consultores.mp4" poster="media/gestao-consultores-poster.jpg" controls muted playsinline preload="none" aria-label="Demonstração do Gestão de Consultores com dados fictícios"></video></div>
+  <h2 data-split>O sistema inteiro em menos de 2 minutos</h2>
+  <p class="sub">Do planejamento à auditoria, com consultores, clientes e projetos fictícios. O sistema original roda em ambiente corporativo.</p>
+  <div class="media wide" data-rise><video src="media/gestao-consultores-v2.mp4" poster="media/gestao-consultores-v2-poster.jpg" controls muted playsinline preload="none" aria-label="Demonstração do Gestão de Consultores com dados fictícios"></video></div>
 </section>
 
 <section class="block" id="demo">
-  <h2 data-split>Experimente: monte uma equipe</h2>
-  <p class="sub">Recriada com as mesmas regras do sistema, só com dados fictícios. Clique em "Como a nota foi formada", tente pré-reservar a Larissa Costa (aparece um conflito de alçada) e troque o perfil em "Ver como" para ver o que cada pessoa enxerga.</p>
-  <div class="demo-frame" data-rise><iframe src="gestao-consultores/demo.html?v=matching" title="Demonstração interativa do Gestão de Consultores" loading="lazy"></iframe></div>
-  <p style="margin-top:18px"><a class="btn ghost" href="gestao-consultores/demo.html" target="_blank" rel="noopener">Abrir a demonstração em tela cheia ↗</a></p>
+  <h2 data-split>Uma amostra para você clicar</h2>
+  <p class="sub">Veja a visão geral, rode a recomendação de equipe e passeie pela agenda da semana. O resto do sistema está no vídeo, e eu mostro ao vivo numa conversa.</p>
+  <div class="demo-frame" data-rise><iframe src="gestao-consultores/demo.html?v=3" title="Amostra do Gestão de Consultores" loading="lazy"></iframe></div>
+  <p style="margin-top:18px"><a class="btn" href="https://wa.me/5511967020373?text=Ol%C3%A1%2C%20Nat%C3%A3!%20Vi%20o%20Gest%C3%A3o%20de%20Consultores%20no%20seu%20portf%C3%B3lio%20e%20quero%20conversar." target="_blank" rel="noopener">Quero ver ao vivo</a></p>
 </section>
 
 <section class="block" id="fluxo">
-  <h2 data-split>Como funciona: do projeto à agenda</h2>
-  <p class="sub">Toque em cada etapa para ver o detalhe.</p>
+  <h2 data-split>O que o sistema resolve</h2>
+  <p class="sub">Toque em cada item para ver o detalhe.</p>
   <div class="steps">
-    <div class="step" role="button" tabindex="0" aria-expanded="false"><span class="n"></span><span><h4>O projeto diz o que precisa</h4><p>Cliente, módulo, fase, período, modalidade e os requisitos de competência.</p><span class="x"><p>Cada requisito tem um nível mínimo e pode ser eliminatório. Há modelos de requisitos para não começar do zero a cada projeto, e as fases (treinamento, Go Live, acompanhamento) podem pedir reforços diferentes.</p></span></span></div>
-    <div class="step" role="button" tabindex="0" aria-expanded="false"><span class="n"></span><span><h4>Primeiro, quem pode</h4><p>Requisitos eliminatórios, senioridade e restrição de viagem tiram candidatos da lista.</p><span class="x"><p>Quem sai da lista aparece com o motivo: "não viaja e o cliente fica a 330 km", "nível 2 em Compras, o projeto pede 3". Conflito de agenda também pode excluir, conforme a exigência de disponibilidade integral.</p></span></span></div>
-    <div class="step" role="button" tabindex="0" aria-expanded="false"><span class="n"></span><span><h4>Depois, quem faz mais sentido</h4><p>Uma nota com 8 critérios: aderência técnica, disponibilidade, perfil, carga futura, logística, experiência, continuidade e sustentabilidade.</p><span class="x"><p>Os pesos são configuráveis na Administração e cada nota vem com razões e ressalvas, como "carga futura elevada", "existe pré-reserva em parte do período" ou "Calendar não verificado". A sustentabilidade pesa viagens, Go Lives e projetos recentes, para não sobrecarregar sempre as mesmas pessoas. São regras explicáveis, não inteligência artificial: o sistema apoia a escolha, não decide sozinho.</p></span></span></div>
-    <div class="step" role="button" tabindex="0" aria-expanded="false"><span class="n"></span><span><h4>Pré-reserva e confirmação</h4><p>A pré-reserva segura a agenda; a confirmação cria o evento no Calendar.</p><span class="x"><p>O ciclo tem 7 etapas: rascunho, análise, pré-reserva, confirmação, execução, conclusão e cancelamento. Rascunho e análise não ocupam a agenda; a pré-reserva ocupa e expira em 48 horas. A alocação é feita em segmentos de dias e horários, para períodos fracionados. Se o Calendar falhar na confirmação, os eventos criados são desfeitos e um alerta crítico é aberto.</p></span></span></div>
-    <div class="step" role="button" tabindex="0" aria-expanded="false"><span class="n"></span><span><h4>Agenda e capacidade</h4><p>Carga por pessoa, módulo e semana, somando alocações, treinamentos e bloqueios.</p><span class="x"><p>A disponibilidade cruza os registros internos com o livre/ocupado do Calendar, que mostra os horários ocupados sem expor o título dos eventos. Se a consulta falha, a tela avisa que a agenda não foi verificada, em vez de mostrar a pessoa como livre.</p></span></span></div>
-    <div class="step" role="button" tabindex="0" aria-expanded="false"><span class="n"></span><span><h4>Competências viram treinamento</h4><p>Autoavaliação, avaliação da liderança e evidências de experiência, por módulo.</p><span class="x"><p>Quando falta um nível para um projeto, a lacuna vira sugestão de treinamento e entra no plano de desenvolvimento do consultor. Assim, planejar a capacidade também ajuda a desenvolver a equipe.</p></span></span></div>
-    <div class="step" role="button" tabindex="0" aria-expanded="false"><span class="n"></span><span><h4>Cada perfil vê o que deve</h4><p>Administração, coordenação, liderança, gerente de projeto e consultor têm alçadas diferentes.</p><span class="x"><p>O gerente de projeto só vê a própria carteira; a liderança, os módulos dela; o consultor, a própria agenda e o próprio plano. Quando duas pré-reservas disputam o mesmo horário, quem tem alçada maior pode substituir a outra, mas precisa escrever uma justificativa, que fica na auditoria. Alocação confirmada nunca é atropelada.</p></span></span></div>
-    <div class="step" role="button" tabindex="0" aria-expanded="false"><span class="n"></span><span><h4>Cenários antes de decidir</h4><p>Monte equipes hipotéticas e compare antes de mexer na agenda real.</p><span class="x"><p>A comparação mostra conflitos, módulos sem cobertura, requisitos eliminatórios descobertos e riscos de deslocamento. Só um cenário sem pendência crítica pode ser aplicado, e ele vira pré-reservas de uma vez; se algo falhar no meio, nada fica pela metade.</p></span></span></div>
-    <div class="step" role="button" tabindex="0" aria-expanded="false"><span class="n"></span><span><h4>Tudo fica registrado</h4><p>Quem fez, quando e o que mudou, em cada ação crítica.</p><span class="x"><p>Exceções feitas pela gestão ficam rastreadas, sem apagar o histórico. Os registros de auditoria, de desempenho e de sincronização com o Calendar ajudam a reconstruir o motivo de cada decisão.</p></span></span></div>
-  </div>
-</section>
-
-<section class="block" id="arquitetura">
-  <h2 data-split>Por dentro: como o sistema foi montado</h2>
-  <p class="sub">Interface e servidor no mesmo projeto do Apps Script, com o Google Sheets como banco de dados.</p>
-  <ol class="flow" data-rise>
-    <li><b>Navegador</b><span>Telas em HTML, CSS e JavaScript</span></li>
-    <li><b>google.script.run</b><span>A tela chama o servidor</span></li>
-    <li><b>apiRpc(ação)</b><span>Um roteador distribui cada ação</span></li>
-    <li><b>Autorização</b><span>Domínio, usuário ativo e papel</span></li>
-    <li><b>Regras</b><span>Elegibilidade, nota, conflitos</span></li>
-    <li><b>Sheets · Calendar · Maps</b><span>Dados, agenda e rotas</span></li>
-  </ol>
-  <div class="cols">
-    <div class="panelc" data-rise><h3>Decisões de confiabilidade</h3><ul><li>Trava de concorrência (LockService) e versão em cada registro, para duas pessoas não sobrescreverem a mesma alocação</li><li>Operações críticas revalidam permissão e conflitos antes de gravar</li><li>Ter o link não basta: o servidor confere domínio, cadastro ativo e as permissões do papel</li><li>Rotas calculadas pelo Maps ficam em cache para não repetir consultas</li></ul></div>
-    <div class="panelc" data-rise><h3>O banco de dados</h3><ul><li>39 abas organizadas em grupos: acesso, catálogos, consultores e competências, clientes e logística, projetos, alocações, treinamentos, cenários, alertas e auditoria</li><li>Os registros se ligam por identificadores, como numa base relacional</li><li>Validações e relacionamentos ficam no código, porque Sheets não é um banco SQL</li></ul></div>
+    <div class="step" role="button" tabindex="0" aria-expanded="false"><span class="n"></span><span><h4>Quem colocar no projeto</h4><p>Uma lista de consultores ordenada para cada projeto, módulo e período.</p><span class="x"><p>O sistema já tira da lista quem não atende ao projeto e explica o motivo. Para quem fica, mostra por que faz sentido e o que merece atenção. A escolha final continua com quem coordena.</p></span></span></div>
+    <div class="step" role="button" tabindex="0" aria-expanded="false"><span class="n"></span><span><h4>Agenda sem dupla alocação</h4><p>Pré-reserva, confirmação e convite no Google Calendar, sem conflito.</p><span class="x"><p>Cada alocação passa por etapas até ser confirmada, e o sistema impede que a mesma pessoa fique em dois lugares ao mesmo tempo, mesmo com várias pessoas planejando juntas.</p></span></span></div>
+    <div class="step" role="button" tabindex="0" aria-expanded="false"><span class="n"></span><span><h4>Capacidade da equipe à vista</h4><p>Quem está livre, ocupado, em treinamento ou de folga, por semana e por módulo.</p><span class="x"><p>Projetos, treinamentos, férias e compromissos da agenda aparecem juntos, para enxergar a falta de gente antes que ela vire problema.</p></span></span></div>
+    <div class="step" role="button" tabindex="0" aria-expanded="false"><span class="n"></span><span><h4>Logística no planejamento</h4><p>Tempo de deslocamento de carro e de transporte público até o cliente.</p><span class="x"><p>Viagens entre estados também entram na conta, para não mandar alguém que não pode viajar ou que vai passar o dia na estrada.</p></span></span></div>
+    <div class="step" role="button" tabindex="0" aria-expanded="false"><span class="n"></span><span><h4>Competências viram treinamento</h4><p>Lacunas da equipe viram sugestões de capacitação, com instrutor e horário livre.</p><span class="x"><p>Planejar a capacidade também ajuda a desenvolver a equipe: cada consultor tem um plano de desenvolvimento ligado aos projetos que vêm pela frente.</p></span></span></div>
+    <div class="step" role="button" tabindex="0" aria-expanded="false"><span class="n"></span><span><h4>Cenários, alertas e auditoria</h4><p>Simular antes de decidir, ser avisado dos riscos e saber quem fez o quê.</p><span class="x"><p>Equipes hipotéticas são comparadas antes de mexer na agenda real. Os alertas apontam riscos como Go Live sem equipe confirmada. E cada perfil de acesso vê só o que deve, com tudo registrado.</p></span></span></div>
   </div>
 </section>
 
@@ -94,14 +74,14 @@
   <p class="sub">O que já está publicado e os próximos passos.</p>
   <div class="cols">
     <div class="panelc" data-rise><h3>Publicado</h3><ul><li>Versão 1.4 publicada em setembro de 2026, com cadastros, projetos, competências, recomendação, alocação, agenda, treinamentos, cenários, alertas, indicadores e auditoria</li><li>Pacotes de cada versão com notas, roteiro de verificação e validação estática</li><li>Versão 1.5 pronta como candidata, com verificação do banco, exigência de backup e plano de recuperação</li></ul></div>
-    <div class="panelc" data-rise><h3>Próximos passos</h3><ul><li>Rodada de validação com vários usuários ao mesmo tempo, com Calendar e Maps reais e volume representativo</li><li>Promover a versão 1.5 depois dessa rodada</li><li>Calibrar os pesos da recomendação com quem coordena a operação</li><li>Continuar sem inteligência artificial preditiva: regras e pesos que qualquer gestor consegue entender e auditar</li></ul></div>
+    <div class="panelc" data-rise><h3>Próximos passos</h3><ul><li>Rodada de validação com vários usuários ao mesmo tempo, com Calendar e Maps reais e volume representativo</li><li>Promover a versão 1.5 depois dessa rodada</li><li>Ajustar a recomendação com quem coordena a operação, mantendo cada sugestão explicável</li></ul></div>
   </div>
 </section>
 
 <section class="block" id="papel">
   <h2 data-split>Meu papel</h2>
   <div class="cols">
-    <div class="panelc" data-rise><h3>O que eu fiz</h3><ul><li>Escolhi um problema real da rotina de implantação de ERP para aprender Google Apps Script na prática</li><li>Transformei a dor em regras de produto: o que elimina, o que pontua, o que só gera ressalva</li><li>Modelei os dados, desenhei as telas e defini as integrações com Calendar e Maps</li><li>Conduzi a evolução por versões, com notas de release, verificações e plano de recuperação</li></ul><div class="tags"><span>Produto</span><span>Regras de negócio</span><span>Modelagem de dados</span><span>Planejamento de capacidade</span></div></div>
+    <div class="panelc" data-rise><h3>O que eu fiz</h3><ul><li>Escolhi um problema real da rotina de implantação de ERP para aprender Google Apps Script na prática</li><li>Transformei a dor em regras de produto e em telas que um coordenador usa no dia a dia</li><li>Modelei os dados, desenhei as telas e defini as integrações com Calendar e Maps</li><li>Conduzi a evolução por versões, com notas de release, verificações e plano de recuperação</li></ul><div class="tags"><span>Produto</span><span>Regras de negócio</span><span>Modelagem de dados</span><span>Planejamento de capacidade</span></div></div>
     <div class="panelc" data-rise><h3>Como foi construído</h3><ul><li>Google Apps Script (JavaScript V8) com HtmlService</li><li>Google Sheets como banco, Calendar para agenda e convites, Maps para rotas</li><li>Desenvolvimento apoiado por IA, sob a minha definição de regras, decisões e validação</li></ul><div class="tags"><span>Google Apps Script</span><span>JavaScript</span><span>Google Sheets</span><span>Google Calendar</span><span>Google Maps</span></div></div>
   </div>
 </section>
