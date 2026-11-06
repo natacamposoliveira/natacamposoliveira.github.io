@@ -94,28 +94,58 @@ img,video,svg{display:block;max-width:100%}
 .elo-panel .where{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px}
 .elo-panel .where span{background:var(--bg);border-radius:999px;padding:5px 12px;font-size:14px;font-weight:700}
 
-/* ---------- ROTA ---------- */
-.route{position:relative;height:100vh;overflow:hidden;background:var(--steel);color:#fff}
-.route .rhead{position:absolute;top:96px;left:0;right:0;z-index:3}
-.route h2{font-size:clamp(28px,3.6vw,48px);font-weight:900}
-.route .sub{color:#B9C4CF;margin-top:4px}
-.road{position:absolute;left:0;top:58%;height:72px;margin-top:-36px;background:var(--road);border-top:4px solid var(--steel2);border-bottom:4px solid var(--steel2)}
-.road::after{content:"";position:absolute;left:0;right:0;top:50%;height:4px;margin-top:-2px;background:repeating-linear-gradient(90deg,var(--lane) 0 40px,transparent 40px 80px)}
-.stops{position:absolute;left:0;top:0;height:100%;list-style:none}
-.stop{position:absolute;top:58%;width:300px}
-.stop .pin{position:absolute;left:-14px;top:-64px;width:28px;height:28px;border-radius:50%;background:var(--steel2);border:4px solid #fff;transition:background .3s,transform .3s var(--ease)}
-.stop.lit .pin{background:var(--orange);transform:scale(1.25)}
-.stop .info{position:absolute;left:-14px;bottom:84px;width:290px;text-align:left;background:#fff;color:var(--steel);border-radius:18px;padding:18px;opacity:.38;transform:translateY(12px);transition:opacity .45s,transform .45s var(--ease),box-shadow .3s;cursor:pointer;border:0;font:inherit}
-.stop.lit .info{opacity:1;transform:none}
-.stop .info:hover{box-shadow:0 0 0 4px var(--orange)}
-.stop:nth-child(even) .info{bottom:auto;top:84px}
-.stop:nth-child(even) .pin{top:38px}
-.stop .info b{font-family:var(--fd);color:var(--orange);font-size:22px;display:block}
-.stop .info strong{display:block;font-size:16px;margin-top:2px}
-.stop .info span{display:block;font-size:15px;color:var(--mute)}
-.stop .info em{display:inline-block;margin-top:8px;font-style:normal;font-weight:800;font-size:14px;color:var(--steel)}
-.truck{position:absolute;top:58%;left:0;width:116px;margin-top:-52px;z-index:4}
+/* ---------- ROTA (trabalho em cima, projetos embaixo) ----------
+   Tudo dentro da rota usa a altura da tela (vh), para não se sobrepor com zoom. */
+.route{position:relative;height:100vh;min-height:420px;overflow:hidden;background:var(--steel);color:#fff;--u:min(1vh,1.3vw)}
+.route .rhead{position:absolute;top:calc(68px + var(--u)*2);left:0;right:0;z-index:5}
+.route h2{font-size:max(20px,calc(var(--u)*5.2));font-weight:900}
+.route .sub{color:#B9C4CF;margin-top:calc(var(--u)*.6);font-size:max(13px,calc(var(--u)*1.9))}
+.legend{display:flex;gap:calc(var(--u)*2.4);margin-top:calc(var(--u)*1.2);font-size:max(12px,calc(var(--u)*1.7));font-weight:800}
+.legend span{display:flex;align-items:center;gap:8px}
+.legend i{width:calc(var(--u)*1.6);height:calc(var(--u)*1.6);min-width:10px;min-height:10px;border-radius:3px}
+.lw i{background:#fff}.lp i{background:var(--kraft)}
+.lane{position:absolute;left:24px;z-index:4;font-family:var(--fd);font-weight:700;font-size:max(11px,calc(var(--u)*1.5));letter-spacing:.02em;padding:calc(var(--u)*.6) calc(var(--u)*1.2);border-radius:999px}
+.lane.w{top:calc(var(--u)*30);background:#fff;color:var(--steel)}
+.lane.p{top:calc(var(--u)*72);background:var(--kraft);color:var(--steel)}
+.world{position:absolute;left:0;top:0;height:100%}
+.road{position:absolute;left:0;top:calc(var(--u)*59);height:calc(var(--u)*8);background:var(--road);border-top:calc(var(--u)*.5) solid var(--steel2);border-bottom:calc(var(--u)*.5) solid var(--steel2)}
+.road::after{content:"";position:absolute;left:0;right:0;top:50%;height:calc(var(--u)*.5);margin-top:calc(var(--u)*-.25);background:repeating-linear-gradient(90deg,var(--lane) 0 calc(var(--u)*4),transparent calc(var(--u)*4) calc(var(--u)*8))}
+.walk{position:absolute;left:0;height:calc(var(--u)*1.6);background:#4A5C70}
+.walk.t{top:calc(var(--u)*57.4)}.walk.b{top:calc(var(--u)*67.4)}
+.place{position:absolute;width:calc(var(--u)*26);display:flex;flex-direction:column;align-items:center;background:none;border:0;padding:0;cursor:pointer;color:inherit;font:inherit}
+.place.w{top:calc(var(--u)*57.4);transform:translate(-50%,-100%)}
+.place.p{top:calc(var(--u)*69);transform:translateX(-50%);flex-direction:column-reverse}
+.place .art{width:calc(var(--u)*22);height:calc(var(--u)*19);transition:transform .45s var(--ease),filter .45s;filter:saturate(.35) brightness(.75)}
+.place.p .art{width:calc(var(--u)*16);height:calc(var(--u)*14)}
+.place.lit .art{filter:none}
+.place:hover .art,.place:focus-visible .art{transform:translateY(calc(var(--u)*-1)) rotateX(8deg)}
+.place .tag{margin:calc(var(--u)*.8) 0;background:#fff;color:var(--steel);border-radius:calc(var(--u)*1.2);padding:calc(var(--u)*.6) calc(var(--u)*1.2);font-weight:800;font-size:max(11px,calc(var(--u)*1.55));line-height:1.25;text-align:center;white-space:nowrap;opacity:.55;transition:opacity .4s,box-shadow .3s}
+.place.p .tag{background:var(--kraft)}
+.place .tag b{display:block;font-family:var(--fd);color:var(--orange);font-size:max(11px,calc(var(--u)*1.6))}
+.place.p .tag b{color:var(--steel)}
+.place.lit .tag{opacity:1}
+.place:hover .tag,.place:focus-visible .tag{box-shadow:0 0 0 3px var(--orange)}
+.place .open{display:block;font-size:max(10px,calc(var(--u)*1.25));font-weight:800;margin-top:2px;color:var(--mute)}
+.truck{position:absolute;left:0;top:calc(var(--u)*58.6);width:calc(var(--u)*12);z-index:6}
 .truck .wheel{transform-box:fill-box;transform-origin:center}
+/* animações quando o caminhão chega */
+.place .crane{transform-box:view-box;transform-origin:155px 22px;transition:transform 1.2s var(--ease)}
+.place.lit .crane{transform:rotate(-6deg)}
+.place .win{transition:fill .5s}
+.place.lit .win{fill:#FFD166}
+.place .door{transition:transform .8s var(--ease)}
+.place.lit .door{transform:translateY(-26px)}
+.place .barx{transform-box:fill-box;transform-origin:bottom;transform:scaleY(.2);transition:transform .8s var(--ease)}
+.place.lit .barx{transform:scaleY(1)}
+.place .flag{transform-box:fill-box;transform-origin:left center;transition:transform .6s var(--ease)}
+.place.lit .flag{animation:wave 1.6s ease-in-out infinite}
+@keyframes wave{50%{transform:skewY(-4deg)}}
+.place .check{stroke-dasharray:40;stroke-dashoffset:40;transition:stroke-dashoffset .8s var(--ease) .2s}
+.place.lit .check{stroke-dashoffset:0}
+.place .heart{transform-box:fill-box;transform-origin:center;transform:scale(0);transition:transform .6s cubic-bezier(.34,1.56,.64,1) .2s}
+.place.lit .heart{transform:scale(1)}
+@media (max-width:700px){.route{--u:min(1vh,2.2vw)}.lane{left:12px}}
+@media (max-height:520px){.route .sub{display:none}}
 
 /* drawer (detalhe da parada) */
 .drawer{position:fixed;inset:0;z-index:90;display:flex;justify-content:flex-end;visibility:hidden;overflow:hidden}
@@ -230,8 +260,6 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   .quick{grid-template-columns:1fr}.tree{grid-template-columns:1fr 1fr}
   .nav ul{position:fixed;top:68px;left:0;right:0;flex-direction:column;background:var(--bg);padding:12px 24px 20px;box-shadow:0 20px 30px -20px rgba(34,48,63,.4);display:none}
   .nav.menu ul{display:flex}.burger{display:block}
-  .stop{width:250px}.stop .info{width:240px}
-  .route .rhead{top:84px}
 }
 @media (max-width:560px){.tree{grid-template-columns:1fr}.cases{grid-template-columns:1fr}.hero .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;font-size:13px}.hero .facts b{font-size:17px}.hero .ctas .btn{padding:14px 18px}}
 @media (prefers-reduced-motion:reduce){*,*::before{animation:none!important;transition:none!important}}
@@ -243,3 +271,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .kp::after{content:"Ver subcategorias";margin-top:10px;font-weight:800;font-size:14px;color:var(--orange)}
 .kp.open::after{content:"Fechar"}
 .kp:hover{box-shadow:0 0 0 3px var(--orange)}
+
+.drawer h4.role{font-family:var(--fb);letter-spacing:0;font-size:17px;font-weight:800;margin-top:22px}
+.drawer h4.role small{display:block;font-weight:600;color:var(--mute);font-size:14px}
+.drawer h4.role+ul{margin-top:8px}
+@media (max-height:640px){.route .sub{display:none}.route .rhead .wrap{display:flex;align-items:center;gap:22px;flex-wrap:wrap}.route .legend{margin-top:0}.place.w .art{width:calc(var(--u)*18);height:calc(var(--u)*15.5)}.place.p .art{width:calc(var(--u)*13);height:calc(var(--u)*11.5)}}

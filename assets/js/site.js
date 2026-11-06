@@ -109,19 +109,26 @@ if (radar) {
 /* ---------- ROTA DO CAMINHÃO ---------- */
 function initRoute() {
   const route = $('#rota'); if (!route) return;
-  const stops = $('#stops'), road = $('#road'), truck = $('#truck'), all = $$('.stop', stops);
-  const mob = innerWidth < 700, step = mob ? 280 : 350, start = innerWidth * (mob ? .55 : .42);
-  all.forEach((s, i) => s.style.left = (start + i * step) + 'px');
-  const total = start + all.length * step + 160; road.style.width = stops.style.width = total + 'px';
-  const dist = total - innerWidth, t0 = innerWidth * (mob ? .08 : .18), t1 = innerWidth * (mob ? .3 : .42);
-  const light = p => { const tx = t0 + (t1 - t0) * p + 100; all.forEach((s, i) => s.classList.toggle('lit', start + i * step - dist * p <= tx)); };
-  if (!hasG || reduce) { light(1); return; }
-  gsap.set(truck, { x: t0 });
-  gsap.timeline({ scrollTrigger: { trigger: route, pin: true, scrub: 1, end: () => '+=' + (dist + innerWidth * .3), invalidateOnRefresh: true, onUpdate: s => light(s.progress) } })
-    .to([road, stops], { x: -dist, ease: 'none' }, 0)
-    .to(truck, { x: t1, ease: 'none' }, 0)
-    .to('#truck .wheel', { rotation: 360 * 14, ease: 'none' }, 0);
-  light(0);
+  const world = $('#world'), truck = $('#truck'), places = $$('.place', world), lanes = $$('.road, .walk', world);
+  let tl = null;
+  const build = () => {
+    tl && tl.scrollTrigger && tl.scrollTrigger.kill(); tl && tl.kill();
+    const u = Math.min(innerHeight / 100, innerWidth * (innerWidth < 700 ? .022 : .013));
+    const step = u * 30, start = Math.max(innerWidth * .5, u * 60), n = Math.max(...places.map(p => +p.dataset.i)) + 1;
+    places.forEach(p => p.style.left = (start + +p.dataset.i * step) + 'px');
+    const total = start + n * step + u * 30; lanes.forEach(l => l.style.width = total + 'px'); world.style.width = total + 'px';
+    const dist = Math.max(0, total - innerWidth), t0 = innerWidth * .1, t1 = innerWidth * .4;
+    const light = p => { const tx = t0 + (t1 - t0) * p + u * 10; places.forEach(pl => pl.classList.toggle('lit', start + +pl.dataset.i * step - dist * p <= tx)); };
+    if (!hasG || reduce) { light(1); return; }
+    gsap.set(world, { x: 0 }); gsap.set(truck, { x: t0 });
+    tl = gsap.timeline({ scrollTrigger: { trigger: route, pin: true, scrub: 1, end: () => '+=' + (dist + innerWidth * .3), onUpdate: s => light(s.progress) } })
+      .to(world, { x: -dist, ease: 'none' }, 0)
+      .to(truck, { x: t1, ease: 'none' }, 0)
+      .to('#truck .wheel', { rotation: 360 * 14, ease: 'none' }, 0);
+    light(0);
+  };
+  build();
+  let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { build(); ScrollTrigger.refresh(); }, 250); });
 }
 
 /* painel lateral com o detalhe da parada */

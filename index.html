@@ -57,27 +57,101 @@
 </div></section>
 
 <section class="route" id="rota">
-  <div class="rhead"><div class="wrap"><h2>A rota até aqui</h2><p class="sub">Role para o caminhão andar. Toque numa parada para abrir os detalhes.</p></div></div>
-  <div class="road" id="road" aria-hidden="true"></div>
-  <ol class="stops" id="stops">
-    <li class="stop"><span class="pin" aria-hidden="true"></span><button class="info" data-open="p0"><b>2017</b><strong>Aprendiz · Construtora Tenda</strong><span>Pagamentos, notas e auditoria.</span><em>Abrir detalhes</em></button></li>
-    <li class="stop"><span class="pin" aria-hidden="true"></span><button class="info" data-open="p1"><b>2019</b><strong>Suprimentos · Construtora Tenda</strong><span>Cotações, negociações e contratos.</span><em>Abrir detalhes</em></button></li>
-    <li class="stop"><span class="pin" aria-hidden="true"></span><button class="info" data-open="p2"><b>2022</b><strong>Compras · Cogra</strong><span>Reposição por estoque, giro e sell-out.</span><em>Abrir detalhes</em></button></li>
-    <li class="stop"><span class="pin" aria-hidden="true"></span><button class="info" data-open="p3"><b>2025</b><strong>Analista de Compras · Cogra</strong><span>Planejamento de demanda e IQF.</span><em>Abrir detalhes</em></button></li>
-    <li class="stop"><span class="pin" aria-hidden="true"></span><button class="info" data-open="p4"><b>2025</b><strong>Implantação de ERP · Bluesoft</strong><span>Do cadastro ao Go Live no varejo.</span><em>Abrir detalhes</em></button></li>
-    <li class="stop"><span class="pin" aria-hidden="true"></span><button class="info" data-open="p5"><b>2026</b><strong>Ninho Impact</strong><span>Sistema doado a um instituto social.</span><em>Abrir detalhes</em></button></li>
-    <li class="stop"><span class="pin" aria-hidden="true"></span><button class="info" data-open="p6"><b>Hoje</b><strong>Próxima entrega</strong><span>Aberto ao Brasil e a Portugal.</span><em>Abrir detalhes</em></button></li>
-  </ol>
+  <div class="rhead"><div class="wrap"><h2>A rota até aqui</h2><p class="sub">Role para o caminhão andar. Toque num lugar para abrir os detalhes.</p>
+    <div class="legend"><span class="lw"><i></i>Trabalho</span><span class="lp"><i></i>Projetos</span></div></div></div>
+  
+  <div class="world" id="world">
+    <div class="walk t"></div><div class="road" id="road" aria-hidden="true"></div><div class="walk b"></div>
+    <ol class="places" style="list-style:none">
+      <li><button class="place w" data-i="0" data-open="t-tenda" aria-label="Construtora Tenda, 2017 a 2020">
+        <svg class="art" viewBox="0 0 200 170" aria-hidden="true">
+          <ellipse cx="96" cy="166" rx="70" ry="5" fill="rgba(0,0,0,.25)"/>
+          <path d="M130 60l16-10v110l-16 10z" fill="#B8C1CB"/><path d="M40 60l16-10h90l-16 10z" fill="#F4F6F8"/>
+          <rect x="40" y="60" width="90" height="110" fill="#E3E8ED"/>
+          <g class="win" fill="#9AA6B2"><rect x="52" y="74" width="18" height="16"/><rect x="78" y="74" width="18" height="16"/><rect x="104" y="74" width="18" height="16"/><rect x="52" y="102" width="18" height="16"/><rect x="78" y="102" width="18" height="16"/><rect x="104" y="102" width="18" height="16"/></g>
+          <rect x="78" y="134" width="18" height="36" fill="#3B4C5E"/>
+          <g stroke="#FFD166" stroke-width="4"><path d="M40 60V34M130 60V34M40 34h90M40 46h90"/><path d="M40 34l12 12M64 34l12 12M88 34l12 12M112 34l12 12" stroke-width="2"/></g>
+          <rect x="150" y="20" width="10" height="150" fill="#FF5F1F"/>
+          <g class="crane"><path d="M155 22H40" stroke="#FF5F1F" stroke-width="8"/><path d="M155 22l-28-14v14" fill="none" stroke="#FF5F1F" stroke-width="3"/><path d="M70 26v16" stroke="#22303F" stroke-width="2"/><rect x="62" y="42" width="16" height="12" fill="#D2A877" stroke="#B98C5A" stroke-width="2"/></g>
+        </svg>
+        <span class="tag"><b>2017–2020</b>Construtora Tenda<span class="open">Abrir</span></span></button></li>
+
+      <li><button class="place w" data-i="1" data-open="t-cogra" aria-label="Cogra, 2022 a 2025">
+        <svg class="art" viewBox="0 0 200 170" aria-hidden="true">
+          <ellipse cx="100" cy="166" rx="88" ry="5" fill="rgba(0,0,0,.25)"/>
+          <path d="M186 78l10-8v92l-10 8z" fill="#B8C1CB"/>
+          <path d="M14 78Q100 20 186 78V170H14Z" fill="#E3E8ED"/><path d="M14 78Q100 20 186 78" fill="none" stroke="#3B4C5E" stroke-width="6"/>
+          <rect x="60" y="54" width="80" height="22" rx="4" fill="#22303F"/><text x="100" y="70" text-anchor="middle" font-family="Unbounded,sans-serif" font-size="11" font-weight="700" fill="#fff">COGRA</text>
+          <g fill="#9AA6B2"><rect x="26" y="96" width="44" height="74"/><rect x="130" y="96" width="44" height="74"/></g>
+          <g stroke="#7C8896" stroke-width="2"><path d="M26 108h44M26 120h44M26 132h44M130 108h44M130 120h44M130 132h44"/></g>
+          <rect x="78" y="96" width="44" height="74" fill="#3B4C5E"/>
+          <g fill="#D2A877" stroke="#B98C5A" stroke-width="2"><rect x="84" y="148" width="16" height="16"/><rect x="100" y="148" width="16" height="16"/><rect x="92" y="132" width="16" height="16"/></g>
+          <g class="door"><rect x="78" y="96" width="44" height="34" fill="#9AA6B2"/><path d="M78 106h44M78 116h44M78 126h44" stroke="#7C8896" stroke-width="2"/></g>
+        </svg>
+        <span class="tag"><b>2022–2025</b>Cogra<span class="open">Abrir</span></span></button></li>
+
+      <li><button class="place w" data-i="3" data-open="t-bluesoft" aria-label="Bluesoft, 2025 até hoje">
+        <svg class="art" viewBox="0 0 200 170" aria-hidden="true">
+          <ellipse cx="100" cy="166" rx="70" ry="5" fill="rgba(0,0,0,.25)"/>
+          <path d="M144 14l14-8v156l-14 8z" fill="#245A93"/><path d="M56 14l14-8h88l-14 8z" fill="#5C93CF"/>
+          <rect x="56" y="14" width="88" height="156" fill="#2F6FB5"/>
+          <g class="win" fill="#7FB3E8"><rect x="66" y="26" width="30" height="20" rx="2"/><rect x="104" y="26" width="30" height="20" rx="2"/><rect x="66" y="54" width="30" height="20" rx="2"/><rect x="104" y="54" width="30" height="20" rx="2"/><rect x="66" y="82" width="30" height="20" rx="2"/><rect x="104" y="82" width="30" height="20" rx="2"/></g>
+          <rect x="82" y="132" width="36" height="38" fill="#22303F"/>
+          <rect x="6" y="94" width="58" height="44" rx="6" fill="#fff"/><g fill="#FF5F1F"><rect class="barx" x="15" y="120" width="9" height="12"/><rect class="barx" x="29" y="110" width="9" height="22"/><rect class="barx" x="43" y="102" width="9" height="30"/></g><path d="M35 138v12M23 150h24" stroke="#fff" stroke-width="4"/>
+          <path d="M156 40a14 14 0 0 1 26 4a10 10 0 0 1 0 20h-30a12 12 0 0 1 4-24z" fill="#fff"/>
+        </svg>
+        <span class="tag"><b>2025–hoje</b>Bluesoft<span class="open">Abrir</span></span></button></li>
+
+      <li><button class="place w" data-i="5" data-open="t-prox" aria-label="Próximo destino">
+        <svg class="art" viewBox="0 0 200 170" aria-hidden="true">
+          <ellipse cx="100" cy="166" rx="30" ry="4" fill="rgba(0,0,0,.25)"/>
+          <rect x="94" y="30" width="12" height="138" fill="#9AA6B2"/><rect x="106" y="30" width="4" height="138" fill="#7C8896"/>
+          <g class="flag"><path d="M110 40h68l14 16l-14 16h-68z" fill="#1F9D6B"/><text x="148" y="61" text-anchor="middle" font-family="Unbounded,sans-serif" font-size="13" font-weight="700" fill="#fff">BRASIL</text></g>
+          <g class="flag"><path d="M94 84H24l-14 16l14 16h70z" fill="#2F6FB5"/><text x="54" y="105" text-anchor="middle" font-family="Unbounded,sans-serif" font-size="12" font-weight="700" fill="#fff">PORTUGAL</text></g>
+          <circle cx="102" cy="26" r="10" fill="#FF5F1F"/>
+        </svg>
+        <span class="tag"><b>Hoje</b>Próximo destino<span class="open">Abrir</span></span></button></li>
+
+      <li><button class="place p" data-i="2" data-open="t-iqf" aria-label="Projeto IQF, 2025">
+        <svg class="art" viewBox="0 0 160 140" aria-hidden="true">
+          <ellipse cx="80" cy="134" rx="50" ry="4" fill="rgba(0,0,0,.25)"/>
+          <path d="M118 16l8-6v118l-8 6z" fill="#B98C5A"/>
+          <rect x="34" y="16" width="84" height="118" rx="8" fill="#D2A877"/><rect x="42" y="26" width="68" height="100" rx="4" fill="#fff"/>
+          <rect x="60" y="8" width="32" height="14" rx="4" fill="#3B4C5E"/>
+          <g stroke="#9AA6B2" stroke-width="4" stroke-linecap="round"><path d="M68 44h32M68 64h32M68 84h32"/></g>
+          <g class="check" fill="none" stroke="#1F9D6B" stroke-width="4" stroke-linecap="round"><path d="M50 44l4 4l8-8M50 64l4 4l8-8M50 84l4 4l8-8"/></g>
+          <path d="M54 116a22 22 0 0 1 44 0" fill="none" stroke="#E3E8ED" stroke-width="7"/><path d="M54 116a22 22 0 0 1 30 -20" fill="none" stroke="#FF5F1F" stroke-width="7"/>
+        </svg>
+        <span class="tag"><b>2025</b>IQF · ENGEMA<span class="open">Abrir</span></span></button></li>
+
+      <li><button class="place p" data-i="4" data-open="t-ninho" aria-label="Projeto Ninho Impact, 2026">
+        <svg class="art" viewBox="0 0 160 140" aria-hidden="true">
+          <ellipse cx="80" cy="134" rx="56" ry="4" fill="rgba(0,0,0,.25)"/>
+          <path d="M132 64l10-7v66l-10 7z" fill="#D9C7AE"/><path d="M14 66L80 16l66 50" fill="#FF5F1F"/><path d="M146 66l8-6L88 10l-8 6z" fill="#E14A0C"/>
+          <rect x="26" y="64" width="106" height="70" fill="#F4E9D8"/>
+          <rect x="66" y="92" width="26" height="42" rx="13" fill="#B98C5A"/>
+          <g class="win" fill="#7FB3E8"><rect x="36" y="80" width="20" height="18" rx="2"/><rect x="104" y="80" width="20" height="18" rx="2"/></g>
+          <ellipse cx="108" cy="30" rx="20" ry="8" fill="#8A6239"/><path d="M90 28q18-11 36 0" stroke="#B98C5A" stroke-width="3" fill="none"/><circle cx="103" cy="24" r="5" fill="#F4E9D8"/><circle cx="114" cy="23" r="5" fill="#F4E9D8"/>
+          <path class="heart" d="M79 78c-8-6-13-10-13-16a6 6 0 0 1 13-3a6 6 0 0 1 13 3c0 6-5 10-13 16z" fill="#FF5F1F"/>
+        </svg>
+        <span class="tag"><b>2026</b>Ninho Impact<span class="open">Abrir</span></span></button></li>
+    </ol>
+  </div>
   <svg class="truck" id="truck" viewBox="0 0 116 66" aria-hidden="true"><rect x="2" y="6" width="70" height="40" rx="6" fill="#FF5F1F"/><rect x="10" y="14" width="22" height="16" rx="2" fill="#D2A877"/><rect x="36" y="14" width="22" height="16" rx="2" fill="#D2A877"/><path d="M74 16h24l15 15v15H74z" fill="#fff"/><rect x="82" y="20" width="13" height="10" rx="1" fill="#22303F"/><g class="wheel"><circle cx="22" cy="52" r="10" fill="#22303F"/><path d="M22 44v16M14 52h16" stroke="#9AA6B2" stroke-width="2"/></g><g class="wheel"><circle cx="92" cy="52" r="10" fill="#22303F"/><path d="M92 44v16M84 52h16" stroke="#9AA6B2" stroke-width="2"/></g></svg>
 </section>
 
-<template id="p0"><div class="when">2017 – 2019</div><h3>Aprendiz Administrativo</h3><p class="org">Construtora Tenda · São Paulo</p><ul><li>Gestão de adiantamentos e pagamentos a fornecedores, parceiros e reembolsos</li><li>Pagamento de obrigações jurídicas e fiscais e lançamento de notas</li><li>Relatórios para auditoria e controle de materiais</li></ul><div class="chips"><span>Financeiro</span><span>Excel</span><span>Auditoria</span></div></template>
-<template id="p1"><div class="when">2019 – 2020</div><h3>Auxiliar Administrativo · Suprimentos</h3><p class="org">Construtora Tenda · São Paulo</p><ul><li>Cotações e negociações com fornecedores, emissão de pedidos e contratos de serviço e material</li><li>Relatórios de volumetria e de auditoria e melhorias nos sistemas da área</li><li>Automação de controles e treinamento de usuários nas ferramentas de compras</li></ul><div class="chips"><span>Compras indiretas</span><span>Negociação</span><span>Melhoria de processos</span></div></template>
-<template id="p2"><div class="when">2022 – 2025</div><h3>Assistente de Compras e Planejamento</h3><p class="org">Cogra · distribuidora do mercado de impressão</p><ul><li>Compra e reposição do portfólio por estoque, giro, sell-out e itens de baixa saída</li><li>Acompanhamento de pedidos e relacionamento com fornecedores</li><li>Controles e relatórios em Excel e TOTVS Protheus</li></ul><div class="chips"><span>Compras</span><span>Reposição</span><span>TOTVS Protheus</span></div></template>
-<template id="p3"><div class="when">abr. – out. 2025</div><h3>Analista de Compras e Planejamento</h3><p class="org">Cogra · todo o portfólio de produtos e marcas</p><ul><li>Criei o modelo de cálculo de necessidade de compra (estoque vendável, trânsito, lead time e múltiplos)</li><li>Desenvolvi e apliquei o IQF, publicado no ENGEMA (FEA-USP)</li><li>Construí painéis em Power BI de estoque parado, desempenho comercial e abastecimento</li><li>Participei de BIDs e integrei Compras com Logística, Comercial e Crédito</li></ul><div class="chips"><span>Planejamento de demanda</span><span>Gestão de fornecedores</span><span>Power BI</span></div><a class="btn go" href="casos/iqf.html">Ver o caso do IQF</a></template>
-<template id="p4"><div class="when">nov. 2025 – hoje</div><h3>Analista de Implantação ERP · Supply Chain</h3><p class="org">Bluesoft Sistemas · redes de varejo e alimentos</p><ul><li>Implanto, treino e homologo cadastros, compras, recebimento, acordos comerciais, pricing, operações de loja e PCP</li><li>Preparo o Go Live com migração de custos, estoques e preços; em um dos projetos, conduzi sozinho o pós-Go Live</li><li>Criei uma ferramenta que lê o ERP via API e mostra ao consultor o que atacar; ela deu origem a uma plataforma interna de ferramentas</li><li>Relatórios em SQL e JavaScript e automações em Python com validação antes de gravar</li></ul><div class="chips"><span>Implantação de ERP</span><span>Varejo</span><span>SQL</span><span>Python</span><span>APIs</span></div></template>
-<template id="p5"><div class="when">set. 2026 – hoje</div><h3>Ninho Impact</h3><p class="org">Voluntário · Instituto Ninho Social · projeto integrador do Senac</p><ul><li>Sistema que conduzi dos requisitos à entrega e doei ao Instituto</li><li>Propus o módulo de Oportunidades e Parceiros</li><li>Custo zero e 18 de 18 cenários aprovados</li></ul><div class="chips"><span>Produto</span><span>Requisitos</span><span>Projeto social</span></div><a class="btn go" href="casos/ninho-impact.html">Ver o caso do Ninho Impact</a></template>
-<template id="p6"><div class="when">Hoje</div><h3>Próxima entrega</h3><p class="org">São Paulo · aberto ao Brasil e a Portugal · presencial, híbrido ou remoto</p><ul><li>Supply Chain, compras e planejamento de demanda</li><li>Implantação e consultoria funcional de ERP</li><li>Automação de processos e análise de dados</li></ul><a class="btn go" href="#contato">Vamos conversar</a></template>
+<template id="t-tenda"><div class="when">2017 – 2020</div><h3>Construtora Tenda</h3><p class="org">Construtora · São Paulo · 2 cargos</p>
+<h4 class="role">Auxiliar Administrativo · Suprimentos <small>ago. 2019 – nov. 2020</small></h4><ul><li>Cotações e negociações com fornecedores, emissão de pedidos e contratos de serviço e material</li><li>Relatórios de volumetria e de auditoria e melhorias nos sistemas da área</li><li>Automação de controles e treinamento de usuários nas ferramentas de compras</li></ul>
+<h4 class="role">Aprendiz Administrativo <small>out. 2017 – jan. 2019</small></h4><ul><li>Adiantamentos e pagamentos a fornecedores, parceiros e reembolsos</li><li>Obrigações jurídicas e fiscais, lançamento de notas e relatórios para auditoria</li></ul>
+<div class="chips"><span>Compras indiretas</span><span>Negociação</span><span>Melhoria de processos</span><span>Excel</span></div></template>
+<template id="t-cogra"><div class="when">2022 – 2025</div><h3>Cogra</h3><p class="org">Distribuidora do mercado de impressão · São Paulo · 2 cargos</p>
+<h4 class="role">Analista de Compras e Planejamento <small>abr. – out. 2025</small></h4><ul><li>Respondi pelas compras e pelo planejamento de demanda de todo o portfólio</li><li>Criei o modelo de cálculo de necessidade de compra: estoque vendável, trânsito, lead time e múltiplos de embalagem</li><li>Construí painéis em Power BI de estoque parado, desempenho comercial e abastecimento</li><li>Participei de BIDs e integrei Compras com Logística, Comercial e Crédito</li></ul>
+<h4 class="role">Assistente de Compras e Planejamento <small>jan. 2022 – mar. 2025</small></h4><ul><li>Compra e reposição do portfólio por estoque, giro, sell-out e itens de baixa saída</li><li>Acompanhamento de pedidos e relacionamento com fornecedores</li><li>Controles e relatórios em Excel e TOTVS Protheus</li></ul>
+<div class="chips"><span>Planejamento de demanda</span><span>Compras</span><span>Power BI</span><span>TOTVS Protheus</span></div></template>
+<template id="t-bluesoft"><div class="when">nov. 2025 – hoje</div><h3>Bluesoft Sistemas</h3><p class="org">Analista de Implantação ERP · Supply Chain · redes de varejo e alimentos</p><ul><li>Implanto, treino e homologo cadastros, compras, recebimento, acordos comerciais, pricing, operações de loja e PCP</li><li>Preparo o Go Live com migração de custos, estoques e preços; em um dos projetos, conduzi sozinho o pós-Go Live</li><li>Criei uma ferramenta que lê o ERP via API e mostra ao consultor o que atacar; ela deu origem a uma plataforma interna de ferramentas</li><li>Relatórios em SQL e JavaScript e automações em Python que validam tudo antes de gravar</li></ul><div class="chips"><span>Implantação de ERP</span><span>Varejo</span><span>SQL</span><span>Python</span><span>APIs</span></div></template>
+<template id="t-prox"><div class="when">Hoje</div><h3>Próximo destino</h3><p class="org">São Paulo · aberto ao Brasil e a Portugal · presencial, híbrido ou remoto</p><ul><li>Supply Chain, compras e planejamento de demanda</li><li>Implantação e consultoria funcional de ERP</li><li>Automação de processos e análise de dados</li></ul><a class="btn go" href="#contato">Vamos conversar</a></template>
+<template id="t-iqf"><div class="when">Projeto · 2025</div><h3>IQF: Índice de Qualidade de Fornecedores</h3><p class="org">Projeto integrador do Senac, aplicado na Cogra · publicado no ENGEMA (FEA-USP)</p><ul><li>Índice com 4 indicadores e 41 subcategorias</li><li>Aplicado a 6 meses de dados de um fornecedor estratégico: 64,48%, fornecedor crítico</li><li>Primeiro autor e condutor do projeto</li></ul><div class="chips"><span>Gestão de fornecedores</span><span>Indicadores</span><span>Análise de dados</span></div><a class="btn go" href="casos/iqf.html">Ver o caso completo</a></template>
+<template id="t-ninho"><div class="when">Projeto · 2026</div><h3>Ninho Impact</h3><p class="org">Projeto social e voluntário · sistema doado ao Instituto Ninho Social</p><ul><li>Conduzi o sistema dos requisitos à entrega</li><li>Propus o módulo de Oportunidades e Parceiros</li><li>Custo zero e 18 de 18 cenários aprovados</li></ul><div class="chips"><span>Produto</span><span>Requisitos</span><span>Projeto social</span></div><a class="btn go" href="casos/ninho-impact.html">Ver o caso completo</a></template>
 
 <section class="sec" id="casos"><div class="wrap">
   <div class="sec-head"><div><h2 data-split>Casos</h2><p class="sub">O resumo de cada caso. Abra um caso para ver os detalhes, as imagens e as simulações.</p></div></div>
