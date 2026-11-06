@@ -193,3 +193,16 @@ if (sim) {
   calc();
 }
 })();
+
+/* Consulting Hub: mapa das frentes */
+(() => {
+  const nodes = document.querySelectorAll('.hm-node'), panel = document.getElementById('hmPanel');
+  if (!nodes.length || !panel) return;
+  const show = n => {
+    nodes.forEach(x => { x.classList.toggle('on', x === n); x.setAttribute('aria-pressed', x === n); });
+    panel.innerHTML = document.getElementById('hm-' + n.dataset.hm).innerHTML;
+    if (window.gsap) gsap.fromTo(panel, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: .45, ease: 'power3.out' });
+  };
+  nodes.forEach(n => n.addEventListener('click', () => show(n)));
+  show(nodes[0]);
+})();

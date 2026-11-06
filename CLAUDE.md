@@ -38,7 +38,9 @@ Quando o Natã passar um projeto novo, avaliar e atualizar **todas** as partes a
 - Commit e push em `main`; conferir no endereço publicado.
 
 ## Estado atual
-- Lugares da rota (data-i): 0 Tenda, 1 Cogra, 2 IQF (projeto), 3 Bluesoft, 4 Gestão de Consultores (projeto), 5 Ninho Impact (projeto), 6 Próximo destino.
-- Ordem dos casos: Ninho Impact → Gestão de Consultores → IQF (ligar anterior/próximo ao incluir um novo).
-- Demonstrações interativas ficam em `casos/<nome>/demo.html` (dados fictícios, `noindex`).
+- Lugares da rota (data-i): 0 Tenda, 1 Cogra, 2 IQF (projeto), 3 Bluesoft, 4 Consulting Hub (projeto), 5 Gestão de Consultores (projeto), 6 Ninho Impact (projeto), 7 Próximo destino.
+- Ordem dos casos: Ninho Impact → Gestão de Consultores → Consulting Hub → IQF (ligar anterior/próximo ao incluir um novo).
+- Demonstrações públicas ficam em `casos/<nome>/demo.html` e são só AMOSTRAS: poucas telas estáticas, sem regras/algoritmo no código; o resto leva ao vídeo e ao WhatsApp (pedido do Natã: não ensinar a copiar). A recriação completa usada para gravar o vídeo fica fora do repositório. Sem link de tela cheia.
+- Vídeos e pôsteres: ao regravar, trocar o nome do arquivo (ex.: -v2) para não ficar preso em cache.
+- Projetos com colegas: deixar claro o que é do Natã e citar quem contribuiu (ex.: Consulting Hub).
 - Caixas da esteira já mostram tampa, frente e lateral (108 px); com mais caixas, conferir o espaçamento.
