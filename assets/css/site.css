@@ -276,3 +276,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .drawer h4.role small{display:block;font-weight:600;color:var(--mute);font-size:14px}
 .drawer h4.role+ul{margin-top:8px}
 @media (max-height:640px){.route .sub{display:none}.route .rhead .wrap{display:flex;align-items:center;gap:22px;flex-wrap:wrap}.route .legend{margin-top:0}.place.w .art{width:calc(var(--u)*18);height:calc(var(--u)*15.5)}.place.p .art{width:calc(var(--u)*13);height:calc(var(--u)*11.5)}}
+
+/* canais de contato */
+.channels{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;max-width:980px;margin:34px auto 0;text-align:left}
+.channels a{display:block;background:var(--card);border-radius:18px;padding:18px 20px;text-decoration:none;font-weight:700;color:var(--steel);border:2px solid transparent;transition:border-color .25s,transform .25s var(--ease);overflow-wrap:anywhere}
+.channels a:hover{border-color:var(--orange);transform:translateY(-3px)}
+.channels b{display:block;font-family:var(--fd);font-size:13px;color:var(--orange);margin-bottom:4px}
+.channels{grid-template-columns:repeat(2,minmax(0,1fr));max-width:760px}
+@media (max-width:560px){.channels{grid-template-columns:1fr}}
