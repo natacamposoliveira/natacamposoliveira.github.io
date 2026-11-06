@@ -42,5 +42,7 @@ Quando o Natã passar um projeto novo, avaliar e atualizar **todas** as partes a
 - Ordem dos casos: Ninho Impact → Gestão de Consultores → Consulting Hub → IQF (ligar anterior/próximo ao incluir um novo).
 - Demonstrações públicas ficam em `casos/<nome>/demo.html` e são só AMOSTRAS: poucas telas estáticas, sem regras/algoritmo no código; o resto leva ao vídeo e ao WhatsApp (pedido do Natã: não ensinar a copiar). A recriação completa usada para gravar o vídeo fica fora do repositório. Sem link de tela cheia.
 - Vídeos e pôsteres: ao regravar, trocar o nome do arquivo (ex.: -v2) para não ficar preso em cache.
-- Projetos com colegas: deixar claro o que é do Natã e citar quem contribuiu (ex.: Consulting Hub).
+- Projetos com colegas: mostrar só o que é do Natã e não destacar nomes de colegas (o portfólio é dele). Nunca atribuir a ele o que outros fizeram.
+- O portfólio vende o que o Natã sabe fazer: nada de bastidores internos da empresa (apresentar à diretoria, adoção, próximos passos internos).
+- Consulting Hub: o Gerador de Apontamentos não aparece no site nem no vídeo (pedido do Natã).
 - Caixas da esteira já mostram tampa, frente e lateral (108 px); com mais caixas, conferir o espaçamento.
