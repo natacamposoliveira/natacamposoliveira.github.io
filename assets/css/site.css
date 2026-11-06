@@ -108,6 +108,7 @@ img,video,svg{display:block;max-width:100%}
 .legend span{display:flex;align-items:center;gap:8px}
 .legend i{width:calc(var(--u)*1.6);height:calc(var(--u)*1.6);min-width:10px;min-height:10px;border-radius:3px}
 .lw i{background:#fff}.lp i{background:var(--kraft)}
+.le i{background:#1F9D6B}
 .lane{position:absolute;left:24px;z-index:4;font-family:var(--fd);font-weight:700;font-size:max(11px,calc(var(--u)*1.5));letter-spacing:.02em;padding:calc(var(--u)*.6) calc(var(--u)*1.2);border-radius:999px}
 .lane.w{top:calc(var(--u)*30);background:#fff;color:var(--steel)}
 .lane.p{top:calc(var(--u)*72);background:var(--kraft);color:var(--steel)}
@@ -338,3 +339,15 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .hm-panel p{margin-top:8px}
 @media (max-width:640px){.hubmap{height:auto;display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:14px;background:var(--card)}.hm-lines{display:none}.hm-core{position:static;transform:none;width:auto;height:auto;border-radius:16px;padding:16px;grid-column:1/-1}.hm-node{position:static;transform:none;margin:0;width:auto}}
 @media (prefers-reduced-motion:reduce){.hm-lines circle{animation:none}}
+
+/* Formação: terceiro tipo de lugar na rota */
+.place.e .tag{background:#1F9D6B;color:#fff}
+.place.e .tag b{color:#fff}
+.place.e .open{color:#CFEFE1}
+.place .badge{transform-box:view-box;transform-origin:80px 6px}
+.place.lit .badge{animation:swing 2.6s ease-in-out infinite}
+@keyframes swing{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+.place .prog{transform-box:fill-box;transform-origin:left center;transform:scaleX(.12);transition:transform 1.4s var(--ease) .2s}
+.place.lit .prog{transform:scaleX(.88)}
+.place .tassel{transform-box:view-box;transform-origin:122px 25px}
+.place.lit .tassel{animation:swing 1.8s ease-in-out infinite}
