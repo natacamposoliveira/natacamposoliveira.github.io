@@ -117,7 +117,7 @@ function initRoute() {
     const step = u * 30, start = Math.max(innerWidth * .5, u * 60), n = Math.max(...places.map(p => +p.dataset.i)) + 1;
     places.forEach(p => p.style.left = (start + +p.dataset.i * step) + 'px');
     const total = start + n * step + u * 30; lanes.forEach(l => l.style.width = total + 'px'); world.style.width = total + 'px';
-    const dist = Math.max(0, total - innerWidth), t0 = innerWidth * .1, t1 = innerWidth * .4;
+    const dist = Math.max(0, total - innerWidth), t0 = innerWidth * .1, t1 = Math.max(t0, start + (n - 1) * step - dist - u * 16);
     const light = p => { const tx = t0 + (t1 - t0) * p + u * 10; places.forEach(pl => pl.classList.toggle('lit', start + +pl.dataset.i * step - dist * p <= tx)); };
     if (!hasG || reduce) { light(1); return; }
     gsap.set(world, { x: 0 }); gsap.set(truck, { x: t0 });
