@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IQF: Índice de Qualidade de Fornecedores · caso de Natã Campos de Oliveira</title>
+<meta name="description" content="IQF: índice que avalia fornecedores por 4 indicadores e 41 subcategorias, desenvolvido por Natã Campos de Oliveira e aplicado a 6 meses de dados. Relato técnico publicado nos anais do XXVII ENGEMA (FEA-USP).">
+<link rel="canonical" href="https://natacamposoliveira.github.io/casos/iqf.html">
+<meta property="og:type" content="article"><meta property="og:title" content="IQF: Índice de Qualidade de Fornecedores · Natã Campos de Oliveira">
+<meta name="theme-color" content="#EDF0F3">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/site.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"ScholarlyArticle","headline":"Gestão de fornecedores com foco em indicadores de desempenho: proposta de intervenção na Cogra","author":[{"@type":"Person","name":"Natã Campos de Oliveira","url":"https://natacamposoliveira.github.io/"},{"@type":"Person","name":"Maiki Bezerra de Oliveira"},{"@type":"Person","name":"Lucas da Silva Rodrigues"},{"@type":"Person","name":"Vinicius Eduardo da Silva Ribeiro"},{"@type":"Person","name":"Davi Lucas Arruda de Araújo"}],"isPartOf":{"@type":"PublicationIssue","name":"Anais do XXVII ENGEMA (FEA-USP)"},"datePublished":"2025-12","url":"https://engemausp.submissao.com.br/27/anais/resumo.php?cod_trabalho=1245","inLanguage":"pt-BR","keywords":"Gestão de fornecedores, Indicadores de desempenho, Índice de qualidade de fornecedor"}
+</script>
+</head>
+<body>
+<div class="progress" aria-hidden="true"></div>
+<header class="nav"><div class="wrap">
+  <a class="brand" href="../index.html"><i aria-hidden="true"></i>Natã Campos de Oliveira</a>
+  <button class="burger" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span></button>
+  <ul><li><a href="#resumo">Resumo</a></li><li><a href="#modelo">O modelo</a></li><li><a href="#simulador">Simulador</a></li><li><a href="../index.html#contato">Contato</a></li></ul>
+</div></header>
+
+<main class="wrap">
+<section class="ch" id="resumo">
+  <a class="crumb" href="../index.html#casos">← Todos os casos</a>
+  <h1 data-split="now">IQF: avaliar fornecedores por dados, não por percepção</h1>
+  <p class="lead" data-rise>Numa distribuidora do mercado de impressão, os fornecedores atrasavam e demoravam a responder, e não havia nenhum indicador para cobrar. Criei um índice com regras claras e apliquei a 6 meses de dados de um fornecedor estratégico.</p>
+  <div class="meta" data-rise><span>Cogra · Compras e planejamento</span><span>Projeto integrador · Centro Universitário Senac</span><span>Publicado no ENGEMA (FEA-USP) · dez. 2025</span></div>
+  <div class="kpis">
+    <div class="kpi" data-rise><b data-count="64.48" data-dec="2" data-suf="%">64,48%</b><span>nota do fornecedor avaliado: crítico</span></div>
+    <div class="kpi" data-rise><b data-count="4">4</b><span>indicadores com pesos</span></div>
+    <div class="kpi" data-rise><b data-count="41">41</b><span>subcategorias medidas</span></div>
+    <div class="kpi" data-rise><b data-count="6" data-suf=" meses">6 meses</b><span>de registros reais analisados</span></div>
+  </div>
+  <div class="quick">
+    <div data-rise><small>Problema</small><p>Atrasos, respostas lentas e cobranças por e-mail, sem nenhum número para negociar com o fornecedor.</p></div>
+    <div data-rise><small>O que eu fiz</small><p>Defini os indicadores, os pesos e o tempo ideal de resposta de cada tipo de pedido, e organizei os dados de 6 meses.</p></div>
+    <div data-rise><small>Resultado</small><p>O fornecedor ficou em 64,48%, na faixa crítica, e o índice mostrou exatamente onde agir: atendimento e prazo de entrega.</p></div>
+  </div>
+</section>
+
+<section class="block" id="modelo">
+  <h2 data-split>O modelo: 4 indicadores, 41 subcategorias</h2>
+  <p class="sub">Cada indicador tem um peso na nota final. Toque num indicador para ver as subcategorias medidas e quanto o fornecedor fez em cada uma.</p>
+  <div class="tree">
+    <div class="kp" role="button" tabindex="0" aria-expanded="false"><span class="w">40%</span><h4>Atendimento do fornecedor</h4><span class="bar2"><i style="width:48.5%"></i></span><span class="t">19,40 de 40 pontos</span>
+      <ul><li>Consulta de disponibilidade</li><li>Confirmação de pedido</li><li>Recusa de nota fiscal</li><li>Respostas sobre avarias</li><li>Divergência na nota: item divergente</li><li>Divergência na nota: CFOP incorreto</li><li>Divergência na nota: produto não solicitado</li><li>Solicitação de BID</li><li>Previsão de entrega</li><li>Dúvida geral</li><li>Cotações</li><li>Atraso na entrega da nota fiscal</li><li>Dados cadastrais</li><li>Certificados</li><li>Atualização de prazo de entrega</li></ul></div>
+    <div class="kp" role="button" tabindex="0" aria-expanded="false"><span class="w">20%</span><h4>Entrega no prazo</h4><span class="bar2"><i style="width:34.6%"></i></span><span class="t">6,92 de 20 pontos</span>
+      <ul><li>Equipamentos</li><li>Suprimentos</li><li>Infoimagem</li><li>Peças</li><li>Acessórios</li></ul></div>
+    <div class="kp" role="button" tabindex="0" aria-expanded="false"><span class="w">20%</span><h4>Conformidade do pedido</h4><span class="bar2"><i style="width:96.5%"></i></span><span class="t">19,29 de 20 pontos</span>
+      <ul><li>Equipamentos</li><li>Suprimentos</li><li>Acessórios</li><li>Infoimagem</li><li>Peças</li></ul></div>
+    <div class="kp" role="button" tabindex="0" aria-expanded="false"><span class="w">20%</span><h4>Avarias no recebimento</h4><span class="bar2"><i style="width:94.3%"></i></span><span class="t">18,86 de 20 pontos</span>
+      <ul><li>Caixa amassada ou rasgada (5 linhas de produto)</li><li>Lacre rompido (5 linhas de produto)</li><li>Produto danificado (5 linhas de produto)</li><li>Tinta vazando (suprimentos)</li></ul></div>
+  </div>
+  <div class="cols">
+    <div class="panelc" data-rise><h3>Como ler a nota</h3><ul><li><b>85% ou mais:</b> ótimo fornecedor, manter e ampliar a parceria</li><li><b>De 70% a 84,99%:</b> fornecedor regular, acompanhar com plano de melhoria</li><li><b>Abaixo de 70%:</b> fornecedor crítico, revisão de contrato ou ação corretiva imediata</li></ul></div>
+    <div class="panelc" data-rise><h3>O que a nota mostrou</h3><ul><li>Pontos fortes: pedidos chegam certos e quase sem avarias</li><li>Pontos fracos: atendimento lento e entregas fora do prazo</li><li>Ação: revisar o acordo de nível de serviço e cobrar prazo com dados</li></ul></div>
+  </div>
+</section>
+
+<section class="block" id="simulador">
+  <h2 data-split>Teste o IQF você mesmo</h2>
+  <p class="sub">Os valores iniciais são os do fornecedor avaliado. Mude o desempenho de cada indicador e veja a nota e a classificação mudarem.</p>
+  <div class="sim" id="sim">
+    <div>
+      <div class="lv"><label>Atendimento do fornecedor · peso 40% <output>48,5%</output></label><input type="range" min="0" max="100" step="0.1" value="48.5" data-w=".4" aria-label="Atendimento do fornecedor"></div>
+      <div class="lv"><label>Entrega no prazo · peso 20% <output>34,6%</output></label><input type="range" min="0" max="100" step="0.1" value="34.6" data-w=".2" aria-label="Entrega no prazo"></div>
+      <div class="lv"><label>Conformidade do pedido · peso 20% <output>96,5%</output></label><input type="range" min="0" max="100" step="0.1" value="96.5" data-w=".2" aria-label="Conformidade do pedido"></div>
+      <div class="lv"><label>Avarias no recebimento · peso 20% <output>94,3%</output></label><input type="range" min="0" max="100" step="0.1" value="94.3" data-w=".2" aria-label="Avarias no recebimento"></div>
+      <button class="reset" type="button">Voltar aos valores do fornecedor avaliado</button>
+    </div>
+    <div class="meter" aria-live="polite"><div class="v">64,48%</div><div class="bar"><i></i></div><div class="marks"><span>0</span><span>70</span><span>85</span><span>100</span></div><div class="c"></div></div>
+  </div>
+</section>
+
+<section class="block">
+  <h2 data-split>Como eu construí</h2>
+  <div class="steps">
+    <div class="step" role="button" tabindex="0" aria-expanded="false"><span class="n"></span><span><h4>Diagnóstico</h4><p>Mapear os atrasos, as respostas lentas e os follow-ups por e-mail.</p><span class="x"><p>Conversei com compras e logística e cruzei registros de pedidos e comunicações com fornecedores para entender onde o problema nascia.</p></span></span></div>
+    <div class="step" role="button" tabindex="0" aria-expanded="false"><span class="n"></span><span><h4>Escolha do método</h4><p>Usar o IQF, um índice ponderado conhecido na gestão de fornecedores.</p><span class="x"><p>O IQF transforma percepção em número: cada critério recebe uma nota e um peso conforme a importância para a empresa.</p></span></span></div>
+    <div class="step" role="button" tabindex="0" aria-expanded="false"><span class="n"></span><span><h4>Indicadores e pesos</h4><p>Atendimento com 40%, e entrega, conformidade e avarias com 20% cada.</p><span class="x"><p>O atendimento ganhou o maior peso porque era o maior gargalo. Cada indicador foi aberto em subcategorias, por tipo de interação e por linha de produto.</p></span></span></div>
+    <div class="step" role="button" tabindex="0" aria-expanded="false"><span class="n"></span><span><h4>Coleta e tratamento dos dados</h4><p>Seis meses de registros organizados em planilhas padronizadas.</p><span class="x"><p>Defini um tempo ideal de resposta para cada tipo de pedido. Uma consulta de disponibilidade, por exemplo, tem uma janela menor que um pedido de nota fiscal.</p></span></span></div>
+    <div class="step" role="button" tabindex="0" aria-expanded="false"><span class="n"></span><span><h4>Aplicação e classificação</h4><p>A nota final de 64,48% colocou o fornecedor na faixa crítica.</p><span class="x"><p>O detalhamento por subcategoria mostrou que o problema estava no atendimento e no prazo, e não na qualidade dos produtos.</p></span></span></div>
+    <div class="step" role="button" tabindex="0" aria-expanded="false"><span class="n"></span><span><h4>Próximos passos propostos</h4><p>Aplicar aos fornecedores estratégicos com revisão mensal.</p><span class="x"><p>O modelo ficou na empresa como base para o ciclo seguinte. Também propusemos, em protótipo de telas, uma ferramenta que transforma cada e-mail com o fornecedor num chamado com protocolo, para automatizar a coleta.</p></span></span></div>
+  </div>
+</section>
+
+<section class="block">
+  <h2 data-split>Publicação</h2>
+  <div class="panelc" data-rise style="margin-top:22px">
+    <h3>Gestão de fornecedores com foco em indicadores de desempenho: proposta de intervenção na Cogra</h3>
+    <p style="margin-top:10px;color:var(--mute)">Relato técnico nos anais do XXVII ENGEMA (FEA-USP), dezembro de 2025. Autores: Natã Campos de Oliveira (primeiro autor e condutor do projeto), Maiki Bezerra de Oliveira, Lucas da Silva Rodrigues e Vinicius Eduardo da Silva Ribeiro, com orientação do Prof. Davi Lucas Arruda de Araújo.</p>
+    <a class="btn" style="margin-top:18px" href="https://engemausp.submissao.com.br/27/anais/resumo.php?cod_trabalho=1245" target="_blank" rel="noopener">Ler o resumo no ENGEMA</a>
+    <p style="margin-top:14px;font-size:15px;color:var(--mute)">O fornecedor avaliado não é identificado neste portfólio.</p>
+  </div>
+</section>
+
+<nav class="next" aria-label="Navegação entre casos"><a class="btn ghost" href="ninho-impact.html">← Caso anterior: Ninho Impact</a><a class="btn" href="../index.html#casos">Todos os casos</a></nav>
+</main>
+
+<footer><div class="wrap"><span>© 2026 Natã Campos de Oliveira</span><a href="https://www.linkedin.com/in/natacamposoliveira/">LinkedIn</a></div></footer>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="../assets/js/site.js"></script>
+</body>
+</html>

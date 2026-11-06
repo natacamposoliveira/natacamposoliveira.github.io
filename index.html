@@ -2,155 +2,142 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Natã Campos de Oliveira · Supply Chain e Implantação de ERP</title>
-<meta name="description" content="Natã Campos de Oliveira: Supply Chain, Compras e Planejamento de Demanda, Implantação de ERP no varejo, dados e automação (Power BI, SQL, Python, APIs). São Paulo, aberto a oportunidades no Brasil e em Portugal.">
+<meta name="description" content="Natã Campos de Oliveira: Supply Chain, compras, planejamento de demanda e implantação de ERP no varejo, com dados e automação (Power BI, SQL, Python, APIs). São Paulo, aberto a oportunidades no Brasil e em Portugal.">
 <link rel="canonical" href="https://natacamposoliveira.github.io/">
 <meta property="og:type" content="profile">
 <meta property="og:title" content="Natã Campos de Oliveira · Supply Chain e Implantação de ERP">
-<meta property="og:description" content="Trabalhei em cada elo da cadeia de suprimentos. Hoje coloco essa cadeia inteira dentro do sistema.">
+<meta property="og:description" content="Minha carreira é uma linha de abastecimento: compras, planejamento, implantação de ERP e automação.">
 <meta property="og:url" content="https://natacamposoliveira.github.io/">
 <meta property="og:locale" content="pt_BR">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#EDF0F3">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Natã Campos de Oliveira",
-  "alternateName": ["Natã Campos De Oliveira", "Nata Campos Oliveira"],
-  "url": "https://natacamposoliveira.github.io/",
-  "jobTitle": "Analista de Implantação ERP - Supply Chain",
-  "worksFor": {"@type": "Organization", "name": "Bluesoft Sistemas"},
-  "address": {"@type": "PostalAddress", "addressLocality": "São Paulo", "addressRegion": "SP", "addressCountry": "BR"},
-  "alumniOf": [{"@type": "CollegeOrUniversity", "name": "Centro Universitário Senac"}],
-  "knowsLanguage": "pt",
-  "knowsAbout": ["Supply Chain", "Gestão da cadeia de suprimentos", "Compras", "Planejamento de demanda", "Gestão de estoques", "Gestão de fornecedores", "Implantação de ERP", "Consultoria funcional de ERP", "Varejo", "Recebimento de mercadorias", "NF-e", "Precificação de varejo", "Melhoria de processos", "Análise de dados", "Power BI", "SQL", "PostgreSQL", "Python", "APIs REST", "TOTVS Protheus", "Automação de processos"],
-  "sameAs": ["https://www.linkedin.com/in/natacamposoliveira/"],
-  "seeks": {"@type": "Demand", "description": "Oportunidades em Supply Chain, implantação de ERP e automação de processos, no Brasil ou em Portugal (presencial, híbrido ou remoto)."}
-}
+{"@context":"https://schema.org","@type":"Person","name":"Natã Campos de Oliveira","alternateName":["Natã Campos De Oliveira","Nata Campos Oliveira"],"url":"https://natacamposoliveira.github.io/",
+"jobTitle":"Analista de Implantação ERP - Supply Chain","worksFor":{"@type":"Organization","name":"Bluesoft Sistemas"},
+"address":{"@type":"PostalAddress","addressLocality":"São Paulo","addressRegion":"SP","addressCountry":"BR"},
+"alumniOf":[{"@type":"CollegeOrUniversity","name":"Centro Universitário Senac"}],"knowsLanguage":"pt",
+"knowsAbout":["Supply Chain","Gestão da cadeia de suprimentos","Compras","Planejamento de demanda","Gestão de estoques","Gestão de fornecedores","Implantação de ERP","Consultoria funcional de ERP","Varejo","Recebimento de mercadorias","NF-e","Precificação de varejo","Melhoria de processos","Análise de dados","Power BI","SQL","PostgreSQL","Python","APIs REST","TOTVS Protheus","Automação de processos","Levantamento de requisitos"],
+"sameAs":["https://www.linkedin.com/in/natacamposoliveira/"],
+"seeks":{"@type":"Demand","description":"Oportunidades em Supply Chain, implantação de ERP e automação de processos, no Brasil ou em Portugal (presencial, híbrido ou remoto)."}}
 </script>
-<style>
-:root{--bg:#F6F3EE;--surface:#FFFFFF;--ink:#14263A;--muted:#4F5D6A;--line:#D9D3C9;--accent:#B5532B;--green:#3D6B57;--slate:#7A8B99}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#10161D;--surface:#17212B;--ink:#EEF1F4;--muted:#A9B4BF;--line:#2A3742;--accent:#E07A4F;--green:#6FA88E;--slate:#9AAAB8}}
-:root[data-theme="dark"]{--bg:#10161D;--surface:#17212B;--ink:#EEF1F4;--muted:#A9B4BF;--line:#2A3742;--accent:#E07A4F;--green:#6FA88E;--slate:#9AAAB8}
-*{box-sizing:border-box;margin:0}
-body{background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
-a{color:inherit}
-.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
-header.top{padding:22px 0;display:flex;justify-content:space-between;align-items:center;gap:16px}
-header.top .name{font-weight:700}
-header.top nav a{margin-left:18px;text-decoration:none;color:var(--muted);font-size:15px}
-header.top nav a:hover{color:var(--ink)}
-.hero{padding:56px 0 36px}
-.kicker{font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600}
-h1{font-size:clamp(30px,5vw,50px);line-height:1.12;letter-spacing:-.015em;margin-top:14px;max-width:880px}
-h1 em{font-style:normal;color:var(--accent)}
-.lead{font-size:clamp(17px,2vw,20px);color:var(--muted);margin-top:20px;max-width:760px}
-.cta{margin-top:28px;display:flex;flex-wrap:wrap;gap:12px}
-.btn{display:inline-block;padding:12px 18px;border-radius:8px;font-weight:600;text-decoration:none;border:1.5px solid var(--ink)}
-.btn.primary{background:var(--ink);color:var(--bg)}
-.chain{margin:44px 0 8px;position:relative;display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
-.chain:before{content:"";position:absolute;left:7%;right:7%;top:7px;height:2px;background:var(--ink);opacity:.8}
-.node{text-align:center;font-size:14px;font-weight:600;position:relative}
-.node i{display:block;width:16px;height:16px;border-radius:50%;background:var(--ink);margin:0 auto 10px;border:3px solid var(--bg)}
-.lanes{display:grid;gap:8px;margin-top:18px}
-.lane{border-left:4px solid;padding:9px 14px;font-size:15px;color:var(--muted);border-radius:0 6px 6px 0}
-.lane b{color:var(--ink);margin-right:8px}
-.l1{border-color:var(--slate);background:color-mix(in srgb,var(--slate) 12%,transparent)}
-.l2{border-color:var(--green);background:color-mix(in srgb,var(--green) 12%,transparent)}
-.l3{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,transparent)}
-.l4{border-color:var(--ink);background:color-mix(in srgb,var(--ink) 7%,transparent)}
-section{padding:48px 0;border-top:1px solid var(--line)}
-h2{font-size:clamp(24px,3vw,30px);letter-spacing:-.01em}
-.sub{color:var(--muted);margin-top:8px;max-width:720px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px;margin-top:26px}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:10px}
-.tag{font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:var(--accent)}
-.card h3{font-size:19px;line-height:1.3}
-.card p{color:var(--muted);font-size:15px}
-.meta{margin-top:auto;font-size:13px;color:var(--muted);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
-.soon{font-size:12px;font-weight:600;border:1px solid var(--line);border-radius:99px;padding:2px 10px}
-.timeline{margin-top:24px;display:grid;gap:14px}
-.t{display:grid;grid-template-columns:150px 1fr;gap:16px}
-.t .when{color:var(--muted);font-size:14px;padding-top:2px}
-.t h3{font-size:17px}
-.t p{color:var(--muted);font-size:15px}
-.skills{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
-.skills span{border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:5px 12px;font-size:14px}
-footer{padding:36px 0 56px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
-@media (max-width:720px){
-  header.top nav{display:none}
-  .chain{grid-template-columns:1fr;gap:10px}
-  .chain:before{left:7px;right:auto;top:6px;bottom:6px;width:2px;height:auto}
-  .node{text-align:left;display:flex;align-items:center;gap:12px}
-  .node i{margin:0}
-  .t{grid-template-columns:1fr;gap:2px}
-}
-</style>
 </head>
 <body>
-<div class="wrap">
-<header class="top">
-  <div class="name">Natã Campos de Oliveira</div>
-  <nav><a href="#casos">Casos</a><a href="#trajetoria">Trajetória</a><a href="#contato">Contato</a></nav>
-</header>
+<div class="progress" aria-hidden="true"></div>
+<header class="nav"><div class="wrap">
+  <a class="brand" href="#topo"><i aria-hidden="true"></i>Natã Campos de Oliveira</a>
+  <button class="burger" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span></button>
+  <ul><li><a href="#cadeia">A cadeia</a></li><li><a href="#rota">Trajetória</a></li><li><a href="#casos">Casos</a></li><li><a href="#contato">Contato</a></li></ul>
+</div></header>
 
 <main>
-<div class="hero">
-  <div class="kicker">Supply Chain · Compras · Implantação de ERP</div>
-  <h1>Trabalhei em cada elo da cadeia de suprimentos. <em>Hoje coloco essa cadeia inteira dentro do sistema.</em></h1>
-  <p class="lead">Comprei, planejei a demanda e hoje implanto o ERP que redes de varejo, distribuição e indústria de alimentos usam para comprar, receber, precificar e vender. No caminho, construo os relatórios e as automações que faltam, com a regra do negócio sempre no centro.</p>
-  <div class="cta">
-    <a class="btn primary" href="https://www.linkedin.com/in/natacamposoliveira/">Falar comigo no LinkedIn</a>
-    <a class="btn" href="#casos">Ver os casos</a>
+<section class="hero" id="topo"><div class="wrap">
+  <div>
+    <h1 data-split="now">Minha carreira é uma <em>linha de abastecimento.</em></h1>
+    <p class="lead" data-rise>Comprei, planejei a demanda e hoje implanto o ERP que redes de varejo usam para comprar, receber, precificar e vender. No caminho, construo os relatórios, as automações e os sistemas que faltam.</p>
+    <div class="ctas" data-rise><a class="btn" href="#rota">Seguir a rota</a><a class="btn ghost" href="#casos">Ver os casos</a></div>
+    <div class="facts" data-rise><div><b>6+ anos</b>em compras e Supply Chain</div><div><b>3 empresas</b>Tenda, Cogra e Bluesoft</div><div><b>SP</b>aberto ao Brasil e a Portugal</div></div>
   </div>
+  <div class="scene" aria-label="Esteira com as competências do Natã">
+    <span class="hint">Passe o mouse ou toque numa caixa</span>
+    <div class="iso" id="iso"><div class="belt"></div>
+      <button class="box" data-t="Compras" data-d="Construtora Tenda e Cogra: cotação, negociação, pedidos e contratos com fornecedores." data-f="todos"><span class="f"><span class="s1"></span><span class="s2"></span><span class="top"><span>Compras</span></span></span></button>
+      <button class="box" data-t="Planejamento de demanda" data-d="Cogra: cálculo de necessidade de compra com estoque vendável, trânsito, lead time e múltiplos de embalagem." data-f="todos"><span class="f"><span class="s1"></span><span class="s2"></span><span class="top"><span>Planejamento de demanda</span></span></span></button>
+      <button class="box" data-t="Fornecedores" data-d="Cogra: IQF, índice que avalia fornecedores por indicadores, publicado no ENGEMA." data-f="fornecedores"><span class="f"><span class="s1"></span><span class="s2"></span><span class="top"><span>Fornecedores</span></span></span></button>
+      <button class="box" data-t="Implantação de ERP" data-d="Bluesoft: cadastro, compras, recebimento, preço, loja e produção, do mapeamento ao Go Live." data-f="todos"><span class="f"><span class="s1"></span><span class="s2"></span><span class="top"><span>Implantação de ERP</span></span></span></button>
+      <button class="box" data-t="Power BI e SQL" data-d="Painéis de estoque e vendas e relatórios de margem que respeitam a regra real do negócio." data-f="dados"><span class="f"><span class="s1"></span><span class="s2"></span><span class="top"><span>Power BI e SQL</span></span></span></button>
+      <button class="box" data-t="Python e APIs" data-d="Automações em lote que validam o arquivo inteiro antes de gravar: se uma linha falha, nada é gravado." data-f="todos"><span class="f"><span class="s1"></span><span class="s2"></span><span class="top"><span>Python e APIs</span></span></span></button>
+      <button class="box" data-t="Produto e requisitos" data-d="Ninho Impact: do levantamento com a diretoria até a entrega de um sistema completo." data-f="produto"><span class="f"><span class="s1"></span><span class="s2"></span><span class="top"><span>Produto e requisitos</span></span></span></button>
+    </div>
+    <div class="tip" id="tip" role="status"><b></b><span></span><br><a href="#casos">Ver casos relacionados</a></div>
+  </div>
+</div></section>
 
-  <div class="chain" aria-label="Etapas da cadeia de suprimentos">
-    <div class="node"><i></i>Fornecedor</div><div class="node"><i></i>Compra</div><div class="node"><i></i>Planejamento</div><div class="node"><i></i>Recebimento</div><div class="node"><i></i>Estoque</div><div class="node"><i></i>Preço e margem</div><div class="node"><i></i>Loja</div>
+<section class="sec" id="cadeia"><div class="wrap">
+  <div class="sec-head"><div><h2 data-split>A cadeia inteira, elo por elo</h2><p class="sub">Escolha um elo para ver o que eu já fiz nele.</p></div></div>
+  <div class="chain-wrap">
+    <div class="radar" id="radar">
+      <canvas aria-hidden="true"></canvas>
+      <div class="hub"><div><b>Natã</b>Supply Chain + ERP</div></div>
+      <button class="elo">Fornecedor</button><button class="elo">Compra</button><button class="elo">Planejamento</button><button class="elo">Recebimento</button><button class="elo">Estoque</button><button class="elo">Preço e margem</button><button class="elo">Loja</button>
+    </div>
+    <div class="elo-panel" id="elo-panel" aria-live="polite"></div>
   </div>
-  <div class="lanes">
-    <div class="lane l1"><b>Construtora Tenda</b>suprimentos e compras indiretas</div>
-    <div class="lane l2"><b>Cogra</b>compras, planejamento de demanda, estoque e fornecedores</div>
-    <div class="lane l3"><b>Bluesoft</b>implantação de ERP de ponta a ponta no varejo</div>
-    <div class="lane l4"><b>Dados e automação</b>SQL · Python · APIs · Power BI, em todas as etapas</div>
-  </div>
-</div>
+  <template id="elo-0"><div class="k">Elo 1 de 7</div><h3>Fornecedor</h3><p>Medir o fornecedor com dados, e não por percepção.</p><ul><li>Criei o IQF: 4 indicadores e 41 subcategorias</li><li>Relacionamento e BIDs com fornecedores na Cogra</li><li>Contratos de fornecimento no ERP, na Bluesoft</li></ul><div class="where"><span>Cogra</span><span>Bluesoft</span></div></template>
+  <template id="elo-1"><div class="k">Elo 2 de 7</div><h3>Compra</h3><p>Do pedido certo, na hora certa, ao contrato bem negociado.</p><ul><li>Cotações, negociações e pedidos de compras indiretas</li><li>Compra e reposição do portfólio inteiro</li><li>Linha de compra, sugestão e agenda de compras no ERP</li></ul><div class="where"><span>Tenda</span><span>Cogra</span><span>Bluesoft</span></div></template>
+  <template id="elo-2"><div class="k">Elo 3 de 7</div><h3>Planejamento</h3><p>Quanto comprar de cada item, sem depender de achismo.</p><ul><li>Cálculo de necessidade de compra: estoque vendável, trânsito, lead time e múltiplos</li><li>Análise de giro, sell-out e itens de baixa saída</li></ul><div class="where"><span>Cogra</span></div></template>
+  <template id="elo-3"><div class="k">Elo 4 de 7</div><h3>Recebimento</h3><p>A mercadoria e a nota fiscal precisam bater.</p><ul><li>Implantação de recebimento de NF-e e CT-e, XML e divergências</li><li>Investigação de divergências até a causa</li></ul><div class="where"><span>Bluesoft</span></div></template>
+  <template id="elo-4"><div class="k">Elo 5 de 7</div><h3>Estoque</h3><p>Estoque parado é dinheiro parado.</p><ul><li>Painéis em Power BI de estoque parado e abastecimento</li><li>Inventários, transferências e migração de estoques no Go Live</li></ul><div class="where"><span>Cogra</span><span>Bluesoft</span></div></template>
+  <template id="elo-5"><div class="k">Elo 6 de 7</div><h3>Preço e margem</h3><p>Margem só é real quando a regra está certa.</p><ul><li>Precificação de varejo e atacado e promoções no ERP</li><li>Relatórios em SQL e JavaScript que respeitam custo, venda, devolução e margem</li></ul><div class="where"><span>Bluesoft</span></div></template>
+  <template id="elo-6"><div class="k">Elo 7 de 7</div><h3>Loja</h3><p>No fim, tudo precisa funcionar no caixa e na prateleira.</p><ul><li>Operações de loja, etiquetas, carga de PDVs e balanças</li><li>Prevenção de perdas, trocas e devoluções</li></ul><div class="where"><span>Bluesoft</span></div></template>
+</div></section>
 
-<section id="casos">
-  <h2>Casos</h2>
-  <p class="sub">Cada caso mostra o problema, o que eu fiz, como funciona e o resultado. Os dados de clientes e empresas são substituídos por dados fictícios.</p>
-  <div class="grid">
-    <article class="card"><div class="tag">Planejamento</div><h3>Cálculo de necessidade de compra</h3><p>Quanto comprar de cada item a partir de estoque vendável, pedidos em trânsito, lead time e múltiplos de embalagem, com regra explícita para todo o portfólio.</p><div class="meta"><span>Cogra</span><span class="soon">em breve</span></div></article>
-    <article class="card"><div class="tag">Fornecedores</div><h3>IQF: Índice de Qualidade de Fornecedores</h3><p>Avaliação de fornecedores por indicadores objetivos, com KPIs por subcategoria. Trabalho apresentado no ENGEMA (FEA-USP).</p><div class="meta"><span>Cogra · acadêmico</span><span class="soon">em breve</span></div></article>
-    <article class="card"><div class="tag">Implantação</div><h3>Control Tower: saúde da implantação de ERP</h3><p>Lê o ERP em modo somente leitura e transforma os dados em evidência de adoção: cobertura, pendências e prazos por projeto.</p><div class="meta"><span>Bluesoft</span><span class="soon">em breve</span></div></article>
-    <article class="card"><div class="tag">Automação</div><h3>Operações em lote via API, sem erro parcial</h3><p>Cadastros e manutenções em massa no ERP que validam o arquivo inteiro antes de gravar: se uma linha falha, nada é gravado.</p><div class="meta"><span>Bluesoft</span><span class="soon">em breve</span></div></article>
-    <article class="card"><div class="tag">Dados</div><h3>Relatórios e dashboards com a regra real do negócio</h3><p>Relatórios em SQL e JavaScript que respeitam custo, venda, devolução e margem, e guias para conduzir clientes na leitura dos painéis.</p><div class="meta"><span>Bluesoft</span><span class="soon">em breve</span></div></article>
-    <article class="card"><div class="tag">Produto e impacto social</div><h3>Ninho Impact: gestão da jornada social</h3><p>Sistema que conduzi dos requisitos à entrega e doei ao Instituto Ninho Social, que atende pessoas em situação de rua em São Paulo.</p><div class="meta"><span>Voluntário · acadêmico</span><span class="soon">em breve</span></div></article>
-  </div>
+<section class="route" id="rota">
+  <div class="rhead"><div class="wrap"><h2>A rota até aqui</h2><p class="sub">Role para o caminhão andar. Toque numa parada para abrir os detalhes.</p></div></div>
+  <div class="road" id="road" aria-hidden="true"></div>
+  <ol class="stops" id="stops">
+    <li class="stop"><span class="pin" aria-hidden="true"></span><button class="info" data-open="p0"><b>2017</b><strong>Aprendiz · Construtora Tenda</strong><span>Pagamentos, notas e auditoria.</span><em>Abrir detalhes</em></button></li>
+    <li class="stop"><span class="pin" aria-hidden="true"></span><button class="info" data-open="p1"><b>2019</b><strong>Suprimentos · Construtora Tenda</strong><span>Cotações, negociações e contratos.</span><em>Abrir detalhes</em></button></li>
+    <li class="stop"><span class="pin" aria-hidden="true"></span><button class="info" data-open="p2"><b>2022</b><strong>Compras · Cogra</strong><span>Reposição por estoque, giro e sell-out.</span><em>Abrir detalhes</em></button></li>
+    <li class="stop"><span class="pin" aria-hidden="true"></span><button class="info" data-open="p3"><b>2025</b><strong>Analista de Compras · Cogra</strong><span>Planejamento de demanda e IQF.</span><em>Abrir detalhes</em></button></li>
+    <li class="stop"><span class="pin" aria-hidden="true"></span><button class="info" data-open="p4"><b>2025</b><strong>Implantação de ERP · Bluesoft</strong><span>Do cadastro ao Go Live no varejo.</span><em>Abrir detalhes</em></button></li>
+    <li class="stop"><span class="pin" aria-hidden="true"></span><button class="info" data-open="p5"><b>2026</b><strong>Ninho Impact</strong><span>Sistema doado a um instituto social.</span><em>Abrir detalhes</em></button></li>
+    <li class="stop"><span class="pin" aria-hidden="true"></span><button class="info" data-open="p6"><b>Hoje</b><strong>Próxima entrega</strong><span>Aberto ao Brasil e a Portugal.</span><em>Abrir detalhes</em></button></li>
+  </ol>
+  <svg class="truck" id="truck" viewBox="0 0 116 66" aria-hidden="true"><rect x="2" y="6" width="70" height="40" rx="6" fill="#FF5F1F"/><rect x="10" y="14" width="22" height="16" rx="2" fill="#D2A877"/><rect x="36" y="14" width="22" height="16" rx="2" fill="#D2A877"/><path d="M74 16h24l15 15v15H74z" fill="#fff"/><rect x="82" y="20" width="13" height="10" rx="1" fill="#22303F"/><g class="wheel"><circle cx="22" cy="52" r="10" fill="#22303F"/><path d="M22 44v16M14 52h16" stroke="#9AA6B2" stroke-width="2"/></g><g class="wheel"><circle cx="92" cy="52" r="10" fill="#22303F"/><path d="M92 44v16M84 52h16" stroke="#9AA6B2" stroke-width="2"/></g></svg>
 </section>
 
-<section id="trajetoria">
-  <h2>Trajetória</h2>
-  <div class="timeline">
-    <div class="t"><div class="when">nov. 2025 – hoje</div><div><h3>Analista de Implantação ERP – Supply Chain · Bluesoft Sistemas</h3><p>Implantação do ERP nas frentes de Supply Chain e Comercial: cadastros, compras, recebimento, acordos comerciais, pricing, operações de loja e PCP, do mapeamento ao Go Live.</p></div></div>
-    <div class="t"><div class="when">2022 – 2025</div><div><h3>Assistente → Analista de Compras e Planejamento · Cogra</h3><p>Compras e planejamento de demanda de todo o portfólio, cálculo de necessidade de compra, IQF e painéis em Power BI.</p></div></div>
-    <div class="t"><div class="when">2017 – 2020</div><div><h3>Aprendiz → Auxiliar Administrativo · Construtora Tenda</h3><p>Suprimentos e compras indiretas: cotações, negociações, pedidos, contratos e controles.</p></div></div>
-    <div class="t"><div class="when">até dez. 2026</div><div><h3>Graduação tecnológica em Logística e Supply Chain · Centro Universitário Senac</h3><p>Antes, cursei Ciências Contábeis até o 3º ano na Universidade Paulista.</p></div></div>
-  </div>
-  <div class="skills" aria-label="Competências">
-    <span>Supply Chain</span><span>Compras</span><span>Planejamento de demanda</span><span>Gestão de estoques</span><span>Gestão de fornecedores</span><span>Implantação de ERP</span><span>Varejo</span><span>Recebimento e NF-e</span><span>Precificação</span><span>Melhoria de processos</span><span>Power BI</span><span>Excel</span><span>TOTVS Protheus</span><span>SQL</span><span>Python</span><span>APIs REST</span><span>Automação</span>
-  </div>
-</section>
+<template id="p0"><div class="when">2017 – 2019</div><h3>Aprendiz Administrativo</h3><p class="org">Construtora Tenda · São Paulo</p><ul><li>Gestão de adiantamentos e pagamentos a fornecedores, parceiros e reembolsos</li><li>Pagamento de obrigações jurídicas e fiscais e lançamento de notas</li><li>Relatórios para auditoria e controle de materiais</li></ul><div class="chips"><span>Financeiro</span><span>Excel</span><span>Auditoria</span></div></template>
+<template id="p1"><div class="when">2019 – 2020</div><h3>Auxiliar Administrativo · Suprimentos</h3><p class="org">Construtora Tenda · São Paulo</p><ul><li>Cotações e negociações com fornecedores, emissão de pedidos e contratos de serviço e material</li><li>Relatórios de volumetria e de auditoria e melhorias nos sistemas da área</li><li>Automação de controles e treinamento de usuários nas ferramentas de compras</li></ul><div class="chips"><span>Compras indiretas</span><span>Negociação</span><span>Melhoria de processos</span></div></template>
+<template id="p2"><div class="when">2022 – 2025</div><h3>Assistente de Compras e Planejamento</h3><p class="org">Cogra · distribuidora do mercado de impressão</p><ul><li>Compra e reposição do portfólio por estoque, giro, sell-out e itens de baixa saída</li><li>Acompanhamento de pedidos e relacionamento com fornecedores</li><li>Controles e relatórios em Excel e TOTVS Protheus</li></ul><div class="chips"><span>Compras</span><span>Reposição</span><span>TOTVS Protheus</span></div></template>
+<template id="p3"><div class="when">abr. – out. 2025</div><h3>Analista de Compras e Planejamento</h3><p class="org">Cogra · todo o portfólio de produtos e marcas</p><ul><li>Criei o modelo de cálculo de necessidade de compra (estoque vendável, trânsito, lead time e múltiplos)</li><li>Desenvolvi e apliquei o IQF, publicado no ENGEMA (FEA-USP)</li><li>Construí painéis em Power BI de estoque parado, desempenho comercial e abastecimento</li><li>Participei de BIDs e integrei Compras com Logística, Comercial e Crédito</li></ul><div class="chips"><span>Planejamento de demanda</span><span>Gestão de fornecedores</span><span>Power BI</span></div><a class="btn go" href="casos/iqf.html">Ver o caso do IQF</a></template>
+<template id="p4"><div class="when">nov. 2025 – hoje</div><h3>Analista de Implantação ERP · Supply Chain</h3><p class="org">Bluesoft Sistemas · redes de varejo e alimentos</p><ul><li>Implanto, treino e homologo cadastros, compras, recebimento, acordos comerciais, pricing, operações de loja e PCP</li><li>Preparo o Go Live com migração de custos, estoques e preços; em um dos projetos, conduzi sozinho o pós-Go Live</li><li>Criei uma ferramenta que lê o ERP via API e mostra ao consultor o que atacar; ela deu origem a uma plataforma interna de ferramentas</li><li>Relatórios em SQL e JavaScript e automações em Python com validação antes de gravar</li></ul><div class="chips"><span>Implantação de ERP</span><span>Varejo</span><span>SQL</span><span>Python</span><span>APIs</span></div></template>
+<template id="p5"><div class="when">set. 2026 – hoje</div><h3>Ninho Impact</h3><p class="org">Voluntário · Instituto Ninho Social · projeto integrador do Senac</p><ul><li>Sistema que conduzi dos requisitos à entrega e doei ao Instituto</li><li>Propus o módulo de Oportunidades e Parceiros</li><li>Custo zero e 18 de 18 cenários aprovados</li></ul><div class="chips"><span>Produto</span><span>Requisitos</span><span>Projeto social</span></div><a class="btn go" href="casos/ninho-impact.html">Ver o caso do Ninho Impact</a></template>
+<template id="p6"><div class="when">Hoje</div><h3>Próxima entrega</h3><p class="org">São Paulo · aberto ao Brasil e a Portugal · presencial, híbrido ou remoto</p><ul><li>Supply Chain, compras e planejamento de demanda</li><li>Implantação e consultoria funcional de ERP</li><li>Automação de processos e análise de dados</li></ul><a class="btn go" href="#contato">Vamos conversar</a></template>
 
-<section id="contato">
-  <h2>Contato</h2>
-  <p class="sub">Aberto a oportunidades em Supply Chain, implantação de ERP e automação de processos, no Brasil ou em Portugal, presencial, híbrido ou remoto. Me mande uma mensagem contando o desafio da sua operação.</p>
-  <div class="cta"><a class="btn primary" href="https://www.linkedin.com/in/natacamposoliveira/">linkedin.com/in/natacamposoliveira</a></div>
-</section>
+<section class="sec" id="casos"><div class="wrap">
+  <div class="sec-head"><div><h2 data-split>Casos</h2><p class="sub">O resumo de cada caso. Abra um caso para ver os detalhes, as imagens e as simulações.</p></div></div>
+  <div class="filters" role="group" aria-label="Filtrar casos">
+    <button class="on" data-f="todos">Todos</button><button data-f="fornecedores">Fornecedores</button><button data-f="dados">Dados</button><button data-f="produto">Produto</button><button data-f="social">Projeto social</button>
+  </div>
+  <div class="cases">
+    <a class="case" href="casos/ninho-impact.html" data-tags="produto social dados">
+      <span class="door" aria-hidden="true">Doca 1<small>Projeto social</small></span>
+      <span class="lbl">Projeto social · Instituto Ninho Social</span>
+      <h3>Ninho Impact: um sistema doado para acompanhar pessoas em situação de rua</h3>
+      <p>O Instituto não tinha como registrar atendimentos nem mostrar resultados a parceiros. Conduzi o sistema dos requisitos à entrega e propus o módulo que conecta empresas a pessoas.</p>
+      <div class="nums"><div><b data-count="0" data-pre="R$ ">R$ 0</b><span>custo mensal</span></div><div><b data-count="18" data-suf="/18">18/18</b><span>cenários aprovados</span></div><div><b data-count="66" data-pre="−" data-suf="%">−66%</b><span>gravações por cadastro</span></div></div>
+      <span class="more">Ver o caso completo <i aria-hidden="true">→</i></span>
+    </a>
+    <a class="case" href="casos/iqf.html" data-tags="fornecedores dados">
+      <span class="door" aria-hidden="true">Doca 2<small>Publicado no ENGEMA</small></span>
+      <span class="lbl">Publicado no ENGEMA (FEA-USP)</span>
+      <h3>IQF: avaliar fornecedores por dados, não por percepção</h3>
+      <p>Fornecedores atrasavam e demoravam a responder, sem indicador para cobrar. Criei um índice com 4 indicadores e 41 subcategorias e apliquei a 6 meses de dados.</p>
+      <div class="nums"><div><b data-count="64.48" data-dec="2" data-suf="%">64,48%</b><span>IQF do fornecedor</span></div><div><b data-count="41">41</b><span>subcategorias</span></div><div><b>Crítico</b><span>classificação</span></div></div>
+      <span class="more">Ver o caso completo <i aria-hidden="true">→</i></span>
+    </a>
+  </div>
+</div></section>
+
+<section class="contact" id="contato"><div class="wrap">
+  <h2 data-split>Tem uma carga para destravar?</h2>
+  <p>Conte o desafio da sua operação. Respondo pelo LinkedIn.</p>
+  <div class="ctas"><a class="btn orange" href="https://www.linkedin.com/in/natacamposoliveira/" rel="me">Falar comigo no LinkedIn</a></div>
+</div></section>
 </main>
 
-<footer>São Paulo, Brasil · © 2026 Natã Campos de Oliveira</footer>
-</div>
+<div class="drawer" id="drawer" aria-hidden="true"><div class="shade"></div><div class="panel" role="dialog" aria-modal="true" aria-label="Detalhes da parada"><button class="close" aria-label="Fechar">×</button><div class="body"></div></div></div>
+
+<footer><div class="wrap"><span>© 2026 Natã Campos de Oliveira</span><span>Supply Chain · Implantação de ERP · São Paulo</span></div></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="assets/js/site.js"></script>
 </body>
 </html>
