@@ -284,3 +284,20 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .channels b{display:block;font-family:var(--fd);font-size:13px;color:var(--orange);margin-bottom:4px}
 .channels{grid-template-columns:repeat(2,minmax(0,1fr));max-width:760px}
 @media (max-width:560px){.channels{grid-template-columns:1fr}}
+
+/* celulares pequenos */
+.route h2{font-size:max(20px,min(calc(var(--u)*5.2),7.2vw))}
+@media (max-width:560px){
+  .hero h1{font-size:clamp(25px,8.1vw,40px)}
+  .hero .lead{font-size:16px}
+  .ch h1{font-size:clamp(26px,8.2vw,44px)}
+  .contact h2{font-size:clamp(30px,10vw,48px)}
+}
+@media (max-width:420px){
+  .route .sub{display:none}
+  .brand{font-size:13px}
+  .hero .facts{font-size:12px;gap:8px}.hero .facts b{font-size:15px}
+  .hero .ctas{gap:10px}.hero .ctas .btn{padding:13px 16px;font-size:15px}
+  .wrap{padding:0 16px}
+  .sec h2{font-size:clamp(26px,8.5vw,40px)}
+}
