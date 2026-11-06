@@ -3,269 +3,771 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Demonstração · Gestão de Consultores</title>
+<title>Gestão de Consultores · demonstração</title>
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Unbounded:wght@700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#F2F4F7;--card:#fff;--ink:#1D2A38;--mute:#5E6E80;--line:#E1E6EC;--side:#22303F;--side2:#2E3E50;--or:#FF5F1F;--ok:#1F9D6B;--warn:#E0A100;--bad:#D64545;--blue:#2F6FB5;--ease:cubic-bezier(.16,1,.3,1)}
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--ink);font-family:Manrope,system-ui,sans-serif;font-size:15px;line-height:1.5;height:100vh;overflow:hidden}
-button,select,input{font:inherit;color:inherit}
-.app{display:grid;grid-template-columns:230px 1fr;height:100vh}
-.side{background:var(--side);color:#DCE3EA;padding:18px 12px;display:flex;flex-direction:column;gap:4px}
-.logo{font-family:Unbounded;font-weight:700;font-size:14px;color:#fff;padding:6px 10px 16px;display:flex;gap:10px;align-items:center}
-.logo i{width:24px;height:24px;border-radius:6px;background:var(--or);display:block}
-.side small{padding:12px 10px 4px;font-size:11px;color:#8EA0B3;font-weight:800}
-.nav{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;border:0;background:none;color:#DCE3EA;cursor:pointer;text-align:left;font-weight:700}
-.nav:hover{background:var(--side2)}.nav.on{background:#fff;color:var(--ink)}
-.nav svg{width:18px;height:18px;flex:none}
-.user{margin-top:auto;padding:10px;border-top:1px solid var(--side2);font-size:13px;color:#A9B7C6}
-.user b{display:block;color:#fff}
-.main{overflow:auto;padding:22px 28px 60px}
-.top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:18px}
-.top h1{font-size:24px;font-weight:800}
-.demo{background:#FFF4E5;color:#8A4B00;border-radius:999px;padding:6px 12px;font-size:13px;font-weight:800}
-.grid{display:grid;gap:14px}
-.g4{grid-template-columns:repeat(4,1fr)}.g2{grid-template-columns:1.3fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}
-.card{background:var(--card);border-radius:16px;padding:18px;border:1px solid var(--line)}
-.kpi b{font-family:Unbounded;font-size:28px;display:block;line-height:1.1}
-.kpi span{color:var(--mute);font-size:13px}
-.card h2{font-size:16px;font-weight:800;margin-bottom:10px}
-.muted{color:var(--mute)}
-table{width:100%;border-collapse:collapse}
-th{font-size:12px;color:var(--mute);text-align:left;font-weight:800;padding:8px;border-bottom:1px solid var(--line)}
-td{padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:middle}
-tr.click{cursor:pointer}tr.click:hover td{background:#F7F9FB}
-.pill{display:inline-block;border-radius:999px;padding:3px 10px;font-size:12px;font-weight:800;background:#EEF1F5}
-.p-ok{background:#E3F5EC;color:#137A52}.p-warn{background:#FFF4D6;color:#8A6400}.p-bad{background:#FCE8E8;color:#A53030}.p-or{background:#FFE9DF;color:#B5410F}.p-blue{background:#E4EEF9;color:#245A93}
-.bar{height:8px;background:#EEF1F5;border-radius:4px;overflow:hidden}.bar i{display:block;height:100%;border-radius:4px;transition:width .6s var(--ease)}
-.form{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
-label{font-size:12px;font-weight:800;color:var(--mute);display:grid;gap:4px}
-select,input[type=text]{border:1px solid var(--line);border-radius:10px;padding:9px 10px;background:#fff}
-.btn{border:0;border-radius:10px;padding:10px 16px;font-weight:800;cursor:pointer;background:var(--ink);color:#fff;transition:transform .15s}
-.btn:active{transform:scale(.97)}.btn.or{background:var(--or)}.btn.ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}
-.cand{display:grid;grid-template-columns:44px 1.2fr 1fr auto;gap:14px;align-items:center;padding:14px;border:1px solid var(--line);border-radius:14px;background:#fff;margin-top:10px;transition:box-shadow .25s,border-color .25s}
-.cand.sel{border-color:var(--or);box-shadow:0 0 0 3px #FFE1D3}
-.av{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-weight:800;color:#fff}
-.cand h3{font-size:15px}.cand .muted{font-size:13px}
-.score{font-family:Unbounded;font-size:22px}
-.why{grid-column:1/-1;display:none;padding-top:10px;border-top:1px dashed var(--line);margin-top:4px}
-.cand.open .why{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.crit{display:grid;grid-template-columns:120px 1fr 34px;gap:8px;align-items:center;font-size:13px;margin-top:6px}
-.why ul{padding-left:18px;font-size:13px;display:grid;gap:4px}
-.ex{opacity:.75}
-.toast{position:fixed;right:22px;bottom:22px;background:var(--ink);color:#fff;padding:14px 18px;border-radius:14px;font-weight:700;transform:translateY(20px);opacity:0;transition:all .35s var(--ease);max-width:380px}
-.toast.show{transform:none;opacity:1}
-.cal{display:grid;grid-template-columns:170px repeat(6,1fr);gap:4px;font-size:12px}
-.cal .h{font-weight:800;color:var(--mute);padding:6px}
-.cal .n{padding:8px 6px;font-weight:700}
-.cal .c{border-radius:8px;min-height:34px;padding:4px 6px;font-weight:700;display:flex;align-items:center}
-.lvl{display:inline-flex;gap:3px}.lvl i{width:12px;height:12px;border-radius:3px;background:#E1E6EC}.lvl i.f{background:var(--blue)}
-.steps{display:flex;gap:6px;margin:6px 0 14px;flex-wrap:wrap}
-.steps span{padding:6px 12px;border-radius:999px;background:#EEF1F5;font-size:12px;font-weight:800;color:var(--mute)}
-.steps span.on{background:var(--or);color:#fff}.steps span.done{background:#E3F5EC;color:#137A52}
-.log li{list-style:none;padding:8px 0;border-bottom:1px solid var(--line);font-size:13px}
-.log time{color:var(--mute);margin-right:8px}
-.weights{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:4px 0 14px}
-.weights label{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px}
-.weights input{width:100%;accent-color:var(--or)}
-.cap{position:fixed;left:262px;bottom:26px;background:rgba(29,42,56,.92);color:#fff;padding:12px 18px;border-radius:14px;font-weight:700;font-size:16px;display:none;z-index:9;max-width:560px}
-.cur{position:fixed;width:22px;height:22px;border-radius:50%;background:rgba(255,95,31,.35);border:2px solid #FF5F1F;pointer-events:none;z-index:10;transform:translate(-50%,-50%);display:none;transition:width .15s,height .15s}.cur.dn{width:14px;height:14px}
-@media (max-width:860px){.nav{white-space:nowrap;flex:none}.app{grid-template-columns:1fr}.side{flex-direction:row;overflow:auto;padding:8px}.side small,.user,.logo{display:none}.g4,.g3,.g2,.form,.weights{grid-template-columns:1fr 1fr}.cand{grid-template-columns:40px 1fr auto}.cand .mid{display:none}.cand.open .why{grid-template-columns:1fr}body{overflow:auto;height:auto}.app{height:auto}}
-@media (max-width:480px){.g4,.g3,.g2,.form,.weights{grid-template-columns:1fr}.main{padding:16px 14px 40px}.top{flex-wrap:wrap}.top h1{font-size:20px}.card{overflow-x:auto}.cal{min-width:620px}.cap{left:14px;right:14px;max-width:none}}
+:root{--bg:#f5f7fb;--panel:#fff;--panel2:#f8fafc;--text:#162033;--muted:#6b7280;--border:#e5eaf2;--primary:#2857d8;--primary2:#1f46b6;--nav:#101a2e;--nav2:#16233f;--success:#15803d;--successBg:#ecfdf3;--warn:#b45309;--warnBg:#fff7ed;--danger:#b91c1c;--dangerBg:#fef2f2;--info:#0369a1;--infoBg:#eff6ff;--violet:#7c3aed;--violetBg:#f5f3ff;--shadow:0 10px 30px rgba(15,23,42,.07);--radius:18px;--ease:cubic-bezier(.16,1,.3,1)}
+*{box-sizing:border-box}html,body{height:100%}body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);font-size:13px}
+button,input,select,textarea{font:inherit;color:inherit}button{cursor:pointer}.hidden{display:none!important}
+.app{display:grid;grid-template-columns:250px 1fr;height:100vh}
+.sidebar{background:linear-gradient(180deg,var(--nav),#0d1526);color:#fff;padding:20px 14px;overflow:auto;z-index:50;display:flex;flex-direction:column}
+.brand{display:flex;align-items:center;gap:12px;padding:6px 10px 20px}.brand-mark{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#5f86ff,var(--primary));display:grid;place-items:center;font-weight:900;box-shadow:0 8px 18px rgba(40,87,216,.35)}.brand strong{display:block;font-size:15px;line-height:1.2}.brand span{display:block;font-size:11px;color:#9fb0cf;margin-top:2px}
+.nav-section{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#7485a8;padding:12px 12px 6px}
+.nav-item{display:flex;align-items:center;gap:11px;color:#cbd5e1;padding:10px 12px;border-radius:12px;margin:2px 0;font-size:13px;font-weight:650;transition:background .18s,color .18s;border:0;background:none;width:100%;text-align:left}.nav-item:hover,.nav-item.active{background:var(--nav2);color:#fff}.nav-item.active{box-shadow:inset 3px 0 0 #6e91ff}.nav-icon{width:19px;text-align:center}
+.sidebar-foot{margin-top:auto;padding:14px;border:1px solid rgba(255,255,255,.08);border-radius:14px;background:rgba(255,255,255,.03)}.sidebar-foot small{color:#91a0be}.sidebar-foot b{display:block;font-size:12px;margin-top:3px}
+.main{min-width:0;display:flex;flex-direction:column;height:100vh}
+.topbar{flex:none;min-height:66px;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 26px;flex-wrap:wrap}
+.top-left{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.menu-btn{display:none;background:none;border:0;font-size:22px}.crumb{font-size:13px;color:var(--muted)}.crumb b{color:var(--text)}
+.user{display:flex;align-items:center;gap:10px}.avatar{width:36px;height:36px;border-radius:50%;background:#dce6ff;color:var(--primary);display:grid;place-items:center;font-weight:800}.user-meta{line-height:1.2}.user-meta b{display:block;font-size:12px}.user-meta span{font-size:11px;color:var(--muted)}
+.roleSel{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);font-weight:700}.roleSel select{border:1px solid var(--border);border-radius:10px;padding:7px 9px;background:#fff;font-size:12px;font-weight:700}
+.demo-tag{background:#fff4e5;color:#8a4b00;border-radius:999px;padding:5px 10px;font-size:10px;font-weight:800;letter-spacing:.02em}
+.content{flex:1;overflow:auto;padding:26px 28px 60px}
+.page{display:none;max-width:1480px;margin:0 auto}.page.active{display:block;animation:pg .35s var(--ease)}@keyframes pg{from{opacity:0;transform:translateY(8px)}}
+.page-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:20px;flex-wrap:wrap}.page-head h1{font-size:26px;margin:0 0 5px;letter-spacing:-.01em}.page-head p{margin:0;color:var(--muted);font-size:13px}.actions{display:flex;gap:8px;flex-wrap:wrap}
+.btn{border:1px solid var(--border);background:#fff;color:var(--text);padding:9px 14px;border-radius:11px;font-weight:700;font-size:12px;transition:transform .15s,background .15s,box-shadow .15s}.btn:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(15,23,42,.06)}.btn:active{transform:scale(.97)}.btn.primary{background:var(--primary);border-color:var(--primary);color:#fff}.btn.primary:hover{background:var(--primary2)}.btn.danger{color:var(--danger);background:var(--dangerBg);border-color:#fecaca}.btn.sm{padding:6px 10px;font-size:11px}
+.badge{display:inline-flex;align-items:center;gap:6px;padding:4px 9px;border-radius:999px;font-size:10px;font-weight:800;white-space:nowrap}.badge.success{background:var(--successBg);color:var(--success)}.badge.warn{background:var(--warnBg);color:var(--warn)}.badge.danger{background:var(--dangerBg);color:var(--danger)}.badge.info{background:var(--infoBg);color:var(--info)}.badge.violet{background:var(--violetBg);color:var(--violet)}.badge.neutral{background:#eef2f7;color:#475569}.dot{width:7px;height:7px;border-radius:50%;background:currentColor}
+.grid{display:grid;gap:16px}.stats{grid-template-columns:repeat(5,minmax(0,1fr));margin-bottom:16px}.card{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow)}
+.stat{padding:18px}.stat-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.stat .label{font-size:11px;color:var(--muted);font-weight:700}.stat .value{font-size:26px;font-weight:850;letter-spacing:-.02em}.stat .delta{font-size:10px;margin-top:4px;color:var(--muted)}.stat-icon{width:34px;height:34px;border-radius:11px;background:#f0f4ff;color:var(--primary);display:grid;place-items:center}
+.dash-grid{grid-template-columns:1.25fr .75fr}.panel{padding:19px}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}.panel-head h3{font-size:14px;margin:0}.panel-head span{font-size:11px;color:var(--muted)}
+.capacity-list{display:grid;gap:12px}.capacity-row{display:grid;grid-template-columns:90px 1fr 46px;gap:12px;align-items:center;font-size:11px}.bar{height:8px;background:#edf1f7;border-radius:99px;overflow:hidden}.bar>i{display:block;height:100%;background:linear-gradient(90deg,#5a7fff,var(--primary));border-radius:99px;transition:width .7s var(--ease)}.capacity-row b{text-align:right}
+.timeline,.alerts{display:grid;gap:9px}.event{display:grid;grid-template-columns:48px 1fr auto;gap:10px;align-items:center;padding:11px;border:1px solid var(--border);border-radius:13px;background:var(--panel2)}.date-box{text-align:center;border-right:1px solid var(--border)}.date-box b{display:block;font-size:16px}.date-box span{font-size:9px;color:var(--muted);text-transform:uppercase}.event h4{font-size:12px;margin:0 0 3px}.event p{font-size:10px;color:var(--muted);margin:0}
+.alert{display:flex;gap:10px;align-items:center;padding:11px 12px;border-radius:12px;border:1px solid var(--border);background:#fff}.alert i{font-style:normal}.alert strong{font-size:11px;display:block;margin-bottom:2px}.alert p{margin:0;font-size:10px;color:var(--muted)}
+.toolbar{padding:14px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}.search{display:flex;align-items:center;gap:8px;border:1px solid var(--border);border-radius:10px;padding:8px 10px;background:#fff;min-width:250px}.search input{border:0;outline:0;width:100%;font-size:12px;background:transparent}.filters{display:flex;gap:8px;flex-wrap:wrap}.filters select{border:1px solid var(--border);background:#fff;padding:8px 9px;border-radius:10px;font-size:11px}
+.table-card{overflow:hidden}table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--border);font-size:11px;vertical-align:middle}th{font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:#fafbfe}tbody tr{transition:background .15s}tbody tr:hover{background:#fbfcff}
+.person{display:flex;align-items:center;gap:9px}.mini-avatar{width:30px;height:30px;border-radius:10px;background:#eaf0ff;color:var(--primary);display:grid;place-items:center;font-weight:800;font-size:10px;flex:none}.person b{display:block;font-size:11px}.person span{font-size:9px;color:var(--muted)}
+.planner{display:grid;grid-template-columns:360px 1fr;gap:18px;align-items:start}.form-card{padding:18px}.form-group{margin-bottom:12px}.form-group label{display:block;font-size:10px;font-weight:800;color:#475569;margin-bottom:5px}.form-group input,.form-group select,.form-group textarea{width:100%;padding:9px 10px;border:1px solid var(--border);border-radius:10px;background:#fff;outline:none;font-size:12px}.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:#9ab1ff;box-shadow:0 0 0 3px #edf2ff}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}.three{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.divider{height:1px;background:var(--border);margin:14px 0}.advanced{background:#f8fafc;border:1px dashed #cfd8e7;border-radius:12px;padding:12px;font-size:10px;color:var(--muted);line-height:1.5}
+.section-card{border:1px solid var(--border);border-radius:14px;background:#fff;padding:13px;margin:10px 0}.section-card h3{margin:0 0 3px;font-size:12px}.section-card>p{margin:0 0 9px;color:var(--muted);font-size:10px}
+.req-chip{display:inline-flex;align-items:center;gap:5px;padding:5px 8px;margin:3px 4px 3px 0;border-radius:999px;background:#f0f4ff;color:#274690;font-size:9px;font-weight:750}.req-chip.elim{background:#fff1f2;color:#9f1239}.req-chip.pref{background:#fff7ed;color:#9a3412}
+.field-help{font-size:9px;color:var(--muted);margin-top:5px;line-height:1.4}.check{display:flex;align-items:center;gap:6px;padding:8px 9px;border:1px solid var(--border);border-radius:9px;background:#fff;font-size:10px;font-weight:700}
+.candidate-list{display:grid;gap:12px}.candidate{padding:16px;display:grid;grid-template-columns:1fr auto;gap:15px;animation:pop .45s var(--ease) both}@keyframes pop{from{opacity:0;transform:translateY(10px) scale(.99)}}
+.cand-top{display:flex;gap:12px;align-items:center}.cand-avatar{width:46px;height:46px;border-radius:14px;background:#e9efff;color:var(--primary);display:grid;place-items:center;font-weight:900;flex:none}.cand-name h3{margin:0 0 3px;font-size:14px}.cand-name p{margin:0;color:var(--muted);font-size:10px}.fit{display:flex;gap:6px;margin-top:7px;flex-wrap:wrap;align-items:center}
+.reason-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}.reason{padding:9px;border-radius:10px;background:#f8fafc;border:1px solid var(--border)}.reason span{display:block;font-size:9px;color:var(--muted);margin-bottom:2px}.reason b{font-size:11px}
+.metric-strip{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:8px}.metric-mini{padding:8px 9px;border:1px solid var(--border);border-radius:10px;background:#fafbfe}.metric-mini span{display:block;color:var(--muted);font-size:8px;text-transform:uppercase;letter-spacing:.03em}.metric-mini b{font-size:11px}
+.candidate .right{text-align:right;min-width:150px;display:flex;flex-direction:column;gap:7px}.rank{font-size:10px;color:var(--muted)}.rank strong{display:block;font-size:17px;color:var(--text);margin-top:2px}
+.warnline{margin-top:10px;font-size:10px;color:var(--warn)}.okline{margin-top:10px;font-size:10px;color:var(--success)}
+.excluded{padding:14px 16px}.excluded summary{cursor:pointer;font-weight:800;font-size:12px}.excluded ul{margin:10px 0 0;padding-left:18px;display:grid;gap:5px;font-size:11px;color:#475569}
+.projects-grid{grid-template-columns:repeat(3,1fr)}.project-card{padding:16px;transition:transform .2s var(--ease),box-shadow .2s}.project-card:hover{transform:translateY(-2px)}.project-top{display:flex;justify-content:space-between;gap:10px}.project-card h3{font-size:13px;margin:0}.project-card p{font-size:10px;color:var(--muted);margin:4px 0 0}.project-meta{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}.meta{padding:9px;background:#f8fafc;border-radius:10px}.meta span{display:block;font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}.meta b{font-size:10px}.module-pill{font-size:9px;font-weight:800;background:#eef2ff;color:#3730a3;padding:4px 7px;border-radius:999px;margin-right:4px}
+.calendar-wrap{overflow:auto;border-radius:15px}.calendar-grid{display:grid;grid-template-columns:180px repeat(5,minmax(130px,1fr));border:1px solid var(--border);border-radius:15px;overflow:hidden;background:#fff;min-width:880px}.cal-cell{min-height:66px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);padding:7px;font-size:9px}.cal-head{min-height:auto;background:#fafbfe;font-weight:800;text-align:center}.cal-person{display:flex;align-items:center;gap:7px;font-weight:800}
+.slot{border-radius:8px;padding:5px 6px;font-size:8px;font-weight:700;margin-bottom:4px;border:1px solid transparent}.slot.project{background:#eaf0ff;color:#3156b8}.slot.free{background:#edfdf3;color:#15803d}.slot.training{background:#fff7ed;color:#9a3412;border-color:#fed7aa}.slot.reserve{background:#f5f3ff;color:#6d28d9;border-color:#ddd6fe}.slot.block{background:#fef2f2;color:#991b1b;border-color:#fecaca}.slot.external{background:#f1f5f9;color:#475569;border-color:#cbd5e1}
+.training-grid{grid-template-columns:1fr 1fr}.training-card{padding:16px}.training-card h3{font-size:13px;margin:10px 0 4px}.training-card p{font-size:10px;color:var(--muted);margin:0}.training-foot{display:flex;justify-content:space-between;align-items:center;margin-top:12px;gap:8px}
+.admin-grid{grid-template-columns:repeat(3,1fr)}.admin-card{padding:17px}.admin-card h3{font-size:13px;margin:0 0 5px}.admin-card p{font-size:10px;color:var(--muted);min-height:28px;margin:0}.admin-card .count{font-size:22px;font-weight:850;margin:10px 0}
+.empty{padding:40px 20px;text-align:center;color:var(--muted);font-size:12px}.empty strong{display:block;color:var(--text);margin-bottom:5px;font-size:13px}
+.sync{display:inline-flex;align-items:center;gap:7px;padding:5px 9px;border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--muted);font-size:10px;font-weight:800}.mini-spinner{width:11px;height:11px;border:2px solid #dbe4f3;border-top-color:var(--primary);border-radius:50%;animation:spin .7s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+.toast{position:fixed;right:22px;bottom:22px;background:#101828;color:#fff;padding:12px 15px;border-radius:12px;box-shadow:var(--shadow);font-size:12px;transform:translateY(120px);opacity:0;transition:.3s var(--ease);z-index:220;max-width:420px}.toast.show{transform:none;opacity:1}.toast.error{background:#7f1d1d}
+.modal{position:fixed;inset:0;background:rgba(15,23,42,.45);display:none;align-items:center;justify-content:center;padding:18px;z-index:150}.modal.show{display:flex;animation:fade .2s}@keyframes fade{from{opacity:0}}.modal-card{width:min(780px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:20px;padding:22px;box-shadow:0 30px 80px rgba(15,23,42,.25);animation:rise .3s var(--ease)}@keyframes rise{from{transform:translateY(14px) scale(.98);opacity:0}}.modal-card.wide{width:min(980px,100%)}
+.modal-head{display:flex;justify-content:space-between;gap:15px;align-items:flex-start}.modal-head h2{margin:6px 0 3px;font-size:20px}.modal-head p{margin:0;color:var(--muted);font-size:11px}.close{border:0;background:#f1f5f9;width:32px;height:32px;border-radius:10px;flex:none}
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}.detail-box{border:1px solid var(--border);background:#fafbfe;border-radius:12px;padding:11px}.detail-box span{display:block;font-size:9px;color:var(--muted);margin-bottom:3px}.detail-box b{font-size:12px}
+.profile-columns{display:grid;grid-template-columns:1.1fr .9fr;gap:16px}.skill-group-title{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:850;margin:14px 0 8px}.skill-row{display:grid;grid-template-columns:minmax(140px,1fr) 1fr 36px;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid #f0f3f8;font-size:11px}.compact-list{display:grid;gap:7px}.compact-item{padding:9px;border:1px solid var(--border);border-radius:11px;background:#fafbfe;font-size:10px}.compact-item strong{display:block;font-size:11px;margin-bottom:3px}.compact-item span{color:var(--muted)}
+.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:16px;flex-wrap:wrap}.section-title{font-size:13px;margin:18px 0 9px}.inline-note{font-size:10px;color:var(--muted)}.mono{font-family:ui-monospace,Menlo,monospace;font-size:10px}.subtle-callout{padding:10px 11px;border-radius:11px;background:#f7f9fd;border:1px solid var(--border);font-size:10px;color:#475569;margin:9px 0;line-height:1.5}
+.route-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.route-card{padding:13px;border:1px solid var(--border);border-radius:12px;background:#f8fafc}.route-card span{display:block;color:var(--muted);font-size:9px;margin-top:5px}.route-card b{display:block;font-size:15px;margin-top:2px}.route-card small{color:var(--muted)}
+.weekdays{display:flex;gap:6px;flex-wrap:wrap}.range{width:100%;accent-color:var(--primary)}
+.cap{position:fixed;left:270px;bottom:24px;background:rgba(16,26,46,.94);color:#fff;padding:12px 18px;border-radius:14px;font-weight:600;font-size:15px;display:none;z-index:300;max-width:560px;box-shadow:0 20px 40px rgba(0,0,0,.25)}
+.cur{position:fixed;width:22px;height:22px;border-radius:50%;background:rgba(40,87,216,.28);border:2px solid #2857d8;pointer-events:none;z-index:400;transform:translate(-50%,-50%);display:none;transition:width .15s,height .15s}.cur.dn{width:14px;height:14px}
+@media(max-width:1180px){.stats{grid-template-columns:repeat(3,1fr)}.projects-grid{grid-template-columns:repeat(2,1fr)}.reason-grid{grid-template-columns:repeat(2,1fr)}.metric-strip{grid-template-columns:repeat(3,1fr)}.planner{grid-template-columns:320px 1fr}}
+@media(max-width:900px){.planner{grid-template-columns:minmax(0,1fr)!important}.planner>*,.grid>*{min-width:0}.app{grid-template-columns:1fr}.sidebar{position:fixed;left:-270px;top:0;bottom:0;width:250px;transition:left .25s var(--ease)}.sidebar.open{left:0;box-shadow:20px 0 40px rgba(0,0,0,.3)}.menu-btn{display:block}.topbar{padding:10px 14px}.content{padding:16px}.dash-grid,.planner,.training-grid,.profile-columns,.route-grid{grid-template-columns:1fr}.stats,.admin-grid{grid-template-columns:1fr 1fr}.user-meta{display:none}.cap{left:14px;right:14px;max-width:none}}
+@media(max-width:620px){.stats,.projects-grid,.admin-grid{grid-template-columns:1fr}.candidate{grid-template-columns:minmax(0,1fr)}.candidate>*{min-width:0}.metric-mini b,.reason b{overflow-wrap:anywhere}.candidate .right{text-align:left;min-width:0}.reason-grid,.two,.three,.detail-grid{grid-template-columns:1fr}.metric-strip{grid-template-columns:1fr 1fr}.search{min-width:0;width:100%}.page-head h1{font-size:21px}.crumb{display:none}}
 </style>
 </head>
 <body>
 <div class="app">
-  <aside class="side">
-    <div class="logo"><i></i>Gestão de Consultores</div>
-    <small>PLANEJAMENTO</small>
-    <button class="nav on" data-v="visao"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Visão geral</button>
-    <button class="nav" data-v="projetos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h18v13H3zM8 7V4h8v3"/></svg>Projetos</button>
-    <button class="nav" data-v="matching"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="4"/><path d="M2 21c0-4 3-6 7-6M16 11l2 2 4-4"/></svg>Montar equipe</button>
-    <button class="nav" data-v="agenda"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Agenda e capacidade</button>
-    <small>EQUIPE</small>
-    <button class="nav" data-v="competencias"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3 7h7l-6 4 2 7-6-4-6 4 2-7-6-4h7z"/></svg>Competências</button>
-    <button class="nav" data-v="auditoria"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4zM8 9h8M8 13h8M8 17h5"/></svg>Auditoria</button>
-    <div class="user"><b>Gestora Demo</b>Coordenação de implantação</div>
+  <aside class="sidebar" id="sidebar">
+    <div class="brand"><div class="brand-mark">GC</div><div><strong>Gestão de Consultores</strong><span>Resource Planning</span></div></div>
+    <div class="nav-section">Operação</div>
+    <button class="nav-item active" data-page="inicio"><span class="nav-icon">⌂</span>Início</button>
+    <button class="nav-item" data-page="planejamento"><span class="nav-icon">◎</span>Planejamento</button>
+    <button class="nav-item" data-page="clientes"><span class="nav-icon">◇</span>Clientes</button>
+    <button class="nav-item" data-page="projetos"><span class="nav-icon">▦</span>Projetos</button>
+    <button class="nav-item" data-page="consultores"><span class="nav-icon">◉</span>Consultores</button>
+    <button class="nav-item" data-page="agenda"><span class="nav-icon">▣</span>Agenda &amp; Capacidade</button>
+    <div class="nav-section">Desenvolvimento</div>
+    <button class="nav-item" data-page="treinamentos"><span class="nav-icon">◫</span>Treinamentos &amp; Skill Gap</button>
+    <button class="nav-item" data-page="cenarios"><span class="nav-icon">⌘</span>Cenários</button>
+    <button class="nav-item" data-page="alertas"><span class="nav-icon">!</span>Alertas</button>
+    <button class="nav-item" data-page="indicadores"><span class="nav-icon">⌁</span>Indicadores</button>
+    <div class="nav-section" id="sysSection">Sistema</div>
+    <button class="nav-item" data-page="administracao"><span class="nav-icon">⚙</span>Administração</button>
+    <button class="nav-item" data-page="auditoria"><span class="nav-icon">≡</span>Auditoria</button>
+    <div class="sidebar-foot"><small>Ambiente de demonstração</small><b>v1.4.0-rc1 • dados fictícios</b></div>
   </aside>
-  <main class="main" id="main"></main>
+
+  <main class="main">
+    <header class="topbar">
+      <div class="top-left"><button class="menu-btn" id="menuBtn" aria-label="Abrir menu">☰</button><div class="crumb">Gestão de Consultores / <b id="crumb">Início</b></div><span class="badge success"><span class="dot"></span>ONLINE</span><span class="sync hidden" id="sync"><span class="mini-spinner"></span><span id="syncText">Sincronizando</span></span><span class="demo-tag">DEMONSTRAÇÃO · DADOS FICTÍCIOS</span></div>
+      <div class="user"><label class="roleSel">Ver como<select id="roleSel"><option value="ADMIN">Administrador</option><option value="COORDENACAO" selected>Coordenação</option><option value="LIDERANCA">Liderança (Supply)</option><option value="GP">Gerente de Projeto</option><option value="CONSULTOR">Consultor</option></select></label><div class="avatar" id="userAvatar">CD</div><div class="user-meta"><b id="userName"></b><span id="userRole"></span></div></div>
+    </header>
+
+    <div class="content" id="content">
+      <section class="page active" id="page-inicio">
+        <div class="page-head"><div><h1>Visão geral</h1><p>Capacidade, projetos e riscos que exigem atenção.</p></div><div class="actions"><button class="btn" onclick="go('consultores')">Ver consultores</button><button class="btn primary mgmt" onclick="go('planejamento')">+ Planejar projeto</button></div></div>
+        <div class="grid stats" id="dashStats"></div>
+        <div class="grid dash-grid">
+          <div class="card panel"><div class="panel-head"><div><h3>Capacidade por módulo</h3><span>Próxima semana</span></div><button class="btn sm" onclick="go('agenda')">Detalhar</button></div><div class="capacity-list" id="dashCap"></div></div>
+          <div class="card panel"><div class="panel-head"><div><h3>Alertas prioritários</h3><span id="dashAlertSum"></span></div></div><div class="alerts" id="dashAlerts"></div></div>
+          <div class="card panel"><div class="panel-head"><div><h3>Próximos Go Lives</h3><span>Janela de 45 dias</span></div></div><div class="timeline" id="dashGo"></div></div>
+          <div class="card panel"><div class="panel-head"><div><h3>Capacitação &amp; desenvolvimento</h3><span>Skill Gap + planos + capacidade livre</span></div></div><div class="alerts" id="dashDev"></div></div>
+        </div>
+      </section>
+
+      <section class="page" id="page-planejamento">
+        <div class="page-head"><div><h1>Planejar projeto</h1><p>Encontre os consultores mais aderentes ao contexto do projeto e ao período.</p></div><span class="badge info">MATCHING EXPLICÁVEL</span></div>
+        <div class="planner">
+          <div class="card form-card">
+            <div class="form-group"><label>Projeto</label><select id="plProject" onchange="syncPlan()"></select></div>
+            <div class="two"><div class="form-group"><label>Início</label><input type="date" id="plStart"></div><div class="form-group"><label>Fim</label><input type="date" id="plEnd"></div></div>
+            <div class="two"><div class="form-group"><label>Módulo</label><select id="plModule" onchange="renderInherited()"></select></div><div class="form-group"><label>Modalidade</label><select id="plModality"><option value="ONSITE">Presencial</option><option value="REMOTE">Remoto</option><option value="HYBRID">Híbrido</option></select></div></div>
+            <div class="two"><div class="form-group"><label>Janela de trabalho</label><div class="two"><input type="time" id="plWS" value="09:00"><input type="time" id="plWE" value="18:00"></div></div><div class="form-group"><label>Partida estimada para rota</label><input type="time" id="plDep" value="07:00"><div class="field-help">Usada no cálculo logístico. Não é monitoramento contínuo.</div></div></div>
+            <div class="section-card"><h3>Requisitos herdados do projeto</h3><p>São aplicados automaticamente pelo matching.</p><div id="plInherited"></div></div>
+            <div class="form-group"><label>Requisito adicional nesta análise</label><select id="plSkill"></select><div class="field-help">Opcional. Complementa os requisitos cadastrados no projeto; não substitui o cadastro.</div></div>
+            <div class="two"><div class="form-group"><label>Nível mínimo adicional</label><select id="plSkillLvl"><option value="1">1 — Conhece</option><option value="2">2 — Com acompanhamento</option><option value="3" selected>3 — Autônomo</option><option value="4">4 — Referência</option></select></div><div class="form-group"><label>Natureza</label><select id="plReqType"><option value="ELIMINATORY">Eliminatório</option><option value="PREFERRED">Preferencial</option><option value="INFORMATIVE">Informativo</option></select></div></div>
+            <div class="two"><div class="form-group"><label>Senioridade mínima</label><select id="plMinCareer"></select><div class="field-help">Opcional e eliminatória quando informada.</div></div><div class="form-group"><label>Contexto histórico</label><label class="check"><input type="checkbox" id="plCont" checked> Priorizar continuidade e experiência com o cliente</label><div class="field-help">Go Lives recentes, viagens e concentração de projetos entram como sustentabilidade operacional.</div></div></div>
+            <div class="form-group"><label class="check"><input type="checkbox" id="plFull"> Exigir disponibilidade integral no período</label></div>
+            <div class="advanced"><b>Como o motor decide:</b><br>1. elimina incompatibilidades objetivas; 2. cruza Calendar Free/Busy, capacidade, skills, perfil, experiência, continuidade, sustentabilidade e logística; 3. explica motivos e ressalvas. Transporte público é detalhado sob demanda para manter o matching rápido.</div>
+            <div class="divider"></div><button class="btn primary" style="width:100%;padding:12px" id="runBtn" onclick="runMatching()">Encontrar consultores</button>
+          </div>
+          <div><div class="panel-head"><div><h3>Consultores elegíveis</h3><span id="candCount">Execute o matching para iniciar</span></div></div><div class="candidate-list" id="candList"><div class="card empty"><strong>Nenhuma análise executada</strong>Escolha um projeto, módulo e período.</div></div></div>
+        </div>
+      </section>
+
+      <section class="page" id="page-clientes">
+        <div class="page-head"><div><h1>Clientes</h1><p>Cadastro operacional usado pelos projetos e pela logística.</p></div><button class="btn primary mgmt" onclick="openClientForm()">+ Novo cliente</button></div>
+        <div class="card table-card"><div class="toolbar"><div class="search">⌕ <input id="clSearch" placeholder="Buscar cliente, cidade ou estado..." oninput="renderClients()"></div></div><div style="overflow:auto"><table><thead><tr><th>Cliente</th><th>Localidade</th><th>Unidades</th><th>Projetos</th><th></th></tr></thead><tbody id="clBody"></tbody></table></div></div>
+      </section>
+
+      <section class="page" id="page-projetos">
+        <div class="page-head"><div><h1>Projetos</h1><p>Implantação, cobertura, Go Live e contexto operacional.</p></div><button class="btn primary canProject" onclick="openProjectForm()">+ Novo projeto</button></div>
+        <div class="card toolbar" style="margin-bottom:14px"><div class="search">⌕ <input id="prSearch" placeholder="Buscar projeto, GP ou local..." oninput="renderProjects()"></div></div>
+        <div class="grid projects-grid" id="prGrid"></div>
+      </section>
+
+      <section class="page" id="page-consultores">
+        <div class="page-head"><div><h1>Consultores</h1><p>Capacidade, perfil, senioridade, skills e mobilidade.</p></div><button class="btn primary canConsultant" onclick="toast('No sistema real, o cadastro valida e-mail corporativo, módulos e senioridade.')">+ Novo consultor</button></div>
+        <div class="card table-card"><div class="toolbar"><div class="search">⌕ <input id="coSearch" placeholder="Buscar consultor, módulo ou cidade..." oninput="renderConsultants()"></div><div class="filters"><select id="coModule" onchange="renderConsultants()"></select><select id="coStatus" onchange="renderConsultants()"><option value="">Todos os status</option><option value="AVAILABLE">Disponível</option><option value="PRE_RESERVED">Pré-reservado</option><option value="ALLOCATED">Alocado</option><option value="TRAINING">Em treinamento</option><option value="PARTIAL">Parcialmente disponível</option><option value="UNAVAILABLE">Indisponível</option></select></div></div><div style="overflow:auto"><table><thead><tr><th>Consultor</th><th>Módulo</th><th>Nível</th><th>Localização</th><th>Status hoje</th><th></th></tr></thead><tbody id="coBody"></tbody></table></div></div>
+      </section>
+
+      <section class="page" id="page-agenda">
+        <div class="page-head"><div><h1>Agenda &amp; Capacidade</h1><p>Visão semanal consolidada de alocações, pré-reservas e capacidade futura.</p></div><div class="actions"><button class="btn mgmt" onclick="openAvailabilityForm()">+ Indisponibilidade</button><button class="btn" onclick="shiftWeek(-7)">◀ Semana anterior</button><button class="btn" onclick="state.week=monday(TODAY);renderCapacity()">Hoje</button><button class="btn" onclick="shiftWeek(7)">Próxima semana ▶</button></div></div>
+        <div class="calendar-wrap"><div class="calendar-grid" id="calGrid"></div></div>
+        <div class="section-card" style="margin-top:16px"><h3>Jornada de alocação</h3><p>A intenção evolui sem consumir capacidade até a pré-reserva. A confirmação permanece decisão humana.</p><div class="fit"><span class="badge neutral">1 • Rascunho</span><span>→</span><span class="badge warn">2 • Em análise</span><span>→</span><span class="badge violet">3 • Pré-reservado</span><span>→</span><span class="badge success">4 • Confirmado</span><span>→</span><span class="badge info">Em execução</span><span>→</span><span class="badge neutral">Concluída</span></div></div>
+        <h3 class="section-title">Planejamentos, alocações e pré-reservas</h3>
+        <div class="card table-card"><div style="overflow:auto"><table><thead><tr><th>Consultor</th><th>Projeto</th><th>Módulo</th><th>Período</th><th>Status</th><th>Criado por</th><th>Ações</th></tr></thead><tbody id="alBody"></tbody></table></div></div>
+      </section>
+
+      <section class="page" id="page-treinamentos">
+        <div class="page-head"><div><h1>Treinamentos</h1><p>Capacitação interna conectada ao Skill Gap e à capacidade livre.</p></div><button class="btn primary canTraining" onclick="openTrainingForm()">+ Criar treinamento</button></div>
+        <div class="grid dash-grid" style="margin-bottom:16px"><div class="card panel"><div class="panel-head"><div><h3>Skill Gap</h3><span>Nível-alvo 3 • autonomia</span></div><button class="btn sm" onclick="analyzeGap()">Analisar</button></div><div id="gapList" class="alerts"></div></div><div class="card panel"><div class="panel-head"><div><h3>Capacitações sugeridas</h3><span>Gap + referência + capacidade interna</span></div></div><div id="recList" class="alerts"></div></div></div>
+        <div class="grid training-grid" id="trGrid"></div>
+      </section>
+
+      <section class="page" id="page-cenarios">
+        <div class="page-head"><div><h1>Cenários de Planejamento</h1><p>Simule combinações sem consumir capacidade até decidir aplicar.</p></div><button class="btn primary" onclick="openScenarioForm()">+ Novo cenário</button></div>
+        <div class="grid dash-grid"><div class="card panel"><div class="panel-head"><h3>Cenários</h3><span>Marque para comparar</span></div><div id="scList" class="alerts"></div></div><div class="card panel"><div class="panel-head"><h3>Comparação</h3></div><div id="scCompare"><div class="empty"><strong>Selecione cenários</strong>Compare conflitos e composição antes de aplicar.</div></div></div></div>
+      </section>
+
+      <section class="page" id="page-alertas">
+        <div class="page-head"><div><h1>Alertas Operacionais</h1><p>Riscos persistentes com acompanhamento e resolução.</p></div><button class="btn" onclick="refreshAlerts(true)">Recalcular alertas</button></div>
+        <div class="card table-card"><div style="overflow:auto"><table><thead><tr><th>Severidade</th><th>Tipo</th><th>Mensagem</th><th>Status</th><th></th></tr></thead><tbody id="atBody"></tbody></table></div></div>
+      </section>
+
+      <section class="page" id="page-indicadores">
+        <div class="page-head"><div><h1>Indicadores</h1><p>Leitura executiva de utilização, risco e desenvolvimento.</p></div><span class="badge neutral" id="indPeriod"></span></div>
+        <div class="grid stats" id="indStats"></div>
+        <div class="grid dash-grid"><div class="card panel"><div class="panel-head"><h3>Utilização por módulo</h3></div><div class="capacity-list" id="indCap"></div></div><div class="card panel"><div class="panel-head"><h3>Princípio de equilíbrio</h3></div><div class="advanced"><b>O matching não deve premiar sobrecarga.</b><br>Capacidade passada e futura entra na recomendação para evitar concentração recorrente nos mesmos consultores.</div></div></div>
+      </section>
+
+      <section class="page" id="page-administracao">
+        <div class="page-head"><div><h1>Administração</h1><p>Parâmetros configuráveis sem alteração de código.</p></div></div>
+        <div class="grid admin-grid" id="adGrid"></div>
+      </section>
+
+      <section class="page" id="page-auditoria">
+        <div class="page-head"><div><h1>Auditoria</h1><p>Quem alterou o quê, quando e sob qual alçada.</p></div><button class="btn" onclick="renderAudit()">Atualizar</button></div>
+        <div class="card table-card"><div style="overflow:auto"><table><thead><tr><th>Data/hora</th><th>Usuário</th><th>Papel</th><th>Ação</th><th>Entidade</th><th>ID</th></tr></thead><tbody id="auBody"></tbody></table></div></div>
+      </section>
+    </div>
+  </main>
 </div>
 <div class="toast" id="toast"></div>
+<div class="modal" id="modal"><div class="modal-card" id="modalCard"><div class="modal-head"><div><span class="badge info" id="mBadge">DETALHES</span><h2 id="mTitle"></h2><p id="mSub"></p></div><button class="close" onclick="closeModal()" aria-label="Fechar">✕</button></div><div id="mBody"></div></div></div>
 <div class="cap" id="cap"></div><div class="cur" id="cur"></div>
+
 <script>
-/* ===== Dados fictícios ===== */
-const MOD = { SUP: 'Supply', COM: 'Comercial', FIS: 'Fiscal', PCP: 'PCP' };
-const C = [
-  { id: 'c1', n: 'Ana Ribeiro', mod: 'SUP', sen: 3, city: 'São Paulo', travel: true, load: 40, sk: { compras: 4, recebimento: 4, estoque: 3, pricing: 2 }, hist: 6, color: '#2F6FB5' },
-  { id: 'c2', n: 'Bruno Tavares', mod: 'SUP', sen: 2, city: 'Campinas', travel: true, load: 85, sk: { compras: 3, recebimento: 4, estoque: 4, pricing: 1 }, hist: 4, color: '#1F9D6B' },
-  { id: 'c3', n: 'Carla Menezes', mod: 'SUP', sen: 3, city: 'Curitiba', travel: false, load: 20, sk: { compras: 4, recebimento: 3, estoque: 4, pricing: 3 }, hist: 8, color: '#8E5BD0' },
-  { id: 'c4', n: 'Diego Prado', mod: 'SUP', sen: 1, city: 'São Paulo', travel: true, load: 10, sk: { compras: 2, recebimento: 2, estoque: 2, pricing: 1 }, hist: 1, color: '#E0A100' },
-  { id: 'c5', n: 'Elisa Fonseca', mod: 'SUP', sen: 2, city: 'Santos', travel: true, load: 30, sk: { compras: 3, recebimento: 3, estoque: 2, pricing: 4 }, hist: 3, color: '#D64545' },
-  { id: 'c6', n: 'Fábio Lacerda', mod: 'COM', sen: 3, city: 'São Paulo', travel: true, load: 50, sk: { pricing: 4, compras: 2, estoque: 1 }, hist: 7, color: '#3B4C5E' },
-  { id: 'c7', n: 'Gabriela Nunes', mod: 'COM', sen: 2, city: 'Sorocaba', travel: true, load: 20, sk: { pricing: 3, compras: 3 }, hist: 2, color: '#FF5F1F' },
-  { id: 'c8', n: 'Henrique Sales', mod: 'FIS', sen: 3, city: 'São Paulo', travel: false, load: 60, sk: { fiscal: 4, recebimento: 3 }, hist: 9, color: '#245A93' },
-  { id: 'c9', n: 'Isabela Rocha', mod: 'FIS', sen: 2, city: 'Ribeirão Preto', travel: true, load: 15, sk: { fiscal: 3, recebimento: 2 }, hist: 3, color: '#137A52' },
-  { id: 'c10', n: 'João Vieira', mod: 'PCP', sen: 3, city: 'São Paulo', travel: true, load: 35, sk: { producao: 4, estoque: 3 }, hist: 5, color: '#B5410F' },
-  { id: 'c11', n: 'Larissa Costa', mod: 'SUP', sen: 2, city: 'São Paulo', travel: true, load: 55, sk: { compras: 4, recebimento: 2, estoque: 3, pricing: 2 }, hist: 5, color: '#5E6E80' },
-  { id: 'c12', n: 'Marcos Lima', mod: 'PCP', sen: 1, city: 'Jundiaí', travel: true, load: 5, sk: { producao: 2, estoque: 2 }, hist: 1, color: '#A57A4C' }
-];
-const P = [
-  { id: 'p1', n: 'Rede Aurora Supermercados', city: 'Sorocaba', phase: 'Treinamento', mod: 'SUP', ini: '2026-11-16', fim: '2026-12-18', modal: 'Presencial', req: [{ s: 'compras', min: 3, el: true }, { s: 'recebimento', min: 3, el: false }, { s: 'estoque', min: 2, el: false }], minSen: 2, status: 'Planejamento' },
-  { id: 'p2', n: 'Atacado Horizonte', city: 'Campinas', phase: 'Go Live', mod: 'SUP', ini: '2026-12-01', fim: '2026-12-12', modal: 'Presencial', req: [{ s: 'recebimento', min: 4, el: true }, { s: 'estoque', min: 3, el: false }], minSen: 3, status: 'Equipe parcial' },
-  { id: 'p3', n: 'Empório Vale Verde', city: 'Remoto', phase: 'Acompanhamento', mod: 'COM', ini: '2026-11-23', fim: '2027-01-15', modal: 'Remoto', req: [{ s: 'pricing', min: 3, el: true }], minSen: 2, status: 'Equipe completa' },
-  { id: 'p4', n: 'Laticínios Serra Azul', city: 'Bragança Paulista', phase: 'Treinamento', mod: 'PCP', ini: '2026-11-30', fim: '2026-12-22', modal: 'Híbrido', req: [{ s: 'producao', min: 3, el: true }], minSen: 2, status: 'Planejamento' },
-  { id: 'p5', n: 'Distribuidora Ponte Alta', city: 'Santos', phase: 'Diagnóstico', mod: 'FIS', ini: '2026-12-07', fim: '2026-12-19', modal: 'Presencial', req: [{ s: 'fiscal', min: 3, el: true }], minSen: 2, status: 'Planejamento' }
-];
-const DIST = { 'São Paulo': { Sorocaba: 95, Campinas: 95, Santos: 80, 'Bragança Paulista': 90 }, Campinas: { Sorocaba: 85, Campinas: 0, Santos: 170, 'Bragança Paulista': 65 }, Curitiba: { Sorocaba: 330, Campinas: 470, Santos: 400 }, Santos: { Sorocaba: 160, Campinas: 170, Santos: 0 }, Sorocaba: { Sorocaba: 0, Campinas: 85 }, 'Ribeirão Preto': { Santos: 400, Sorocaba: 320 }, Jundiaí: { 'Bragança Paulista': 50, Sorocaba: 90 } };
-const SKN = { compras: 'Compras', recebimento: 'Recebimento', estoque: 'Estoque', pricing: 'Pricing', fiscal: 'Fiscal', producao: 'Produção (PCP)' };
-const W = { tec: 35, disp: 25, carga: 15, log: 10, exp: 15 };
-const LOG = [['09:12', 'Gestora Demo abriu o projeto Rede Aurora Supermercados'], ['08:55', 'Treinamento "Recebimento avançado" criado com 4 participantes'], ['08:40', 'Alocação de João Vieira confirmada no projeto Laticínios Serra Azul']];
-const RES = {}; // pré-reservas
-let view = 'visao', curProj = 'p1', curCons = 'c4';
+/* =====================================================================
+   Gestão de Consultores — demonstração pública
+   Reconstrução das regras da V1.4 em JavaScript no navegador.
+   Todos os nomes, clientes, projetos e e-mails são fictícios.
+   ===================================================================== */
+const TODAY = '2026-11-09';
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const D = s => { const [y, m, d] = s.split('-').map(Number); return new Date(y, m - 1, d, 12); };
+const I = dt => dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0') + '-' + String(dt.getDate()).padStart(2, '0');
+const add = (s, n) => { const x = D(s); x.setDate(x.getDate() + n); return I(x); };
+const dow = s => D(s).getDay();
+const diff = (a, b) => Math.round((D(b) - D(a)) / 864e5);
+const monday = s => { const w = dow(s); return add(s, w === 0 ? -6 : 1 - w); };
+const weekdays = (a, b) => { let n = 0; for (let x = a; x <= b; x = add(x, 1)) { const w = dow(x); if (w && w < 6) n++; } return n; };
+const tm = t => { const [h, m] = String(t || '00:00').split(':').map(Number); return h * 60 + (m || 0); };
+const hm = m => String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0');
+const fd = s => s ? s.slice(8, 10) + '/' + s.slice(5, 7) + '/' + s.slice(0, 4) : '—';
+const fs = s => s ? s.slice(8, 10) + '/' + s.slice(5, 7) : '—';
+const pct = v => Math.round(Number(v || 0) * 100) + '%';
+const esc = v => String(v ?? '').replace(/[&<>'"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[c]));
+const ini = n => String(n || '?').split(/\s+/).filter(Boolean).slice(0, 2).map(x => x[0]).join('').toUpperCase();
+const uid = p => p + '-' + Math.random().toString(16).slice(2, 14).toUpperCase();
+const nowClock = () => { const d = new Date(); return String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0'); };
+const overlap = (a1, a2, b1, b2) => tm(a1) < tm(b2) && tm(b1) < tm(a2);
+const v = id => document.getElementById(id)?.value || '';
 
-const $ = s => document.querySelector(s);
-const pill = (t, k) => `<span class="pill p-${k}">${t}</span>`;
-const ini = n => n.split(' ').map(x => x[0]).join('');
-const km = (a, b) => b === 'Remoto' ? 0 : (DIST[a] && DIST[a][b] != null ? DIST[a][b] : 250);
-const fmt = d => d.split('-').reverse().slice(0, 2).join('/');
-function toast(t) { const e = $('#toast'); e.textContent = t; e.classList.add('show'); clearTimeout(e._t); e._t = setTimeout(() => e.classList.remove('show'), 2600); }
-
-/* ===== Matching explicável ===== */
-function match(p) {
-  const out = [];
-  C.filter(c => c.mod === p.mod).forEach(c => {
-    const why = [], warn = [], stop = [];
-    if (c.sen < p.minSen) stop.push(`Senioridade abaixo da mínima (${c.sen} de ${p.minSen})`);
-    p.req.forEach(r => { const v = c.sk[r.s] || 0; if (r.el && v < r.min) stop.push(`Requisito eliminatório: ${SKN[r.s]} nível ${v}, mínimo ${r.min}`); });
-    const d = km(c.city, p.city);
-    if (p.modal === 'Presencial' && !c.travel && d > 150) stop.push(`Não viaja e o cliente fica a ${d} km`);
-    const tec = p.req.reduce((a, r) => a + Math.min(1, (c.sk[r.s] || 0) / 4), 0) / p.req.length;
-    const disp = Math.max(0, 1 - c.load / 100), carga = c.load > 80 ? .2 : c.load > 60 ? .5 : 1;
-    const log = p.modal === 'Remoto' ? 1 : Math.max(0, 1 - d / 300), exp = Math.min(1, c.hist / 8);
-    const s = { tec, disp, carga, log, exp };
-    const tot = Object.keys(W).reduce((a, k) => a + s[k] * W[k], 0) / Object.values(W).reduce((a, b) => a + b, 0) * 100;
-    if (tec >= .85) why.push('Domina os requisitos técnicos do projeto'); else if (tec >= .6) why.push('Atende aos requisitos técnicos principais');
-    if (disp >= .6) why.push(`Tem capacidade livre no período (${100 - c.load}% disponível)`);
-    if (log >= .65 && p.modal !== 'Remoto') why.push(`Deslocamento curto: ${d} km até o cliente`);
-    if (exp >= .6) why.push(`${c.hist} implantações recentes no mesmo módulo`);
-    if (c.load > 70) warn.push(`Carga futura alta (${c.load}%): risco de sobrecarga`);
-    if (p.modal !== 'Remoto' && d > 150) warn.push(`Deslocamento longo (${d} km)`);
-    if (c.sen === 1) warn.push('Perfil júnior: indicado com acompanhamento');
-    p.req.forEach(r => { const v = c.sk[r.s] || 0; if (!r.el && v < r.min) warn.push(`${SKN[r.s]} abaixo do desejado (nível ${v} de ${r.min}): sugerir treinamento`); });
-    out.push({ c, s, tot: Math.round(tot), why, warn, stop, d });
-  });
-  return out.sort((a, b) => (a.stop.length - b.stop.length) || b.tot - a.tot);
-}
-
-/* ===== Telas ===== */
-const V = {
-  visao() {
-    const conf = Object.values(RES).filter(r => r === 'confirmada').length;
-    return `<div class="top"><h1>Visão geral</h1><span class="demo">Demonstração · dados fictícios</span></div>
-    <div class="grid g4">
-      <div class="card kpi"><b>${C.length}</b><span>consultores ativos</span></div>
-      <div class="card kpi"><b>${P.length}</b><span>projetos em planejamento ou execução</span></div>
-      <div class="card kpi"><b>${Math.round(C.reduce((a, c) => a + c.load, 0) / C.length)}%</b><span>carga média nas próximas 6 semanas</span></div>
-      <div class="card kpi"><b>${2 + conf}</b><span>alertas de agenda para revisar</span></div>
-    </div>
-    <div class="grid g2" style="margin-top:14px">
-      <div class="card"><h2>Projetos que precisam de equipe</h2><table><tr><th>Cliente</th><th>Fase</th><th>Início</th><th>Situação</th></tr>
-      ${P.map(p => `<tr class="click" data-p="${p.id}"><td><b>${p.n}</b><div class="muted">${MOD[p.mod]} · ${p.modal}</div></td><td>${p.phase}</td><td>${fmt(p.ini)}</td><td>${pill(p.status, p.status === 'Equipe completa' ? 'ok' : p.status === 'Equipe parcial' ? 'warn' : 'blue')}</td></tr>`).join('')}</table></div>
-      <div class="card"><h2>Carga por consultor</h2>${C.slice(0, 8).map(c => `<div style="display:grid;grid-template-columns:130px 1fr 40px;gap:10px;align-items:center;margin:8px 0;font-size:13px"><span>${c.n}</span><div class="bar"><i style="width:${c.load}%;background:${c.load > 80 ? 'var(--bad)' : c.load > 60 ? 'var(--warn)' : 'var(--ok)'}"></i></div><b>${c.load}%</b></div>`).join('')}</div>
-    </div>`;
-  },
-  projetos() {
-    return `<div class="top"><h1>Projetos</h1><span class="demo">Demonstração · dados fictícios</span></div>
-    <div class="grid g3">${P.map(p => `<div class="card click" data-p="${p.id}" style="cursor:pointer"><div class="muted">${MOD[p.mod]} · ${p.phase}</div><h2 style="margin:6px 0">${p.n}</h2>
-      <div class="muted">${p.city} · ${p.modal} · ${fmt(p.ini)} a ${fmt(p.fim)}</div>
-      <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:6px">${p.req.map(r => pill(`${SKN[r.s]} ≥ ${r.min}${r.el ? ' · eliminatório' : ''}`, r.el ? 'or' : 'blue')).join('')}</div>
-      <button class="btn or" style="margin-top:14px" data-go="${p.id}">Montar equipe</button></div>`).join('')}</div>`;
-  },
-  matching() {
-    const p = P.find(x => x.id === curProj), r = match(p);
-    return `<div class="top"><h1>Montar equipe</h1><span class="demo">Demonstração · dados fictícios</span></div>
-    <div class="card"><div class="form">
-      <label>Projeto<select id="selP">${P.map(x => `<option value="${x.id}" ${x.id === p.id ? 'selected' : ''}>${x.n}</option>`).join('')}</select></label>
-      <label>Módulo<select disabled><option>${MOD[p.mod]}</option></select></label>
-      <label>Período<input type="text" value="${fmt(p.ini)} a ${fmt(p.fim)}" disabled></label>
-      <label>Modalidade<select disabled><option>${p.modal} · ${p.city}</option></select></label></div>
-      <div class="muted" style="font-size:13px;margin-bottom:6px">Pesos dos critérios (configuráveis). A recomendação explica cada nota; a decisão final é da coordenação.</div>
-      <div class="weights">${[['tec', 'Aderência técnica'], ['disp', 'Disponibilidade'], ['carga', 'Carga futura'], ['log', 'Logística'], ['exp', 'Experiência']].map(([k, t]) => `<label>${t}<input type="range" min="0" max="50" value="${W[k]}" data-w="${k}"><span>${W[k]}</span></label>`).join('')}</div>
-    </div>
-    <div id="cands">${r.map((x, i) => cand(x, i, p)).join('')}</div>`;
-  },
-  agenda() {
-    const weeks = ['16/11', '23/11', '30/11', '07/12', '14/12', '21/12'];
-    const pal = { p1: '#FFE9DF', p2: '#FCE8E8', p3: '#E4EEF9', p4: '#E3F5EC', p5: '#FFF4D6' };
-    const plan = { c1: ['p1', 'p1', 'p1', '', '', ''], c2: ['p2', 'p2', 'p2', 'p2', 'T', ''], c3: ['', '', 'p1', 'p1', '', ''], c6: ['p3', 'p3', 'p3', 'p3', 'p3', 'p3'], c8: ['p5', 'p5', '', 'p5', 'p5', 'X'], c10: ['', '', 'p4', 'p4', 'p4', ''], c11: ['T', '', 'p2', 'p2', '', ''], c5: ['', 'X', '', '', '', ''] };
-    Object.entries(RES).forEach(([k, st]) => { const [cid, pid] = k.split(':'); plan[cid] = plan[cid] || ['', '', '', '', '', '']; plan[cid] = plan[cid].map((v, i) => (i < 4 && !v) ? pid + (st === 'pre' ? '*' : '') : v); });
-    const rows = Object.keys(plan).map(cid => { const c = C.find(x => x.id === cid); return `<div class="n">${c.n}<div class="muted" style="font-weight:500">${MOD[c.mod]}</div></div>` + plan[cid].map(v => { if (!v) return '<div class="c" style="background:#F7F9FB"></div>'; if (v === 'T') return `<div class="c" style="background:#EDE5FA;color:#5B3A9A">Treinamento</div>`; if (v === 'X') return `<div class="c" style="background:#EEF1F5;color:#5E6E80">Bloqueio</div>`; const pre = v.endsWith('*'), pid = v.replace('*', ''); const p = P.find(x => x.id === pid); return `<div class="c" style="background:${pal[pid]};${pre ? 'outline:2px dashed #FF5F1F' : ''}">${p.n.split(' ').slice(0, 2).join(' ')}${pre ? ' · pré' : ''}</div>`; }).join(''); }).join('');
-    return `<div class="top"><h1>Agenda e capacidade</h1><span class="demo">Demonstração · dados fictícios</span></div>
-    <div class="card"><div class="muted" style="margin-bottom:10px">Próximas 6 semanas. Alocações confirmadas, pré-reservas (tracejado), treinamentos e bloqueios. A disponibilidade combina os registros internos com o livre/ocupado do Calendar.</div>
-    <div class="cal"><div class="h">Consultor</div>${weeks.map(w => `<div class="h">Semana ${w}</div>`).join('')}${rows}</div></div>`;
-  },
-  competencias() {
-    const c = C.find(x => x.id === curCons), p1 = P[0];
-    const gaps = p1.req.filter(r => (c.sk[r.s] || 0) < r.min);
-    return `<div class="top"><h1>Competências</h1><span class="demo">Demonstração · dados fictícios</span></div>
-    <div class="grid g2"><div class="card"><div class="form" style="grid-template-columns:1fr"><label>Consultor<select id="selC">${C.map(x => `<option value="${x.id}" ${x.id === c.id ? 'selected' : ''}>${x.n} · ${MOD[x.mod]}</option>`).join('')}</select></label></div>
-      <table><tr><th>Competência</th><th>Autoavaliação</th><th>Liderança</th><th>Evidência</th></tr>${Object.entries(c.sk).map(([k, v]) => `<tr><td><b>${SKN[k]}</b></td><td>${lv(Math.min(4, v + (k.length % 2)))}</td><td>${lv(v)}</td><td>${v >= 3 ? pill(`${Math.max(1, c.hist - 2)} projetos`, 'ok') : pill('em formação', 'warn')}</td></tr>`).join('')}</table></div>
-      <div class="card"><h2>Lacunas para o próximo projeto</h2><div class="muted" style="margin-bottom:10px">${p1.n} · ${MOD[p1.mod]}</div>
-      ${gaps.length ? gaps.map(g => `<div style="padding:12px;border:1px solid var(--line);border-radius:12px;margin-top:8px"><b>${SKN[g.s]}</b>: nível ${c.sk[g.s] || 0}, o projeto pede ${g.min}<div style="margin-top:8px">${pill('Treinamento sugerido: ' + SKN[g.s] + ' na prática', 'blue')}</div></div>`).join('') + `<button class="btn" style="margin-top:14px" id="trein">Incluir no plano de desenvolvimento</button>` : '<p class="muted">Sem lacunas para este projeto.</p>'}</div></div>`;
-  },
-  auditoria() {
-    return `<div class="top"><h1>Auditoria</h1><span class="demo">Demonstração · dados fictícios</span></div>
-    <div class="card"><div class="muted" style="margin-bottom:8px">Toda ação crítica fica registrada com quem fez, quando e o que mudou.</div><ul class="log">${LOG.map(([t, x]) => `<li><time>${t}</time>${x}</li>`).join('')}</ul></div>`;
-  }
+/* ---------- Catálogos ---------- */
+const MODULES = [{ id: 'SUPPLY', name: 'Supply' }, { id: 'WMS', name: 'WMS' }, { id: 'FISCAL', name: 'Fiscal' }, { id: 'FINANCEIRO', name: 'Financeiro' }, { id: 'CONTABIL', name: 'Contábil' }];
+const LEVELS = [['JR1', 'Júnior 1'], ['JR2', 'Júnior 2'], ['JR3', 'Júnior 3'], ['JR4', 'Júnior 4'], ['PL1', 'Pleno 1'], ['PL2', 'Pleno 2'], ['PL3', 'Pleno 3'], ['PL4', 'Pleno 4']].map((x, i) => ({ id: x[0], name: x[1], order: (i + 1) * 10 }));
+const SKILLS = [
+  ['SK-INV', 'Inventário', 'SUPPLY', 'HARD'], ['SK-COM', 'Compras', 'SUPPLY', 'HARD'], ['SK-REC', 'Recebimento de Mercadorias', 'SUPPLY', 'HARD'], ['SK-EST', 'Gestão de Estoque', 'SUPPLY', 'HARD'], ['SK-PRC', 'Pricing', 'SUPPLY', 'HARD'],
+  ['SK-END', 'Endereçamento', 'WMS', 'HARD'], ['SK-EXP', 'Expedição', 'WMS', 'HARD'], ['SK-NFE', 'Escrituração e NF-e', 'FISCAL', 'HARD'], ['SK-APU', 'Apuração de impostos', 'FISCAL', 'HARD'], ['SK-CAP', 'Contas a pagar e receber', 'FINANCEIRO', 'HARD'], ['SK-CON', 'Conciliação contábil', 'CONTABIL', 'HARD'],
+  ['SF-AUT', 'Autonomia', 'GLOBAL', 'SOFT'], ['SF-ADA', 'Adaptabilidade', 'GLOBAL', 'SOFT'], ['SF-COM', 'Comunicação com Cliente', 'GLOBAL', 'SOFT'], ['SF-CNF', 'Gestão de Conflitos', 'GLOBAL', 'SOFT'], ['SF-DID', 'Didática', 'GLOBAL', 'SOFT'], ['SF-ANA', 'Capacidade Analítica', 'GLOBAL', 'SOFT'], ['SF-PRO', 'Proatividade', 'GLOBAL', 'SOFT'], ['SF-ORG', 'Organização', 'GLOBAL', 'SOFT'], ['SF-PRE', 'Condução sob Pressão', 'GLOBAL', 'SOFT']
+].map(x => ({ id: x[0], name: x[1], module: x[2], type: x[3] }));
+const DIMS = [['P-COMPLEXITY', 'Complexidade Operacional', 'SF-ANA'], ['P-MATURITY', 'Maturidade de Processos', 'SF-ORG'], ['P-CAPACITY', 'Capacidade Operacional do Cliente', 'SF-DID'], ['P-DEPENDENCY', 'Dependência da Consultoria', 'SF-PRO'], ['P-RESISTANCE', 'Resistência à Mudança', 'SF-ADA'], ['P-CONFLICT', 'Potencial de Conflito', 'SF-CNF'], ['P-AUTONOMY', 'Autonomia Exigida', 'SF-AUT'], ['P-COMM', 'Necessidade de Comunicação', 'SF-COM']].map(x => ({ id: x[0], name: x[1], soft: x[2] }));
+const ROLES = {
+  ADMIN: { name: 'Administrador', p: 500, user: 'Administração Demo', email: 'admin@empresa-demo.com.br' },
+  COORDENACAO: { name: 'Coordenação', p: 400, user: 'Coordenação Demo', email: 'coordenacao@empresa-demo.com.br' },
+  LIDERANCA: { name: 'Liderança', p: 300, user: 'Liderança Supply', email: 'lideranca.supply@empresa-demo.com.br', scope: ['SUPPLY'] },
+  GP: { name: 'Gerente de Projeto', p: 200, user: 'Gerente de Projeto Demo', email: 'gp@empresa-demo.com.br' },
+  CONSULTOR: { name: 'Consultor', p: 100, user: 'Ana Ribeiro', email: 'ana.ribeiro@empresa-demo.com.br', cid: 'c1' }
 };
-const lv = v => `<span class="lvl">${[1, 2, 3, 4].map(i => `<i class="${i <= v ? 'f' : ''}"></i>`).join('')}</span>`;
-function cand(x, i, p) {
-  const k = x.c.id + ':' + p.id, st = RES[k];
-  const crit = [['Aderência técnica', 'tec'], ['Disponibilidade', 'disp'], ['Carga futura', 'carga'], ['Logística', 'log'], ['Experiência', 'exp']];
-  const elig = !x.stop.length;
-  return `<div class="cand ${elig ? '' : 'ex'} ${st ? 'sel' : ''}" data-k="${k}">
-    <div class="av" style="background:${x.c.color}">${ini(x.c.n)}</div>
-    <div><h3>${x.c.n}</h3><div class="muted">${MOD[x.c.mod]} · nível ${x.c.sen} · ${x.c.city}</div></div>
-    <div class="mid">${elig ? `<div class="bar"><i style="width:${x.tot}%;background:${x.tot > 70 ? 'var(--ok)' : x.tot > 50 ? 'var(--warn)' : 'var(--bad)'}"></i></div><div class="muted" style="font-size:12px;margin-top:4px">${x.why[0] || 'Atende parcialmente'}</div>` : `<div style="font-size:13px;color:var(--bad);font-weight:700">Fora da lista: ${x.stop[0]}</div>`}</div>
-    <div style="text-align:right">${elig ? `<div class="score">${x.tot}</div>` : pill('Inelegível', 'bad')}<div style="margin-top:6px;display:flex;gap:6px;justify-content:flex-end"><button class="btn ghost" data-why>Por quê?</button>${elig ? (st === 'confirmada' ? pill('Confirmada', 'ok') : st === 'pre' ? `<button class="btn or" data-conf>Confirmar</button>` : `<button class="btn" data-res>Pré-reservar</button>`) : ''}</div></div>
-    <div class="why"><div><b>Como a nota foi formada</b>${crit.map(([t, k2]) => `<div class="crit"><span>${t} · ${W[k2]}</span><div class="bar"><i style="width:${Math.round(x.s[k2] * 100)}%;background:var(--blue)"></i></div><b>${Math.round(x.s[k2] * 100)}</b></div>`).join('')}</div>
-      <div><b>Razões</b><ul>${(x.why.length ? x.why : ['Sem pontos fortes destacados']).map(w => `<li>${w}</li>`).join('')}</ul><b style="display:block;margin-top:10px">Ressalvas</b><ul>${(x.stop.concat(x.warn).length ? x.stop.concat(x.warn) : ['Nenhuma ressalva']).map(w => `<li>${w}</li>`).join('')}</ul></div></div>
-  </div>`;
+const DEFAULT_WEIGHTS = { technical: 35, availability: 20, profile: 15, workload: 15, logistics: 10, experience: 5, continuity: 7, sustainability: 8 };
+const WEIGHT_LABEL = { technical: 'Aderência técnica', availability: 'Disponibilidade', profile: 'Perfil', workload: 'Carga futura', logistics: 'Logística', experience: 'Experiência', continuity: 'Continuidade', sustainability: 'Sustentabilidade' };
+const ACTIVE = ['PRE_RESERVED', 'CONFIRMED', 'IN_PROGRESS'], HARD = ['CONFIRMED', 'IN_PROGRESS'];
+
+/* ---------- Geografia fictícia para estimar rotas ---------- */
+const GEO = { 'São Paulo': [-23.55, -46.63, 'SP'], 'Campinas': [-22.91, -47.06, 'SP'], 'Curitiba': [-25.43, -49.27, 'PR'], 'Osasco': [-23.53, -46.79, 'SP'], 'Santos': [-23.96, -46.33, 'SP'], 'Guarulhos': [-23.46, -46.53, 'SP'], 'Sorocaba': [-23.50, -47.46, 'SP'], 'Ribeirão Preto': [-21.18, -47.81, 'SP'], 'Belo Horizonte': [-19.92, -43.94, 'MG'], 'Cotia': [-23.60, -46.92, 'SP'], 'Jundiaí': [-23.19, -46.88, 'SP'], 'Recife': [-8.05, -34.88, 'PE'] };
+function route(a, b, mode = 'DRIVING') {
+  const A = GEO[a], B = GEO[b]; if (!A || !B) return null;
+  const R = 6371, dLat = (B[0] - A[0]) * Math.PI / 180, dLon = (B[1] - A[1]) * Math.PI / 180;
+  const h = Math.sin(dLat / 2) ** 2 + Math.cos(A[0] * Math.PI / 180) * Math.cos(B[0] * Math.PI / 180) * Math.sin(dLon / 2) ** 2;
+  let km = 2 * R * Math.asin(Math.sqrt(h)) * 1.3; if (km < 6) km = 6 + (a.length % 5) * 2.3;
+  let min = Math.round(km / 52 * 60 + 9); if (mode === 'TRANSIT') min = Math.round(min * 1.75 + 12);
+  return { km: Math.round(km * 10) / 10, min, sec: min * 60, duration_text: durText(min), distance_text: String(Math.round(km * 10) / 10).replace('.', ',') + ' km' };
+}
+const durText = m => m < 60 ? m + ' minutos' : Math.floor(m / 60) + ' h ' + String(m % 60).padStart(2, '0') + ' min';
+const AIRPORT = { 'São Paulo': ['Congonhas', 24, 11.2], 'Campinas': ['Viracopos', 28, 17.5], 'Curitiba': ['Afonso Pena', 30, 18.4], 'Belo Horizonte': ['Confins', 46, 38.6], 'Ribeirão Preto': ['Leite Lopes', 20, 9.8], 'Guarulhos': ['Guarulhos', 18, 9.1], 'Santos': ['Congonhas', 75, 72.4] };
+
+/* ---------- Dados fictícios ---------- */
+const sk = o => Object.entries(o).map(([k, lvl]) => ({ skill: k, level: lvl, self: Math.min(4, lvl + (k.length % 2)), leader: lvl, lastUsed: add(TODAY, -((k.charCodeAt(3) % 9) * 21)) }));
+let CONSULTANTS = [
+  { id: 'c1', name: 'Ana Ribeiro', module: 'SUPPLY', secondary: [], level: 'PL2', city: 'São Paulo', travel: true, leader: 'lideranca.supply@empresa-demo.com.br', skills: sk({ 'SK-INV': 4, 'SK-COM': 3, 'SK-REC': 4, 'SK-EST': 3, 'SK-PRC': 2, 'SF-AUT': 4, 'SF-COM': 3, 'SF-ANA': 3, 'SF-PRE': 3, 'SF-DID': 4, 'SF-ORG': 3 }), h: { golives: 3, travel60: 2, projects60: 2, golives90: 1, clients: ['cl1'] }, exp: [{ d: 'Conduziu inventário de Go Live com autonomia', t: 'GO_LIVE', s: 'SK-INV', date: '2026-08-14' }] },
+  { id: 'c2', name: 'Bruno Tavares', module: 'SUPPLY', secondary: [], level: 'PL1', city: 'Campinas', travel: true, leader: 'lideranca.supply@empresa-demo.com.br', skills: sk({ 'SK-INV': 3, 'SK-COM': 4, 'SK-REC': 3, 'SK-EST': 4, 'SF-AUT': 3, 'SF-COM': 3, 'SF-PRE': 4 }), h: { golives: 5, travel60: 9, projects60: 4, golives90: 3, clients: ['cl2'] }, exp: [] },
+  { id: 'c3', name: 'Carla Menezes', module: 'SUPPLY', secondary: ['WMS'], level: 'PL4', city: 'Curitiba', travel: false, leader: 'lideranca.supply@empresa-demo.com.br', skills: sk({ 'SK-INV': 4, 'SK-COM': 4, 'SK-REC': 3, 'SK-EST': 4, 'SK-PRC': 4, 'SK-END': 3, 'SF-AUT': 4, 'SF-DID': 4, 'SF-COM': 4 }), h: { golives: 8, travel60: 0, projects60: 1, golives90: 0, clients: [] }, exp: [] },
+  { id: 'c4', name: 'Diego Prado', module: 'SUPPLY', secondary: [], level: 'JR2', city: 'Osasco', travel: true, leader: 'lideranca.supply@empresa-demo.com.br', skills: sk({ 'SK-INV': 2, 'SK-COM': 2, 'SK-REC': 2, 'SK-EST': 1, 'SF-PRO': 3, 'SF-ORG': 2 }), h: { golives: 0, travel60: 0, projects60: 1, golives90: 0, clients: [] }, exp: [] },
+  { id: 'c5', name: 'Elisa Fonseca', module: 'SUPPLY', secondary: [], level: 'JR4', city: 'Santos', travel: true, leader: 'lideranca.supply@empresa-demo.com.br', skills: sk({ 'SK-INV': 3, 'SK-REC': 3, 'SK-PRC': 4, 'SK-COM': 2, 'SF-COM': 3, 'SF-ADA': 3 }), h: { golives: 1, travel60: 0, projects60: 1, golives90: 1, clients: ['cl3'] }, exp: [] },
+  { id: 'c6', name: 'Larissa Costa', module: 'SUPPLY', secondary: ['WMS'], level: 'PL3', city: 'São Paulo', travel: true, leader: 'lideranca.supply@empresa-demo.com.br', skills: sk({ 'SK-INV': 3, 'SK-COM': 3, 'SK-EST': 3, 'SK-REC': 2, 'SK-END': 3, 'SF-AUT': 3, 'SF-CNF': 3 }), h: { golives: 4, travel60: 3, projects60: 3, golives90: 1, clients: ['cl1'] }, exp: [] },
+  { id: 'c7', name: 'Fábio Lacerda', module: 'WMS', secondary: [], level: 'PL2', city: 'Guarulhos', travel: true, leader: 'lideranca.wms@empresa-demo.com.br', skills: sk({ 'SK-END': 4, 'SK-EXP': 4, 'SF-AUT': 3, 'SF-DID': 3 }), h: { golives: 3, travel60: 4, projects60: 2, golives90: 1, clients: ['cl2'] }, exp: [] },
+  { id: 'c8', name: 'Gabriela Nunes', module: 'WMS', secondary: [], level: 'JR3', city: 'Sorocaba', travel: true, leader: 'lideranca.wms@empresa-demo.com.br', skills: sk({ 'SK-END': 2, 'SK-EXP': 3, 'SF-PRO': 3 }), h: { golives: 0, travel60: 0, projects60: 2, golives90: 0, clients: [] }, exp: [] },
+  { id: 'c9', name: 'Henrique Sales', module: 'FISCAL', secondary: [], level: 'PL4', city: 'São Paulo', travel: false, leader: 'lideranca.fiscal@empresa-demo.com.br', skills: sk({ 'SK-NFE': 4, 'SK-APU': 4, 'SF-ANA': 4, 'SF-COM': 3 }), h: { golives: 6, travel60: 0, projects60: 2, golives90: 1, clients: ['cl5'] }, exp: [] },
+  { id: 'c10', name: 'Isabela Rocha', module: 'FISCAL', secondary: [], level: 'JR4', city: 'Ribeirão Preto', travel: true, leader: 'lideranca.fiscal@empresa-demo.com.br', skills: sk({ 'SK-NFE': 3, 'SK-APU': 2, 'SF-ORG': 3 }), h: { golives: 1, travel60: 2, projects60: 1, golives90: 0, clients: [] }, exp: [] },
+  { id: 'c11', name: 'João Vieira', module: 'FINANCEIRO', secondary: ['CONTABIL'], level: 'PL1', city: 'Belo Horizonte', travel: true, leader: 'lideranca.financeiro@empresa-demo.com.br', skills: sk({ 'SK-CAP': 4, 'SK-CON': 2, 'SF-COM': 3 }), h: { golives: 2, travel60: 6, projects60: 2, golives90: 1, clients: ['cl4'] }, exp: [] },
+  { id: 'c12', name: 'Marina Duarte', module: 'CONTABIL', secondary: [], level: 'PL2', city: 'São Paulo', travel: true, leader: 'lideranca.financeiro@empresa-demo.com.br', skills: sk({ 'SK-CON': 4, 'SF-ANA': 4 }), h: { golives: 2, travel60: 1, projects60: 1, golives90: 0, clients: [] }, exp: [] }
+].map(c => Object.assign(c, { email: c.name.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(' ', '.') + '@empresa-demo.com.br', state: GEO[c.city][2], airport: AIRPORT[c.city] ? AIRPORT[c.city][0] : '', active: true, history: [] }));
+let CLIENTS = [
+  { id: 'cl1', name: 'Rede Aurora Supermercados', city: 'Cotia', state: 'SP', units: 18, code: 'AUR-01' },
+  { id: 'cl2', name: 'Atacado Horizonte', city: 'Campinas', state: 'SP', units: 9, code: 'HOR-02' },
+  { id: 'cl3', name: 'Empório Vale Verde', city: 'Santos', state: 'SP', units: 4, code: 'EVV-03' },
+  { id: 'cl4', name: 'Distribuidora Ponte Alta', city: 'Recife', state: 'PE', units: 3, code: 'DPA-04', airport: 'Aeroporto do Recife (REC)' },
+  { id: 'cl5', name: 'Laticínios Serra Azul', city: 'Jundiaí', state: 'SP', units: 2, code: 'LSA-05' }
+];
+const req = (m, s, min, type, w = 1) => ({ id: uid('REQ'), module: m, skill: s, min, type, weight: w });
+let PROJECTS = [
+  { id: 'p1', client: 'cl1', name: 'Implantação Rede Aurora', type: 'IMPLANTACAO', status: 'PLANNING', gp: 'gp@empresa-demo.com.br', start: '2026-11-16', golive: '2026-12-07', end: '2026-12-18', reqs: [req('SUPPLY', 'SK-INV', 3, 'ELIMINATORY', 2), req('SUPPLY', 'SK-REC', 3, 'PREFERRED'), req('SUPPLY', 'SK-COM', 2, 'PREFERRED'), req('FISCAL', 'SK-NFE', 3, 'ELIMINATORY', 2)], profile: { 'P-COMPLEXITY': 3, 'P-AUTONOMY': 4, 'P-COMM': 3, 'P-CONFLICT': 2, 'P-RESISTANCE': 3 } },
+  { id: 'p2', client: 'cl2', name: 'Expansão Atacado Horizonte', type: 'EXPANSAO', status: 'TRAINING', gp: 'gp2@empresa-demo.com.br', start: '2026-11-09', golive: '2026-11-23', end: '2026-12-04', reqs: [req('WMS', 'SK-END', 3, 'ELIMINATORY', 2), req('SUPPLY', 'SK-REC', 3, 'PREFERRED')], profile: { 'P-COMPLEXITY': 3, 'P-AUTONOMY': 3 } },
+  { id: 'p3', client: 'cl3', name: 'Rollout Empório Vale Verde', type: 'ROLLOUT', status: 'MAPPING', gp: 'gp@empresa-demo.com.br', start: '2026-11-23', golive: '2027-01-11', end: '2027-01-29', reqs: [req('SUPPLY', 'SK-PRC', 3, 'PREFERRED', 2), req('WMS', 'SK-EXP', 2, 'PREFERRED')], profile: { 'P-COMM': 4 } },
+  { id: 'p4', client: 'cl4', name: 'Implantação Ponte Alta', type: 'IMPLANTACAO', status: 'PLANNING', gp: 'gp2@empresa-demo.com.br', start: '2026-11-30', golive: '2026-12-14', end: '2026-12-23', reqs: [req('FINANCEIRO', 'SK-CAP', 3, 'ELIMINATORY', 2), req('SUPPLY', 'SK-COM', 3, 'PREFERRED')], profile: { 'P-DEPENDENCY': 4, 'P-AUTONOMY': 4 } },
+  { id: 'p5', client: 'cl5', name: 'Migração Serra Azul', type: 'MIGRACAO', status: 'HOMOLOGATION', gp: 'gp2@empresa-demo.com.br', start: '2026-10-19', golive: '2026-11-20', end: '2026-11-27', reqs: [req('SUPPLY', 'SK-EST', 3, 'PREFERRED'), req('FISCAL', 'SK-APU', 3, 'ELIMINATORY')], profile: { 'P-MATURITY': 3 } }
+].map(p => Object.assign(p, { city: CLIENTS.find(c => c.id === p.client).city, state: CLIENTS.find(c => c.id === p.client).state }));
+function segs(start, end, pattern = 'WEEKDAYS', st = '09:00', et = '18:00', days = [], specific = []) {
+  const out = [];
+  for (let d = start; d <= end; d = add(d, 1)) {
+    const w = dow(d); let inc = false;
+    if (pattern === 'EVERY_DAY') inc = true; else if (pattern === 'SPECIFIC_DATES') inc = specific.includes(d); else if (pattern === 'CUSTOM_WEEKDAYS') inc = days.includes(w); else inc = w !== 0 && w !== 6;
+    if (inc) out.push({ date: d, start: st, end: et, hours: (tm(et) - tm(st)) / 60 });
+  }
+  return out;
+}
+const alloc = (id, cid, pid, mod, status, a, b, by, role, extra = {}) => Object.assign({ id, cid, pid, module: mod, status, modality: 'ONSITE', segs: segs(a, b), by, role, priority: ROLES[role].p, created: fd(add(TODAY, -3)) + ', 16:40', expires: '' }, extra);
+let ALLOCATIONS = [
+  alloc('ALOC-1F3A90C2E7B1', 'c2', 'p2', 'SUPPLY', 'CONFIRMED', '2026-11-09', '2026-11-27', 'coordenacao@empresa-demo.com.br', 'COORDENACAO'),
+  alloc('ALOC-27C4D11A9F02', 'c7', 'p2', 'WMS', 'IN_PROGRESS', '2026-11-02', '2026-11-20', 'coordenacao@empresa-demo.com.br', 'COORDENACAO'),
+  alloc('ALOC-3B8E2F6D04A5', 'c1', 'p5', 'SUPPLY', 'CONFIRMED', '2026-11-09', '2026-11-13', 'lideranca.supply@empresa-demo.com.br', 'LIDERANCA'),
+  alloc('ALOC-4D19A7C3B880', 'c6', 'p3', 'SUPPLY', 'PRE_RESERVED', '2026-11-23', '2026-12-04', 'gp@empresa-demo.com.br', 'GP', { expires: '11/11/2026, 10:15' }),
+  alloc('ALOC-5E02B9D4C711', 'c9', 'p5', 'FISCAL', 'CONFIRMED', '2026-11-16', '2026-11-20', 'coordenacao@empresa-demo.com.br', 'COORDENACAO'),
+  alloc('ALOC-6A73C08E2D19', 'c5', 'p1', 'SUPPLY', 'DRAFT', '2026-11-16', '2026-11-27', 'gp@empresa-demo.com.br', 'GP'),
+  alloc('ALOC-7C55E1A0B3D4', 'c8', 'p2', 'WMS', 'PRE_RESERVED', '2026-11-16', '2026-11-18', 'gp2@empresa-demo.com.br', 'GP', { expires: '10/11/2026, 18:00' }),
+  alloc('ALOC-8F21D6B7A0C9', 'c8', 'p3', 'WMS', 'PRE_RESERVED', '2026-11-18', '2026-11-19', 'gp@empresa-demo.com.br', 'GP', { expires: '11/11/2026, 09:30' }),
+  alloc('ALOC-9A04C3E5F6B2', 'c11', 'p4', 'FINANCEIRO', 'IN_ANALYSIS', '2026-11-30', '2026-12-11', 'coordenacao@empresa-demo.com.br', 'COORDENACAO')
+];
+let BLOCKS = [
+  { id: 'BLK-0A1B2C3D4E5F', cid: 'c5', type: 'ABSENCE', sd: '2026-11-17', st: '14:00', ed: '2026-11-17', et: '18:00', factor: 1, notes: 'Consulta médica', active: true },
+  { id: 'BLK-1F2E3D4C5B6A', cid: 'c3', type: 'VACATION', sd: '2026-11-30', st: '00:00', ed: '2026-12-11', et: '23:59', factor: 1, notes: 'Férias', active: true },
+  { id: 'BLK-2A3B4C5D6E7F', cid: 'c12', type: 'ADMIN', sd: '2026-11-11', st: '09:00', ed: '2026-11-11', et: '13:00', factor: 0.5, notes: 'Fechamento interno', active: true }
+];
+let TRAININGS = [
+  { id: 'TRN-C8B110CCDEF3', title: 'Recebimento avançado na prática', module: 'SUPPLY', skill: 'SK-REC', instructor: 'c1', participants: ['c4', 'c5'], sd: '2026-11-12', st: '14:00', ed: '2026-11-12', et: '16:00', modality: 'REMOTE', status: 'CONFIRMED', synced: true }
+];
+const CALENDAR = { c1: { ok: true, busy: [{ date: '2026-11-17', start: '10:00', end: '12:00' }] }, c6: { ok: false, reason: 'requestFailed' }, c9: { ok: true, busy: [{ date: '2026-11-10', start: '14:00', end: '15:00' }] } };
+let SCENARIOS = [
+  { id: 'SCN-185C257D79A6', name: 'Opção A — Supply experiente', pid: 'p1', status: 'DRAFT', items: [{ id: uid('SCI'), cid: 'c1', module: 'SUPPLY', start: '2026-11-16', end: '2026-12-18', modality: 'ONSITE' }] },
+  { id: 'SCN-43A83CA72DC1', name: 'Opção B — Supply + Fiscal', pid: 'p1', status: 'DRAFT', items: [{ id: uid('SCI'), cid: 'c1', module: 'SUPPLY', start: '2026-11-16', end: '2026-12-18', modality: 'ONSITE' }, { id: uid('SCI'), cid: 'c9', module: 'FISCAL', start: '2026-11-23', end: '2026-12-18', modality: 'ONSITE' }] }
+];
+let PLANS = [];
+let ALERTS = [];
+let AUDIT = [
+  ['06/11/2026, 11:20', 'gp@empresa-demo.com.br', 'GP', 'ALLOCATION_PRE_RESERVE', 'ALLOCATION', 'ALOC-4D19A7C3B880'],
+  ['06/11/2026, 10:02', 'coordenacao@empresa-demo.com.br', 'COORDENACAO', 'CALENDAR_SYNC', 'ALLOCATION', 'ALOC-1F3A90C2E7B1'],
+  ['06/11/2026, 10:02', 'coordenacao@empresa-demo.com.br', 'COORDENACAO', 'ALLOCATION_CONFIRM', 'ALLOCATION', 'ALOC-1F3A90C2E7B1'],
+  ['05/11/2026, 17:44', 'lideranca.supply@empresa-demo.com.br', 'LIDERANCA', 'LEADER_SKILL_EVALUATION', 'CONSULTANT_SKILL', 'CSK-92B7A14E0C55'],
+  ['05/11/2026, 16:30', 'coordenacao@empresa-demo.com.br', 'COORDENACAO', 'TRAINING_CREATE', 'TRAINING', 'TRN-C8B110CCDEF3'],
+  ['05/11/2026, 15:12', 'gp@empresa-demo.com.br', 'GP', 'SCENARIO_CREATE', 'SCENARIO', 'SCN-185C257D79A6'],
+  ['04/11/2026, 09:41', 'coordenacao@empresa-demo.com.br', 'COORDENACAO', 'AVAILABILITY_BLOCK_CREATE', 'CONSULTANT', 'CONS-DA20A1D5CCAA'],
+  ['03/11/2026, 18:05', 'admin@empresa-demo.com.br', 'ADMIN', 'DATABASE_BACKUP_CREATE', 'DATABASE', 'DB-DEMO']
+];
+let WEIGHTS = Object.assign({}, DEFAULT_WEIGHTS);
+const state = { role: 'COORDENACAO', page: 'inicio', week: monday(TODAY), matching: null, gap: null, recs: null, preData: null };
+
+/* ---------- utilidades de catálogo ---------- */
+const C = id => CONSULTANTS.find(x => x.id === id), P = id => PROJECTS.find(x => x.id === id), CL = id => CLIENTS.find(x => x.id === id);
+const modName = id => (MODULES.find(m => m.id === id) || {}).name || id || '—';
+const lvl = id => LEVELS.find(l => l.id === id) || { name: '—', order: 0 };
+const skName = id => (SKILLS.find(s => s.id === id) || {}).name || id;
+const levelOf = (c, s) => (c.skills.find(x => x.skill === s) || {}).level || 0;
+const role = () => ROLES[state.role];
+const me = () => ({ email: role().email, role: state.role, p: role().p });
+function audit(action, entity, id) { AUDIT.unshift([fd(TODAY) + ', ' + nowClock(), me().email, state.role, action, entity, id]); }
+const roleName = r => (ROLES[r] || {}).name || r;
+
+/* ---------- RBAC (mesmas regras do servidor) ---------- */
+const canManagement = () => ['ADMIN', 'COORDENACAO', 'LIDERANCA', 'GP'].includes(state.role);
+const canAdmin = () => ['ADMIN', 'COORDENACAO'].includes(state.role);
+const canConfirm = () => ['ADMIN', 'COORDENACAO', 'LIDERANCA'].includes(state.role);
+function canAccess(page) {
+  if (['administracao', 'auditoria'].includes(page)) return canAdmin();
+  if (['planejamento', 'cenarios', 'alertas', 'indicadores'].includes(page)) return canManagement();
+  if (page === 'treinamentos') return ['ADMIN', 'COORDENACAO', 'LIDERANCA', 'CONSULTOR'].includes(state.role);
+  if (page === 'clientes') return state.role !== 'CONSULTOR';
+  return true;
+}
+const manageModule = m => ['ADMIN', 'COORDENACAO'].includes(state.role) || (state.role === 'LIDERANCA' && role().scope.includes(m));
+function visibleConsultants() {
+  if (state.role === 'CONSULTOR') return CONSULTANTS.filter(c => c.id === role().cid);
+  if (state.role === 'LIDERANCA') return CONSULTANTS.filter(c => role().scope.includes(c.module));
+  if (state.role === 'GP') { const ps = new Set(visibleProjects().map(p => p.id)); return CONSULTANTS.filter(c => ALLOCATIONS.some(a => a.cid === c.id && ps.has(a.pid) && a.status !== 'CANCELLED') || true); }
+  return CONSULTANTS;
+}
+function visibleProjects() {
+  if (state.role === 'GP') return PROJECTS.filter(p => p.gp === role().email);
+  if (state.role === 'CONSULTOR') return PROJECTS.filter(p => ALLOCATIONS.some(a => a.pid === p.id && a.cid === role().cid && !['DRAFT', 'IN_ANALYSIS', 'CANCELLED'].includes(a.status)));
+  if (state.role === 'LIDERANCA') return PROJECTS.filter(p => p.reqs.some(r => manageModule(r.module)) || ALLOCATIONS.some(a => a.pid === p.id && manageModule(a.module)));
+  return PROJECTS;
+}
+function visibleAllocations() {
+  let a = ALLOCATIONS;
+  if (state.role === 'GP') { const ps = new Set(visibleProjects().map(p => p.id)); a = a.filter(x => ps.has(x.pid)); }
+  if (state.role === 'LIDERANCA') a = a.filter(x => manageModule(x.module));
+  if (state.role === 'CONSULTOR') a = a.filter(x => x.cid === role().cid && !['DRAFT', 'IN_ANALYSIS'].includes(x.status));
+  return a;
 }
 
-/* ===== Navegação e eventos ===== */
-function render() {
-  document.querySelectorAll('.nav').forEach(b => b.classList.toggle('on', b.dataset.v === view));
-  const m = $('#main'); m.innerHTML = V[view](); m.scrollTop = 0;
-  m.animate([{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }], { duration: 320, easing: 'cubic-bezier(.16,1,.3,1)' });
+/* ---------- Agenda: intervalos internos, Calendar e ocupação ---------- */
+function intervals(cid, a, b, exclude) {
+  const out = [];
+  ALLOCATIONS.filter(x => x.cid === cid && ACTIVE.includes(x.status) && x.id !== exclude).forEach(x => x.segs.forEach(s => { if (s.date >= a && s.date <= b) out.push({ date: s.date, start: s.start, end: s.end, status: x.status, alloc: x, f: 1, src: 'SYSTEM' }); }));
+  BLOCKS.filter(x => x.cid === cid && x.active).forEach(k => { for (let d = k.sd; d <= k.ed; d = add(d, 1)) if (d >= a && d <= b) out.push({ date: d, start: d === k.sd ? k.st : '00:00', end: d === k.ed ? k.et : '23:59', status: 'BLOCK', f: k.factor, src: 'AVAILABILITY', block: k }); });
+  TRAININGS.filter(t => !['CANCELLED', 'COMPLETED'].includes(t.status) && (t.instructor === cid || t.participants.includes(cid))).forEach(t => { for (let d = t.sd; d <= t.ed; d = add(d, 1)) if (d >= a && d <= b) out.push({ date: d, start: d === t.sd ? t.st : '00:00', end: d === t.ed ? t.et : '23:59', status: 'TRAINING', f: 1, src: 'TRAINING', training: t }); });
+  return out;
 }
-document.querySelectorAll('.nav').forEach(b => b.addEventListener('click', () => { view = b.dataset.v; render(); }));
-document.addEventListener('click', e => {
-  const t = e.target;
-  const pr = t.closest('[data-p]'), go = t.closest('[data-go]');
-  if (go) { curProj = go.dataset.go; view = 'matching'; render(); return; }
-  if (pr && view !== 'matching') { curProj = pr.dataset.p; view = 'matching'; render(); return; }
-  const cd = t.closest('.cand'); if (!cd) { if (t.id === 'trein') { LOG.unshift([now(), `Treinamento sugerido incluído no plano de ${C.find(x => x.id === curCons).n}`]); toast('Incluído no plano de desenvolvimento'); } return; }
-  const k = cd.dataset.k, [cid, pid] = k.split(':'), cn = C.find(x => x.id === cid).n, pn = P.find(x => x.id === pid).n;
-  if (t.closest('[data-why]')) { cd.classList.toggle('open'); return; }
-  if (t.closest('[data-res]')) { RES[k] = 'pre'; LOG.unshift([now(), `Pré-reserva de ${cn} no projeto ${pn}`]); toast(`Pré-reserva feita: ${cn}. Ela ocupa a agenda sem criar convite.`); rerender(); return; }
-  if (t.closest('[data-conf]')) { RES[k] = 'confirmada'; LOG.unshift([now(), `Alocação de ${cn} confirmada no projeto ${pn}; evento criado no Calendar`]); toast(`Alocação confirmada. Convite enviado para ${cn} no Calendar.`); rerender(); return; }
-});
-document.addEventListener('input', e => {
-  if (e.target.dataset.w) { W[e.target.dataset.w] = +e.target.value; e.target.nextElementSibling.textContent = e.target.value; const p = P.find(x => x.id === curProj); $('#cands').innerHTML = match(p).map((x, i) => cand(x, i, p)).join(''); }
-});
-document.addEventListener('change', e => {
-  if (e.target.id === 'selP') { curProj = e.target.value; render(); }
-  if (e.target.id === 'selC') { curCons = e.target.value; render(); }
-});
-function rerender() { const open = [...document.querySelectorAll('.cand.open')].map(x => x.dataset.k); const p = P.find(x => x.id === curProj); $('#cands').innerHTML = match(p).map((x, i) => cand(x, i, p)).join(''); open.forEach(k => document.querySelector(`.cand[data-k="${k}"]`)?.classList.add('open')); }
-const now = () => new Date().toTimeString().slice(0, 5);
+const calState = c => { const x = CALENDAR[c.id]; if (x && !x.ok) return { checked: false, status: 'UNAVAILABLE', message: 'Calendar não verificado: ' + x.reason }; return { checked: true, status: 'VERIFIED', message: '' }; };
+const calBusy = (c, a, b) => ((CALENDAR[c.id] || {}).busy || []).filter(x => x.date >= a && x.date <= b).map(x => Object.assign({ status: 'CALENDAR', f: 1, src: 'CALENDAR' }, x));
+function busyMinutes(list, a, b, ws, we) {
+  let total = 0;
+  for (let d = a; d <= b; d = add(d, 1)) {
+    const w = dow(d); if (!w || w === 6) continue;
+    const A = tm(ws), B = tm(we), ev = [];
+    list.filter(x => x.date === d).forEach(x => { const st = Math.max(A, tm(x.start)), et = Math.min(B, tm(x.end)); if (et <= st) return; ev.push([st, x.f], [et, -x.f]); });
+    ev.sort((x, y) => x[0] - y[0] || x[1] - y[1]); let last = null, act = 0;
+    ev.forEach(e => { if (last !== null && e[0] > last) total += (e[0] - last) * Math.min(1, Math.max(0, act)); act += e[1]; last = e[0]; });
+  }
+  return total;
+}
+const workload = (cid, start, days) => { const end = add(start, days); return ALLOCATIONS.filter(a => a.cid === cid && HARD.includes(a.status)).reduce((s, a) => s + a.segs.filter(x => x.date >= start && x.date <= end).reduce((t, x) => t + x.hours, 0), 0); };
+function statusToday(c) {
+  const iv = intervals(c.id, TODAY, TODAY);
+  if (iv.some(x => x.src === 'SYSTEM' && HARD.includes(x.status))) return 'ALLOCATED';
+  if (iv.some(x => x.status === 'TRAINING')) return 'TRAINING';
+  const b = busyMinutes(iv.filter(x => x.status === 'BLOCK'), TODAY, TODAY, '09:00', '18:00');
+  if (b >= 539) return 'UNAVAILABLE';
+  if (iv.some(x => x.status === 'PRE_RESERVED')) return 'PRE_RESERVED';
+  if (b > 0) return 'PARTIAL';
+  return 'AVAILABLE';
+}
+
+/* ---------- Matching explicável (porta das regras de apiRunMatching_) ---------- */
+const fitLabel = s => s >= .82 ? 'Forte aderência' : s >= .68 ? 'Boa aderência' : s >= .52 ? 'Aderência moderada' : 'Aderência limitada';
+function profileScore(p, skillMap) {
+  const soft = []; // requisitos soft explícitos não usados nesta demo → 0.7
+  const explicit = .7, vals = Object.entries(p.profile || {}); if (!vals.length) return explicit;
+  let sum = 0, w = 0; vals.forEach(([dim, demanded]) => { const d = DIMS.find(x => x.id === dim); if (!d) return; const lv = skillMap[d.soft] || 0, wt = 1 + (demanded - 1) * .35; sum += Math.min(1, lv / Math.max(1, demanded)) * wt; w += wt; });
+  return Math.max(0, Math.min(1, explicit * .35 + (w ? sum / w : .7) * .65));
+}
+function runMatchingCore(o) {
+  const p = P(o.pid), cl = CL(p.client), mod = o.module;
+  const persisted = p.reqs.filter(r => r.module === mod), reqs = persisted.slice();
+  (o.inline || []).forEach(r => { const old = reqs.find(x => x.skill === r.skill); if (!old) reqs.push(r); else if (r.type === 'ELIMINATORY' || r.min > old.min) reqs[reqs.indexOf(old)] = r; });
+  const minOrder = o.minCareer ? lvl(o.minCareer).order : 0, expected = weekdays(o.start, o.end) * Math.max(0, tm(o.we) - tm(o.ws));
+  const eligible = [], excluded = [];
+  CONSULTANTS.filter(c => c.active && (c.module === mod || c.secondary.includes(mod))).forEach(c => {
+    const sm = {}; c.skills.forEach(s => sm[s.skill] = s.level);
+    const fails = []; let tw = 0, ts = 0;
+    reqs.forEach(r => { const l = sm[r.skill] || 0; if (r.type === 'ELIMINATORY' && l < r.min) fails.push(skName(r.skill) + ' abaixo do nível ' + r.min); tw += Math.min(1, r.min > 0 ? l / r.min : l / 4) * r.weight; ts += r.weight; });
+    if (minOrder && lvl(c.level).order < minOrder) fails.push('Senioridade abaixo do mínimo ' + lvl(o.minCareer).name);
+    const interstate = p.state !== c.state;
+    if (o.modality !== 'REMOTE' && interstate && !c.travel) fails.push('Indisponível para viagem interestadual');
+    const internal = intervals(c.id, o.start, o.end), cs = calState(c), ext = cs.checked ? calBusy(c, o.start, o.end) : [];
+    const calMin = cs.checked ? busyMinutes(ext, o.start, o.end, o.ws, o.we) : null, busy = busyMinutes(internal.concat(ext), o.start, o.end, o.ws, o.we);
+    const availability = expected ? Math.max(0, Math.min(1, 1 - busy / expected)) : 1;
+    if (o.full && busy > 0) fails.push('Disponibilidade integral não atendida');
+    if (fails.length) { excluded.push({ c, fails }); return; }
+    const pre = internal.filter(x => x.status === 'PRE_RESERVED'), technical = ts ? tw / ts : .7;
+    const w30 = workload(c.id, o.start, 30), w60 = workload(c.id, o.start, 60), w90 = workload(c.id, o.start, 90);
+    const wl = Math.max(0, Math.min(1, 1 - (w30 / 176 * .55 + w60 / 352 * .30 + w90 / 528 * .15)));
+    const experience = Math.max(.25, Math.min(1, lvl(c.level).order / 80));
+    const sameProject = ALLOCATIONS.some(a => a.cid === c.id && a.pid === p.id && a.status !== 'CANCELLED'), sameClient = c.h.clients.includes(cl.id) || ALLOCATIONS.some(a => a.cid === c.id && a.status !== 'CANCELLED' && P(a.pid).client === cl.id);
+    const continuity = o.cont ? (sameProject ? 1 : sameClient ? .88 : .60) : .70;
+    let sus = 1; sus -= Math.min(.30, c.h.travel60 * .018); sus -= Math.min(.20, Math.max(0, c.h.projects60 - 2) * .07); sus -= Math.min(.20, c.h.golives90 * .055); if (w30 > 160) sus -= .10; sus = Math.max(.2, Math.min(1, sus));
+    const profile = profileScore(p, sm);
+    let logistics = .7, rt = null;
+    if (o.modality === 'REMOTE') logistics = 1;
+    else if (interstate) { const ap = AIRPORT[c.city]; logistics = .78; if (ap) { rt = { route_context: 'HOME_TO_AIRPORT', duration_text: durText(ap[1]), distance_text: String(ap[2]).replace('.', ',') + ' km', sec: ap[1] * 60 }; logistics = Math.max(.35, Math.min(.9, 1 - Math.max(0, rt.sec - 1800) / 14400)); } }
+    else { rt = route(c.city, p.city); rt.route_context = 'LOCAL_CLIENT'; logistics = Math.max(.05, Math.min(1, 1 - Math.max(0, rt.sec - 1800) / 10800)); }
+    const W = WEIGHTS, tot = Object.values(W).reduce((a, b) => a + b, 0) || 100;
+    const score = (technical * W.technical + availability * W.availability + profile * W.profile + wl * W.workload + logistics * W.logistics + experience * W.experience + continuity * W.continuity + sus * W.sustainability) / tot;
+    const reasons = []; if (technical >= .85) reasons.push('Aderência técnica forte'); else if (technical >= .65) reasons.push('Boa aderência técnica'); if (availability >= .98) reasons.push('Disponível no período'); else if (availability >= .65) reasons.push('Disponibilidade parcial viável'); if (logistics >= .8) reasons.push('Logística favorável'); if (wl >= .65) reasons.push('Carga futura equilibrada'); if (profile >= .8) reasons.push('Perfil profissional aderente'); if (sameProject) reasons.push('Continuidade no mesmo projeto'); else if (sameClient) reasons.push('Experiência prévia com o cliente'); if (c.h.golives > 0) reasons.push('Histórico de Go Live (' + c.h.golives + ')'); if (sus >= .78) reasons.push('Sustentabilidade operacional favorável');
+    const warnings = []; if (pre.length) warnings.push('Existe pré-reserva em parte do período'); if (availability < .98) warnings.push(Math.round((1 - availability) * 100) + '% da janela de trabalho possui ocupação conhecida'); if (logistics < .45) warnings.push('Logística desfavorável'); if (wl < .35) warnings.push('Carga futura elevada'); if (c.h.travel60 >= 8) warnings.push(c.h.travel60 + ' dia(s) de viagem interestadual nos últimos 60 dias'); if (c.h.projects60 >= 4) warnings.push(c.h.projects60 + ' projetos com atuação nos últimos 60 dias'); if (c.h.golives90 >= 3) warnings.push(c.h.golives90 + ' Go Lives nos últimos 90 dias'); if (sus < .5) warnings.push('Sustentabilidade operacional requer atenção'); if (!cs.checked) warnings.push(cs.message);
+    eligible.push({ c, score, label: fitLabel(score), reasons, warnings, technical, availability, profile, wl, w30, logistics, experience, continuity, sus, rt, interstate, calStatus: cs.status, calHours: calMin === null ? null : Math.round(calMin / 6) / 10, golives: c.h.golives, travel60: c.h.travel60, parts: { technical, availability, profile, workload: wl, logistics, experience, continuity, sustainability: sus } });
+  });
+  eligible.sort((a, b) => b.score - a.score); eligible.forEach((e, i) => e.rank = i + 1);
+  return { p, o, reqs, eligible, excluded };
+}
+
+/* ---------- Capacidade ---------- */
+function capacityByModule(a, b, ids) {
+  const wdays = weekdays(a, b);
+  return MODULES.map(m => {
+    const cs = CONSULTANTS.filter(c => c.module === m.id && (!ids || ids.has(c.id))), set = new Set(cs.map(c => c.id)), total = cs.length * wdays * 8;
+    let conf = 0, pre = 0, tr = 0, bl = 0;
+    ALLOCATIONS.filter(x => set.has(x.cid) && ACTIVE.includes(x.status)).forEach(x => x.segs.forEach(s => { if (s.date >= a && s.date <= b) { if (x.status === 'PRE_RESERVED') pre += s.hours; else conf += s.hours; } }));
+    TRAININGS.filter(t => !['CANCELLED', 'COMPLETED'].includes(t.status)).forEach(t => { const ppl = new Set(t.participants.concat(t.instructor ? [t.instructor] : [])); for (let d = t.sd; d <= t.ed; d = add(d, 1)) { if (d < a || d > b || !dow(d) || dow(d) === 6) continue; const h = Math.min(8, (Math.min(tm(t.et), tm('18:00')) - Math.max(tm(t.st), tm('09:00'))) / 60); ppl.forEach(id => { if (set.has(id) && h > 0) tr += h; }); } });
+    BLOCKS.filter(k => k.active && set.has(k.cid)).forEach(k => { for (let d = k.sd; d <= k.ed; d = add(d, 1)) { if (d < a || d > b || !dow(d) || dow(d) === 6) continue; const st = d === k.sd ? k.st : '00:00', et = d === k.ed ? k.et : '23:59', h = Math.min(8, Math.max(0, (Math.min(tm(et), tm('18:00')) - Math.max(tm(st), tm('09:00'))) / 60)); bl += h * k.factor; } });
+    const used = conf + pre + tr + bl, raw = total ? used / total : 0;
+    return { id: m.id, name: m.name, n: cs.length, total, conf, pre, tr, bl, free: Math.max(0, total - used), util: Math.min(1, raw), raw };
+  });
+}
+
+/* ---------- Alertas (regras de generateAlerts_) ---------- */
+function generateAlerts() {
+  const out = [], nw = monday(add(TODAY, 7)), util = capacityByModule(nw, add(nw, 4));
+  util.forEach(m => { if (m.raw >= .95) out.push(['CRITICAL', 'CAPACITY', m.name + ' com capacidade projetada acima de 95%']); else if (m.raw >= .88) out.push(['ATTENTION', 'CAPACITY', m.name + ' próximo do limite de capacidade']); });
+  PROJECTS.forEach(p => { const d = diff(TODAY, p.golive); if (d >= 0 && d <= 14 && !ALLOCATIONS.some(a => a.pid === p.id && HARD.includes(a.status))) out.push([d <= 7 ? 'CRITICAL' : 'ATTENTION', 'GO_LIVE_COVERAGE', p.name + ' se aproxima do Go Live sem alocação confirmada']); });
+  const seen = new Set(); CONSULTANTS.forEach(c => { const list = []; ALLOCATIONS.filter(a => a.cid === c.id && ACTIVE.includes(a.status)).forEach(a => a.segs.forEach(s => list.push({ a, s }))); for (let i = 0; i < list.length; i++) for (let j = i + 1; j < list.length; j++) { const x = list[i], y = list[j]; if (x.a.id === y.a.id || x.s.date !== y.s.date || !overlap(x.s.start, x.s.end, y.s.start, y.s.end)) continue; const k = [x.a.id, y.a.id].sort().join() + x.s.date; if (seen.has(k)) continue; seen.add(k); const hard = HARD.includes(x.a.status) && HARD.includes(y.a.status); out.push([hard ? 'CRITICAL' : 'ATTENTION', hard ? 'DOUBLE_ALLOCATION' : 'PRE_RESERVATION_DISPUTE', c.name + ' possui sobreposição em ' + fd(x.s.date) + ' (' + x.s.start + '–' + x.s.end + ')']); } });
+  PROJECTS.filter(p => !['COMPLETED', 'CANCELLED'].includes(p.status)).forEach(p => p.reqs.filter(r => r.type === 'ELIMINATORY').forEach(r => { const ok = ALLOCATIONS.some(a => a.pid === p.id && HARD.includes(a.status) && a.module === r.module && levelOf(C(a.cid), r.skill) >= r.min); if (!ok) { const d = diff(TODAY, p.golive); out.push([d >= 0 && d <= 14 ? 'CRITICAL' : 'ATTENTION', 'CRITICAL_REQUIREMENT_GAP', p.name + ' sem cobertura confirmada para ' + skName(r.skill) + ' ≥ ' + r.min]); } }));
+  ALLOCATIONS.filter(a => HARD.includes(a.status)).forEach(a => { const c = C(a.cid), p = P(a.pid); if (p.state !== c.state && !c.travel) out.push(['CRITICAL', 'LOGISTICS_RISK', c.name + ' está alocado em ' + p.name + ' com deslocamento interestadual e restrição de viagem']); });
+  const k = new Set(); return out.filter(x => { const key = x.join('|'); if (k.has(key)) return false; k.add(key); return true; }).map(x => ({ severity: x[0], type: x[1], message: x[2] }));
+}
+const ALERT_TYPE = { CAPACITY: 'Capacidade', GO_LIVE_COVERAGE: 'Cobertura de Go Live', DOUBLE_ALLOCATION: 'Dupla alocação', PRE_RESERVATION_DISPUTE: 'Disputa de pré-reserva', CRITICAL_REQUIREMENT_GAP: 'Requisito crítico', CALENDAR_SYNC: 'Calendar', LOGISTICS_RISK: 'Risco logístico', TRAINING_RECOMMENDED: 'Capacitação sugerida' };
+function syncAlerts(fromUser) {
+  let n = 0; generateAlerts().forEach(g => { if (ALERTS.some(e => e.status !== 'RESOLVED' && e.type === g.type && e.message === g.message)) return; ALERTS.unshift(Object.assign({ id: uid('ALT'), status: 'OPEN' }, g)); n++; });
+  (computeRecs().items || []).slice(0, 2).forEach(r => { const m = 'Capacitação sugerida: ' + r.skill.name + ' • ' + r.rationale; if (!ALERTS.some(e => e.message === m && e.status !== 'RESOLVED')) { ALERTS.push({ id: uid('ALT'), status: 'OPEN', severity: 'INFO', type: 'TRAINING_RECOMMENDED', message: m }); n++; } });
+  return n;
+}
+
+/* ---------- Skill Gap e recomendações ---------- */
+function computeGap(target = 3) {
+  let cons = CONSULTANTS.filter(c => c.active); if (state.role === 'LIDERANCA') cons = cons.filter(c => manageModule(c.module));
+  const busyToday = new Set(ALLOCATIONS.filter(a => HARD.includes(a.status) && a.segs.some(s => s.date === TODAY)).map(a => a.cid));
+  const items = SKILLS.filter(s => s.type === 'HARD').map(s => {
+    const group = cons.filter(c => c.module === s.module || c.secondary.includes(s.module)); if (!group.length) return null;
+    const lv = group.map(c => ({ c, l: levelOf(c, s.id) })), below = lv.filter(x => x.l < target), refs = lv.filter(x => x.l >= 4);
+    return { skill: s, total: lv.length, below: below.length, refs: refs.length, avail: refs.filter(x => !busyToday.has(x.c.id)).length, learners: below.map(x => x.c), references: refs.map(x => x.c), priority: below.length / lv.length };
+  }).filter(Boolean).filter(x => x.below > 0 || x.refs > 0).sort((a, b) => b.priority - a.priority);
+  return { target, items };
+}
+function freeHours(cid, a, b) { const iv = intervals(cid, a, b); return Math.max(0, weekdays(a, b) * 9 - busyMinutes(iv, a, b, '09:00', '18:00') / 60); }
+function computeRecs() {
+  const g = computeGap(3), start = TODAY, end = add(TODAY, 28), items = [];
+  g.items.filter(x => x.below > 0 && x.refs > 0).slice(0, 12).forEach(x => {
+    const refs = x.references.slice().sort((a, b) => freeHours(b.id, start, end) - freeHours(a.id, start, end)), ppl = x.learners.slice(0, 6);
+    if (!refs.length || !ppl.length) return; const inst = refs[0], everyone = [inst].concat(ppl); let slot = null;
+    for (let d = add(start, 1); d <= end && !slot; d = add(d, 1)) { if (!dow(d) || dow(d) === 6) continue; for (const st of [540, 600, 840, 900, 960]) { const s = hm(st), e = hm(st + 120); if (everyone.every(c => busyMinutes(intervals(c.id, d, d), d, d, s, e) === 0)) { slot = { date: d, start: s, end: e }; break; } } }
+    const demand = PROJECTS.filter(p => !['COMPLETED', 'CANCELLED'].includes(p.status)).reduce((n, p) => n + p.reqs.filter(r => r.skill === x.skill.id).reduce((m, r) => m + (r.type === 'ELIMINATORY' ? 2 : 1), 0), 0);
+    items.push({ skill: x.skill, instructor: inst, participants: ppl, slot, demand, priority: Math.min(1, x.priority * .75 + Math.min(.25, demand * .04)), rationale: x.below + ' de ' + x.total + ' consultores abaixo do nível 3' + (demand ? ' • skill demandada em projetos ativos/requisitos' : '') });
+  });
+  items.sort((a, b) => b.priority - a.priority || b.demand - a.demand); return { items };
+}
+
+/* ---------- Interface: navegação, modal, toast ---------- */
+const PAGES = { inicio: 'Início', planejamento: 'Planejamento', clientes: 'Clientes', projetos: 'Projetos', consultores: 'Consultores', agenda: 'Agenda & Capacidade', treinamentos: 'Treinamentos & Skill Gap', cenarios: 'Cenários', alertas: 'Alertas', indicadores: 'Indicadores', administracao: 'Administração', auditoria: 'Auditoria' };
+function go(page) {
+  if (!PAGES[page]) page = 'inicio'; if (!canAccess(page)) { toast('Esta área não faz parte do seu perfil de acesso.'); page = 'inicio'; }
+  state.page = page; $$('.page').forEach(p => p.classList.toggle('active', p.id === 'page-' + page)); $$('.nav-item').forEach(n => n.classList.toggle('active', n.dataset.page === page));
+  $('#crumb').textContent = PAGES[page]; $('#sidebar').classList.remove('open'); $('#content').scrollTop = 0; renderPage(page);
+}
+function renderPage(p) { ({ inicio: renderDashboard, planejamento: renderPlanner, clientes: renderClients, projetos: renderProjects, consultores: renderConsultants, agenda: renderAgenda, treinamentos: renderTrainingsPage, cenarios: renderScenarios, alertas: renderAlerts, indicadores: renderIndicators, administracao: renderAdmin, auditoria: renderAudit })[p](); }
+function toast(msg, err) { const t = $('#toast'); t.textContent = msg; t.className = 'toast show' + (err ? ' error' : ''); clearTimeout(t._t); t._t = setTimeout(() => t.className = 'toast', 3800); }
+function showModal(title, sub, body, badge = 'DETALHES', wide = false) { $('#mTitle').textContent = title; $('#mSub').textContent = sub || ''; $('#mBadge').textContent = badge; $('#mBody').innerHTML = body; $('#modalCard').classList.toggle('wide', wide); $('#modal').classList.add('show'); }
+function closeModal() { $('#modal').classList.remove('show'); }
+function busy(label, ms = 650) { const s = $('#sync'); $('#syncText').textContent = label; s.classList.remove('hidden'); return new Promise(r => setTimeout(() => { s.classList.add('hidden'); r(); }, ms)); }
+function statusBadge(s) { const m = { AVAILABLE: ['Disponível', 'success'], DRAFT: ['Rascunho', 'neutral'], IN_ANALYSIS: ['Em análise', 'warn'], PRE_RESERVED: ['Pré-reservado', 'violet'], ALLOCATED: ['Alocado', 'info'], CONFIRMED: ['Confirmada', 'success'], IN_PROGRESS: ['Em execução', 'info'], COMPLETED: ['Concluída', 'neutral'], CANCELLED: ['Cancelada', 'danger'], PLANNING: ['Planejamento', 'neutral'], MAPPING: ['Mapeamento', 'neutral'], TRAINING: ['Treinamento', 'warn'], HOMOLOGATION: ['Homologação', 'info'], PARTIAL: ['Parcialmente disponível', 'warn'], UNAVAILABLE: ['Indisponível', 'danger'], OPEN: ['OPEN', 'neutral'], RESOLVED: ['RESOLVED', 'success'], PLANNED: ['Planejado', 'warn'] }[s] || [s || '—', 'neutral']; return `<span class="badge ${m[1]}"><span class="dot"></span>${esc(m[0])}</span>`; }
+const sevBadge = s => { const m = { CRITICAL: ['Crítico', 'danger'], ATTENTION: ['Atenção', 'warn'], INFO: ['Informativo', 'info'] }[s]; return `<span class="badge ${m[1]}">${m[0]}</span>`; };
+const opts = (items, sel) => items.map(([val, lab]) => `<option value="${esc(val)}" ${val === sel ? 'selected' : ''}>${esc(lab)}</option>`).join('');
+
+function applyRole() {
+  const r = role(); $('#userName').textContent = r.user; $('#userRole').textContent = r.name + (r.scope ? ' • ' + r.scope.join(', ') : ''); $('#userAvatar').textContent = ini(r.user);
+  $$('.nav-item').forEach(n => n.classList.toggle('hidden', !canAccess(n.dataset.page))); $('#sysSection').classList.toggle('hidden', !canAdmin());
+  $$('.mgmt').forEach(x => x.classList.toggle('hidden', !canManagement())); $$('.canProject').forEach(x => x.classList.toggle('hidden', !['ADMIN', 'COORDENACAO', 'GP'].includes(state.role)));
+  $$('.canConsultant').forEach(x => x.classList.toggle('hidden', !canAdmin())); $$('.canTraining').forEach(x => x.classList.toggle('hidden', !canConfirm()));
+  state.matching = null; go(canAccess(state.page) ? state.page : 'inicio');
+}
+
+/* ---------- Início ---------- */
+function renderDashboard() {
+  const al = visibleAllocations().filter(a => a.status !== 'CANCELLED'), pr = visibleProjects(), alerts = generateAlerts();
+  const w = { draft: al.filter(a => a.status === 'DRAFT').length, an: al.filter(a => a.status === 'IN_ANALYSIS').length, pre: al.filter(a => a.status === 'PRE_RESERVED').length };
+  const confirmed = new Set(al.filter(a => HARD.includes(a.status)).map(a => a.cid)).size, crit = alerts.filter(a => a.severity === 'CRITICAL').length;
+  const cards = state.role === 'CONSULTOR' ? [['Meus projetos', pr.length, '▦', 'Projetos com vínculo ativo'], ['Em alocação', confirmed ? 1 : 0, '◉', 'Confirmações/em execução'], ['Disponibilidade hoje', ({ AVAILABLE: 'Livre', PARTIAL: 'Parcial' })[statusToday(C('c1'))] || 'Ocupado', '✓', 'Capacidade interna conhecida'], ['Minhas pré-reservas', w.pre, '◌', 'Reservas visíveis para você'], ['Ações de desenvolvimento', PLANS.filter(p => p.cid === 'c1').reduce((n, p) => n + p.items.filter(i => i.status !== 'DONE').length, 0), '🎓', 'Plano individual']]
+    : [['Projetos ativos', pr.filter(p => !['COMPLETED', 'CANCELLED'].includes(p.status)).length, '▦', 'Visão atual'], ['Em análise', w.draft + w.an, '◎', 'Rascunhos + análises'], ['Consultores alocados', confirmed, '◉', 'Confirmados/em execução'], ['Pré-reservas', w.pre, '◌', 'Aguardando decisão'], ['Alertas críticos', crit, '!', 'Requerem atenção']];
+  $('#dashStats').innerHTML = cards.map(x => `<div class="card stat"><div class="stat-top"><span class="label">${x[0]}</span><span class="stat-icon">${x[2]}</span></div><div class="value">${x[1]}</div><div class="delta">${x[3]}</div></div>`).join('');
+  const nw = monday(add(TODAY, 7)); capBars('#dashCap', capacityByModule(nw, add(nw, 4)));
+  $('#dashAlertSum').textContent = crit + ' críticos';
+  $('#dashAlerts').innerHTML = canManagement() ? (alerts.slice(0, 5).map(a => `<div class="alert"><i>${a.severity === 'CRITICAL' ? '🔴' : a.severity === 'ATTENTION' ? '🟠' : '🔵'}</i><div><strong>${esc(a.message)}</strong><p>${esc(a.type)}</p></div></div>`).join('') || '<div class="empty"><strong>Sem alertas críticos</strong>Nenhum risco prioritário detectado.</div>') : '<div class="empty"><strong>Alertas gerenciais</strong>Disponíveis para gestão.</div>';
+  $('#dashGo').innerHTML = pr.map(p => Object.assign({ d: diff(TODAY, p.golive) }, p)).filter(p => p.d >= 0 && p.d <= 45).sort((a, b) => a.d - b.d).map(p => `<div class="event"><div class="date-box"><b>${p.golive.slice(8, 10)}</b><span>${D(p.golive).toLocaleString('pt-BR', { month: 'short' })}</span></div><div><h4>${esc(p.name)}</h4><p>${esc(p.city + '/' + p.state)}</p></div><span class="badge ${p.d <= 7 ? 'danger' : 'warn'}">${p.d} dias</span></div>`).join('') || '<div class="empty"><strong>Nenhum Go Live próximo</strong>Cadastre datas nos projetos para acompanhar aqui.</div>';
+  const recs = computeRecs().items, plans = PLANS.length;
+  $('#dashDev').innerHTML = `<div class="alert"><i>🎯</i><div><strong>${plans} plano(s) ativo(s)</strong><p>${PLANS.reduce((n, p) => n + p.items.filter(i => i.status !== 'DONE').length, 0)} ações abertas.</p></div></div>` + recs.slice(0, 2).map(r => `<div class="alert"><i>🎓</i><div><strong>${esc(r.skill.name)}</strong><p>${esc(r.rationale)}${r.slot ? ' • janela ' + fd(r.slot.date) + ' ' + r.slot.start + '–' + r.slot.end : ''}</p></div></div>`).join('');
+}
+function capBars(sel, items) { $(sel).innerHTML = items.map(m => `<div class="capacity-row"><span>${esc(m.name)}</span><div class="bar"><i style="width:${Math.round(m.util * 100)}%"></i></div><b>${pct(m.util)}</b></div>`).join(''); }
+
+/* ---------- Planejamento ---------- */
+function renderPlanner() {
+  const ps = visibleProjects(), sel = $('#plProject'), cur = sel.value;
+  sel.innerHTML = '<option value="">Selecione...</option>' + ps.map(p => `<option value="${p.id}">${esc(p.name)}</option>`).join(''); if (ps.some(p => p.id === cur)) sel.value = cur;
+  const mods = MODULES.filter(m => state.role !== 'LIDERANCA' || manageModule(m.id)); const mcur = $('#plModule').value; $('#plModule').innerHTML = opts(mods.map(m => [m.id, m.name]), mcur || mods[0].id);
+  $('#plSkill').innerHTML = '<option value="">Sem skill específica</option>' + SKILLS.filter(s => s.type === 'HARD').map(s => `<option value="${s.id}">${esc(s.name)}</option>`).join('');
+  $('#plMinCareer').innerHTML = '<option value="">Sem mínimo</option>' + LEVELS.map(l => `<option value="${l.id}">${l.name}</option>`).join('');
+  renderInherited(); if (state.matching) renderCandidates();
+}
+function syncPlan() { const p = P(v('plProject')); if (!p) return; $('#plStart').value = p.start < TODAY ? TODAY : p.start; $('#plEnd').value = p.end; state.matching = null; $('#candList').innerHTML = '<div class="card empty"><strong>Nenhuma análise executada</strong>Clique em “Encontrar consultores”.</div>'; $('#candCount').textContent = 'Execute o matching para iniciar'; renderInherited(); }
+function renderInherited() { const p = P(v('plProject')), box = $('#plInherited'); if (!p) { box.innerHTML = '<span class="inline-note">O cadastro do projeto será consultado automaticamente ao executar o matching.</span>'; return; } const r = p.reqs.filter(x => x.module === v('plModule')); box.innerHTML = r.length ? r.map(x => `<span class="req-chip ${x.type === 'ELIMINATORY' ? 'elim' : x.type === 'PREFERRED' ? 'pref' : ''}">${esc(skName(x.skill))} ≥ ${x.min} • ${x.type === 'ELIMINATORY' ? 'Eliminatório' : x.type === 'PREFERRED' ? 'Preferencial' : 'Informativo'}</span>`).join('') : '<span class="inline-note">Nenhum requisito persistido para este módulo.</span>'; }
+function planProject(id) { go('planejamento'); $('#plProject').value = id; const p = P(id); const m = p.reqs[0] ? p.reqs[0].module : 'SUPPLY'; if ([...$('#plModule').options].some(o => o.value === m)) $('#plModule').value = m; syncPlan(); }
+async function runMatching() {
+  const pid = v('plProject'); if (!pid) { toast('Cadastre ou selecione um projeto.', true); return; }
+  const start = v('plStart'), end = v('plEnd'); if (!start || !end || end < start) { toast('Período inválido para o matching.', true); return; }
+  if (tm(v('plWE')) <= tm(v('plWS'))) { toast('Janela de trabalho inválida.', true); return; }
+  const inline = v('plSkill') ? [{ id: 'INLINE-0', module: v('plModule'), skill: v('plSkill'), min: Number(v('plSkillLvl')), type: v('plReqType'), weight: 2 }] : [];
+  await busy('Analisando disponibilidade, histórico e logística...', 900);
+  state.matching = runMatchingCore({ pid, module: v('plModule'), start, end, modality: v('plModality'), ws: v('plWS'), we: v('plWE'), dep: v('plDep'), minCareer: v('plMinCareer'), cont: $('#plCont').checked, full: $('#plFull').checked, inline });
+  renderCandidates();
+}
+function renderCandidates() {
+  const r = state.matching, el = $('#candList'); $('#candCount').textContent = r.eligible.length + ' candidatos após filtros eliminatórios';
+  const exc = r.excluded.length ? `<details class="card excluded"><summary>${r.excluded.length} consultor(es) fora da lista — ver motivos</summary><ul>${r.excluded.map(x => `<li><b>${esc(x.c.name)}</b>: ${esc(x.fails.join(' • '))}</li>`).join('')}</ul></details>` : '';
+  if (!r.eligible.length) { el.innerHTML = '<div class="card empty"><strong>Nenhum consultor elegível</strong>Revise disponibilidade, módulo ou requisitos eliminatórios.</div>' + exc; return; }
+  el.innerHTML = r.eligible.map((e, i) => { const c = e.c, rt = e.rt ? ((e.rt.route_context === 'HOME_TO_AIRPORT' ? 'Até aeroporto: ' : '') + e.rt.duration_text + ' • ' + e.rt.distance_text) : (r.o.modality === 'REMOTE' ? 'Remoto' : 'Não calculada');
+    return `<div class="card candidate" style="animation-delay:${i * 70}ms" data-cid="${c.id}"><div><div class="cand-top"><div class="cand-avatar">${ini(c.name)}</div><div class="cand-name"><h3>${esc(c.name)}</h3><p>${esc(lvl(c.level).name)} • ${esc(c.city + '/' + c.state)}</p><div class="fit">${e.reasons.map(y => `<span class="badge success">✓ ${esc(y)}</span>`).join('')}</div></div></div>
+    <div class="reason-grid"><div class="reason"><span>Aderência</span><b>${e.label}</b></div><div class="reason"><span>Técnica</span><b>${pct(e.technical)}</b></div><div class="reason"><span>Disponibilidade</span><b>${pct(e.availability)}</b></div><div class="reason"><span>Logística</span><b>${esc(rt)}</b></div></div>
+    <div class="metric-strip"><div class="metric-mini"><span>Carga 30d</span><b>${Math.round(e.w30)}h</b></div><div class="metric-mini"><span>Continuidade</span><b>${pct(e.continuity)}</b></div><div class="metric-mini"><span>Sustentabilidade</span><b>${pct(e.sus)}</b></div><div class="metric-mini"><span>Go Lives</span><b>${e.golives}</b></div><div class="metric-mini"><span>Viagem 60d</span><b>${e.travel60}d</b></div><div class="metric-mini"><span>Calendar</span><b>${e.calStatus === 'VERIFIED' ? e.calHours.toFixed(1).replace('.', ',') + 'h ocupado' : 'Não verificado'}</b></div></div>
+    ${e.warnings.length ? `<div class="warnline">⚠ ${e.warnings.map(esc).join(' • ')}</div>` : '<div class="okline">✓ Sem ressalvas relevantes</div>'}</div>
+    <div class="right"><div class="rank">ORDEM SUGERIDA<strong>${e.rank}º</strong></div><div class="rank">Nota interna <strong style="font-size:13px">${Math.round(e.score * 100)}</strong></div><button class="btn" onclick="openWhy('${c.id}')">Como a nota foi formada</button><button class="btn" onclick="openConsultant('${c.id}')">Ver perfil</button>${r.o.modality !== 'REMOTE' ? `<button class="btn" onclick="openLogistics('${c.id}')">Detalhar logística</button>` : ''}<button class="btn primary" onclick="openPreReserve('${c.id}')">Pré-reservar</button></div></div>`; }).join('') + exc;
+}
+function openWhy(cid) {
+  const e = state.matching.eligible.find(x => x.c.id === cid), tot = Object.values(WEIGHTS).reduce((a, b) => a + b, 0);
+  const rows = Object.keys(WEIGHTS).map(k => `<div class="skill-row"><span><b>${WEIGHT_LABEL[k]}</b><br><small class="inline-note">peso ${WEIGHTS[k]} de ${tot}</small></span><div class="bar"><i style="width:${Math.round(e.parts[k] * 100)}%"></i></div><b>${Math.round(e.parts[k] * 100)}</b></div>`).join('');
+  showModal('Como a nota foi formada — ' + e.c.name, 'Nota interna ' + Math.round(e.score * 100) + ' • ' + e.label + '. Média ponderada dos 8 critérios; os pesos ficam em Administração.', rows + `<div class="subtle-callout"><b>Razões:</b> ${esc(e.reasons.join(' • ') || '—')}<br><b>Ressalvas:</b> ${esc(e.warnings.join(' • ') || 'Nenhuma')}</div><div class="modal-actions">${canAdmin() ? '<button class="btn" onclick="openWeights()">Ajustar pesos</button>' : ''}<button class="btn primary" onclick="closeModal()">Fechar</button></div>`, 'MATCHING EXPLICÁVEL');
+}
+function openLogistics(cid) {
+  const c = C(cid), p = state.matching.p, dep = state.matching.o.dep || '07:00';
+  if (p.state === c.state) { const a = route(c.city, p.city), t = route(c.city, p.city, 'TRANSIT'); const card = (ti, ic, x) => `<div class="route-card"><div style="font-size:19px">${ic}</div><span>${ti}</span><b>${x.duration_text}</b><small>${x.distance_text}</small></div>`;
+    showModal('Detalhes de logística', 'Mobility / Logistics Engine', `<div class="subtle-callout">${esc(c.city + '/' + c.state)} → ${esc(p.city + '/' + p.state)} • partida de referência ${dep}. Cálculo sob demanda; não há rastreamento contínuo.<br><b>Precisão da origem:</b> aproximada — baseada em cidade/UF.</div><div class="route-grid">${card('Carro', '🚗', a)}${card('Transporte público', '🚇', t)}</div><div class="modal-actions"><button class="btn primary" onclick="closeModal()">Fechar</button></div>`, 'LOGÍSTICA'); }
+  else { const ap = AIRPORT[c.city], cl = CL(p.client); showModal('Detalhes de logística', 'Mobility / Logistics Engine', `<div class="subtle-callout"><b>Viagem interestadual.</b> O sistema modela os trechos terrestres e aeroportos. Passagem aérea e hotel permanecem fora do escopo atual.</div><div class="route-grid"><div class="route-card"><span>Origem → aeroporto ${esc(ap ? ap[0] : '')}</span><b>${ap ? durText(ap[1]) : 'Não calculado'}</b><small>${ap ? String(ap[2]).replace('.', ',') + ' km' : 'Sem aeroporto de referência'}</small></div><div class="route-card"><span>${esc(cl.airport || 'Aeroporto destino')} → cliente</span><b>${cl.airport ? '22 minutos' : 'Não calculado'}</b><small>${cl.airport ? '12,4 km' : 'Cadastre o aeroporto de referência do cliente'}</small></div></div><div class="modal-actions"><button class="btn primary" onclick="closeModal()">Fechar</button></div>`, 'LOGÍSTICA'); }
+}
+
+/* ---------- Pré-reserva, rascunho, análise, override ---------- */
+function openPreReserve(cid) {
+  const c = C(cid), o = state.matching.o;
+  showModal('Pré-reservar ' + c.name, 'Defina exatamente os dias e horários que consumirão capacidade.', `<div class="two"><div class="form-group"><label>Início</label><input type="date" id="prS" value="${o.start}"></div><div class="form-group"><label>Fim</label><input type="date" id="prE" value="${o.end}"></div></div><div class="two"><div class="form-group"><label>Horário inicial</label><input type="time" id="prST" value="${o.ws}"></div><div class="form-group"><label>Horário final</label><input type="time" id="prET" value="${o.we}"></div></div><div class="form-group"><label>Padrão</label><select id="prPat" onchange="$('#prWd').classList.toggle('hidden',this.value!=='CUSTOM_WEEKDAYS');$('#prSp').classList.toggle('hidden',this.value!=='SPECIFIC_DATES')"><option value="WEEKDAYS">Segunda a sexta</option><option value="EVERY_DAY">Todos os dias</option><option value="CUSTOM_WEEKDAYS">Dias da semana selecionados</option><option value="SPECIFIC_DATES">Datas específicas</option></select></div><div id="prWd" class="hidden form-group"><div class="weekdays">${[[1, 'Seg'], [2, 'Ter'], [3, 'Qua'], [4, 'Qui'], [5, 'Sex'], [6, 'Sáb'], [0, 'Dom']].map(x => `<label class="check"><input type="checkbox" name="prWdx" value="${x[0]}" ${x[0] >= 1 && x[0] <= 5 ? 'checked' : ''}> ${x[1]}</label>`).join('')}</div></div><div id="prSp" class="hidden form-group"><label>Datas específicas</label><textarea id="prSpx" rows="2" placeholder="16/11/2026; 18/11/2026"></textarea></div><div class="subtle-callout">A pré-reserva sinaliza intenção de uso da capacidade e expira conforme política configurada (48 h). A confirmação continua sendo uma decisão humana.</div><div class="modal-actions"><button class="btn" onclick="closeModal()">Cancelar</button><button class="btn" onclick="stage('${cid}','DRAFT')">Salvar rascunho</button><button class="btn" onclick="stage('${cid}','IN_ANALYSIS')">Colocar em análise</button><button class="btn primary" id="prGo" onclick="preReserve('${cid}')">Criar pré-reserva</button></div>`, 'PLANEJAMENTO DA ALOCAÇÃO');
+}
+function payload(cid) {
+  const pat = v('prPat'), days = $$('input[name=prWdx]:checked').map(x => Number(x.value)), sp = (v('prSpx') || '').split(/[;,\n]+/).map(x => { const m = x.trim().match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/); return m ? `${m[3]}-${m[2].padStart(2, '0')}-${m[1].padStart(2, '0')}` : ''; }).filter(Boolean);
+  const s = v('prS'), e = v('prE'), st = v('prST'), et = v('prET'); if (!s || !e || e < s) throw new Error('Período é obrigatório e deve ser válido.'); if (tm(et) <= tm(st)) throw new Error('O horário final deve ser posterior ao inicial.');
+  const list = segs(s, e, pat, st, et, days, sp); if (!list.length) throw new Error('Nenhum dia/horário selecionado para a pré-reserva.');
+  return { cid, pid: state.matching.p.id, module: state.matching.o.module, segs: list, modality: state.matching.o.modality };
+}
+function conflicts(cid, list, exclude) { const out = []; ALLOCATIONS.filter(a => a.cid === cid && ACTIVE.includes(a.status) && a.id !== exclude).forEach(a => a.segs.forEach(s => { if (list.some(r => r.date === s.date && overlap(r.start, r.end, s.start, s.end))) out.push({ a, s }); })); return out; }
+function newAlloc(pl, status, override = '') { const a = { id: uid('ALOC'), cid: pl.cid, pid: pl.pid, module: pl.module, status, modality: pl.modality, segs: pl.segs, by: me().email, role: state.role, priority: me().p, created: fd(TODAY) + ', ' + nowClock(), expires: status === 'PRE_RESERVED' ? fd(add(TODAY, 2)) + ', ' + nowClock() : '', override }; ALLOCATIONS.push(a); return a; }
+async function stage(cid, status) {
+  try { const pl = payload(cid); if (ALLOCATIONS.some(a => a.pid === pl.pid && a.cid === cid && a.module === pl.module && ['DRAFT', 'IN_ANALYSIS'].includes(a.status))) { toast('Já existe um rascunho ou análise aberta para este consultor neste projeto/módulo.', true); return; }
+    const a = newAlloc(pl, status); audit(status === 'DRAFT' ? 'ALLOCATION_DRAFT_CREATE' : 'ALLOCATION_ANALYSIS_CREATE', 'ALLOCATION', a.id); closeModal(); await busy(status === 'DRAFT' ? 'Salvando rascunho...' : 'Colocando consultor em análise...', 400); toast(status === 'DRAFT' ? 'Rascunho salvo. Ele não consome capacidade.' : 'Consultor colocado em análise. Ainda não consome capacidade.'); } catch (e) { toast(e.message, true); }
+}
+function conflictTable(list) { return `<div class="card table-card" style="margin-top:12px"><div style="overflow:auto"><table><thead><tr><th>Conflito</th><th>Janela</th><th>Status</th><th>Alçada</th></tr></thead><tbody>${list.slice(0, 6).map(x => `<tr><td>${esc(P(x.a.pid).name)}</td><td>${fd(x.s.date)}<br><span class="inline-note">${x.s.start}–${x.s.end}</span></td><td>${statusBadge(x.a.status)}</td><td>${esc(roleName(x.a.role))} (${x.a.priority})<br><span class="inline-note">${esc(x.a.by)}</span></td></tr>`).join('')}</tbody></table></div></div>${list.length > 6 ? `<div class="inline-note" style="margin-top:6px">+ ${list.length - 6} janela(s) em conflito.</div>` : ''}`; }
+function decideConflict(pl, onOk, exclude) {
+  const cf = conflicts(pl.cid, pl.segs, exclude), hard = cf.filter(x => HARD.includes(x.a.status));
+  if (hard.length) { showModal('Conflito de agenda', 'A agenda possui um conflito que impede esta ação.', `<div class="alert"><i>⚠</i><div><strong>O consultor já possui alocação confirmada em um ou mais horários selecionados.</strong><p>Revise o período ou a alocação existente.</p></div></div>${conflictTable(hard)}<div class="modal-actions"><button class="btn" onclick="closeModal()">Fechar</button></div>`, 'CONCORRÊNCIA'); return; }
+  const pre = cf.filter(x => x.a.status === 'PRE_RESERVED');
+  if (pre.length) { const top = Math.max(...pre.map(x => x.a.priority));
+    if (me().p > top) { window.__ov = () => { const r = (v('ovReason') || '').trim(); if (r.length < 8) { toast('Informe uma justificativa objetiva para o override.', true); return; } [...new Set(pre.map(x => x.a))].forEach(a => { a.status = 'CANCELLED'; a.override = r; audit('OVERRIDDEN_BY_HIGHER_PRIORITY', 'ALLOCATION', a.id); }); onOk(r); };
+      showModal('Conflito de pré-reserva', 'Sua alçada permite uma decisão explícita.', `<div class="alert"><i>⚠</i><div><strong>Existe pré-reserva de prioridade inferior. Sua alçada permite substituição mediante confirmação.</strong><p>A substituição será auditada. Alocações confirmadas nunca são atropeladas automaticamente.</p></div></div>${conflictTable(pre)}<div class="form-group" style="margin-top:14px"><label>Justificativa do override</label><textarea id="ovReason" rows="3" placeholder="Explique por que a prioridade operacional exige esta substituição."></textarea><div class="field-help">Obrigatória (mínimo de 8 caracteres) para preservar contexto e auditoria.</div></div><div class="modal-actions"><button class="btn" onclick="closeModal()">Manter reserva atual</button><button class="btn danger" id="ovGo" onclick="__ov()">Confirmar override</button></div>`, 'CONCORRÊNCIA'); return; }
+    showModal('Conflito de agenda', 'A agenda possui um conflito que impede esta ação.', `<div class="alert"><i>⚠</i><div><strong>Existe pré-reserva com prioridade igual ou superior.</strong><p>Sua alçada (${me().p}) não permite substituir uma reserva de prioridade ${top}.</p></div></div>${conflictTable(pre)}<div class="modal-actions"><button class="btn" onclick="closeModal()">Fechar</button></div>`, 'CONCORRÊNCIA'); return; }
+  onOk('');
+}
+function preReserve(cid) {
+  let pl; try { pl = payload(cid); } catch (e) { toast(e.message, true); return; }
+  decideConflict(pl, async r => { const a = newAlloc(pl, 'PRE_RESERVED', r); audit('ALLOCATION_PRE_RESERVE', 'ALLOCATION', a.id); closeModal(); await busy('Criando pré-reserva...', 450); toast('Pré-reserva criada. Ela ocupa a agenda sem enviar convite e expira em 48 h.'); const e = state.matching && state.matching.eligible.find(x => x.c.id === cid); if (e && !e.warnings.includes('Existe pré-reserva em parte do período')) { e.warnings.unshift('Existe pré-reserva em parte do período'); renderCandidates(); } });
+}
+
+/* ---------- Clientes ---------- */
+function renderClients() { const q = v('clSearch').toLowerCase(); $('#clBody').innerHTML = CLIENTS.filter(c => !q || [c.name, c.city, c.state, c.code].join(' ').toLowerCase().includes(q)).map(c => `<tr><td><b>${esc(c.name)}</b><br><span class="inline-note">Código: ${esc(c.code)}${c.airport ? ' • ✈ ' + esc(c.airport) : ''}</span></td><td>${esc(c.city + '/' + c.state)}</td><td>${c.units}</td><td>${PROJECTS.filter(p => p.client === c.id).length}</td><td><button class="btn sm" onclick="openClientForm('${c.id}')">Abrir</button></td></tr>`).join('') || '<tr><td colspan="5"><div class="empty">Nenhum cliente encontrado.</div></td></tr>'; }
+function openClientForm(id = '') { const c = CL(id) || {}; showModal(c.name || 'Novo cliente', 'Localização usada em projetos e no Mobility/Logistics Engine.', `<div class="two"><div class="form-group"><label>Nome</label><input id="fcN" value="${esc(c.name || '')}"></div><div class="form-group"><label>Identificação interna</label><input id="fcC" value="${esc(c.code || '')}"></div></div><div class="three"><div class="form-group"><label>Cidade</label><select id="fcCity">${opts(Object.keys(GEO).map(x => [x, x]), c.city || 'São Paulo')}</select></div><div class="form-group"><label>Estado</label><input id="fcS" value="${esc(c.state || 'SP')}" disabled></div><div class="form-group"><label>Unidades</label><input type="number" min="0" id="fcU" value="${c.units || 1}"></div></div><div class="section-card"><h3>Logística interestadual</h3><p>Usada apenas para estimar trechos terrestres. Passagens e hotel continuam fora do escopo.</p><div class="form-group"><label>Aeroporto de referência no destino</label><input id="fcA" value="${esc(c.airport || '')}"></div></div><div class="modal-actions"><button class="btn" onclick="closeModal()">Cancelar</button>${canManagement() ? `<button class="btn primary" onclick="saveClient('${id}')">Salvar</button>` : ''}</div>`, 'CLIENTE'); }
+function saveClient(id) { const n = v('fcN').trim(); if (!n) { toast('Nome do cliente é obrigatório.', true); return; } const city = v('fcCity'), row = { name: n, code: v('fcC'), city, state: GEO[city][2], units: Math.max(0, Number(v('fcU')) || 0), airport: v('fcA') }; let c = CL(id); if (c) Object.assign(c, row); else { c = Object.assign({ id: uid('CLI') }, row); CLIENTS.push(c); } audit(id ? 'CLIENT_UPDATE' : 'CLIENT_CREATE', 'CLIENT', c.id); closeModal(); renderClients(); toast('Cliente salvo.'); }
+
+/* ---------- Projetos ---------- */
+function renderProjects() { const q = v('prSearch').toLowerCase(), items = visibleProjects().filter(p => [p.name, p.gp, p.city, p.state].join(' ').toLowerCase().includes(q)); $('#prGrid').innerHTML = items.map(p => `<div class="card project-card"><div class="project-top"><div><h3>${esc(p.name)}</h3><p>${esc(CL(p.client).name)} • ${esc(p.city + '/' + p.state)}</p></div>${statusBadge(p.status)}</div><div class="project-meta"><div class="meta"><span>Go Live</span><b>${fd(p.golive)}</b></div><div class="meta"><span>GP</span><b>${esc(p.gp)}</b></div></div><div>${[...new Set(p.reqs.map(r => r.module))].map(m => `<span class="module-pill">${esc(modName(m))}</span>`).join('')}</div><div style="display:flex;justify-content:flex-end;gap:8px;margin-top:12px;flex-wrap:wrap"><button class="btn sm" onclick="openProject('${p.id}')">Abrir</button>${canManagement() ? `<button class="btn sm" onclick="openProjectConfig('${p.id}')">Configurar</button><button class="btn sm primary" onclick="planProject('${p.id}')">Planejar</button>` : ''}</div></div>`).join('') || '<div class="card empty"><strong>Nenhum projeto no seu escopo</strong></div>'; }
+function openProject(id) { const p = P(id); showModal(p.name, `${CL(p.client).name} • ${p.city}/${p.state} • GP ${p.gp}`, `<div class="detail-grid"><div class="detail-box"><span>Início</span><b>${fd(p.start)}</b></div><div class="detail-box"><span>Go Live</span><b>${fd(p.golive)}</b></div><div class="detail-box"><span>Encerramento</span><b>${fd(p.end)}</b></div><div class="detail-box"><span>Status</span><b>${statusBadge(p.status)}</b></div></div><h3 class="section-title">Requisitos configurados</h3><div class="alerts">${p.reqs.map(r => `<div class="alert"><i>•</i><div><strong>${esc(modName(r.module))} • ${esc(skName(r.skill))}</strong><p>${r.type === 'ELIMINATORY' ? 'Eliminatório' : r.type === 'PREFERRED' ? 'Preferencial' : 'Informativo'} • mínimo ${r.min} • peso ${r.weight}</p></div></div>`).join('') || '<div class="inline-note">Sem requisitos.</div>'}</div><h3 class="section-title">Equipe planejada</h3><div class="alerts">${ALLOCATIONS.filter(a => a.pid === id && a.status !== 'CANCELLED').map(a => `<div class="alert"><i>◉</i><div style="flex:1"><strong>${esc(C(a.cid).name)}</strong><p>${esc(modName(a.module))} • ${fs(a.segs[0].date)} → ${fs(a.segs[a.segs.length - 1].date)}</p></div>${statusBadge(a.status)}</div>`).join('') || '<div class="inline-note">Ninguém alocado ainda.</div>'}</div><div class="modal-actions">${canManagement() ? `<button class="btn primary" onclick="closeModal();planProject('${id}')">Planejar</button>` : ''}<button class="btn" onclick="closeModal()">Fechar</button></div>`, 'PROJETO'); }
+function openProjectConfig(id) {
+  const p = P(id), mods = MODULES.filter(m => state.role !== 'LIDERANCA' || manageModule(m.id)), base = ['ADMIN', 'COORDENACAO', 'GP'].includes(state.role);
+  showModal(p.name, 'Configuração do projeto: perfil e requisitos usados pelo matching.', `<h3 class="section-title">Perfil do projeto</h3><div class="field-help" style="margin-bottom:8px">Cada dimensão exige uma soft skill do consultor (ex.: Autonomia Exigida → Autonomia).</div>${DIMS.map(d => `<div class="form-group"><label>${d.name} — <span id="pv-${d.id}">${p.profile[d.id] || 2}</span>/4</label><input class="range" type="range" min="1" max="4" value="${p.profile[d.id] || 2}" id="pd-${d.id}" ${base ? '' : 'disabled'} oninput="$('#pv-${d.id}').textContent=this.value"></div>`).join('')}${base ? `<button class="btn primary" onclick="saveProfile('${id}')">Salvar perfil</button>` : ''}
+  <h3 class="section-title">Requisitos do projeto</h3><div class="alerts">${p.reqs.map(r => `<div class="alert"><i>◆</i><div style="flex:1"><strong>${esc(skName(r.skill))}</strong><p>${esc(modName(r.module))} • mínimo ${r.min} • ${r.type} • peso ${r.weight}</p></div>${manageModule(r.module) || ['GP'].includes(state.role) ? `<button class="btn sm danger" onclick="removeReq('${id}','${r.id}')">Remover</button>` : ''}</div>`).join('')}</div>
+  <div class="two" style="margin-top:12px"><div class="form-group"><label>Skill</label><select id="rqS">${SKILLS.filter(s => s.type === 'HARD').map(s => `<option value="${s.id}">${esc(s.name)}</option>`).join('')}</select></div><div class="form-group"><label>Módulo</label><select id="rqM">${opts(mods.map(m => [m.id, m.name]))}</select></div></div><div class="three"><div class="form-group"><label>Nível mínimo</label><select id="rqL">${opts([[1, '1'], [2, '2'], [3, '3'], [4, '4']].map(x => [String(x[0]), x[1]]), '3')}</select></div><div class="form-group"><label>Tipo</label><select id="rqT"><option value="ELIMINATORY">Eliminatório</option><option value="PREFERRED">Preferencial</option><option value="INFORMATIVE">Informativo</option></select></div><div class="form-group"><label>Peso</label><input type="number" id="rqW" min="0" max="10" value="1"></div></div><button class="btn" onclick="addReq('${id}')">+ Adicionar requisito</button><div class="modal-actions"><button class="btn primary" onclick="closeModal()">Fechar</button></div>`, 'PROJETO • CONFIGURAÇÃO', true);
+}
+function saveProfile(id) { const p = P(id); DIMS.forEach(d => p.profile[d.id] = Number(v('pd-' + d.id))); audit('PROJECT_PROFILE_SAVE', 'PROJECT', id); toast('Perfil salvo. O próximo matching já usa estes valores.'); }
+function addReq(id) { const p = P(id), s = SKILLS.find(x => x.id === v('rqS')), m = v('rqM'); if (s.module !== m) { toast('A skill selecionada não pertence ao módulo do requisito.', true); return; } p.reqs.push(req(m, s.id, Number(v('rqL')), v('rqT'), Math.min(10, Math.max(0, Number(v('rqW')) || 1)))); audit('REQUIREMENT_CREATE', 'PROJECT_REQUIREMENT', p.reqs[p.reqs.length - 1].id); openProjectConfig(id); toast('Requisito adicionado.'); }
+function removeReq(id, rid) { const p = P(id); p.reqs = p.reqs.filter(r => r.id !== rid); audit('REQUIREMENT_REMOVE', 'PROJECT_REQUIREMENT', rid); openProjectConfig(id); toast('Requisito removido.'); }
+function openProjectForm() { showModal('Novo projeto', 'Estrutura mínima; perfil e requisitos podem ser refinados depois.', `<div class="two"><div class="form-group"><label>Cliente</label><select id="npC">${opts(CLIENTS.map(c => [c.id, c.name]))}</select></div><div class="form-group"><label>Tipo de projeto</label><select id="npT">${opts([['IMPLANTACAO', 'Implantação'], ['EXPANSAO', 'Expansão'], ['ROLLOUT', 'Rollout'], ['MIGRACAO', 'Migração']])}</select></div></div><div class="form-group"><label>Nome do projeto</label><input id="npN"></div><div class="three"><div class="form-group"><label>Início</label><input type="date" id="npS" value="${add(TODAY, 21)}"></div><div class="form-group"><label>Go Live</label><input type="date" id="npG" value="${add(TODAY, 42)}"></div><div class="form-group"><label>Fim</label><input type="date" id="npE" value="${add(TODAY, 56)}"></div></div><div class="modal-actions"><button class="btn" onclick="closeModal()">Cancelar</button><button class="btn primary" onclick="saveProject()">Salvar</button></div>`, 'CADASTRO'); }
+function saveProject() { const n = v('npN').trim(), s = v('npS'), g = v('npG'), e = v('npE'); if (!n) { toast('Nome do projeto é obrigatório.', true); return; } if (e < s) { toast('A data final do projeto não pode ser anterior ao início.', true); return; } if (g < s || g > e) { toast('O Go Live precisa estar entre o início e o encerramento estimado.', true); return; } const cl = CL(v('npC')), p = { id: uid('PRJ'), client: cl.id, name: n, type: v('npT'), status: 'PLANNING', gp: state.role === 'GP' ? role().email : 'gp@empresa-demo.com.br', start: s, golive: g, end: e, city: cl.city, state: cl.state, reqs: [], profile: {} }; PROJECTS.push(p); audit('PROJECT_CREATE', 'PROJECT', p.id); closeModal(); renderProjects(); toast('Projeto salvo com sucesso.'); }
+
+/* ---------- Consultores ---------- */
+function renderConsultants() {
+  const q = v('coSearch').toLowerCase(), m = v('coModule'), st = v('coStatus'); if (!$('#coModule').options.length) $('#coModule').innerHTML = '<option value="">Todos os módulos</option>' + MODULES.map(x => `<option value="${x.id}">${x.name}</option>`).join('');
+  const items = visibleConsultants().map(c => Object.assign({ st: statusToday(c) }, c)).filter(c => (!m || c.module === m) && (!st || c.st === st) && [c.name, c.email, c.module, c.city].join(' ').toLowerCase().includes(q));
+  $('#coBody').innerHTML = items.map(c => `<tr><td><div class="person"><div class="mini-avatar">${ini(c.name)}</div><div><b>${esc(c.name)}</b><span>${esc(c.email)}</span></div></div></td><td>${esc(modName(c.module))}${c.secondary.length ? `<br><span class="inline-note">+ ${c.secondary.map(modName).join(', ')}</span>` : ''}</td><td>${esc(lvl(c.level).name)}</td><td>${esc(c.city + '/' + c.state)}</td><td>${statusBadge(c.st)}</td><td><button class="btn sm" onclick="openConsultant('${c.id}')">Abrir</button></td></tr>`).join('') || '<tr><td colspan="6"><div class="empty"><strong>Nenhum consultor encontrado</strong></div></td></tr>';
+}
+function openConsultant(id) {
+  const c = C(id), own = state.role === 'CONSULTOR' && role().cid === id, sens = ['ADMIN', 'COORDENACAO'].includes(state.role) || own || (state.role === 'LIDERANCA' && manageModule(c.module)), canEval = ['ADMIN', 'COORDENACAO'].includes(state.role) || (state.role === 'LIDERANCA' && manageModule(c.module));
+  const row = s => `<div class="skill-row"><span><b>${esc(skName(s.skill))}</b><br><small class="inline-note">${sens ? `Auto ${s.self} • Liderança ${s.leader} • uso ${fd(s.lastUsed)}` : 'Detalhes restritos à gestão responsável'}</small></span><div class="bar"><i style="width:${s.level * 25}%"></i></div><b>${s.level}/4</b></div>`;
+  const hard = c.skills.filter(s => SKILLS.find(x => x.id === s.skill).type === 'HARD'), soft = c.skills.filter(s => SKILLS.find(x => x.id === s.skill).type === 'SOFT');
+  const al = ALLOCATIONS.filter(a => a.cid === id && ACTIVE.includes(a.status)).map(a => `<div class="compact-item"><strong>${esc(P(a.pid).name)}</strong><span>${statusBadge(a.status)} • ${modName(a.module)} • ${fs(a.segs[0].date)} → ${fs(a.segs[a.segs.length - 1].date)}</span></div>`).join('') || '<div class="inline-note">Sem alocações ativas.</div>';
+  const ex = sens ? (c.exp.map(x => `<div class="compact-item"><strong>${esc(x.d)}</strong><span>${x.t} • ${esc(skName(x.s))} • ${fd(x.date)}</span></div>`).join('') || '<div class="inline-note">Sem experiências/evidências registradas.</div>') : '<div class="inline-note">Restrito à própria pessoa e à gestão responsável.</div>';
+  const bl = BLOCKS.filter(b => b.cid === id && b.active).map(b => `<div class="compact-item"><strong>${({ ABSENCE: 'Ausência', VACATION: 'Férias', ADMIN: 'Administrativo', OTHER: 'Outro bloqueio' })[b.type]}</strong><span>${fd(b.sd)}, ${b.st} → ${fd(b.ed)}, ${b.et}${b.notes && sens ? ' • ' + esc(b.notes) : ''}</span>${sens ? `<div><button class="btn sm danger" style="margin-top:6px" onclick="removeBlock('${b.id}','${id}')">Remover</button></div>` : ''}</div>`).join('') || '<div class="inline-note">Sem bloqueios internos ativos.</div>';
+  const hist = sens ? (c.history.slice(0, 6).map(h => `<div class="compact-item"><strong>${esc(skName(h.skill))} • ${h.level}/4</strong><span>${h.src} • ${h.at}</span></div>`).join('') || '<div class="inline-note">Sem histórico adicional.</div>') : '';
+  showModal(c.name, `${modName(c.module)} • ${lvl(c.level).name} • ${c.city}/${c.state}`, `<div class="detail-grid"><div class="detail-box"><span>Status operacional hoje</span><b>${statusBadge(statusToday(c))}</b></div><div class="detail-box"><span>Módulos adicionais</span><b>${esc(c.secondary.map(modName).join(', ') || '—')}</b></div><div class="detail-box"><span>Disponibilidade para viagem</span><b>${c.travel ? 'Sim' : 'Não'}</b></div><div class="detail-box"><span>Aeroporto</span><b>${esc(c.airport || '—')}</b></div><div class="detail-box"><span>Liderança responsável</span><b>${canManagement() && state.role !== 'GP' ? esc(c.leader) : 'Restrito'}</b></div><div class="detail-box"><span>Go Lives no histórico</span><b>${c.h.golives}</b></div></div><div class="profile-columns"><div><div class="skill-group-title">Hard Skills</div>${hard.map(row).join('') || '<div class="inline-note">Sem avaliações.</div>'}<div class="skill-group-title">Soft Skills</div>${soft.map(row).join('') || '<div class="inline-note">Sem avaliações neste grupo.</div>'}</div><div><div class="skill-group-title">Alocações ativas</div><div class="compact-list">${al}</div><div class="skill-group-title">Experiência / evidências</div><div class="compact-list">${ex}</div><div class="skill-group-title">Indisponibilidades</div><div class="compact-list">${bl}</div>${sens ? `<div class="skill-group-title">Histórico de avaliações</div><div class="compact-list">${hist}</div>` : ''}</div></div><div class="modal-actions">${own || canEval ? `<button class="btn" onclick="openSkillEval('${id}')">Avaliar skills</button><button class="btn" onclick="openPlan('${id}')">Plano de desenvolvimento</button><button class="btn" onclick="openAvailabilityForm('${id}')">+ Indisponibilidade</button>` : ''}<button class="btn primary" onclick="closeModal()">Fechar</button></div>`, 'PERFIL DO CONSULTOR', true);
+}
+function openSkillEval(id) { const c = C(id), own = state.role === 'CONSULTOR'; showModal('Avaliar skills — ' + c.name, own ? 'Autoavaliação do consultor.' : 'Avaliação da liderança.', `<div class="subtle-callout">Escala: 0 sem experiência • 1 conhece • 2 com acompanhamento • 3 autônomo • 4 referência/ensina. Cada avaliação fica no histórico.</div><div class="form-group"><label>Competência</label><select id="seS">${SKILLS.filter(s => s.module === c.module || c.secondary.includes(s.module) || s.type === 'SOFT').map(s => `<option value="${s.id}">${s.type === 'SOFT' ? 'Soft • ' : 'Hard • '}${esc(s.name)}</option>`).join('')}</select></div><div class="form-group"><label>Nível</label><select id="seL">${opts([['0', '0 — Sem experiência'], ['1', '1 — Conhece'], ['2', '2 — Executa com acompanhamento'], ['3', '3 — Executa com autonomia'], ['4', '4 — Referência / consegue ensinar']], '3')}</select></div><div class="modal-actions"><button class="btn" onclick="openConsultant('${id}')">Voltar</button><button class="btn primary" onclick="saveEval('${id}',${own})">Salvar avaliação</button></div>`, 'SKILLS'); }
+function saveEval(id, own) { const c = C(id), s = v('seS'), l = Number(v('seL')); let x = c.skills.find(k => k.skill === s); if (!x) { x = { skill: s, level: 0, self: 0, leader: 0, lastUsed: TODAY }; c.skills.push(x); } if (own) { x.self = l; if (!x.leader) x.level = l; } else { x.leader = l; x.level = l; } c.history.unshift({ skill: s, level: l, src: own ? 'Autoavaliação' : 'Liderança', at: fd(TODAY) + ', ' + nowClock() }); audit(own ? 'SELF_SKILL_UPDATE' : 'LEADER_SKILL_EVALUATION', 'CONSULTANT_SKILL', uid('CSK')); toast('Avaliação de skill salva. O matching e o Skill Gap já consideram o novo nível.'); openConsultant(id); }
+function openPlan(id) {
+  const c = C(id), plan = PLANS.find(p => p.cid === id), manage = ['ADMIN', 'COORDENACAO'].includes(state.role) || (state.role === 'LIDERANCA' && manageModule(c.module));
+  const body = plan ? `<div class="section-card"><h3>${esc(plan.title)}</h3><p>${fd(plan.start)} → ${fd(plan.end)} • Responsável: ${esc(plan.owner)}</p></div>${plan.items.map((i, k) => `<div class="alert"><i>${i.status === 'DONE' ? '✓' : i.status === 'IN_PROGRESS' ? '◉' : '○'}</i><div style="flex:1"><strong>${esc(skName(i.skill))}</strong><p>Prática acompanhada • nível ${i.cur} → ${i.target}</p></div><select onchange="PLANS.find(p=>p.cid==='${id}').items[${k}].status=this.value;audit('DEVELOPMENT_ITEM_STATUS','DEVELOPMENT_PLAN_ITEM','DVI-${k}');toast('Status atualizado.')">${opts([['TODO', 'A fazer'], ['IN_PROGRESS', 'Em andamento'], ['PAUSED', 'Pausado'], ['DONE', 'Concluído']], i.status)}</select></div>`).join('') || '<div class="inline-note">Nenhuma ação.</div>'}` : `<div class="empty"><strong>Nenhum plano de desenvolvimento</strong>Use o Skill Gap e as evidências para estruturar objetivos por período.</div>`;
+  showModal('Plano de desenvolvimento — ' + c.name, 'Skill Gap + evidências + ações acompanháveis por período.', body + `<div class="modal-actions"><button class="btn" onclick="openConsultant('${id}')">Voltar</button>${manage && !plan ? `<button class="btn primary" onclick="createPlan('${id}')">Criar plano com os Skill Gaps</button>` : ''}</div>`, 'DESENVOLVIMENTO');
+}
+function createPlan(id) { const c = C(id), gaps = c.skills.filter(s => s.level < 3 && SKILLS.find(x => x.id === s.skill).type === 'HARD'); PLANS.push({ id: uid('DVP'), cid: id, title: 'Plano de desenvolvimento', start: TODAY, end: add(TODAY, 90), owner: me().email, items: gaps.map(g => ({ skill: g.skill, cur: g.level, target: 3, status: 'TODO' })) }); audit('DEVELOPMENT_PLAN_CREATE', 'DEVELOPMENT_PLAN', uid('DVP')); audit('DEVELOPMENT_GAPS_ADD', 'DEVELOPMENT_PLAN', uid('DVP')); toast(gaps.length + ' ação(ões) criada(s) a partir do Skill Gap.'); openPlan(id); }
+function openAvailabilityForm(id) { const list = visibleConsultants(); id = id || list[0].id; showModal('Registrar indisponibilidade', 'Ausência, férias, administrativo ou outro bloqueio entram na capacidade e no matching.', `<div class="two"><div class="form-group"><label>Consultor</label><select id="avC">${opts(list.map(c => [c.id, c.name]), id)}</select></div><div class="form-group"><label>Tipo</label><select id="avT">${opts([['ABSENCE', 'Ausência'], ['VACATION', 'Férias'], ['ADMIN', 'Administrativo'], ['OTHER', 'Outro']])}</select></div></div><div class="two"><div class="form-group"><label>Início</label><input type="datetime-local" id="avS" value="${add(TODAY, 2)}T09:00"></div><div class="form-group"><label>Fim</label><input type="datetime-local" id="avE" value="${add(TODAY, 2)}T13:00"></div></div><div class="form-group"><label>Impacto na capacidade</label><select id="avF">${opts([['1', '100% bloqueado'], ['0.5', '50% bloqueado'], ['0.25', '25% bloqueado']])}</select></div><div class="modal-actions"><button class="btn" onclick="closeModal()">Cancelar</button><button class="btn primary" onclick="saveBlock()">Salvar bloqueio</button></div>`, 'CAPACIDADE'); }
+function saveBlock() { const s = v('avS'), e = v('avE'); if (!s || !e || e <= s) { toast('Período de indisponibilidade inválido.', true); return; } const b = { id: uid('BLK'), cid: v('avC'), type: v('avT'), sd: s.slice(0, 10), st: s.slice(11, 16), ed: e.slice(0, 10), et: e.slice(11, 16), factor: Number(v('avF')), notes: '', active: true }; BLOCKS.push(b); audit('AVAILABILITY_BLOCK_CREATE', 'CONSULTANT', b.cid); closeModal(); toast('Indisponibilidade registrada e capacidade recalculada.'); renderPage(state.page); }
+function removeBlock(bid, cid) { BLOCKS.find(b => b.id === bid).active = false; audit('AVAILABILITY_BLOCK_REMOVE', 'CONSULTANT', cid); toast('Bloqueio removido.'); openConsultant(cid); }
+
+/* ---------- Agenda & Capacidade ---------- */
+function shiftWeek(n) { state.week = add(state.week, n); renderCapacity(); }
+function renderAgenda() { renderCapacity(); renderAllocations(); }
+function renderCapacity() {
+  const days = [0, 1, 2, 3, 4].map(i => add(state.week, i)), list = visibleConsultants();
+  let html = '<div class="cal-cell cal-head">Consultor</div>' + days.map(d => `<div class="cal-cell cal-head">${D(d).toLocaleDateString('pt-BR', { weekday: 'short', day: '2-digit' })}</div>`).join('');
+  list.forEach(c => { html += `<div class="cal-cell cal-person"><div class="mini-avatar">${ini(c.name)}</div><div>${esc(c.name)}<div class="inline-note" style="font-weight:600">${modName(c.module)}</div></div></div>`; days.forEach(d => { const iv = intervals(c.id, d, d).map(x => ({ type: x.status === 'PRE_RESERVED' ? 'reserve' : x.status === 'BLOCK' ? 'block' : x.status === 'TRAINING' ? 'training' : 'project', label: x.alloc ? P(x.alloc.pid).name : x.status === 'BLOCK' ? ({ ABSENCE: 'Ausência', VACATION: 'Férias', ADMIN: 'Administrativo', OTHER: 'Bloqueio' })[x.block.type] : 'Treinamento: ' + x.training.title, start: x.start, end: x.end })); if (calState(c).checked) calBusy(c, d, d).forEach(b => { if (!iv.some(x => overlap(x.start, x.end, b.start, b.end))) iv.push({ type: 'external', label: 'Ocupado no Calendar', start: b.start, end: b.end }); }); html += `<div class="cal-cell">${iv.length ? iv.map(s => `<div class="slot ${s.type}">${esc(s.label)}<br>${s.start}–${s.end}</div>`).join('') : '<div class="slot free">Disponível</div>'}</div>`; }); });
+  $('#calGrid').innerHTML = html;
+}
+function renderAllocations() {
+  const items = visibleAllocations().filter(a => a.status !== 'CANCELLED');
+  $('#alBody').innerHTML = items.map(a => { let x = ''; if (a.status === 'DRAFT' && canManagement()) x += `<button class="btn sm" onclick="transition('${a.id}','IN_ANALYSIS')">Iniciar análise</button> `; if (a.status === 'IN_ANALYSIS' && canManagement()) x += `<button class="btn sm primary" onclick="transition('${a.id}','PRE_RESERVED')">Pré-reservar</button> `; if (a.status === 'PRE_RESERVED' && canConfirm()) x += `<button class="btn sm primary" data-confirm="${a.id}" onclick="confirmAlloc('${a.id}')">Confirmar</button> `; if (a.status === 'CONFIRMED' && canConfirm()) x += `<button class="btn sm primary" onclick="transition('${a.id}','IN_PROGRESS')">Iniciar execução</button> `; if (a.status === 'IN_PROGRESS' && canConfirm()) x += `<button class="btn sm primary" onclick="transition('${a.id}','COMPLETED')">Concluir</button> `; if (canManagement() && a.status !== 'COMPLETED') x += `<button class="btn sm danger" onclick="cancelAlloc('${a.id}')">Cancelar</button>`;
+    return `<tr><td><b>${esc(C(a.cid).name)}</b></td><td>${esc(P(a.pid).name)}</td><td>${esc(modName(a.module))}</td><td>${fs(a.segs[0].date)} → ${fs(a.segs[a.segs.length - 1].date)}<br><span class="inline-note">${a.segs.length} dia(s)</span></td><td>${statusBadge(a.status)}${a.status === 'PRE_RESERVED' && a.expires ? `<br><span class="inline-note">expira ${a.expires}</span>` : ''}</td><td>${esc(a.by)}<br><span class="inline-note">${roleName(a.role)}</span></td><td>${x || '<span class="inline-note">—</span>'}</td></tr>`; }).join('') || '<tr><td colspan="7"><div class="empty"><strong>Nenhum planejamento</strong>Rascunhos, análises, pré-reservas e confirmações aparecerão aqui.</div></td></tr>';
+}
+async function transition(id, target) {
+  const a = ALLOCATIONS.find(x => x.id === id);
+  if (target === 'IN_ANALYSIS') { a.status = 'IN_ANALYSIS'; audit('ALLOCATION_START_ANALYSIS', 'ALLOCATION', id); toast('Alocação movida para análise.'); renderAgenda(); return; }
+  if (target === 'PRE_RESERVED') { decideConflict({ cid: a.cid, segs: a.segs }, async r => { a.status = 'PRE_RESERVED'; a.override = r; a.priority = Math.max(a.priority, me().p); a.expires = fd(add(TODAY, 2)) + ', ' + nowClock(); audit('ALLOCATION_PRE_RESERVE_FROM_ANALYSIS', 'ALLOCATION', id); closeModal(); toast('Pré-reserva criada.'); renderAgenda(); }, id); return; }
+  if (target === 'IN_PROGRESS') { if (!a.segs.some(s => s.date <= TODAY)) { toast('A execução só pode ser iniciada a partir da data e horário do primeiro segmento planejado.', true); return; } a.status = 'IN_PROGRESS'; audit('ALLOCATION_START_EXECUTION', 'ALLOCATION', id); toast('Alocação marcada como em execução.'); renderAgenda(); return; }
+  if (target === 'COMPLETED') { if (a.segs.some(s => s.date > TODAY)) { toast('Ainda existem segmentos futuros nesta alocação. Ajuste/cancele os segmentos futuros antes de concluir.', true); return; } a.status = 'COMPLETED'; audit('ALLOCATION_COMPLETE', 'ALLOCATION', id); toast('Alocação concluída.'); renderAgenda(); }
+}
+function confirmAlloc(id) { const a = ALLOCATIONS.find(x => x.id === id); showModal('Confirmar alocação', C(a.cid).name + ' • ' + P(a.pid).name, `<div class="subtle-callout">Ao confirmar, o sistema revalida conflitos dentro de uma trava (LockService), grava a nova versão do registro e cria ${a.segs.length} evento(s) no Google Calendar com o consultor como convidado. Se o Calendar falhar, os eventos criados são desfeitos e um alerta crítico é aberto.</div><div class="modal-actions"><button class="btn" onclick="closeModal()">Cancelar</button><button class="btn primary" id="cfGo" onclick="doConfirm('${id}')">Confirmar e sincronizar Calendar</button></div>`, 'DECISÃO HUMANA'); }
+async function doConfirm(id) { const a = ALLOCATIONS.find(x => x.id === id); if (conflicts(a.cid, a.segs, id).length) { closeModal(); toast('Conflito detectado durante a confirmação. Atualize a tela e revise a agenda.', true); return; } closeModal(); await busy('Confirmando e sincronizando Calendar...', 900); a.status = 'CONFIRMED'; a.priority = Math.max(a.priority, me().p); audit('ALLOCATION_CONFIRM', 'ALLOCATION', id); audit('CALENDAR_SYNC', 'ALLOCATION', id); toast('Alocação confirmada e Calendar sincronizado (' + a.segs.length + ' eventos).'); renderAgenda(); }
+function cancelAlloc(id) { const a = ALLOCATIONS.find(x => x.id === id); if (state.role === 'GP' && (HARD.includes(a.status) || me().p < a.priority)) { toast('Sem permissão para cancelar esta alocação ou existe uma decisão de alçada superior.', true); return; } showModal('Cancelar alocação', C(a.cid).name + ' • ' + P(a.pid).name, `<div class="form-group"><label>Motivo do cancelamento</label><input id="caR" value="Ajuste de planejamento"></div><div class="modal-actions"><button class="btn" onclick="closeModal()">Voltar</button><button class="btn danger" onclick="doCancel('${id}')">Cancelar alocação</button></div>`, 'CANCELAMENTO'); }
+function doCancel(id) { const a = ALLOCATIONS.find(x => x.id === id); a.status = 'CANCELLED'; a.override = v('caR'); audit('CANCELLED', 'ALLOCATION', id); if (a.segs.length) audit('CALENDAR_REMOVE', 'ALLOCATION', id); closeModal(); toast('Alocação cancelada.'); renderAgenda(); }
+
+/* ---------- Treinamentos & Skill Gap ---------- */
+function renderTrainingsPage() { if (!state.gap) { state.gap = computeGap(); state.recs = computeRecs(); } renderGap(); renderTrainings(); }
+async function analyzeGap() { await busy('Analisando Skill Gap e capacidade...', 700); state.gap = computeGap(); state.recs = computeRecs(); renderGap(); toast('Skill Gap recalculado com as avaliações atuais.'); }
+function renderGap() {
+  const g = state.gap; $('#gapList').innerHTML = state.role === 'CONSULTOR' ? '<div class="empty"><strong>Visão de Skill Gap restrita à coordenação e liderança.</strong></div>' : g.items.slice(0, 8).map(x => `<div class="alert"><i>🎓</i><div style="flex:1"><strong>${esc(x.skill.name)} <span class="inline-note">• ${modName(x.skill.module)}</span></strong><p>${x.below}/${x.total} abaixo do nível ${g.target} • ${x.refs} referência(s)${x.avail ? ' • ' + x.avail + ' disponível(is) hoje' : ''}</p></div><div style="width:70px" class="bar"><i style="width:${Math.round(x.priority * 100)}%;background:linear-gradient(90deg,#f59e0b,#b45309)"></i></div></div>`).join('');
+  const r = state.recs.items; $('#recList').innerHTML = state.role === 'CONSULTOR' ? '' : r.slice(0, 5).map((x, i) => `<div class="alert"><i>✨</i><div style="flex:1"><strong>${esc('Capacitação interna — ' + x.skill.name)}</strong><p>${esc(x.rationale)}<br>Instrutor sugerido: ${esc(x.instructor.name)} • ${x.participants.length} participante(s)${x.slot ? ' • ' + fd(x.slot.date) + ' ' + x.slot.start + '–' + x.slot.end : ' • janela comum não encontrada'}</p></div>${canConfirm() ? `<button class="btn sm" onclick="openTrainingForm(${i})">Criar treino</button>` : ''}</div>`).join('') || '<div class="empty"><strong>Sem recomendação pronta</strong>É necessário haver gap, uma referência interna e capacidade compatível.</div>';
+}
+function renderTrainings() { let t = TRAININGS; if (state.role === 'CONSULTOR') t = t.filter(x => x.instructor === 'c1' || x.participants.includes('c1')); if (state.role === 'LIDERANCA') t = t.filter(x => manageModule(x.module)); $('#trGrid').innerHTML = t.map(x => `<div class="card training-card"><span class="badge ${x.status === 'PLANNED' ? 'warn' : 'info'}">${x.status === 'PLANNED' ? 'Planejado' : 'Confirmado'}</span><h3>${esc(x.title)}</h3><p>${modName(x.module)} • ${fd(x.sd)}, ${x.st} → ${x.et} • ${x.modality === 'REMOTE' ? 'Remoto' : x.modality === 'ONSITE' ? 'Presencial' : 'Híbrido'}</p><p style="margin-top:6px">Instrutor: ${esc(C(x.instructor).name)} • ${x.participants.map(id => esc(C(id).name)).join(', ')}</p><div class="training-foot"><span class="inline-note">${x.synced ? '✓ Evento no Calendar' : 'Sem evento no Calendar'}</span>${canConfirm() ? `<button class="btn sm" onclick="syncTraining('${x.id}')">Sincronizar Calendar</button>` : ''}</div></div>`).join('') || '<div class="card empty"><strong>Nenhum treinamento cadastrado</strong>Use a capacidade livre para transformar gaps em desenvolvimento.</div>'; }
+function openTrainingForm(i) {
+  const r = typeof i === 'number' ? state.recs.items[i] : null, cons = CONSULTANTS;
+  showModal('Criar treinamento', 'O treinamento também consome capacidade e pode gerar evento no Calendar.', `<div class="form-group"><label>Título</label><input id="tT" value="${esc(r ? 'Capacitação interna — ' + r.skill.name : '')}"></div><div class="two"><div class="form-group"><label>Módulo</label><select id="tM">${opts(MODULES.map(m => [m.id, m.name]), r ? r.skill.module : 'SUPPLY')}</select></div><div class="form-group"><label>Skill relacionada</label><select id="tS">${opts([['', 'Nenhuma']].concat(SKILLS.filter(s => s.type === 'HARD').map(s => [s.id, s.name])), r ? r.skill.id : '')}</select></div></div><div class="two"><div class="form-group"><label>Instrutor</label><select id="tI">${opts(cons.map(c => [c.id, c.name]), r ? r.instructor.id : 'c1')}</select></div><div class="form-group"><label>Participantes (Ctrl/Cmd para vários)</label><select id="tP" multiple size="5">${cons.map(c => `<option value="${c.id}" ${r && r.participants.some(p => p.id === c.id) ? 'selected' : ''}>${esc(c.name)}</option>`).join('')}</select></div></div><div class="two"><div class="form-group"><label>Início</label><input type="datetime-local" id="tSt" value="${r && r.slot ? r.slot.date + 'T' + r.slot.start : add(TODAY, 3) + 'T14:00'}"></div><div class="form-group"><label>Fim</label><input type="datetime-local" id="tEn" value="${r && r.slot ? r.slot.date + 'T' + r.slot.end : add(TODAY, 3) + 'T16:00'}"></div></div><div class="two"><div class="form-group"><label>Modalidade</label><select id="tMo">${opts([['REMOTE', 'Remoto'], ['ONSITE', 'Presencial'], ['HYBRID', 'Híbrido']])}</select></div><div class="form-group"><label>Status</label><select id="tSs">${opts([['PLANNED', 'Planejado'], ['CONFIRMED', 'Confirmado']])}</select></div></div>${r ? '<div class="subtle-callout">Janela sugerida pela capacidade interna; valide o Google Calendar antes de sincronizar.</div>' : ''}<div class="modal-actions"><button class="btn" onclick="closeModal()">Cancelar</button><button class="btn primary" onclick="saveTraining()">Salvar</button></div>`, 'TREINAMENTO');
+}
+function saveTraining() { const s = v('tSt'), e = v('tEn'), t = v('tT').trim(); if (!t || !s || !e) { toast('Título, início e fim são obrigatórios.', true); return; } if (e <= s) { toast('Período de treinamento inválido: revise início e fim.', true); return; } const sk = SKILLS.find(x => x.id === v('tS')); if (sk && sk.module !== v('tM')) { toast('A skill selecionada não pertence ao módulo do treinamento.', true); return; } const x = { id: uid('TRN'), title: t, module: v('tM'), skill: v('tS'), instructor: v('tI'), participants: [...$('#tP').selectedOptions].map(o => o.value).filter(id => id !== v('tI')), sd: s.slice(0, 10), st: s.slice(11, 16), ed: e.slice(0, 10), et: e.slice(11, 16), modality: v('tMo'), status: v('tSs'), synced: false }; TRAININGS.push(x); audit('TRAINING_CREATE', 'TRAINING', x.id); closeModal(); state.recs = computeRecs(); renderTrainingsPage(); toast('Treinamento criado e capacidade recalculada.'); }
+async function syncTraining(id) { await busy('Sincronizando treinamento...', 700); const t = TRAININGS.find(x => x.id === id); t.synced = true; audit('CALENDAR_SYNC', 'TRAINING', id); renderTrainings(); toast('Treinamento sincronizado com o Calendar (' + (t.participants.length + 1) + ' convidados).'); }
+
+/* ---------- Cenários ---------- */
+function visibleScenarios() { return state.role === 'GP' ? SCENARIOS.filter(s => P(s.pid).gp === role().email) : SCENARIOS; }
+function renderScenarios() { $('#scList').innerHTML = visibleScenarios().map(s => `<div class="alert"><input type="checkbox" class="scChk" value="${s.id}" onchange="compareScenarios()"><div style="flex:1"><strong>${esc(s.name)}</strong><p>${esc(P(s.pid).name)} • ${s.items.filter(i => i.start).length} item(ns) • ${s.status}</p></div><button class="btn sm" onclick="openScenario('${s.id}')">Abrir</button></div>`).join('') || '<div class="empty"><strong>Nenhum cenário</strong>Crie uma simulação sem mexer na agenda real.</div>'; }
+function compareOne(s) {
+  const p = P(s.pid), its = s.items.filter(i => i.start); let ext = 0; const days = {};
+  its.forEach(i => { ext += conflicts(i.cid, segs(i.start, i.end)).length; segs(i.start, i.end).forEach(x => { const k = i.cid + x.date; days[k] = (days[k] || 0) + 1; }); });
+  const internal = Object.values(days).filter(n => n > 1).length, reqMods = [...new Set(p.reqs.map(r => r.module))], cov = [...new Set(its.map(i => i.module))], missing = reqMods.filter(m => !cov.includes(m));
+  const gaps = p.reqs.filter(r => r.type === 'ELIMINATORY').filter(r => !its.filter(i => i.module === r.module).some(i => levelOf(C(i.cid), r.skill) >= r.min)).map(r => skName(r.skill) + ' ≥ ' + r.min);
+  const log = []; its.forEach(i => { if (i.modality === 'REMOTE') return; const c = C(i.cid); if (c.state !== p.state) { if (!c.travel) log.push({ sev: 'CRITICAL', msg: c.name + ' — Viagem interestadual incompatível com disponibilidade para viagem.' }); return; } const r = route(c.city, p.city); if (r.min >= 180) log.push({ sev: 'CRITICAL', msg: c.name + ' — Deslocamento local estimado acima de 3h.' }); else if (r.min >= 120) log.push({ sev: 'ATTENTION', msg: c.name + ' — Deslocamento local estimado acima de 2h.' }); });
+  const hours = its.reduce((n, i) => n + weekdays(i.start, i.end) * 8, 0), conf = ext + internal, crit = conf > 0 || missing.length || gaps.length || log.some(x => x.sev === 'CRITICAL'), att = crit || log.length;
+  return { s, its, hours, conf, missing, gaps, log, readiness: crit ? 'INCOMPLETE' : att ? 'ATTENTION' : 'READY', status: crit ? 'CRITICAL' : att ? 'ATTENTION' : 'OK' };
+}
+async function compareScenarios() { const ids = $$('.scChk:checked').map(x => x.value), el = $('#scCompare'); if (!ids.length) { el.innerHTML = '<div class="empty"><strong>Selecione cenários</strong>Compare conflitos e composição antes de aplicar.</div>'; return; } el.innerHTML = '<div class="empty"><strong>Comparando...</strong>Validando cobertura, conflitos e logística.</div>'; await new Promise(r => setTimeout(r, 450)); el.innerHTML = '<div class="alerts">' + ids.map(id => compareOne(SCENARIOS.find(s => s.id === id))).map(x => `<div class="alert" style="align-items:flex-start"><i>${x.status === 'CRITICAL' ? '🔴' : x.status === 'ATTENTION' ? '🟠' : '✓'}</i><div style="flex:1"><strong>${esc(x.s.name)}</strong><p>${x.its.length} pessoa/período • ${x.hours}h estimadas • ${x.conf} conflito(s)<br>${x.missing.length ? 'Módulos sem cobertura: ' + esc(x.missing.map(modName).join(', ')) + '<br>' : ''}${x.gaps.length ? 'Requisitos críticos: ' + esc(x.gaps.join(', ')) + '<br>' : ''}${x.log.length ? 'Riscos logísticos: ' + esc(x.log.map(y => y.msg).join(' • ')) : 'Cobertura/logística sem ressalva crítica conhecida'}</p></div><span class="badge ${x.status === 'CRITICAL' ? 'danger' : x.status === 'ATTENTION' ? 'warn' : 'success'}">${x.readiness === 'READY' ? 'Pronto' : x.readiness === 'ATTENTION' ? 'Atenção' : 'Incompleto'}</span></div>`).join('') + '</div>'; }
+function openScenarioForm() { showModal('Novo cenário', 'Simulação isolada até a aplicação.', `<div class="form-group"><label>Nome</label><input id="scN" placeholder="Ex.: Opção C — equipe equilibrada"></div><div class="form-group"><label>Projeto</label><select id="scP">${opts(visibleProjects().map(p => [p.id, p.name]))}</select></div><div class="modal-actions"><button class="btn" onclick="closeModal()">Cancelar</button><button class="btn primary" onclick="saveScenario()">Criar</button></div>`, 'CENÁRIO'); }
+function saveScenario() { const s = { id: uid('SCN'), name: v('scN').trim() || 'Cenário ' + fs(TODAY) + ' ' + nowClock(), pid: v('scP'), status: 'DRAFT', items: [] }; SCENARIOS.push(s); audit('SCENARIO_CREATE', 'SCENARIO', s.id); renderScenarios(); openScenario(s.id); toast('Cenário criado.'); }
+function openScenario(id) { const s = SCENARIOS.find(x => x.id === id), p = P(s.pid); showModal(s.name, p.name + ' • monte a equipe hipotética e depois compare/aplique.', `${s.items.filter(i => i.start).map(i => `<div class="alert"><i>◉</i><div style="flex:1"><strong>${esc(C(i.cid).name)}</strong><p>${fd(i.start)} → ${fd(i.end)} • ${modName(i.module)}</p></div>${s.status === 'DRAFT' ? `<button class="btn sm danger" onclick="removeScItem('${id}','${i.id}')">×</button>` : ''}</div>`).join('') || '<div class="inline-note">Sem consultores neste cenário.</div>'}${s.status === 'DRAFT' ? `<h3 class="section-title">Adicionar consultor</h3><div class="form-group"><select id="siC">${opts(CONSULTANTS.map(c => [c.id, c.name + ' — ' + modName(c.module)]))}</select></div><div class="two"><div class="form-group"><label>Módulo</label><select id="siM">${opts(MODULES.map(m => [m.id, m.name]))}</select></div><div class="form-group"><label>Modalidade</label><select id="siMo">${opts([['ONSITE', 'Presencial'], ['REMOTE', 'Remoto'], ['HYBRID', 'Híbrido']])}</select></div></div><div class="two"><div class="form-group"><label>Início</label><input type="date" id="siS" value="${p.start < TODAY ? TODAY : p.start}"></div><div class="form-group"><label>Fim</label><input type="date" id="siE" value="${p.end}"></div></div><button class="btn" onclick="addScItem('${id}')">+ Adicionar</button>` : '<div class="subtle-callout">Cenário já aplicado. Crie uma nova versão para outra simulação.</div>'}<div class="modal-actions"><button class="btn" onclick="closeModal()">Fechar</button>${s.status === 'DRAFT' ? `<button class="btn primary" onclick="applyScenario('${id}')">Aplicar como pré-reservas</button>` : ''}</div>`, 'PLANEJAMENTO DE CENÁRIO'); }
+function addScItem(id) { const s = SCENARIOS.find(x => x.id === id), c = C(v('siC')), m = v('siM'); if (c.module !== m && !c.secondary.includes(m)) { toast('O consultor não está habilitado no módulo informado.', true); return; } if (!v('siS') || v('siE') < v('siS')) { toast('Período do item de cenário inválido.', true); return; } s.items.push({ id: uid('SCI'), cid: c.id, module: m, start: v('siS'), end: v('siE'), modality: v('siMo') }); audit('SCENARIO_ITEM_CREATE', 'SCENARIO_ITEM', s.items[s.items.length - 1].id); openScenario(id); renderScenarios(); }
+function removeScItem(id, iid) { const s = SCENARIOS.find(x => x.id === id), i = s.items.find(x => x.id === iid); i.start = ''; i.end = ''; audit('SCENARIO_ITEM_REMOVE', 'SCENARIO_ITEM', iid); openScenario(id); renderScenarios(); }
+async function applyScenario(id) { const s = SCENARIOS.find(x => x.id === id), r = compareOne(s); if (!r.its.length) { toast('Cenário sem itens.', true); return; } if (r.status === 'CRITICAL') { toast('Cenário não aplicado: a comparação atual indica conflito ou requisito crítico pendente. Nenhuma pré-reserva parcial foi mantida.', true); return; } closeModal(); await busy('Validando e aplicando cenário...', 800); r.its.forEach(i => { const a = newAlloc({ cid: i.cid, pid: s.pid, module: i.module, segs: segs(i.start, i.end), modality: i.modality }, 'PRE_RESERVED'); audit('ALLOCATION_PRE_RESERVE', 'ALLOCATION', a.id); }); s.status = 'APPLIED'; audit('SCENARIO_APPLY', 'SCENARIO', id); renderScenarios(); compareScenarios(); toast('Cenário aplicado como ' + r.its.length + ' pré-reserva(s). Veja em Agenda & Capacidade.'); }
+
+/* ---------- Alertas ---------- */
+function renderAlerts() { if (!ALERTS.length) syncAlerts(); $('#atBody').innerHTML = ALERTS.filter(a => a.status !== 'RESOLVED').map(a => `<tr><td>${sevBadge(a.severity)}</td><td>${ALERT_TYPE[a.type] || a.type}</td><td>${esc(a.message)}</td><td>${statusBadge(a.status)}</td><td><button class="btn sm" onclick="resolveAlert('${a.id}')">Resolver</button></td></tr>`).join('') || '<tr><td colspan="5"><div class="empty">Nenhum alerta aberto.</div></td></tr>'; }
+async function refreshAlerts() { await busy('Recalculando alertas...', 650); const n = syncAlerts(); renderAlerts(); toast(n ? n + ' alerta(s) novo(s) a partir do estado atual.' : 'Alertas recalculados. Nenhum risco novo.'); }
+function resolveAlert(id) { const a = ALERTS.find(x => x.id === id); a.status = 'RESOLVED'; audit('ALERT_RESOLVE', 'ALERT', id); renderAlerts(); toast('Alerta resolvido.'); }
+
+/* ---------- Indicadores ---------- */
+function renderIndicators() { const a = state.week, b = add(a, 4), cap = capacityByModule(a, b), avg = cap.reduce((s, x) => s + x.util, 0) / cap.length, sum = k => Math.round(cap.reduce((s, x) => s + x[k], 0)); $('#indPeriod').textContent = 'Período: ' + fd(a) + ' → ' + fd(b); $('#indStats').innerHTML = [['Utilização média', pct(avg), 'Projetos + reservas + treinamento + bloqueios'], ['Capacidade livre', sum('free') + 'h', fd(a) + ' → ' + fd(b)], ['Horas em treinamento', sum('tr') + 'h', 'Desenvolvimento consome capacidade'], ['Bloqueios', sum('bl') + 'h', 'Ausências/administrativo'], ['Alertas críticos', generateAlerts().filter(x => x.severity === 'CRITICAL').length, 'Riscos atuais']].map(x => `<div class="card stat"><span class="label">${x[0]}</span><div class="value">${x[1]}</div><div class="delta">${x[2]}</div></div>`).join(''); capBars('#indCap', cap); }
+
+/* ---------- Administração e auditoria ---------- */
+function renderAdmin() {
+  const cards = [['Módulos', 'Estrutura funcional da consultoria', MODULES.length, () => listModal('Módulos', MODULES.map(m => [m.name, m.id]))], ['Senioridades', 'Níveis de carreira configuráveis', LEVELS.length, () => listModal('Senioridades', LEVELS.map(l => [l.name, 'ordem ' + l.order]))], ['Hard / Soft Skills', 'Catálogo de competências', SKILLS.length, () => listModal('Skills', SKILLS.map(s => [s.name, s.type + ' • ' + modName(s.module)]))], ['Perfil de projeto', 'Dimensões do contexto', DIMS.length, () => listModal('Dimensões de perfil', DIMS.map(d => [d.name, 'escala 1–4 • exige ' + skName(d.soft)]))], ['Pesos do matching', 'Os 8 critérios da recomendação', Object.values(WEIGHTS).reduce((a, b) => a + b, 0), openWeights, 'Ajustar'], ['Papéis e alçadas', 'RBAC + prioridade operacional', 5, () => listModal('Papéis e alçadas', Object.values(ROLES).map(r => [r.name, 'prioridade ' + r.p]))], ['Usuários', 'Acesso, papel e escopo por módulo', 5, () => listModal('Usuários autorizados', Object.entries(ROLES).map(([k, r]) => [r.user, r.email + ' • ' + r.name + (r.scope ? ' • ' + r.scope.join(',') : ' • Global')]))], ['Backup do banco', 'Cópia integral antes de promoções e mudanças relevantes', 'MANUAL', () => { if (state.role !== 'ADMIN') { toast('Backup do banco restrito ao Administrador.', true); return; } audit('DATABASE_BACKUP_CREATE', 'DATABASE', 'DB-DEMO'); toast('Backup criado: [BACKUP] Gestao de Consultores DB ' + TODAY + ' 1.4.0-rc1'); }, 'Criar backup'], ['Desempenho', 'Telemetria de RPCs lentas e erros', '24H', () => showModal('Diagnóstico de desempenho', 'Limiar geral: 1200 ms; sincronização leve: 5000 ms. Não é ranking de pessoas.', '<div class="empty"><strong>Sem amostras lentas no período.</strong>Na demonstração tudo roda no navegador.</div><div class="modal-actions"><button class="btn primary" onclick="closeModal()">Fechar</button></div>', 'PERFORMANCE'), 'Analisar']];
+  window.__adm = cards; $('#adGrid').innerHTML = cards.map((x, i) => `<div class="card admin-card"><h3>${x[0]}</h3><p>${x[1]}</p><div class="count">${x[2]}</div><div style="display:flex;gap:8px;align-items:center"><span class="badge info">${x[0] === 'Backup do banco' ? 'RECUPERAÇÃO' : 'PARAMETRIZÁVEL'}</span><button class="btn sm" onclick="__adm[${i}][3]()">${x[4] || 'Gerenciar'}</button></div></div>`).join('');
+}
+function listModal(title, rows) { showModal(title, 'Parâmetro funcional versionado e auditado.', rows.map(r => `<div class="alert" style="margin-bottom:6px"><i>●</i><div><strong>${esc(r[0])}</strong><p>${esc(r[1])}</p></div></div>`).join('') + '<div class="modal-actions"><button class="btn primary" onclick="closeModal()">Fechar</button></div>', 'ADMINISTRAÇÃO'); }
+function openWeights() { showModal('Pesos do matching', 'Configuração usada por todas as recomendações. Mude e rode o matching de novo para ver a ordem mudar.', Object.keys(WEIGHTS).map(k => `<div class="form-group"><label>${WEIGHT_LABEL[k]} — <span id="wv-${k}">${WEIGHTS[k]}</span></label><input class="range" type="range" min="0" max="50" value="${WEIGHTS[k]}" id="w-${k}" oninput="$('#wv-${k}').textContent=this.value"></div>`).join('') + `<div class="modal-actions"><button class="btn" onclick="WEIGHTS=Object.assign({},DEFAULT_WEIGHTS);openWeights()">Restaurar padrão</button><button class="btn primary" onclick="saveWeights()">Salvar pesos</button></div>`, 'ADMINISTRAÇÃO'); }
+function saveWeights() { if (!canAdmin()) { toast('Sem acesso à administração.', true); return; } Object.keys(WEIGHTS).forEach(k => WEIGHTS[k] = Number(v('w-' + k))); audit('CONFIG_UPDATE', 'CONFIG', 'MATCH_WEIGHTS'); closeModal(); renderAdmin(); if (state.matching) { state.matching = runMatchingCore(state.matching.o); if (state.page === 'planejamento') renderCandidates(); } toast('Pesos salvos. As próximas recomendações já usam a nova configuração.'); }
+function renderAudit() { $('#auBody').innerHTML = AUDIT.map(a => `<tr><td>${a[0]}</td><td>${esc(a[1])}</td><td>${roleName(a[2])}</td><td class="mono">${a[3]}</td><td class="mono">${a[4]}</td><td class="mono">${a[5]}</td></tr>`).join(''); }
+
+/* ---------- Inicialização ---------- */
+$$('.nav-item').forEach(n => n.addEventListener('click', () => go(n.dataset.page)));
+$('#menuBtn').onclick = () => $('#sidebar').classList.toggle('open');
+$('#modal').addEventListener('click', e => { if (e.target.id === 'modal') closeModal(); });
+$('#roleSel').addEventListener('change', e => { state.role = e.target.value; applyRole(); toast('Agora você vê o sistema como ' + roleName(state.role) + '. Menus, dados e botões seguem o perfil de acesso.'); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 window.__rec = () => { const c = $('#cur'); c.style.display = 'block'; addEventListener('mousemove', e => { c.style.left = e.clientX + 'px'; c.style.top = e.clientY + 'px'; }); addEventListener('mousedown', () => c.classList.add('dn')); addEventListener('mouseup', () => c.classList.remove('dn')); };
 window.__cap = t => { const c = $('#cap'); c.textContent = t; c.style.display = t ? 'block' : 'none'; };
-const hv = new URLSearchParams(location.search).get('v'); if (hv && V[hv]) view = hv;
-render();
+const qs = new URLSearchParams(location.search);
+applyRole();
+if (qs.get('v') === 'matching') { planProject('p1'); runMatching(); } else if (qs.get('v') && PAGES[qs.get('v')]) go(qs.get('v'));
 </script>
 </body>
 </html>

@@ -29,29 +29,29 @@
   <a class="crumb" href="../index.html#casos">← Todos os casos</a>
   <h1 data-split="now">Gestão de Consultores: quem colocar em cada projeto, e por quê</h1>
   <p class="lead" data-rise>Criei uma aplicação em Google Apps Script que ajuda a montar a equipe de um projeto de implantação de ERP. Ela cruza competências, agenda, carga de trabalho e deslocamento, e explica cada recomendação. A decisão final continua com quem coordena.</p>
-  <div class="meta" data-rise><span>Projeto autoral de aprendizado</span><span>Google Apps Script</span><span>2026</span><span>Não adotado pela empresa</span></div>
+  <div class="meta" data-rise><span>Projeto autoral</span><span>Google Apps Script</span><span>2026</span><span>Versão 1.4 publicada</span></div>
   <div class="kpis">
     <div class="kpi" data-rise><b data-count="39">39</b><span>tabelas no banco de dados, em Google Sheets</span></div>
-    <div class="kpi" data-rise><b data-count="7">7</b><span>etapas no ciclo de uma alocação, do rascunho à conclusão</span></div>
-    <div class="kpi" data-rise><b data-count="3">3</b><span>serviços Google integrados: Sheets, Calendar e Maps</span></div>
-    <div class="kpi" data-rise><b>V1.4</b><span>versão publicada; a V1.5 está em validação</span></div>
+    <div class="kpi" data-rise><b data-count="8">8</b><span>critérios na recomendação, com pesos configuráveis</span></div>
+    <div class="kpi" data-rise><b data-count="5">5</b><span>perfis de acesso, cada um com a sua alçada</span></div>
+    <div class="kpi" data-rise><b data-count="73">73</b><span>ações no servidor, todas com checagem de permissão</span></div>
   </div>
   <div class="quick">
     <div data-rise><small>Problema</small><p>Escolher consultores dependia de agendas soltas e do conhecimento de poucas pessoas. Quem estava livre nem sempre dominava o módulo, e quem dominava podia estar sobrecarregado ou longe do cliente.</p></div>
     <div data-rise><small>O que eu fiz</small><p>Transformei essa dor em regras, modelei os dados, desenhei a interface e integrei Calendar e Maps, com controle de acesso, auditoria e proteção contra duas pessoas alterarem a mesma coisa ao mesmo tempo.</p></div>
-    <div data-rise><small>Resultado</small><p>Uma aplicação funcional publicada na versão 1.4. Foi um projeto para aprender Apps Script na prática: a empresa não o adotou, por isso não há ganho de operação medido.</p></div>
+    <div data-rise><small>Resultado</small><p>Uma aplicação completa, publicada na versão 1.4: 12 telas, do planejamento à auditoria, integrada a Sheets, Calendar e Maps. A recomendação explica cada nota e a decisão final continua humana.</p></div>
   </div>
 </section>
 
 <section class="block" id="video">
-  <h2 data-split>O sistema em 70 segundos</h2>
+  <h2 data-split>O sistema em 80 segundos</h2>
   <p class="sub">Demonstração recriada com consultores, clientes e projetos fictícios. O sistema original roda em ambiente corporativo.</p>
   <div class="media wide" data-rise><video src="media/gestao-consultores.mp4" poster="media/gestao-consultores-poster.jpg" controls muted playsinline preload="none" aria-label="Demonstração do Gestão de Consultores com dados fictícios"></video></div>
 </section>
 
 <section class="block" id="demo">
   <h2 data-split>Experimente: monte uma equipe</h2>
-  <p class="sub">Escolha um projeto, abra o "Por quê?" de um consultor e mexa nos pesos dos critérios. Versão simplificada, com 5 critérios e dados fictícios.</p>
+  <p class="sub">Recriada com as mesmas regras do sistema, só com dados fictícios. Clique em "Como a nota foi formada", tente pré-reservar a Larissa Costa (aparece um conflito de alçada) e troque o perfil em "Ver como" para ver o que cada pessoa enxerga.</p>
   <div class="demo-frame" data-rise><iframe src="gestao-consultores/demo.html?v=matching" title="Demonstração interativa do Gestão de Consultores" loading="lazy"></iframe></div>
   <p style="margin-top:18px"><a class="btn ghost" href="gestao-consultores/demo.html" target="_blank" rel="noopener">Abrir a demonstração em tela cheia ↗</a></p>
 </section>
@@ -62,10 +62,12 @@
   <div class="steps">
     <div class="step" role="button" tabindex="0" aria-expanded="false"><span class="n"></span><span><h4>O projeto diz o que precisa</h4><p>Cliente, módulo, fase, período, modalidade e os requisitos de competência.</p><span class="x"><p>Cada requisito tem um nível mínimo e pode ser eliminatório. Há modelos de requisitos para não começar do zero a cada projeto, e as fases (treinamento, Go Live, acompanhamento) podem pedir reforços diferentes.</p></span></span></div>
     <div class="step" role="button" tabindex="0" aria-expanded="false"><span class="n"></span><span><h4>Primeiro, quem pode</h4><p>Requisitos eliminatórios, senioridade e restrição de viagem tiram candidatos da lista.</p><span class="x"><p>Quem sai da lista aparece com o motivo: "não viaja e o cliente fica a 330 km", "nível 2 em Compras, o projeto pede 3". Conflito de agenda também pode excluir, conforme a exigência de disponibilidade integral.</p></span></span></div>
-    <div class="step" role="button" tabindex="0" aria-expanded="false"><span class="n"></span><span><h4>Depois, quem faz mais sentido</h4><p>Uma nota por critérios: aderência técnica, disponibilidade, carga futura, logística, experiência e continuidade.</p><span class="x"><p>Os pesos são configuráveis e cada nota vem com razões e ressalvas, como "carga futura alta" ou "perfil júnior, indicado com acompanhamento". São regras explicáveis, não inteligência artificial: o sistema apoia a escolha, não decide sozinho.</p></span></span></div>
-    <div class="step" role="button" tabindex="0" aria-expanded="false"><span class="n"></span><span><h4>Pré-reserva e confirmação</h4><p>A pré-reserva segura a agenda; a confirmação cria o evento no Calendar.</p><span class="x"><p>O ciclo tem 7 etapas: rascunho, análise, pré-reserva, confirmação, execução, conclusão e cancelamento. A alocação é feita em segmentos de dias e horários, para períodos fracionados. Cada evento criado fica ligado ao registro, para acompanhar mudanças.</p></span></span></div>
+    <div class="step" role="button" tabindex="0" aria-expanded="false"><span class="n"></span><span><h4>Depois, quem faz mais sentido</h4><p>Uma nota com 8 critérios: aderência técnica, disponibilidade, perfil, carga futura, logística, experiência, continuidade e sustentabilidade.</p><span class="x"><p>Os pesos são configuráveis na Administração e cada nota vem com razões e ressalvas, como "carga futura elevada", "existe pré-reserva em parte do período" ou "Calendar não verificado". A sustentabilidade pesa viagens, Go Lives e projetos recentes, para não sobrecarregar sempre as mesmas pessoas. São regras explicáveis, não inteligência artificial: o sistema apoia a escolha, não decide sozinho.</p></span></span></div>
+    <div class="step" role="button" tabindex="0" aria-expanded="false"><span class="n"></span><span><h4>Pré-reserva e confirmação</h4><p>A pré-reserva segura a agenda; a confirmação cria o evento no Calendar.</p><span class="x"><p>O ciclo tem 7 etapas: rascunho, análise, pré-reserva, confirmação, execução, conclusão e cancelamento. Rascunho e análise não ocupam a agenda; a pré-reserva ocupa e expira em 48 horas. A alocação é feita em segmentos de dias e horários, para períodos fracionados. Se o Calendar falhar na confirmação, os eventos criados são desfeitos e um alerta crítico é aberto.</p></span></span></div>
     <div class="step" role="button" tabindex="0" aria-expanded="false"><span class="n"></span><span><h4>Agenda e capacidade</h4><p>Carga por pessoa, módulo e semana, somando alocações, treinamentos e bloqueios.</p><span class="x"><p>A disponibilidade cruza os registros internos com o livre/ocupado do Calendar, que mostra os horários ocupados sem expor o título dos eventos. Se a consulta falha, a tela avisa que a agenda não foi verificada, em vez de mostrar a pessoa como livre.</p></span></span></div>
     <div class="step" role="button" tabindex="0" aria-expanded="false"><span class="n"></span><span><h4>Competências viram treinamento</h4><p>Autoavaliação, avaliação da liderança e evidências de experiência, por módulo.</p><span class="x"><p>Quando falta um nível para um projeto, a lacuna vira sugestão de treinamento e entra no plano de desenvolvimento do consultor. Assim, planejar a capacidade também ajuda a desenvolver a equipe.</p></span></span></div>
+    <div class="step" role="button" tabindex="0" aria-expanded="false"><span class="n"></span><span><h4>Cada perfil vê o que deve</h4><p>Administração, coordenação, liderança, gerente de projeto e consultor têm alçadas diferentes.</p><span class="x"><p>O gerente de projeto só vê a própria carteira; a liderança, os módulos dela; o consultor, a própria agenda e o próprio plano. Quando duas pré-reservas disputam o mesmo horário, quem tem alçada maior pode substituir a outra, mas precisa escrever uma justificativa, que fica na auditoria. Alocação confirmada nunca é atropelada.</p></span></span></div>
+    <div class="step" role="button" tabindex="0" aria-expanded="false"><span class="n"></span><span><h4>Cenários antes de decidir</h4><p>Monte equipes hipotéticas e compare antes de mexer na agenda real.</p><span class="x"><p>A comparação mostra conflitos, módulos sem cobertura, requisitos eliminatórios descobertos e riscos de deslocamento. Só um cenário sem pendência crítica pode ser aplicado, e ele vira pré-reservas de uma vez; se algo falhar no meio, nada fica pela metade.</p></span></span></div>
     <div class="step" role="button" tabindex="0" aria-expanded="false"><span class="n"></span><span><h4>Tudo fica registrado</h4><p>Quem fez, quando e o que mudou, em cada ação crítica.</p><span class="x"><p>Exceções feitas pela gestão ficam rastreadas, sem apagar o histórico. Os registros de auditoria, de desempenho e de sincronização com o Calendar ajudam a reconstruir o motivo de cada decisão.</p></span></span></div>
   </div>
 </section>
@@ -88,11 +90,11 @@
 </section>
 
 <section class="block">
-  <h2 data-split>O que é e o que não é</h2>
-  <p class="sub">Para deixar claro o que está pronto e o que ainda falta.</p>
+  <h2 data-split>Onde o projeto está</h2>
+  <p class="sub">O que já está publicado e os próximos passos.</p>
   <div class="cols">
-    <div class="panelc" data-rise><h3>Pronto</h3><ul><li>Versão 1.4 publicada em setembro de 2026, com cadastros, projetos, competências, recomendação, alocação, agenda, treinamentos, cenários, alertas e auditoria</li><li>Pacotes de cada versão com notas, roteiro de verificação e validação estática</li><li>Versão 1.5 pronta como candidata, com verificação do banco, exigência de backup e plano de recuperação</li></ul></div>
-    <div class="panelc" data-rise><h3>Ainda não</h3><ul><li>Não foi adotado pela empresa: não há ganho de operação medido</li><li>Falta validar com vários usuários ao mesmo tempo, com Calendar e Maps reais e com volume representativo</li><li>A versão 1.5 só será declarada estável depois de uma rodada real de validação</li><li>Não é inteligência artificial preditiva: são regras e pesos que qualquer gestor consegue entender</li></ul></div>
+    <div class="panelc" data-rise><h3>Publicado</h3><ul><li>Versão 1.4 publicada em setembro de 2026, com cadastros, projetos, competências, recomendação, alocação, agenda, treinamentos, cenários, alertas, indicadores e auditoria</li><li>Pacotes de cada versão com notas, roteiro de verificação e validação estática</li><li>Versão 1.5 pronta como candidata, com verificação do banco, exigência de backup e plano de recuperação</li></ul></div>
+    <div class="panelc" data-rise><h3>Próximos passos</h3><ul><li>Rodada de validação com vários usuários ao mesmo tempo, com Calendar e Maps reais e volume representativo</li><li>Promover a versão 1.5 depois dessa rodada</li><li>Calibrar os pesos da recomendação com quem coordena a operação</li><li>Continuar sem inteligência artificial preditiva: regras e pesos que qualquer gestor consegue entender e auditar</li></ul></div>
   </div>
 </section>
 
