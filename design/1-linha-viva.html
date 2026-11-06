@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Conceito 1 · Linha viva</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#14213D; --deep:#0F1A31; --panel:#1B2B4F; --line:#2C3F6B;
+  --amber:#FCA311; --sky:#4CC9F0; --ice:#EEF2F8; --mute:#9DAAC4;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--deep)}
+body{background:var(--deep);color:var(--ice);font-family:'Instrument Sans',sans-serif;font-size:18px;line-height:1.55;overflow-x:hidden}
+h1,h2,h3{font-family:'Bricolage Grotesque',sans-serif;letter-spacing:-.02em}
+a{color:inherit}
+.cursor{position:fixed;left:0;top:0;width:34px;height:34px;border:2px solid var(--amber);border-radius:50%;pointer-events:none;z-index:99;transform:translate(-50%,-50%);transition:width .25s var(--ease),height .25s var(--ease),background .25s}
+.cursor.big{width:70px;height:70px;background:rgba(252,163,17,.12)}
+@media (hover:none){.cursor{display:none}}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:18px 28px;transition:background .3s}
+nav.solid{background:rgba(15,26,49,.82);backdrop-filter:blur(12px)}
+nav .me{font-weight:600}
+nav .links a{margin-left:22px;text-decoration:none;color:var(--mute);font-weight:500;position:relative}
+nav .links a::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:2px;background:var(--amber);transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
+nav .links a:hover{color:var(--ice)}nav .links a:hover::after{transform:scaleX(1)}
+
+/* HERO */
+.hero{position:relative;min-height:100vh;display:grid;align-items:center;padding:110px 6vw 60px;overflow:hidden}
+#net{position:absolute;inset:0;width:100%;height:100%}
+.hero .txt{position:relative;max-width:960px}
+.hero h1{font-weight:800;font-size:clamp(46px,8vw,118px);line-height:.95}
+.hero h1 .hl{color:var(--amber)}
+.hero p{margin-top:26px;font-size:clamp(18px,1.6vw,22px);color:var(--mute);max-width:36em}
+.cta{display:inline-flex;align-items:center;gap:10px;margin-top:34px;background:var(--amber);color:var(--deep);font-weight:600;padding:16px 26px;border-radius:999px;text-decoration:none;will-change:transform}
+.scrollhint{position:absolute;bottom:26px;left:6vw;color:var(--mute);font-size:15px;display:flex;align-items:center;gap:10px}
+.scrollhint i{width:2px;height:40px;background:linear-gradient(var(--amber),transparent);animation:drip 1.6s infinite}
+@keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* LINHA (horizontal pinned) */
+.track{position:relative;height:100vh;overflow:hidden;background:var(--night)}
+.track .head{position:absolute;top:78px;left:6vw;z-index:3}
+.track .head h2{font-size:clamp(32px,4vw,56px);font-weight:800}
+.track .head p{color:var(--mute)}
+.rail{position:absolute;top:56px;left:0;height:calc(100% - 56px);display:flex;align-items:center;padding-left:6vw}
+.rail svg{position:absolute;left:0;top:50%;transform:translateY(-50%);overflow:visible}
+.station{position:relative;width:420px;flex:0 0 420px;height:100%;display:flex;align-items:center}
+.station .dot{position:absolute;left:0;top:50%;width:28px;height:28px;margin:-14px 0 0 -14px;border-radius:50%;background:var(--night);border:5px solid var(--c,var(--sky));z-index:2;transition:transform .3s var(--ease)}
+.station.on .dot{transform:scale(1.35);background:var(--c,var(--sky))}
+.card{position:absolute;left:-14px;width:340px;padding:22px;border-radius:18px;background:var(--panel);border:1px solid var(--line);transition:transform .45s var(--ease),border-color .3s;cursor:pointer}
+.station:nth-child(odd) .card{bottom:calc(50% + 34px)}
+.station:nth-child(even) .card{top:calc(50% + 34px)}
+.card:hover{transform:translateY(-6px);border-color:var(--c,var(--sky))}
+.card .yr{font-family:'Bricolage Grotesque';font-weight:800;font-size:34px;color:var(--c,var(--sky));line-height:1}
+.card h3{font-size:21px;margin-top:6px}
+.card p{color:var(--mute);font-size:16px;margin-top:6px}
+.card .more{max-height:0;overflow:hidden;transition:max-height .5s var(--ease)}
+.card.open .more{max-height:220px}
+.card .more ul{margin-top:10px;padding-left:18px;color:var(--ice);font-size:15px}
+.card .tog{margin-top:10px;font-size:14px;font-weight:600;color:var(--c,var(--sky))}
+#pkg{position:absolute;top:0;left:0;width:40px;height:40px;z-index:4;pointer-events:none}
+
+/* SKILLS */
+.skills{padding:120px 6vw 40px}
+.skills h2{font-size:clamp(32px,4vw,56px);font-weight:800}
+.skills p.sub{color:var(--mute);margin-top:6px}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.chip{border:1px solid var(--line);background:transparent;color:var(--ice);font:inherit;font-size:16px;padding:10px 16px;border-radius:999px;cursor:pointer;transition:all .3s var(--ease)}
+.chip:hover{border-color:var(--amber)}
+.chip.on{background:var(--amber);color:var(--deep);border-color:var(--amber)}
+.where{margin-top:22px;min-height:56px;color:var(--mute);font-size:17px}
+.where b{color:var(--ice)}
+
+/* CASES */
+.cases{padding:80px 6vw 40px}
+.cases h2{font-size:clamp(32px,4vw,56px);font-weight:800}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:34px}
+.case{position:relative;border-radius:26px;padding:34px;background:var(--panel);border:1px solid var(--line);overflow:hidden;transform-style:preserve-3d;transition:transform .2s ease-out;cursor:pointer}
+.case .glow{position:absolute;inset:0;background:radial-gradient(400px circle at var(--mx,50%) var(--my,50%),rgba(252,163,17,.16),transparent 60%);pointer-events:none}
+.case .tag{display:inline-block;font-size:14px;font-weight:600;color:var(--deep);background:var(--c);padding:5px 12px;border-radius:999px}
+.case h3{font-size:clamp(26px,2.6vw,36px);margin-top:16px;line-height:1.1}
+.case .q{margin-top:18px;display:grid;gap:12px}
+.case .q div{border-left:3px solid var(--c);padding-left:14px}
+.case .q small{font-weight:600;color:var(--c);font-size:14px}
+.case .q p{color:var(--ice);font-size:16px}
+.nums{display:flex;gap:26px;margin-top:24px;flex-wrap:wrap}
+.nums b{font-family:'Bricolage Grotesque';font-size:44px;font-weight:800;line-height:1;display:block}
+.nums span{font-size:14px;color:var(--mute)}
+.case .open-case{margin-top:24px;font-weight:600;display:inline-flex;gap:8px;align-items:center}
+
+/* IQF SIM */
+.sim{margin:40px 6vw 0;padding:38px;border-radius:26px;background:linear-gradient(180deg,var(--panel),var(--night));border:1px solid var(--line);display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center}
+.sim h3{font-size:30px}
+.sim p.sub{color:var(--mute);margin-top:4px}
+.sl{margin-top:20px}
+.sl label{display:flex;justify-content:space-between;font-size:16px}
+.sl input{width:100%;accent-color:var(--amber);margin-top:6px}
+.gauge{text-align:center}
+.gauge .val{font-family:'Bricolage Grotesque';font-weight:800;font-size:72px;line-height:1}
+.gauge .cls{margin-top:6px;font-weight:600;padding:6px 14px;border-radius:999px;display:inline-block;transition:background .3s,color .3s}
+
+/* CONTACT */
+.contact{padding:140px 6vw 120px;text-align:center}
+.contact h2{font-size:clamp(40px,7vw,100px);font-weight:800;line-height:1}
+.contact p{color:var(--mute);margin-top:14px}
+footer{padding:30px 6vw;color:var(--mute);font-size:15px;border-top:1px solid var(--line)}
+
+@media (max-width:820px){
+  .grid,.sim{grid-template-columns:1fr}
+  .station{width:300px;flex-basis:300px}.card{width:270px}
+  nav .links{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<nav id="nav"><span class="me">Natã Campos de Oliveira</span><span class="links"><a href="#linha">Trajetória</a><a href="#casos">Casos</a><a href="#contato">Contato</a></span></nav>
+
+<header class="hero">
+  <canvas id="net" aria-hidden="true"></canvas>
+  <div class="txt">
+    <h1 id="h1">Minha carreira é uma <span class="hl">linha de abastecimento.</span></h1>
+    <p id="lead">Comprei, planejei a demanda e hoje implanto o ERP que redes de varejo usam para comprar, receber e vender. No caminho, construo os relatórios, automações e sistemas que faltam.</p>
+    <a class="cta magnet" href="#linha">Percorrer a linha</a>
+  </div>
+  <div class="scrollhint"><i></i>Role para seguir a linha</div>
+</header>
+
+<section class="track" id="linha">
+  <div class="head"><h2>A linha</h2><p>Cada estação é um elo da cadeia. Toque num cartão para abrir.</p></div>
+  <div class="rail" id="rail">
+    <svg id="railsvg" height="20"><path id="railpath" d="" stroke="#FCA311" stroke-width="6" fill="none" stroke-linecap="round"/></svg>
+    <svg id="pkg" viewBox="0 0 40 40" aria-hidden="true"><rect x="6" y="9" width="28" height="22" rx="4" fill="#FCA311"/><path d="M6 16h28M20 9v22" stroke="#0F1A31" stroke-width="2"/></svg>
+    <div class="station" style="--c:#4CC9F0"><span class="dot"></span><div class="card"><div class="yr">2017</div><h3>Aprendiz · Construtora Tenda</h3><p>Pagamentos a fornecedores, notas e relatórios de auditoria.</p><div class="more"><ul><li>Adiantamentos e reembolsos</li><li>Obrigações fiscais e jurídicas</li></ul></div><div class="tog">Abrir</div></div></div>
+    <div class="station" style="--c:#4CC9F0"><span class="dot"></span><div class="card"><div class="yr">2019</div><h3>Suprimentos · Construtora Tenda</h3><p>Compras indiretas: cotações, negociações, pedidos e contratos.</p><div class="more"><ul><li>Relatórios de volumetria e auditoria</li><li>Automação de controles</li><li>Treinamento de usuários</li></ul></div><div class="tog">Abrir</div></div></div>
+    <div class="station" style="--c:#7BD389"><span class="dot"></span><div class="card"><div class="yr">2022</div><h3>Compras e planejamento · Cogra</h3><p>Reposição do portfólio por estoque, giro e sell-out.</p><div class="more"><ul><li>Relacionamento com fornecedores</li><li>Controles em Excel e TOTVS Protheus</li></ul></div><div class="tog">Abrir</div></div></div>
+    <div class="station" style="--c:#7BD389"><span class="dot"></span><div class="card"><div class="yr">2025</div><h3>Analista · Cogra</h3><p>Compras e planejamento de demanda de todo o portfólio.</p><div class="more"><ul><li>Cálculo de necessidade de compra</li><li>IQF, publicado no ENGEMA</li><li>Painéis em Power BI</li></ul></div><div class="tog">Abrir</div></div></div>
+    <div class="station" style="--c:#FCA311"><span class="dot"></span><div class="card"><div class="yr">2025</div><h3>Implantação de ERP · Bluesoft</h3><p>Do cadastro ao Go Live em redes de varejo e alimentos.</p><div class="more"><ul><li>Compras, recebimento, preço e loja</li><li>Relatórios em SQL e JavaScript</li><li>Automações em Python via API</li></ul></div><div class="tog">Abrir</div></div></div>
+    <div class="station" style="--c:#F7567C"><span class="dot"></span><div class="card"><div class="yr">2026</div><h3>Ninho Impact · Instituto Ninho Social</h3><p>Sistema doado para acompanhar pessoas em situação de rua.</p><div class="more"><ul><li>Módulo de Oportunidades e Parceiros, ideia minha</li><li>Custo zero, 18 de 18 cenários aprovados</li></ul></div><div class="tog">Abrir</div></div></div>
+    <div class="station" style="--c:#FCA311"><span class="dot"></span><div class="card"><div class="yr">Hoje</div><h3>Próxima estação</h3><p>Aberto a oportunidades no Brasil e em Portugal.</p><div class="more"><ul><li>Supply Chain</li><li>Implantação de ERP</li><li>Automação de processos</li></ul></div><div class="tog">Abrir</div></div></div>
+  </div>
+</section>
+
+<section class="skills">
+  <h2>O que eu levo em cada estação</h2>
+  <p class="sub">Escolha uma competência e veja onde ela foi usada.</p>
+  <div class="chips" id="chips">
+    <button class="chip" data-w="Tenda e Cogra: cotação, negociação e pedidos">Compras</button>
+    <button class="chip" data-w="Cogra: cálculo de necessidade de compra e cobertura de estoque">Planejamento de demanda</button>
+    <button class="chip" data-w="Cogra: IQF, avaliação de fornecedores por indicadores">Gestão de fornecedores</button>
+    <button class="chip" data-w="Bluesoft: parametrização, treinamento e Go Live">Implantação de ERP</button>
+    <button class="chip" data-w="Cogra e Bluesoft: painéis de estoque, vendas e margem">Power BI e SQL</button>
+    <button class="chip" data-w="Bluesoft e Ninho Impact: automações em Python e APIs">Automação</button>
+    <button class="chip" data-w="Ninho Impact: dos requisitos à entrega de um sistema completo">Produto e requisitos</button>
+  </div>
+  <div class="where" id="where">Toque numa competência acima.</div>
+</section>
+
+<section class="cases" id="casos">
+  <h2>Casos</h2>
+  <div class="grid">
+    <article class="case" style="--c:#F7567C"><div class="glow"></div>
+      <span class="tag">Projeto social</span>
+      <h3>Ninho Impact: um sistema doado ao Instituto Ninho Social</h3>
+      <div class="q"><div><small>Problema</small><p>Atendimentos sem registro e nenhum número para mostrar a parceiros.</p></div><div><small>O que eu fiz</small><p>Conduzi dos requisitos à entrega e propus o módulo que conecta empresas a pessoas.</p></div></div>
+      <div class="nums"><div><b class="count" data-to="0" data-pre="R$ ">R$ 0</b><span>custo mensal</span></div><div><b class="count" data-to="18" data-suf="/18">18/18</b><span>cenários aprovados</span></div><div><b class="count" data-to="66" data-pre="−" data-suf="%">−66%</b><span>gravações por cadastro</span></div></div>
+      <div class="open-case">Ver o caso completo</div>
+    </article>
+    <article class="case" style="--c:#7BD389"><div class="glow"></div>
+      <span class="tag">Publicado no ENGEMA (FEA-USP)</span>
+      <h3>IQF: avaliar fornecedores por dados, não por percepção</h3>
+      <div class="q"><div><small>Problema</small><p>Atrasos e respostas lentas sem indicador para cobrar o fornecedor.</p></div><div><small>O que eu fiz</small><p>Índice com 4 indicadores e 41 subcategorias, aplicado a 6 meses de dados.</p></div></div>
+      <div class="nums"><div><b class="count" data-to="64.48" data-dec="2" data-suf="%">64,48%</b><span>IQF do fornecedor</span></div><div><b class="count" data-to="41">41</b><span>subcategorias</span></div></div>
+      <div class="open-case">Ver o caso completo</div>
+    </article>
+  </div>
+</section>
+
+<section class="sim" aria-label="Simulador do IQF">
+  <div>
+    <h3>Teste o IQF você mesmo</h3>
+    <p class="sub">Mexa no desempenho de cada indicador e veja a nota do fornecedor mudar.</p>
+    <div class="sl"><label>Atendimento (peso 40%) <span id="v0">43%</span></label><input type="range" min="0" max="100" value="48.5" step="0.1" data-w="0.4"></div>
+    <div class="sl"><label>Entrega no prazo (peso 20%) <span id="v1">35%</span></label><input type="range" min="0" max="100" value="34.6" step="0.1" data-w="0.2"></div>
+    <div class="sl"><label>Conformidade do pedido (peso 20%) <span id="v2">96%</span></label><input type="range" min="0" max="100" value="96.5" step="0.1" data-w="0.2"></div>
+    <div class="sl"><label>Avarias no recebimento (peso 20%) <span id="v3">94%</span></label><input type="range" min="0" max="100" value="94.3" step="0.1" data-w="0.2"></div>
+  </div>
+  <div class="gauge">
+    <svg viewBox="0 0 220 130" width="100%" style="max-width:360px"><path d="M20 120 A90 90 0 0 1 200 120" stroke="#2C3F6B" stroke-width="18" fill="none" stroke-linecap="round"/><path id="garc" d="M20 120 A90 90 0 0 1 200 120" stroke="#FCA311" stroke-width="18" fill="none" stroke-linecap="round" pathLength="100" stroke-dasharray="100" stroke-dashoffset="35"/></svg>
+    <div class="val" id="gval">64,5%</div>
+    <div class="cls" id="gcls">Fornecedor crítico</div>
+  </div>
+</section>
+
+<section class="contact" id="contato">
+  <h2>Qual é o próximo elo<br>da sua operação?</h2>
+  <p>São Paulo, aberto a oportunidades no Brasil e em Portugal.</p>
+  <a class="cta magnet" href="https://www.linkedin.com/in/natacamposoliveira/">Falar comigo no LinkedIn</a>
+</section>
+<footer>Natã Campos de Oliveira · Supply Chain e implantação de ERP</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+gsap.registerPlugin(ScrollTrigger, SplitText);
+
+/* smooth scroll */
+if(!reduce){const lenis=new Lenis();lenis.on('scroll',ScrollTrigger.update);gsap.ticker.add(t=>lenis.raf(t*1000));gsap.ticker.lagSmoothing(0);
+  document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();lenis.scrollTo(a.getAttribute('href'))}));}
+
+/* cursor + magnet */
+const cur=document.getElementById('cursor');
+addEventListener('pointermove',e=>gsap.to(cur,{x:e.clientX,y:e.clientY,duration:.25,ease:'power3'}));
+document.querySelectorAll('a,button,.card,.case,input').forEach(el=>{el.addEventListener('pointerenter',()=>cur.classList.add('big'));el.addEventListener('pointerleave',()=>cur.classList.remove('big'))});
+document.querySelectorAll('.magnet').forEach(m=>{m.addEventListener('pointermove',e=>{const r=m.getBoundingClientRect();gsap.to(m,{x:(e.clientX-r.left-r.width/2)*.3,y:(e.clientY-r.top-r.height/2)*.4,duration:.4})});m.addEventListener('pointerleave',()=>gsap.to(m,{x:0,y:0,duration:.6,ease:'elastic.out(1,.4)'}))});
+
+/* nav */
+ScrollTrigger.create({start:80,onUpdate:s=>document.getElementById('nav').classList.toggle('solid',s.scroll()>80)});
+
+/* hero: network canvas with moving packages */
+const cv=document.getElementById('net'),cx=cv.getContext('2d');let W,H,nodes=[],links=[],pk=[];const mouse={x:-999,y:-999};
+function build(){W=cv.width=cv.offsetWidth*devicePixelRatio;H=cv.height=cv.offsetHeight*devicePixelRatio;nodes=[];links=[];pk=[];
+  const n=Math.round(W*H/90000);for(let i=0;i<n;i++)nodes.push({x:Math.random()*W,y:Math.random()*H});
+  nodes.forEach((a,i)=>{const near=nodes.map((b,j)=>[j,Math.hypot(a.x-b.x,a.y-b.y)]).filter(d=>d[0]!==i).sort((p,q)=>p[1]-q[1]).slice(0,2);near.forEach(([j])=>{if(i<j)links.push([i,j])})});
+  for(let k=0;k<Math.min(40,links.length);k++)pk.push({l:links[(Math.random()*links.length)|0],t:Math.random(),s:.002+Math.random()*.004});}
+function draw(){cx.clearRect(0,0,W,H);
+  links.forEach(([i,j])=>{const a=nodes[i],b=nodes[j];const mx=(a.x+b.x)/2,my=(a.y+b.y)/2;const d=Math.hypot(mx-mouse.x,my-mouse.y);cx.strokeStyle=d<260*devicePixelRatio?'rgba(252,163,17,.55)':'rgba(76,201,240,.13)';cx.lineWidth=devicePixelRatio*1.2;cx.beginPath();cx.moveTo(a.x,a.y);cx.lineTo(b.x,b.y);cx.stroke()});
+  nodes.forEach(a=>{cx.fillStyle='rgba(238,242,248,.35)';cx.beginPath();cx.arc(a.x,a.y,2.2*devicePixelRatio,0,7);cx.fill()});
+  pk.forEach(p=>{p.t+=reduce?0:p.s;if(p.t>1){p.t=0;p.l=links[(Math.random()*links.length)|0]}const a=nodes[p.l[0]],b=nodes[p.l[1]];const x=a.x+(b.x-a.x)*p.t,y=a.y+(b.y-a.y)*p.t;cx.fillStyle='#FCA311';const s=5*devicePixelRatio;cx.fillRect(x-s/2,y-s/2,s,s)});
+  requestAnimationFrame(draw);}
+addEventListener('resize',build);cv.addEventListener('pointermove',e=>{const r=cv.getBoundingClientRect();mouse.x=(e.clientX-r.left)*devicePixelRatio;mouse.y=(e.clientY-r.top)*devicePixelRatio});
+build();draw();
+
+/* hero text */
+document.fonts.ready.then(()=>{
+  const st=new SplitText('#h1',{type:'words,chars'});
+  gsap.from(st.chars,{yPercent:110,opacity:0,stagger:.018,duration:.9,ease:'expo.out'});
+  gsap.from(['#lead','.hero .cta','.scrollhint'],{y:24,opacity:0,stagger:.12,delay:.6,duration:.9,ease:'expo.out'});
+  setupRail();
+});
+
+/* rail: horizontal pin + line draw + package */
+function setupRail(){
+  const rail=document.getElementById('rail'),svg=document.getElementById('railsvg'),path=document.getElementById('railpath'),pkg=document.getElementById('pkg');
+  const stations=[...rail.querySelectorAll('.station')];
+  const total=rail.scrollWidth;svg.setAttribute('width',total);
+  const firstX=stations[0].offsetLeft,lastX=stations[stations.length-1].offsetLeft;
+  path.setAttribute('d',`M${firstX} 10 H${lastX}`);
+  const len=path.getTotalLength();path.style.strokeDasharray=len;path.style.strokeDashoffset=len;
+  const dist=total-innerWidth+innerWidth*.35;
+  const tl=gsap.timeline({scrollTrigger:{trigger:'#linha',pin:true,scrub:1,end:()=>'+='+dist,invalidateOnRefresh:true,
+    onUpdate:s=>{const p=s.progress;const x=firstX+(lastX-firstX)*p;gsap.set(pkg,{x:x-20,y:rail.offsetHeight/2-20+Math.sin(p*40)*3});
+      stations.forEach(st=>st.classList.toggle('on',st.offsetLeft<=x+2))}}});
+  tl.to(rail,{x:-dist,ease:'none'},0).to(path,{strokeDashoffset:0,ease:'none'},0);
+  stations.forEach(st=>gsap.from(st.querySelector('.card'),{opacity:0,y:st.matches(':nth-child(odd)')?-30:30,duration:.6,scrollTrigger:{trigger:st,containerAnimation:tl,start:'left 85%'}}));
+}
+document.querySelectorAll('.card').forEach(c=>c.addEventListener('click',()=>{c.classList.toggle('open');c.querySelector('.tog').textContent=c.classList.contains('open')?'Fechar':'Abrir'}));
+
+/* chips */
+document.querySelectorAll('.chip').forEach(ch=>ch.addEventListener('click',()=>{document.querySelectorAll('.chip').forEach(o=>o.classList.remove('on'));ch.classList.add('on');const w=document.getElementById('where');w.innerHTML='<b>'+ch.textContent+'</b>: '+ch.dataset.w;gsap.fromTo(w,{opacity:0,x:-12},{opacity:1,x:0,duration:.5})}));
+
+/* case tilt + glow */
+document.querySelectorAll('.case').forEach(c=>{c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect(),px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;c.style.setProperty('--mx',px*100+'%');c.style.setProperty('--my',py*100+'%');gsap.to(c,{rotateY:(px-.5)*8,rotateX:(.5-py)*8,transformPerspective:900,duration:.4})});c.addEventListener('pointerleave',()=>gsap.to(c,{rotateX:0,rotateY:0,duration:.7,ease:'elastic.out(1,.5)'}))});
+gsap.from('.case',{y:60,opacity:0,stagger:.15,duration:1,ease:'expo.out',scrollTrigger:{trigger:'.grid',start:'top 80%'}});
+
+/* counters */
+document.querySelectorAll('.count').forEach(el=>{const to=+el.dataset.to,dec=+(el.dataset.dec||0),pre=el.dataset.pre||'',suf=el.dataset.suf||'';const o={v:0};
+  ScrollTrigger.create({trigger:el,start:'top 90%',once:true,onEnter:()=>gsap.to(o,{v:to,duration:1.6,ease:'power2.out',onUpdate:()=>el.textContent=pre+o.v.toFixed(dec).replace('.',',')+suf})})});
+
+/* IQF simulator */
+const ins=[...document.querySelectorAll('.sim input')],garc=document.getElementById('garc'),gval=document.getElementById('gval'),gcls=document.getElementById('gcls');
+function iqf(){let t=0;ins.forEach((i,k)=>{t+=i.value*i.dataset.w;document.getElementById('v'+k).textContent=(+i.value).toFixed(1).replace('.',',')+'%'});
+  gsap.to(garc,{attr:{'stroke-dashoffset':100-t},duration:.5});gval.textContent=t.toFixed(2).replace('.',',')+'%';
+  const c=t>=85?['Ótimo fornecedor','#7BD389']:t>=70?['Fornecedor regular','#FCA311']:['Fornecedor crítico','#F7567C'];gcls.textContent=c[0];gcls.style.background=c[1];gcls.style.color='#0F1A31';garc.setAttribute('stroke',c[1]);}
+ins.forEach(i=>i.addEventListener('input',iqf));iqf();
+
+/* contact reveal */
+document.fonts.ready.then(()=>{const s=new SplitText('.contact h2',{type:'words'});gsap.from(s.words,{y:60,opacity:0,stagger:.06,duration:1,ease:'expo.out',scrollTrigger:{trigger:'.contact',start:'top 70%'}})});
+</script>
+</body>
+</html>

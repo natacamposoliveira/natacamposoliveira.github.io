@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Conceito 3 · Torre de controle</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;600;800&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#06262B;--bg2:#0A3238;--glass:rgba(255,255,255,.06);--edge:rgba(255,255,255,.12);--mint:#5EEAD4;--coral:#FF7A59;--sand:#F4E9D8;--mute:#9BB8B8;--ease:cubic-bezier(.16,1,.3,1)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:radial-gradient(1200px 700px at 70% -10%,#0E4D55 0,transparent 60%),var(--bg);color:var(--sand);font-family:Onest,sans-serif;font-size:18px;line-height:1.55;overflow-x:hidden}
+h1,h2,h3{font-family:Sora,sans-serif;letter-spacing:-.02em}
+.ticker{position:fixed;top:0;left:0;right:0;z-index:60;height:34px;overflow:hidden;background:rgba(6,38,43,.9);border-bottom:1px solid var(--edge);font-size:14px;color:var(--mute)}
+.ticker .run{display:flex;gap:46px;white-space:nowrap;padding:7px 0;width:max-content}
+.ticker b{color:var(--mint);font-weight:600}
+nav{position:fixed;top:34px;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:14px 28px}
+nav b{font-family:Sora;font-weight:600}
+nav a{margin-left:20px;color:var(--mute);text-decoration:none}
+nav a:hover{color:var(--mint)}
+.hero{min-height:100vh;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:20px;align-items:center;padding:120px 5vw 40px}
+.hero h1{font-weight:800;font-size:clamp(36px,4.6vw,66px);line-height:1.03}
+.hero h1 .m{color:var(--mint)}
+.hero p{color:var(--mute);margin-top:20px;max-width:31em}
+.btn{display:inline-flex;margin-top:28px;padding:15px 24px;border-radius:14px;background:var(--mint);color:var(--bg);font-weight:600;text-decoration:none;box-shadow:0 0 0 0 rgba(94,234,212,.5);animation:ping 2.4s infinite}
+@keyframes ping{70%{box-shadow:0 0 0 18px rgba(94,234,212,0)}100%{box-shadow:0 0 0 0 rgba(94,234,212,0)}}
+.radar{position:relative;aspect-ratio:1;max-height:78vh;margin:auto;width:100%}
+#flow{position:absolute;inset:0;width:100%;height:100%}
+.node{position:absolute;padding:10px 14px;border-radius:14px;background:var(--glass);border:1px solid var(--edge);backdrop-filter:blur(8px);font-family:Sora;font-weight:600;font-size:15px;cursor:pointer;transition:background .3s,border-color .3s;white-space:nowrap}
+.node:hover,.node.on{background:rgba(94,234,212,.16);border-color:var(--mint)}
+.core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:150px;height:150px;border-radius:50%;display:grid;place-items:center;text-align:center;background:radial-gradient(circle,#0E4D55,#06262B);border:1px solid var(--mint);font-family:Sora;font-size:14px;color:var(--mute)}
+.core b{display:block;color:var(--sand);font-size:18px}
+.panel{position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);width:min(420px,92%);padding:16px 18px;border-radius:16px;background:rgba(10,50,56,.92);border:1px solid var(--edge);font-size:16px;opacity:0;transition:opacity .3s,transform .3s var(--ease)}
+.panel.show{opacity:1;transform:translateX(-50%) translateY(-8px)}
+.panel b{color:var(--mint);font-family:Sora}
+section{padding:110px 5vw 30px}
+.st h2{font-size:clamp(30px,3.8vw,52px);font-weight:800}
+.st p.sub{color:var(--mute);margin-top:4px}
+.mask{overflow:hidden}
+.timeline{margin-top:40px;display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.t{padding:22px;border-radius:20px;background:var(--glass);border:1px solid var(--edge);position:relative;overflow:hidden}
+.t::before{content:"";position:absolute;left:0;top:0;height:3px;width:var(--p,0%);background:var(--mint);transition:width 1.2s var(--ease)}
+.t .y{font-family:Sora;font-weight:800;font-size:30px;color:var(--mint)}
+.t h3{font-size:18px;margin-top:6px}
+.t p{color:var(--mute);font-size:15px;margin-top:6px}
+.cases{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:36px}
+.case{padding:30px;border-radius:24px;background:var(--glass);border:1px solid var(--edge);position:relative;overflow:hidden}
+.case::after{content:"";position:absolute;inset:-1px;border-radius:24px;padding:1px;background:conic-gradient(from var(--a,0deg),transparent 0 70%,var(--mint) 85%,transparent);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .4s}
+.case:hover::after{opacity:1}
+.case .tag{font-size:14px;color:var(--coral);font-weight:600}
+.case h3{font-size:28px;line-height:1.15;margin-top:8px}
+.tabs{display:flex;gap:8px;margin-top:18px}
+.tabs button{font:inherit;font-size:15px;padding:8px 14px;border-radius:999px;border:1px solid var(--edge);background:transparent;color:var(--sand);cursor:pointer;transition:all .25s}
+.tabs button.on{background:var(--mint);color:var(--bg);border-color:var(--mint)}
+.pane{margin-top:16px;min-height:96px;color:var(--sand)}
+.spark{margin-top:18px;width:100%;height:70px}
+.kpis{display:flex;gap:26px;margin-top:10px;flex-wrap:wrap}
+.kpis b{font-family:Sora;font-weight:800;font-size:38px;line-height:1;display:block}
+.kpis span{font-size:14px;color:var(--mute)}
+.dial{margin-top:34px;display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center;padding:30px;border-radius:24px;background:var(--glass);border:1px solid var(--edge)}
+.knobs{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.knob{padding:14px;border-radius:16px;background:rgba(255,255,255,.04);border:1px solid var(--edge)}
+.knob label{font-size:15px;color:var(--mute);display:flex;justify-content:space-between}
+.knob input{width:100%;accent-color:var(--mint);margin-top:6px}
+.score{text-align:center}
+.score .v{font-family:Sora;font-weight:800;font-size:76px;line-height:1}
+.score .c{margin-top:8px;font-weight:600}
+.end{text-align:center;padding:140px 5vw}
+.end h2{font-size:clamp(36px,6vw,86px);font-weight:800;line-height:1}
+@media(max-width:860px){.hero,.cases,.dial{grid-template-columns:1fr}.timeline{grid-template-columns:1fr 1fr}.knobs{grid-template-columns:1fr}nav a{display:none}.node{font-size:13px;padding:8px 10px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="ticker"><div class="run" id="run">
+  <span><b>6+ anos</b> em compras e Supply Chain</span><span><b>64,48%</b> IQF calculado e publicado no ENGEMA</span><span><b>18/18</b> cenários aprovados no Ninho Impact</span><span><b>Go Live</b> conduzido sozinho no pós-implantação</span><span><b>São Paulo</b> aberto ao Brasil e a Portugal</span>
+</div></div>
+<nav><b>Natã Campos de Oliveira</b><span><a href="#linha">Trajetória</a><a href="#casos">Casos</a><a href="#fim">Contato</a></span></nav>
+
+<header class="hero">
+  <div>
+    <h1 id="h1">Minha carreira é uma linha de abastecimento. <span class="m">Eu enxergo a cadeia inteira.</span></h1>
+    <p>Compras, planejamento de demanda e implantação de ERP no varejo, com dados e automação. Toque num elo da cadeia para ver onde eu atuei.</p>
+    <a class="btn" href="#casos">Ver os casos</a>
+  </div>
+  <div class="radar" id="radar">
+    <canvas id="flow" aria-hidden="true"></canvas>
+    <div class="core"><div><b>Natã</b>Supply Chain + ERP</div></div>
+    <div class="panel" id="panel"></div>
+  </div>
+</header>
+
+<section class="st" id="linha">
+  <div class="mask"><h2 class="rv">Quatro paradas na mesma linha</h2></div>
+  <p class="sub">A barra de cada cartão se enche quando ele entra na tela.</p>
+  <div class="timeline">
+    <div class="t"><div class="y">2017</div><h3>Construtora Tenda</h3><p>De aprendiz a suprimentos: cotações, negociações e contratos.</p></div>
+    <div class="t"><div class="y">2022</div><h3>Cogra</h3><p>De assistente a analista de compras e planejamento de demanda.</p></div>
+    <div class="t"><div class="y">2025</div><h3>Bluesoft</h3><p>Implantação de ERP em redes de varejo, do cadastro ao Go Live.</p></div>
+    <div class="t"><div class="y">2026</div><h3>Ninho Impact</h3><p>Sistema doado a um instituto que atende pessoas em situação de rua.</p></div>
+  </div>
+</section>
+
+<section class="st" id="casos">
+  <div class="mask"><h2 class="rv">Casos</h2></div>
+  <p class="sub">Troque entre problema, solução e resultado em cada caso.</p>
+  <div class="cases">
+    <article class="case" data-p="Atendimentos a pessoas em situação de rua sem registro nem números para mostrar a parceiros." data-s="Conduzi o sistema dos requisitos à entrega e propus o módulo que conecta empresas a pessoas: vagas, cursos e mutirões." data-r="Entregue com custo zero, 18 de 18 cenários aprovados e manuais para o Instituto operar sozinho.">
+      <div class="tag">Projeto social · Instituto Ninho Social</div><h3>Ninho Impact</h3>
+      <div class="tabs"><button class="on" data-k="p">Problema</button><button data-k="s">O que eu fiz</button><button data-k="r">Resultado</button></div>
+      <div class="pane"></div>
+      <svg class="spark" viewBox="0 0 300 70" preserveAspectRatio="none"><path d="M0 60 L40 55 L80 58 L120 40 L160 42 L200 25 L240 22 L300 8" stroke="#5EEAD4" stroke-width="3" fill="none" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/></svg>
+      <div class="kpis"><div><b>R$ 0</b><span>custo mensal</span></div><div><b>18/18</b><span>cenários</span></div><div><b>−66%</b><span>gravações</span></div></div>
+    </article>
+    <article class="case" data-p="Fornecedores atrasavam e demoravam a responder, e não havia indicador para cobrar." data-s="Índice com 4 indicadores e 41 subcategorias, aplicado a 6 meses de dados de um fornecedor estratégico." data-r="IQF de 64,48%: fornecedor crítico. Atendimento e prazo viraram pontos de ação. Publicado no ENGEMA (FEA-USP).">
+      <div class="tag">Publicado no ENGEMA (FEA-USP)</div><h3>IQF: Índice de Qualidade de Fornecedores</h3>
+      <div class="tabs"><button class="on" data-k="p">Problema</button><button data-k="s">O que eu fiz</button><button data-k="r">Resultado</button></div>
+      <div class="pane"></div>
+      <svg class="spark" viewBox="0 0 300 70" preserveAspectRatio="none"><path d="M0 20 L50 30 L100 26 L150 45 L200 40 L250 52 L300 48" stroke="#FF7A59" stroke-width="3" fill="none" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/></svg>
+      <div class="kpis"><div><b>64,48%</b><span>IQF</span></div><div><b>41</b><span>subcategorias</span></div><div><b>6 meses</b><span>de dados</span></div></div>
+    </article>
+  </div>
+  <div class="dial">
+    <div class="knobs" id="knobs">
+      <div class="knob"><label>Atendimento · 40% <span>48,5</span></label><input type="range" step="0.1" value="48.5" data-w=".4"></div>
+      <div class="knob"><label>Entrega no prazo · 20% <span>34,6</span></label><input type="range" step="0.1" value="34.6" data-w=".2"></div>
+      <div class="knob"><label>Conformidade · 20% <span>96,5</span></label><input type="range" step="0.1" value="96.5" data-w=".2"></div>
+      <div class="knob"><label>Avarias · 20% <span>94,3</span></label><input type="range" step="0.1" value="94.3" data-w=".2"></div>
+    </div>
+    <div class="score"><svg viewBox="0 0 200 200" width="200" height="200"><circle cx="100" cy="100" r="84" stroke="rgba(255,255,255,.1)" stroke-width="16" fill="none"/><circle id="ring" cx="100" cy="100" r="84" stroke="#FF7A59" stroke-width="16" fill="none" stroke-linecap="round" pathLength="100" stroke-dasharray="100" stroke-dashoffset="36" transform="rotate(-90 100 100)"/></svg><div class="v" id="sv">64,48%</div><div class="c" id="sc">Fornecedor crítico</div></div>
+  </div>
+</section>
+
+<section class="end" id="fim"><div class="mask"><h2 class="rv">Precisa enxergar a sua cadeia inteira?</h2></div><a class="btn" href="https://www.linkedin.com/in/natacamposoliveira/">Falar comigo no LinkedIn</a></section>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger,SplitText);
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const lenis=new Lenis();lenis.on('scroll',ScrollTrigger.update);gsap.ticker.add(t=>lenis.raf(t*1000));gsap.ticker.lagSmoothing(0);
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();lenis.scrollTo(a.getAttribute('href'))}));
+
+/* ticker */
+const run=document.getElementById('run');run.innerHTML+=run.innerHTML;gsap.to(run,{xPercent:-50,duration:30,ease:'none',repeat:-1});
+
+/* radar: nodes around core with flowing particles */
+const chain=[['Fornecedor','Cogra: IQF para medir atendimento, prazo, conformidade e avarias.'],['Compra','Tenda e Cogra: cotação, negociação, pedidos e contratos.'],['Planejamento','Cogra: cálculo de necessidade de compra para todo o portfólio.'],['Recebimento','Bluesoft: NF-e, divergências e recebimento de carga no ERP.'],['Estoque','Cogra e Bluesoft: giro, estoque parado, inventário e transferências.'],['Preço e margem','Bluesoft: precificação, promoções e relatórios de margem em SQL.'],['Loja','Bluesoft: operação de loja, PDV e prevenção de perdas.']];
+const radar=document.getElementById('radar'),panel=document.getElementById('panel'),cv=document.getElementById('flow'),cx=cv.getContext('2d');let nodes=[],R,C,parts=[],hot=-1;
+chain.forEach((c,i)=>{const n=document.createElement('div');n.className='node';n.textContent=c[0];radar.appendChild(n);nodes.push(n);gsap.set(n,{xPercent:-50,yPercent:-50});n.addEventListener('pointerenter',()=>gsap.to(n,{scale:1.08,duration:.3}));n.addEventListener('pointerleave',()=>gsap.to(n,{scale:1,duration:.3}));
+  const show=()=>{hot=i;nodes.forEach(o=>o.classList.remove('on'));n.classList.add('on');panel.innerHTML='<b>'+c[0]+'</b><br>'+c[1];panel.classList.add('show')};
+  n.addEventListener('pointerenter',show);n.addEventListener('click',show);n.addEventListener('pointerleave',()=>{hot=-1;n.classList.remove('on');panel.classList.remove('show')})});
+function layout(){const r=radar.getBoundingClientRect();cv.width=r.width*devicePixelRatio;cv.height=r.height*devicePixelRatio;C=r.width/2;R=r.width*.4;
+  nodes.forEach((n,i)=>{const a=-Math.PI/2+i*2*Math.PI/nodes.length;n.dataset.x=C+Math.cos(a)*R;n.dataset.y=C+Math.sin(a)*R;n.style.left=n.dataset.x+'px';n.style.top=n.dataset.y+'px'});
+  parts=[];for(let k=0;k<70;k++)parts.push({i:k%nodes.length,t:Math.random(),s:.003+Math.random()*.004,ring:Math.random()<.55});}
+function frame(){const d=devicePixelRatio;cx.clearRect(0,0,cv.width,cv.height);
+  nodes.forEach((n,i)=>{const j=(i+1)%nodes.length,ax=n.dataset.x*d,ay=n.dataset.y*d,bx=nodes[j].dataset.x*d,by=nodes[j].dataset.y*d;
+    cx.strokeStyle=(hot===i||hot===j)?'rgba(94,234,212,.7)':'rgba(94,234,212,.18)';cx.lineWidth=2*d;cx.beginPath();cx.moveTo(ax,ay);cx.lineTo(bx,by);cx.stroke();
+    cx.strokeStyle=hot===i?'rgba(255,122,89,.8)':'rgba(255,255,255,.06)';cx.setLineDash([4*d,8*d]);cx.beginPath();cx.moveTo(C*d,C*d);cx.lineTo(ax,ay);cx.stroke();cx.setLineDash([])});
+  parts.forEach(p=>{p.t+=reduce?0:p.s*(hot>-1?1.8:1);if(p.t>1){p.t=0;p.i=(p.i+1)%nodes.length}const a=nodes[p.i],b=p.ring?nodes[(p.i+1)%nodes.length]:null;
+    let x,y;if(b){x=(+a.dataset.x+(b.dataset.x-a.dataset.x)*p.t)*d;y=(+a.dataset.y+(b.dataset.y-a.dataset.y)*p.t)*d}else{x=(C+(a.dataset.x-C)*p.t)*d;y=(C+(a.dataset.y-C)*p.t)*d}
+    cx.fillStyle=p.ring?'#5EEAD4':'#FF7A59';cx.beginPath();cx.arc(x,y,2.6*d,0,7);cx.fill()});
+  requestAnimationFrame(frame);}
+addEventListener('resize',layout);layout();frame();
+
+/* intro + reveals */
+document.fonts.ready.then(()=>{const s=new SplitText('#h1',{type:'lines',mask:'lines'});gsap.from(s.lines,{yPercent:100,duration:1,stagger:.12,ease:'expo.out'});
+  gsap.fromTo('.node',{scale:0,opacity:0},{scale:1,opacity:1,stagger:.07,delay:.4,duration:.7,ease:'back.out(2)'});
+  document.querySelectorAll('.rv').forEach(h=>gsap.from(h,{yPercent:110,duration:1,ease:'expo.out',scrollTrigger:{trigger:h,start:'top 85%'}}));});
+document.querySelectorAll('.t').forEach((t,i)=>ScrollTrigger.create({trigger:t,start:'top 85%',once:true,onEnter:()=>setTimeout(()=>t.style.setProperty('--p','100%'),i*180)}));
+gsap.from('.t',{y:40,opacity:0,stagger:.12,duration:.9,ease:'expo.out',scrollTrigger:{trigger:'.timeline',start:'top 85%'}});
+
+/* cases: tabs + sparkline + border spin */
+document.querySelectorAll('.case').forEach(c=>{const pane=c.querySelector('.pane');const set=k=>{c.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('on',b.dataset.k===k));gsap.fromTo(pane,{opacity:0,y:8},{opacity:1,y:0,duration:.4});pane.textContent=c.dataset[k]};set('p');
+  c.querySelectorAll('.tabs button').forEach(b=>b.addEventListener('click',()=>set(b.dataset.k)));
+  gsap.to(c.querySelector('.spark path'),{attr:{'stroke-dashoffset':0},duration:1.6,ease:'power2.out',scrollTrigger:{trigger:c,start:'top 80%'}});
+  c.addEventListener('pointerenter',()=>gsap.to(c,{'--a':'360deg',duration:2,repeat:-1,ease:'none'}));c.addEventListener('pointerleave',()=>gsap.killTweensOf(c))});
+CSS.registerProperty&&CSS.registerProperty({name:'--a',syntax:'<angle>',inherits:false,initialValue:'0deg'});
+
+/* dial */
+const ks=[...document.querySelectorAll('.knob input')],ring=document.getElementById('ring');
+function sc(){let t=0;ks.forEach(k=>{t+=k.value*k.dataset.w;k.previousElementSibling.querySelector('span').textContent=(+k.value).toFixed(1).replace('.',',')});
+  gsap.to(ring,{attr:{'stroke-dashoffset':100-t},duration:.5});document.getElementById('sv').textContent=t.toFixed(2).replace('.',',')+'%';
+  const c=t>=85?['Ótimo fornecedor','#5EEAD4']:t>=70?['Fornecedor regular','#F4C95D']:['Fornecedor crítico','#FF7A59'];ring.setAttribute('stroke',c[1]);const e=document.getElementById('sc');e.textContent=c[0];e.style.color=c[1]}
+ks.forEach(k=>k.addEventListener('input',sc));sc();
+</script>
+</body>
+</html>
