@@ -39,7 +39,7 @@ Quando o Natã passar um projeto novo, avaliar e atualizar **todas** as partes a
 
 ## Estado atual
 - Lugares da rota (data-i): 0 ASAM (formação), 1 Tenda, 2 UNIP (formação), 3 Cogra, 4 Senac (formação), 5 IQF (projeto), 6 Bluesoft, 7 Consulting Hub (projeto), 8 Gestão de Consultores (projeto), 9 Ninho Impact (projeto), 10 Próximo destino.
-- Formação: lugares `.place.p.e` (embaixo da estrada, etiqueta verde, legenda "Formação"), no ano de início. UNIP: Ciências Contábeis, 3 de 4 anos cursados, não concluído (nunca escrever "formado"). Senac: em andamento, conclusão prevista para dez./2026 (atualizar quando ele se formar). ASAM: curso profissionalizante de 2017, só formação, não emprego.
+- Formação: lugares `.place.p.e` (embaixo da estrada, etiqueta verde, legenda "Formação"), no ano de início. UNIP: Ciências Contábeis, 3 de 4 anos cursados, não concluído (nunca escrever "formado"). Senac: em andamento, conclusão prevista para dez./2026 (atualizar quando ele se formar). ASAM: curso profissionalizante de 2017, só formação, não emprego. Cursos: nenhum (os treinamentos em vídeo do sistema da Bluesoft não entram, decisão do Natã).
 - Ordem dos casos: Ninho Impact → Gestão de Consultores → Consulting Hub → IQF (ligar anterior/próximo ao incluir um novo).
 - Demonstrações públicas ficam em `casos/<nome>/demo.html` e são só AMOSTRAS: poucas telas estáticas, sem regras/algoritmo no código; o resto leva ao vídeo e ao WhatsApp (pedido do Natã: não ensinar a copiar). A recriação completa usada para gravar o vídeo fica fora do repositório. Sem link de tela cheia.
 - Vídeos e pôsteres: ao regravar, trocar o nome do arquivo (ex.: -v2) para não ficar preso em cache.
