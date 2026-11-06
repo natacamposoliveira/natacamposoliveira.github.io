@@ -37,5 +37,8 @@ Quando o Natã passar um projeto novo, avaliar e atualizar **todas** as partes a
 - Rodar `./scripts/versionar.sh` (atualiza o `?v=` do CSS/JS para o navegador não usar versão antiga em cache).
 - Commit e push em `main`; conferir no endereço publicado.
 
-## Pendências para o próximo projeto
-- **Caixas da esteira mais 3D:** hoje parecem ter só dois lados (efeito "fantasma"). Mostrar os três lados visíveis (tampa, frente e lateral) com sombreados distintos, como caixa de papelão real. Fazer junto com a inclusão do próximo projeto.
+## Estado atual
+- Lugares da rota (data-i): 0 Tenda, 1 Cogra, 2 IQF (projeto), 3 Bluesoft, 4 Gestão de Consultores (projeto), 5 Ninho Impact (projeto), 6 Próximo destino.
+- Ordem dos casos: Ninho Impact → Gestão de Consultores → IQF (ligar anterior/próximo ao incluir um novo).
+- Demonstrações interativas ficam em `casos/<nome>/demo.html` (dados fictícios, `noindex`).
+- Caixas da esteira já mostram tampa, frente e lateral (108 px); com mais caixas, conferir o espaçamento.
