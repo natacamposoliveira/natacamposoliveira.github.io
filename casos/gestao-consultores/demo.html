@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Demonstração · Gestão de Consultores</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Unbounded:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F2F4F7;--card:#fff;--ink:#1D2A38;--mute:#5E6E80;--line:#E1E6EC;--side:#22303F;--side2:#2E3E50;--or:#FF5F1F;--ok:#1F9D6B;--warn:#E0A100;--bad:#D64545;--blue:#2F6FB5;--ease:cubic-bezier(.16,1,.3,1)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:Manrope,system-ui,sans-serif;font-size:15px;line-height:1.5;height:100vh;overflow:hidden}
+button,select,input{font:inherit;color:inherit}
+.app{display:grid;grid-template-columns:230px 1fr;height:100vh}
+.side{background:var(--side);color:#DCE3EA;padding:18px 12px;display:flex;flex-direction:column;gap:4px}
+.logo{font-family:Unbounded;font-weight:700;font-size:14px;color:#fff;padding:6px 10px 16px;display:flex;gap:10px;align-items:center}
+.logo i{width:24px;height:24px;border-radius:6px;background:var(--or);display:block}
+.side small{padding:12px 10px 4px;font-size:11px;color:#8EA0B3;font-weight:800}
+.nav{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;border:0;background:none;color:#DCE3EA;cursor:pointer;text-align:left;font-weight:700}
+.nav:hover{background:var(--side2)}.nav.on{background:#fff;color:var(--ink)}
+.nav svg{width:18px;height:18px;flex:none}
+.user{margin-top:auto;padding:10px;border-top:1px solid var(--side2);font-size:13px;color:#A9B7C6}
+.user b{display:block;color:#fff}
+.main{overflow:auto;padding:22px 28px 60px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:18px}
+.top h1{font-size:24px;font-weight:800}
+.demo{background:#FFF4E5;color:#8A4B00;border-radius:999px;padding:6px 12px;font-size:13px;font-weight:800}
+.grid{display:grid;gap:14px}
+.g4{grid-template-columns:repeat(4,1fr)}.g2{grid-template-columns:1.3fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}
+.card{background:var(--card);border-radius:16px;padding:18px;border:1px solid var(--line)}
+.kpi b{font-family:Unbounded;font-size:28px;display:block;line-height:1.1}
+.kpi span{color:var(--mute);font-size:13px}
+.card h2{font-size:16px;font-weight:800;margin-bottom:10px}
+.muted{color:var(--mute)}
+table{width:100%;border-collapse:collapse}
+th{font-size:12px;color:var(--mute);text-align:left;font-weight:800;padding:8px;border-bottom:1px solid var(--line)}
+td{padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:middle}
+tr.click{cursor:pointer}tr.click:hover td{background:#F7F9FB}
+.pill{display:inline-block;border-radius:999px;padding:3px 10px;font-size:12px;font-weight:800;background:#EEF1F5}
+.p-ok{background:#E3F5EC;color:#137A52}.p-warn{background:#FFF4D6;color:#8A6400}.p-bad{background:#FCE8E8;color:#A53030}.p-or{background:#FFE9DF;color:#B5410F}.p-blue{background:#E4EEF9;color:#245A93}
+.bar{height:8px;background:#EEF1F5;border-radius:4px;overflow:hidden}.bar i{display:block;height:100%;border-radius:4px;transition:width .6s var(--ease)}
+.form{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+label{font-size:12px;font-weight:800;color:var(--mute);display:grid;gap:4px}
+select,input[type=text]{border:1px solid var(--line);border-radius:10px;padding:9px 10px;background:#fff}
+.btn{border:0;border-radius:10px;padding:10px 16px;font-weight:800;cursor:pointer;background:var(--ink);color:#fff;transition:transform .15s}
+.btn:active{transform:scale(.97)}.btn.or{background:var(--or)}.btn.ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.cand{display:grid;grid-template-columns:44px 1.2fr 1fr auto;gap:14px;align-items:center;padding:14px;border:1px solid var(--line);border-radius:14px;background:#fff;margin-top:10px;transition:box-shadow .25s,border-color .25s}
+.cand.sel{border-color:var(--or);box-shadow:0 0 0 3px #FFE1D3}
+.av{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-weight:800;color:#fff}
+.cand h3{font-size:15px}.cand .muted{font-size:13px}
+.score{font-family:Unbounded;font-size:22px}
+.why{grid-column:1/-1;display:none;padding-top:10px;border-top:1px dashed var(--line);margin-top:4px}
+.cand.open .why{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.crit{display:grid;grid-template-columns:120px 1fr 34px;gap:8px;align-items:center;font-size:13px;margin-top:6px}
+.why ul{padding-left:18px;font-size:13px;display:grid;gap:4px}
+.ex{opacity:.75}
+.toast{position:fixed;right:22px;bottom:22px;background:var(--ink);color:#fff;padding:14px 18px;border-radius:14px;font-weight:700;transform:translateY(20px);opacity:0;transition:all .35s var(--ease);max-width:380px}
+.toast.show{transform:none;opacity:1}
+.cal{display:grid;grid-template-columns:170px repeat(6,1fr);gap:4px;font-size:12px}
+.cal .h{font-weight:800;color:var(--mute);padding:6px}
+.cal .n{padding:8px 6px;font-weight:700}
+.cal .c{border-radius:8px;min-height:34px;padding:4px 6px;font-weight:700;display:flex;align-items:center}
+.lvl{display:inline-flex;gap:3px}.lvl i{width:12px;height:12px;border-radius:3px;background:#E1E6EC}.lvl i.f{background:var(--blue)}
+.steps{display:flex;gap:6px;margin:6px 0 14px;flex-wrap:wrap}
+.steps span{padding:6px 12px;border-radius:999px;background:#EEF1F5;font-size:12px;font-weight:800;color:var(--mute)}
+.steps span.on{background:var(--or);color:#fff}.steps span.done{background:#E3F5EC;color:#137A52}
+.log li{list-style:none;padding:8px 0;border-bottom:1px solid var(--line);font-size:13px}
+.log time{color:var(--mute);margin-right:8px}
+.weights{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:4px 0 14px}
+.weights label{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px}
+.weights input{width:100%;accent-color:var(--or)}
+.cap{position:fixed;left:262px;bottom:26px;background:rgba(29,42,56,.92);color:#fff;padding:12px 18px;border-radius:14px;font-weight:700;font-size:16px;display:none;z-index:9;max-width:560px}
+.cur{position:fixed;width:22px;height:22px;border-radius:50%;background:rgba(255,95,31,.35);border:2px solid #FF5F1F;pointer-events:none;z-index:10;transform:translate(-50%,-50%);display:none;transition:width .15s,height .15s}.cur.dn{width:14px;height:14px}
+@media (max-width:860px){.nav{white-space:nowrap;flex:none}.app{grid-template-columns:1fr}.side{flex-direction:row;overflow:auto;padding:8px}.side small,.user,.logo{display:none}.g4,.g3,.g2,.form,.weights{grid-template-columns:1fr 1fr}.cand{grid-template-columns:40px 1fr auto}.cand .mid{display:none}.cand.open .why{grid-template-columns:1fr}body{overflow:auto;height:auto}.app{height:auto}}
+@media (max-width:480px){.g4,.g3,.g2,.form,.weights{grid-template-columns:1fr}.main{padding:16px 14px 40px}.top{flex-wrap:wrap}.top h1{font-size:20px}.card{overflow-x:auto}.cal{min-width:620px}.cap{left:14px;right:14px;max-width:none}}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <div class="logo"><i></i>Gestão de Consultores</div>
+    <small>PLANEJAMENTO</small>
+    <button class="nav on" data-v="visao"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Visão geral</button>
+    <button class="nav" data-v="projetos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h18v13H3zM8 7V4h8v3"/></svg>Projetos</button>
+    <button class="nav" data-v="matching"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="4"/><path d="M2 21c0-4 3-6 7-6M16 11l2 2 4-4"/></svg>Montar equipe</button>
+    <button class="nav" data-v="agenda"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Agenda e capacidade</button>
+    <small>EQUIPE</small>
+    <button class="nav" data-v="competencias"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3 7h7l-6 4 2 7-6-4-6 4 2-7-6-4h7z"/></svg>Competências</button>
+    <button class="nav" data-v="auditoria"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4zM8 9h8M8 13h8M8 17h5"/></svg>Auditoria</button>
+    <div class="user"><b>Gestora Demo</b>Coordenação de implantação</div>
+  </aside>
+  <main class="main" id="main"></main>
+</div>
+<div class="toast" id="toast"></div>
+<div class="cap" id="cap"></div><div class="cur" id="cur"></div>
+<script>
+/* ===== Dados fictícios ===== */
+const MOD = { SUP: 'Supply', COM: 'Comercial', FIS: 'Fiscal', PCP: 'PCP' };
+const C = [
+  { id: 'c1', n: 'Ana Ribeiro', mod: 'SUP', sen: 3, city: 'São Paulo', travel: true, load: 40, sk: { compras: 4, recebimento: 4, estoque: 3, pricing: 2 }, hist: 6, color: '#2F6FB5' },
+  { id: 'c2', n: 'Bruno Tavares', mod: 'SUP', sen: 2, city: 'Campinas', travel: true, load: 85, sk: { compras: 3, recebimento: 4, estoque: 4, pricing: 1 }, hist: 4, color: '#1F9D6B' },
+  { id: 'c3', n: 'Carla Menezes', mod: 'SUP', sen: 3, city: 'Curitiba', travel: false, load: 20, sk: { compras: 4, recebimento: 3, estoque: 4, pricing: 3 }, hist: 8, color: '#8E5BD0' },
+  { id: 'c4', n: 'Diego Prado', mod: 'SUP', sen: 1, city: 'São Paulo', travel: true, load: 10, sk: { compras: 2, recebimento: 2, estoque: 2, pricing: 1 }, hist: 1, color: '#E0A100' },
+  { id: 'c5', n: 'Elisa Fonseca', mod: 'SUP', sen: 2, city: 'Santos', travel: true, load: 30, sk: { compras: 3, recebimento: 3, estoque: 2, pricing: 4 }, hist: 3, color: '#D64545' },
+  { id: 'c6', n: 'Fábio Lacerda', mod: 'COM', sen: 3, city: 'São Paulo', travel: true, load: 50, sk: { pricing: 4, compras: 2, estoque: 1 }, hist: 7, color: '#3B4C5E' },
+  { id: 'c7', n: 'Gabriela Nunes', mod: 'COM', sen: 2, city: 'Sorocaba', travel: true, load: 20, sk: { pricing: 3, compras: 3 }, hist: 2, color: '#FF5F1F' },
+  { id: 'c8', n: 'Henrique Sales', mod: 'FIS', sen: 3, city: 'São Paulo', travel: false, load: 60, sk: { fiscal: 4, recebimento: 3 }, hist: 9, color: '#245A93' },
+  { id: 'c9', n: 'Isabela Rocha', mod: 'FIS', sen: 2, city: 'Ribeirão Preto', travel: true, load: 15, sk: { fiscal: 3, recebimento: 2 }, hist: 3, color: '#137A52' },
+  { id: 'c10', n: 'João Vieira', mod: 'PCP', sen: 3, city: 'São Paulo', travel: true, load: 35, sk: { producao: 4, estoque: 3 }, hist: 5, color: '#B5410F' },
+  { id: 'c11', n: 'Larissa Costa', mod: 'SUP', sen: 2, city: 'São Paulo', travel: true, load: 55, sk: { compras: 4, recebimento: 2, estoque: 3, pricing: 2 }, hist: 5, color: '#5E6E80' },
+  { id: 'c12', n: 'Marcos Lima', mod: 'PCP', sen: 1, city: 'Jundiaí', travel: true, load: 5, sk: { producao: 2, estoque: 2 }, hist: 1, color: '#A57A4C' }
+];
+const P = [
+  { id: 'p1', n: 'Rede Aurora Supermercados', city: 'Sorocaba', phase: 'Treinamento', mod: 'SUP', ini: '2026-11-16', fim: '2026-12-18', modal: 'Presencial', req: [{ s: 'compras', min: 3, el: true }, { s: 'recebimento', min: 3, el: false }, { s: 'estoque', min: 2, el: false }], minSen: 2, status: 'Planejamento' },
+  { id: 'p2', n: 'Atacado Horizonte', city: 'Campinas', phase: 'Go Live', mod: 'SUP', ini: '2026-12-01', fim: '2026-12-12', modal: 'Presencial', req: [{ s: 'recebimento', min: 4, el: true }, { s: 'estoque', min: 3, el: false }], minSen: 3, status: 'Equipe parcial' },
+  { id: 'p3', n: 'Empório Vale Verde', city: 'Remoto', phase: 'Acompanhamento', mod: 'COM', ini: '2026-11-23', fim: '2027-01-15', modal: 'Remoto', req: [{ s: 'pricing', min: 3, el: true }], minSen: 2, status: 'Equipe completa' },
+  { id: 'p4', n: 'Laticínios Serra Azul', city: 'Bragança Paulista', phase: 'Treinamento', mod: 'PCP', ini: '2026-11-30', fim: '2026-12-22', modal: 'Híbrido', req: [{ s: 'producao', min: 3, el: true }], minSen: 2, status: 'Planejamento' },
+  { id: 'p5', n: 'Distribuidora Ponte Alta', city: 'Santos', phase: 'Diagnóstico', mod: 'FIS', ini: '2026-12-07', fim: '2026-12-19', modal: 'Presencial', req: [{ s: 'fiscal', min: 3, el: true }], minSen: 2, status: 'Planejamento' }
+];
+const DIST = { 'São Paulo': { Sorocaba: 95, Campinas: 95, Santos: 80, 'Bragança Paulista': 90 }, Campinas: { Sorocaba: 85, Campinas: 0, Santos: 170, 'Bragança Paulista': 65 }, Curitiba: { Sorocaba: 330, Campinas: 470, Santos: 400 }, Santos: { Sorocaba: 160, Campinas: 170, Santos: 0 }, Sorocaba: { Sorocaba: 0, Campinas: 85 }, 'Ribeirão Preto': { Santos: 400, Sorocaba: 320 }, Jundiaí: { 'Bragança Paulista': 50, Sorocaba: 90 } };
+const SKN = { compras: 'Compras', recebimento: 'Recebimento', estoque: 'Estoque', pricing: 'Pricing', fiscal: 'Fiscal', producao: 'Produção (PCP)' };
+const W = { tec: 35, disp: 25, carga: 15, log: 10, exp: 15 };
+const LOG = [['09:12', 'Gestora Demo abriu o projeto Rede Aurora Supermercados'], ['08:55', 'Treinamento "Recebimento avançado" criado com 4 participantes'], ['08:40', 'Alocação de João Vieira confirmada no projeto Laticínios Serra Azul']];
+const RES = {}; // pré-reservas
+let view = 'visao', curProj = 'p1', curCons = 'c4';
+
+const $ = s => document.querySelector(s);
+const pill = (t, k) => `<span class="pill p-${k}">${t}</span>`;
+const ini = n => n.split(' ').map(x => x[0]).join('');
+const km = (a, b) => b === 'Remoto' ? 0 : (DIST[a] && DIST[a][b] != null ? DIST[a][b] : 250);
+const fmt = d => d.split('-').reverse().slice(0, 2).join('/');
+function toast(t) { const e = $('#toast'); e.textContent = t; e.classList.add('show'); clearTimeout(e._t); e._t = setTimeout(() => e.classList.remove('show'), 2600); }
+
+/* ===== Matching explicável ===== */
+function match(p) {
+  const out = [];
+  C.filter(c => c.mod === p.mod).forEach(c => {
+    const why = [], warn = [], stop = [];
+    if (c.sen < p.minSen) stop.push(`Senioridade abaixo da mínima (${c.sen} de ${p.minSen})`);
+    p.req.forEach(r => { const v = c.sk[r.s] || 0; if (r.el && v < r.min) stop.push(`Requisito eliminatório: ${SKN[r.s]} nível ${v}, mínimo ${r.min}`); });
+    const d = km(c.city, p.city);
+    if (p.modal === 'Presencial' && !c.travel && d > 150) stop.push(`Não viaja e o cliente fica a ${d} km`);
+    const tec = p.req.reduce((a, r) => a + Math.min(1, (c.sk[r.s] || 0) / 4), 0) / p.req.length;
+    const disp = Math.max(0, 1 - c.load / 100), carga = c.load > 80 ? .2 : c.load > 60 ? .5 : 1;
+    const log = p.modal === 'Remoto' ? 1 : Math.max(0, 1 - d / 300), exp = Math.min(1, c.hist / 8);
+    const s = { tec, disp, carga, log, exp };
+    const tot = Object.keys(W).reduce((a, k) => a + s[k] * W[k], 0) / Object.values(W).reduce((a, b) => a + b, 0) * 100;
+    if (tec >= .85) why.push('Domina os requisitos técnicos do projeto'); else if (tec >= .6) why.push('Atende aos requisitos técnicos principais');
+    if (disp >= .6) why.push(`Tem capacidade livre no período (${100 - c.load}% disponível)`);
+    if (log >= .65 && p.modal !== 'Remoto') why.push(`Deslocamento curto: ${d} km até o cliente`);
+    if (exp >= .6) why.push(`${c.hist} implantações recentes no mesmo módulo`);
+    if (c.load > 70) warn.push(`Carga futura alta (${c.load}%): risco de sobrecarga`);
+    if (p.modal !== 'Remoto' && d > 150) warn.push(`Deslocamento longo (${d} km)`);
+    if (c.sen === 1) warn.push('Perfil júnior: indicado com acompanhamento');
+    p.req.forEach(r => { const v = c.sk[r.s] || 0; if (!r.el && v < r.min) warn.push(`${SKN[r.s]} abaixo do desejado (nível ${v} de ${r.min}): sugerir treinamento`); });
+    out.push({ c, s, tot: Math.round(tot), why, warn, stop, d });
+  });
+  return out.sort((a, b) => (a.stop.length - b.stop.length) || b.tot - a.tot);
+}
+
+/* ===== Telas ===== */
+const V = {
+  visao() {
+    const conf = Object.values(RES).filter(r => r === 'confirmada').length;
+    return `<div class="top"><h1>Visão geral</h1><span class="demo">Demonstração · dados fictícios</span></div>
+    <div class="grid g4">
+      <div class="card kpi"><b>${C.length}</b><span>consultores ativos</span></div>
+      <div class="card kpi"><b>${P.length}</b><span>projetos em planejamento ou execução</span></div>
+      <div class="card kpi"><b>${Math.round(C.reduce((a, c) => a + c.load, 0) / C.length)}%</b><span>carga média nas próximas 6 semanas</span></div>
+      <div class="card kpi"><b>${2 + conf}</b><span>alertas de agenda para revisar</span></div>
+    </div>
+    <div class="grid g2" style="margin-top:14px">
+      <div class="card"><h2>Projetos que precisam de equipe</h2><table><tr><th>Cliente</th><th>Fase</th><th>Início</th><th>Situação</th></tr>
+      ${P.map(p => `<tr class="click" data-p="${p.id}"><td><b>${p.n}</b><div class="muted">${MOD[p.mod]} · ${p.modal}</div></td><td>${p.phase}</td><td>${fmt(p.ini)}</td><td>${pill(p.status, p.status === 'Equipe completa' ? 'ok' : p.status === 'Equipe parcial' ? 'warn' : 'blue')}</td></tr>`).join('')}</table></div>
+      <div class="card"><h2>Carga por consultor</h2>${C.slice(0, 8).map(c => `<div style="display:grid;grid-template-columns:130px 1fr 40px;gap:10px;align-items:center;margin:8px 0;font-size:13px"><span>${c.n}</span><div class="bar"><i style="width:${c.load}%;background:${c.load > 80 ? 'var(--bad)' : c.load > 60 ? 'var(--warn)' : 'var(--ok)'}"></i></div><b>${c.load}%</b></div>`).join('')}</div>
+    </div>`;
+  },
+  projetos() {
+    return `<div class="top"><h1>Projetos</h1><span class="demo">Demonstração · dados fictícios</span></div>
+    <div class="grid g3">${P.map(p => `<div class="card click" data-p="${p.id}" style="cursor:pointer"><div class="muted">${MOD[p.mod]} · ${p.phase}</div><h2 style="margin:6px 0">${p.n}</h2>
+      <div class="muted">${p.city} · ${p.modal} · ${fmt(p.ini)} a ${fmt(p.fim)}</div>
+      <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:6px">${p.req.map(r => pill(`${SKN[r.s]} ≥ ${r.min}${r.el ? ' · eliminatório' : ''}`, r.el ? 'or' : 'blue')).join('')}</div>
+      <button class="btn or" style="margin-top:14px" data-go="${p.id}">Montar equipe</button></div>`).join('')}</div>`;
+  },
+  matching() {
+    const p = P.find(x => x.id === curProj), r = match(p);
+    return `<div class="top"><h1>Montar equipe</h1><span class="demo">Demonstração · dados fictícios</span></div>
+    <div class="card"><div class="form">
+      <label>Projeto<select id="selP">${P.map(x => `<option value="${x.id}" ${x.id === p.id ? 'selected' : ''}>${x.n}</option>`).join('')}</select></label>
+      <label>Módulo<select disabled><option>${MOD[p.mod]}</option></select></label>
+      <label>Período<input type="text" value="${fmt(p.ini)} a ${fmt(p.fim)}" disabled></label>
+      <label>Modalidade<select disabled><option>${p.modal} · ${p.city}</option></select></label></div>
+      <div class="muted" style="font-size:13px;margin-bottom:6px">Pesos dos critérios (configuráveis). A recomendação explica cada nota; a decisão final é da coordenação.</div>
+      <div class="weights">${[['tec', 'Aderência técnica'], ['disp', 'Disponibilidade'], ['carga', 'Carga futura'], ['log', 'Logística'], ['exp', 'Experiência']].map(([k, t]) => `<label>${t}<input type="range" min="0" max="50" value="${W[k]}" data-w="${k}"><span>${W[k]}</span></label>`).join('')}</div>
+    </div>
+    <div id="cands">${r.map((x, i) => cand(x, i, p)).join('')}</div>`;
+  },
+  agenda() {
+    const weeks = ['16/11', '23/11', '30/11', '07/12', '14/12', '21/12'];
+    const pal = { p1: '#FFE9DF', p2: '#FCE8E8', p3: '#E4EEF9', p4: '#E3F5EC', p5: '#FFF4D6' };
+    const plan = { c1: ['p1', 'p1', 'p1', '', '', ''], c2: ['p2', 'p2', 'p2', 'p2', 'T', ''], c3: ['', '', 'p1', 'p1', '', ''], c6: ['p3', 'p3', 'p3', 'p3', 'p3', 'p3'], c8: ['p5', 'p5', '', 'p5', 'p5', 'X'], c10: ['', '', 'p4', 'p4', 'p4', ''], c11: ['T', '', 'p2', 'p2', '', ''], c5: ['', 'X', '', '', '', ''] };
+    Object.entries(RES).forEach(([k, st]) => { const [cid, pid] = k.split(':'); plan[cid] = plan[cid] || ['', '', '', '', '', '']; plan[cid] = plan[cid].map((v, i) => (i < 4 && !v) ? pid + (st === 'pre' ? '*' : '') : v); });
+    const rows = Object.keys(plan).map(cid => { const c = C.find(x => x.id === cid); return `<div class="n">${c.n}<div class="muted" style="font-weight:500">${MOD[c.mod]}</div></div>` + plan[cid].map(v => { if (!v) return '<div class="c" style="background:#F7F9FB"></div>'; if (v === 'T') return `<div class="c" style="background:#EDE5FA;color:#5B3A9A">Treinamento</div>`; if (v === 'X') return `<div class="c" style="background:#EEF1F5;color:#5E6E80">Bloqueio</div>`; const pre = v.endsWith('*'), pid = v.replace('*', ''); const p = P.find(x => x.id === pid); return `<div class="c" style="background:${pal[pid]};${pre ? 'outline:2px dashed #FF5F1F' : ''}">${p.n.split(' ').slice(0, 2).join(' ')}${pre ? ' · pré' : ''}</div>`; }).join(''); }).join('');
+    return `<div class="top"><h1>Agenda e capacidade</h1><span class="demo">Demonstração · dados fictícios</span></div>
+    <div class="card"><div class="muted" style="margin-bottom:10px">Próximas 6 semanas. Alocações confirmadas, pré-reservas (tracejado), treinamentos e bloqueios. A disponibilidade combina os registros internos com o livre/ocupado do Calendar.</div>
+    <div class="cal"><div class="h">Consultor</div>${weeks.map(w => `<div class="h">Semana ${w}</div>`).join('')}${rows}</div></div>`;
+  },
+  competencias() {
+    const c = C.find(x => x.id === curCons), p1 = P[0];
+    const gaps = p1.req.filter(r => (c.sk[r.s] || 0) < r.min);
+    return `<div class="top"><h1>Competências</h1><span class="demo">Demonstração · dados fictícios</span></div>
+    <div class="grid g2"><div class="card"><div class="form" style="grid-template-columns:1fr"><label>Consultor<select id="selC">${C.map(x => `<option value="${x.id}" ${x.id === c.id ? 'selected' : ''}>${x.n} · ${MOD[x.mod]}</option>`).join('')}</select></label></div>
+      <table><tr><th>Competência</th><th>Autoavaliação</th><th>Liderança</th><th>Evidência</th></tr>${Object.entries(c.sk).map(([k, v]) => `<tr><td><b>${SKN[k]}</b></td><td>${lv(Math.min(4, v + (k.length % 2)))}</td><td>${lv(v)}</td><td>${v >= 3 ? pill(`${Math.max(1, c.hist - 2)} projetos`, 'ok') : pill('em formação', 'warn')}</td></tr>`).join('')}</table></div>
+      <div class="card"><h2>Lacunas para o próximo projeto</h2><div class="muted" style="margin-bottom:10px">${p1.n} · ${MOD[p1.mod]}</div>
+      ${gaps.length ? gaps.map(g => `<div style="padding:12px;border:1px solid var(--line);border-radius:12px;margin-top:8px"><b>${SKN[g.s]}</b>: nível ${c.sk[g.s] || 0}, o projeto pede ${g.min}<div style="margin-top:8px">${pill('Treinamento sugerido: ' + SKN[g.s] + ' na prática', 'blue')}</div></div>`).join('') + `<button class="btn" style="margin-top:14px" id="trein">Incluir no plano de desenvolvimento</button>` : '<p class="muted">Sem lacunas para este projeto.</p>'}</div></div>`;
+  },
+  auditoria() {
+    return `<div class="top"><h1>Auditoria</h1><span class="demo">Demonstração · dados fictícios</span></div>
+    <div class="card"><div class="muted" style="margin-bottom:8px">Toda ação crítica fica registrada com quem fez, quando e o que mudou.</div><ul class="log">${LOG.map(([t, x]) => `<li><time>${t}</time>${x}</li>`).join('')}</ul></div>`;
+  }
+};
+const lv = v => `<span class="lvl">${[1, 2, 3, 4].map(i => `<i class="${i <= v ? 'f' : ''}"></i>`).join('')}</span>`;
+function cand(x, i, p) {
+  const k = x.c.id + ':' + p.id, st = RES[k];
+  const crit = [['Aderência técnica', 'tec'], ['Disponibilidade', 'disp'], ['Carga futura', 'carga'], ['Logística', 'log'], ['Experiência', 'exp']];
+  const elig = !x.stop.length;
+  return `<div class="cand ${elig ? '' : 'ex'} ${st ? 'sel' : ''}" data-k="${k}">
+    <div class="av" style="background:${x.c.color}">${ini(x.c.n)}</div>
+    <div><h3>${x.c.n}</h3><div class="muted">${MOD[x.c.mod]} · nível ${x.c.sen} · ${x.c.city}</div></div>
+    <div class="mid">${elig ? `<div class="bar"><i style="width:${x.tot}%;background:${x.tot > 70 ? 'var(--ok)' : x.tot > 50 ? 'var(--warn)' : 'var(--bad)'}"></i></div><div class="muted" style="font-size:12px;margin-top:4px">${x.why[0] || 'Atende parcialmente'}</div>` : `<div style="font-size:13px;color:var(--bad);font-weight:700">Fora da lista: ${x.stop[0]}</div>`}</div>
+    <div style="text-align:right">${elig ? `<div class="score">${x.tot}</div>` : pill('Inelegível', 'bad')}<div style="margin-top:6px;display:flex;gap:6px;justify-content:flex-end"><button class="btn ghost" data-why>Por quê?</button>${elig ? (st === 'confirmada' ? pill('Confirmada', 'ok') : st === 'pre' ? `<button class="btn or" data-conf>Confirmar</button>` : `<button class="btn" data-res>Pré-reservar</button>`) : ''}</div></div>
+    <div class="why"><div><b>Como a nota foi formada</b>${crit.map(([t, k2]) => `<div class="crit"><span>${t} · ${W[k2]}</span><div class="bar"><i style="width:${Math.round(x.s[k2] * 100)}%;background:var(--blue)"></i></div><b>${Math.round(x.s[k2] * 100)}</b></div>`).join('')}</div>
+      <div><b>Razões</b><ul>${(x.why.length ? x.why : ['Sem pontos fortes destacados']).map(w => `<li>${w}</li>`).join('')}</ul><b style="display:block;margin-top:10px">Ressalvas</b><ul>${(x.stop.concat(x.warn).length ? x.stop.concat(x.warn) : ['Nenhuma ressalva']).map(w => `<li>${w}</li>`).join('')}</ul></div></div>
+  </div>`;
+}
+
+/* ===== Navegação e eventos ===== */
+function render() {
+  document.querySelectorAll('.nav').forEach(b => b.classList.toggle('on', b.dataset.v === view));
+  const m = $('#main'); m.innerHTML = V[view](); m.scrollTop = 0;
+  m.animate([{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }], { duration: 320, easing: 'cubic-bezier(.16,1,.3,1)' });
+}
+document.querySelectorAll('.nav').forEach(b => b.addEventListener('click', () => { view = b.dataset.v; render(); }));
+document.addEventListener('click', e => {
+  const t = e.target;
+  const pr = t.closest('[data-p]'), go = t.closest('[data-go]');
+  if (go) { curProj = go.dataset.go; view = 'matching'; render(); return; }
+  if (pr && view !== 'matching') { curProj = pr.dataset.p; view = 'matching'; render(); return; }
+  const cd = t.closest('.cand'); if (!cd) { if (t.id === 'trein') { LOG.unshift([now(), `Treinamento sugerido incluído no plano de ${C.find(x => x.id === curCons).n}`]); toast('Incluído no plano de desenvolvimento'); } return; }
+  const k = cd.dataset.k, [cid, pid] = k.split(':'), cn = C.find(x => x.id === cid).n, pn = P.find(x => x.id === pid).n;
+  if (t.closest('[data-why]')) { cd.classList.toggle('open'); return; }
+  if (t.closest('[data-res]')) { RES[k] = 'pre'; LOG.unshift([now(), `Pré-reserva de ${cn} no projeto ${pn}`]); toast(`Pré-reserva feita: ${cn}. Ela ocupa a agenda sem criar convite.`); rerender(); return; }
+  if (t.closest('[data-conf]')) { RES[k] = 'confirmada'; LOG.unshift([now(), `Alocação de ${cn} confirmada no projeto ${pn}; evento criado no Calendar`]); toast(`Alocação confirmada. Convite enviado para ${cn} no Calendar.`); rerender(); return; }
+});
+document.addEventListener('input', e => {
+  if (e.target.dataset.w) { W[e.target.dataset.w] = +e.target.value; e.target.nextElementSibling.textContent = e.target.value; const p = P.find(x => x.id === curProj); $('#cands').innerHTML = match(p).map((x, i) => cand(x, i, p)).join(''); }
+});
+document.addEventListener('change', e => {
+  if (e.target.id === 'selP') { curProj = e.target.value; render(); }
+  if (e.target.id === 'selC') { curCons = e.target.value; render(); }
+});
+function rerender() { const open = [...document.querySelectorAll('.cand.open')].map(x => x.dataset.k); const p = P.find(x => x.id === curProj); $('#cands').innerHTML = match(p).map((x, i) => cand(x, i, p)).join(''); open.forEach(k => document.querySelector(`.cand[data-k="${k}"]`)?.classList.add('open')); }
+const now = () => new Date().toTimeString().slice(0, 5);
+window.__rec = () => { const c = $('#cur'); c.style.display = 'block'; addEventListener('mousemove', e => { c.style.left = e.clientX + 'px'; c.style.top = e.clientY + 'px'; }); addEventListener('mousedown', () => c.classList.add('dn')); addEventListener('mouseup', () => c.classList.remove('dn')); };
+window.__cap = t => { const c = $('#cap'); c.textContent = t; c.style.display = t ? 'block' : 'none'; };
+const hv = new URLSearchParams(location.search).get('v'); if (hv && V[hv]) view = hv;
+render();
+</script>
+</body>
+</html>
