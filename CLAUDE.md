@@ -36,3 +36,6 @@ Quando o Natã passar um projeto novo, avaliar e atualizar **todas** as partes a
   nada sobreposto, sem rolagem horizontal, caminhão chega ao último lugar.
 - Rodar `./scripts/versionar.sh` (atualiza o `?v=` do CSS/JS para o navegador não usar versão antiga em cache).
 - Commit e push em `main`; conferir no endereço publicado.
+
+## Pendências para o próximo projeto
+- **Caixas da esteira mais 3D:** hoje parecem ter só dois lados (efeito "fantasma"). Mostrar os três lados visíveis (tampa, frente e lateral) com sombreados distintos, como caixa de papelão real. Fazer junto com a inclusão do próximo projeto.
