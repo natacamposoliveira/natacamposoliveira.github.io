@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Precificação na reforma tributária: simulador · Natã Campos de Oliveira</title>
+<meta name="description" content="Simulador de formação de preço de venda na reforma tributária, criado por Natã Campos de Oliveira: ICMS e PIS/COFINS por dentro, CBS e IBS por fora, créditos e regime tributário, ano a ano de 2026 a 2033.">
+<link rel="canonical" href="https://natacamposoliveira.github.io/casos/precificacao-reforma.html">
+<meta property="og:type" content="article"><meta property="og:title" content="Simulador de precificação na reforma tributária · Natã Campos de Oliveira"><meta property="og:description" content="Forme o preço de venda no modelo atual e veja o efeito da CBS e do IBS em cada ano da transição, de 2026 a 2033.">
+<meta property="og:image" content="https://natacamposoliveira.github.io/assets/og-v5.png"><meta property="og:image:width" content="2400"><meta property="og:image:height" content="1254"><meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#EDF0F3">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/site.css?v=feb0e715">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Simulador de precificação na reforma tributária","applicationCategory":"FinanceApplication","operatingSystem":"Navegador","inLanguage":"pt-BR","creator":{"@type":"Person","name":"Natã Campos de Oliveira","url":"https://natacamposoliveira.github.io/"},"description":"Formação do preço de venda com ICMS e PIS/COFINS por dentro e CBS e IBS por fora, com créditos, regime tributário e alíquotas editáveis, ano a ano de 2026 a 2033.","dateCreated":"2026-11","isAccessibleForFree":true}
+</script>
+</head>
+<body>
+<div class="progress" aria-hidden="true"></div>
+<header class="nav"><div class="wrap">
+  <a class="brand" href="../index.html"><i aria-hidden="true"></i>Natã Campos de Oliveira</a>
+  <button class="burger" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span></button>
+  <ul><li><a href="#resumo">Resumo</a></li><li><a href="#simulador">Simulador</a></li><li><a href="#como">Como funciona</a></li><li><a href="#papel">Meu papel</a></li><li><a href="../index.html#contato">Contato</a></li></ul>
+</div></header>
+
+<main class="wrap">
+<section class="ch" id="resumo">
+  <a class="crumb" href="../index.html#casos">← Todos os casos</a>
+  <h1 data-split="now">Precificação na reforma tributária: o preço de venda ano a ano até 2033</h1>
+  <p class="lead" data-rise>Montei um modelo de formação de preço para a transição da reforma tributária. Ele calcula o mesmo produto em qualquer ano de 2026 a 2033, com ICMS e PIS/COFINS por dentro do preço, CBS e IBS por fora, créditos e regime tributário. Virou planilha, simulador e tutorial em vídeo.</p>
+  <div class="meta" data-rise><span>Projeto próprio</span><span>Excel · HTML e JavaScript</span><span>EC 132/2023 · LC 214/2025</span><span>nov. 2026</span></div>
+  <div class="kpis">
+    <div class="kpi" data-rise><b>2026–2033</b><span>todos os anos da transição no mesmo cálculo</span></div>
+    <div class="kpi" data-rise><b data-count="4">4</b><span>cenários comparados lado a lado</span></div>
+    <div class="kpi" data-rise><b data-count="21.2" data-dec="1" data-pre="−" data-suf="%">−21,2%</b><span>no total pago pelo cliente de 2026 a 2033, no exemplo</span></div>
+    <div class="kpi" data-rise><b>R$ 270,25</b><span>preço que mantém o resultado em reais em 2033</span></div>
+  </div>
+  <div class="quick">
+    <div data-rise><small>Problema</small><p>Com a reforma, CBS e IBS passam a ser cobrados por fora do preço, enquanto ICMS e PIS/COFINS seguem por dentro durante a transição. A fórmula de preço usada hoje deixa de mostrar quanto o cliente paga e quanto sobra de resultado.</p></div>
+    <div data-rise><small>O que eu fiz</small><p>Defini o modelo de cálculo a partir da EC 132/2023 e da LC 214/2025: custo líquido com créditos, tributos por dentro no denominador, IBS/CBS por fora e o cronograma de alíquotas de cada ano, com tudo editável.</p></div>
+    <div data-rise><small>Resultado</small><p>No exemplo de um produto de R$ 200 no Lucro Real com margem de 25%, o total pago cai de R$ 377,60 em 2026 para R$ 297,66 em 2033. A margem se mantém, mas o resultado em reais cai, e o simulador mostra o preço que o preserva.</p></div>
+  </div>
+</section>
+
+<section class="block" id="simulador">
+  <h2 data-split>Teste o simulador</h2>
+  <p class="sub">Os campos em papelão são os que você preenche; o resto é calculado na hora. Escolha um exemplo pronto ou digite os seus números, e troque o ano de cada cenário.</p>
+  <div class="tx" id="tx" data-rise>
+    <div class="tx-top">
+      <div class="tx-chips" role="group" aria-label="Exemplos prontos">
+        <button type="button" data-preset="real" aria-pressed="true">Lucro Real</button>
+        <button type="button" data-preset="presumido" aria-pressed="false">Lucro Presumido</button>
+        <button type="button" data-preset="semcred" aria-pressed="false">Sem créditos</button>
+        <button type="button" data-preset="reduzida" aria-pressed="false">Redução de 60%</button>
+      </div>
+      <span class="tx-warn" title="As alíquotas da reforma ainda não foram fixadas oficialmente">Alíquotas da reforma: estimativas de 05/11/2026</span>
+    </div>
+    <div class="tx-grid">
+      <form class="tx-in" id="txForm" autocomplete="off" aria-label="Dados da simulação">
+        <fieldset>
+          <legend>1 · Produto e compra</legend>
+          <div class="tx-f full"><label for="produto">Produto</label><input class="tx-text" id="produto" type="text" value="Liquidificador 2 velocidades"></div>
+          <div class="tx-f"><label for="custo">Custo de compra na NF</label><span class="tx-box"><i>R$</i><input id="custo" inputmode="decimal" data-kind="brl"></span><small>Valor da mercadoria na nota de entrada hoje, com ICMS incluído.</small></div>
+          <div class="tx-f"><label for="icmsC">ICMS destacado na compra</label><span class="tx-box"><input id="icmsC" inputmode="decimal" data-kind="pct"><i>%</i></span></div>
+          <div class="tx-f"><span class="tx-l" id="l-credIcms">Crédito de ICMS?</span><span class="tx-seg" role="group" aria-labelledby="l-credIcms" data-bool="credIcms"><button type="button" data-v="1">Sim</button><button type="button" data-v="0">Não</button></span><small>Revenda por contribuinte do regime normal: Sim.</small></div>
+          <div class="tx-f"><label for="pisC">PIS/COFINS na compra</label><span class="tx-box"><input id="pisC" inputmode="decimal" data-kind="pct"><i>%</i></span><small>9,25% no não cumulativo. Base sem ICMS (Lei 14.592/2023).</small></div>
+          <div class="tx-f"><span class="tx-l" id="l-credPis">Crédito de PIS/COFINS?</span><span class="tx-seg" role="group" aria-labelledby="l-credPis" data-bool="credPis"><button type="button" data-v="1">Sim</button><button type="button" data-v="0">Não</button></span><small>Lucro Real: Sim. Lucro Presumido e Simples Nacional: Não.</small></div>
+          <div class="tx-f"><span class="tx-l" id="l-credIbs">Crédito de IBS/CBS?</span><span class="tx-seg" role="group" aria-labelledby="l-credIbs" data-bool="credIbs"><button type="button" data-v="1">Sim</button><button type="button" data-v="0">Não</button></span><small>Regra geral da reforma: o tributo pago na compra vira crédito.</small></div>
+          <div class="tx-f"><label for="redC">Redução de IBS/CBS na compra</label><span class="tx-box"><input id="redC" inputmode="decimal" data-kind="pct"><i>%</i></span><small>0, 30, 60 ou 100% (alíquota zero), conforme o produto.</small></div>
+          <div class="tx-f"><span class="tx-l" id="l-repassa">Fornecedor mantém o valor líquido?</span><span class="tx-seg" role="group" aria-labelledby="l-repassa" data-bool="repassa"><button type="button" data-v="1">Sim</button><button type="button" data-v="0">Não</button></span><small>Sim: a NF se ajusta aos tributos de cada ano. Não: a NF fica igual em todos os anos.</small></div>
+        </fieldset>
+        <fieldset>
+          <legend>2 · Venda</legend>
+          <div class="tx-f"><label for="margem">Margem desejada</label><span class="tx-box"><input id="margem" inputmode="decimal" data-kind="pct"><i>%</i></span><small>% do preço de venda, antes do IRPJ/CSLL.</small></div>
+          <div class="tx-f"><label for="desp">Despesas operacionais</label><span class="tx-box"><input id="desp" inputmode="decimal" data-kind="pct"><i>%</i></span><small>Comissões, frete, cartão e rateio de fixas, em % do preço.</small></div>
+          <div class="tx-f"><label for="icmsV">ICMS na venda</label><span class="tx-box"><input id="icmsV" inputmode="decimal" data-kind="pct"><i>%</i></span></div>
+          <div class="tx-f"><label for="pisV">PIS/COFINS na venda</label><span class="tx-box"><input id="pisV" inputmode="decimal" data-kind="pct"><i>%</i></span><small>9,25% (não cumulativo) ou 3,65% (cumulativo). Base sem ICMS (STF, Tema 69).</small></div>
+          <div class="tx-f"><label for="redV">Redução de IBS/CBS na venda</label><span class="tx-box"><input id="redV" inputmode="decimal" data-kind="pct"><i>%</i></span></div>
+          <div class="tx-f"><label for="ir">IRPJ + CSLL estimados</label><span class="tx-box"><input id="ir" inputmode="decimal" data-kind="pct"><i>%</i></span><small>Estimativa simplificada sobre o resultado (15% + 10% + 9%).</small></div>
+        </fieldset>
+        <p class="tx-foot">Os dados ficam salvos só neste navegador. <button type="button" id="txReset">Restaurar exemplo</button></p>
+      </form>
+
+      <div class="tx-out">
+        <div id="txAlerts" aria-live="polite"></div>
+        <div class="tx-scen" id="txScen"></div>
+
+        <div class="tx-card">
+          <h3>Para onde vai o dinheiro</h3>
+          <p class="tx-hint">Composição do total pago pelo cliente em cada cenário, na mesma escala.</p>
+          <div id="txBars"></div>
+          <div class="tx-keys" id="txKeys"></div>
+        </div>
+
+        <div class="tx-card">
+          <div class="tx-memh"><h3>Memória de cálculo</h3><div class="tx-tabs" role="tablist" id="txTabs" aria-label="Cenário da memória de cálculo"></div></div>
+          <ol class="tx-steps" id="txSteps"></ol>
+        </div>
+
+        <details class="tx-det">
+          <summary>Cálculo completo, linha a linha</summary>
+          <div class="tx-tbl"><table id="txTbl"></table></div>
+        </details>
+
+        <details class="tx-det">
+          <summary>Parâmetros da reforma</summary>
+          <div class="tx-par">
+            <div>
+              <div class="tx-f"><label for="cbsRef">CBS: referência</label><span class="tx-box"><input id="cbsRef" inputmode="decimal" data-kind="pct"><i>%</i></span><small>11,3%: cálculo do TCU (28/10/2026), pendente de resolução do Senado até 15/12/2026.</small></div>
+              <div class="tx-f"><label for="ibsRef">IBS: referência</label><span class="tx-box"><input id="ibsRef" inputmode="decimal" data-kind="pct"><i>%</i></span><small>18,7%: estimativa não oficial. Troque quando a alíquota oficial for publicada.</small></div>
+            </div>
+            <div class="tx-tbl"><table id="txSched"></table></div>
+          </div>
+          <div class="tx-notes">
+            <p>De 2026 a 2032, ICMS, ISS e PIS/COFINS não integram a base do IBS/CBS (LC 214/2025, art. 12, § 2º, V). Em 2026, CBS 0,9% e IBS 0,1% são compensados com PIS/COFINS ou dispensados (arts. 343, 346 e 348). Em 2027–2028, CBS = referência − 0,1 p.p. (art. 347).</p>
+            <p>O IBS de 2029 a 2032 segue uma aproximação proporcional (10% a 40% da referência). IBS/CBS não são incluídos na base do ICMS, tema ainda controvertido.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+  <p class="tx-legal">Simulação educativa. Antes de aplicar em operações reais, valide o enquadramento fiscal, os créditos permitidos e as regras aplicáveis com um profissional habilitado.</p>
+</section>
+
+<section class="block" id="como">
+  <h2 data-split>Como o cálculo funciona</h2>
+  <p class="sub">Toque em cada etapa para ver o detalhe.</p>
+  <div class="steps">
+    <div class="step" role="button" tabindex="0" aria-expanded="false"><span class="n"></span><span><h4>Custo líquido</h4><p>O ponto de partida é quanto a mercadoria realmente custa depois dos créditos.</p><span class="x"><p>Da nota de compra saem os créditos de ICMS, PIS/COFINS e IBS/CBS a que a empresa tem direito. Se não houver crédito de IBS/CBS, o imposto pago na compra vira custo.</p></span></span></div>
+    <div class="step" role="button" tabindex="0" aria-expanded="false"><span class="n"></span><span><h4>Tributos por dentro</h4><p>ICMS e PIS/COFINS fazem parte do preço e entram no denominador.</p><span class="x"><p>Preço = custo líquido ÷ [1 − (ICMS + PIS/COFINS + despesas + margem)]. O PIS/COFINS é calculado sobre a base sem ICMS. Se a soma dos percentuais chega a 100%, o cálculo é bloqueado.</p></span></span></div>
+    <div class="step" role="button" tabindex="0" aria-expanded="false"><span class="n"></span><span><h4>IBS e CBS por fora</h4><p>Os novos tributos são somados ao preço, sobre a base sem ICMS e PIS/COFINS.</p><span class="x"><p>O cliente paga o preço de venda mais o IBS/CBS destacado. Por isso o simulador mostra o preço e o total pago separados.</p></span></span></div>
+    <div class="step" role="button" tabindex="0" aria-expanded="false"><span class="n"></span><span><h4>Um ano de cada vez</h4><p>O cronograma define as alíquotas e o quanto de ICMS e PIS/COFINS ainda vale em cada ano.</p><span class="x"><p>2026 é ano de teste, sem efeito no preço. Em 2027 o PIS/COFINS sai e a CBS entra. De 2029 a 2032 o ICMS cai 10% ao ano enquanto o IBS sobe. Em 2033 fica só o modelo novo.</p></span></span></div>
+    <div class="step" role="button" tabindex="0" aria-expanded="false"><span class="n"></span><span><h4>Margem não é resultado</h4><p>Manter a margem em % não mantém o resultado em reais.</p><span class="x"><p>Com o preço menor, a mesma margem rende menos em reais. O simulador calcula o preço que preserva o resultado do cenário 1 e o total que o cliente pagaria nesse preço.</p></span></span></div>
+    <div class="step" role="button" tabindex="0" aria-expanded="false"><span class="n"></span><span><h4>Pronto para as alíquotas oficiais</h4><p>As referências de CBS e IBS são editáveis.</p><span class="x"><p>Quando as alíquotas definitivas forem publicadas, basta trocar os dois valores em "Parâmetros da reforma" para todo o cronograma se ajustar.</p></span></span></div>
+  </div>
+</section>
+
+<section class="block" id="papel">
+  <h2 data-split>Meu papel</h2>
+  <div class="cols">
+    <div class="panelc" data-rise><h3>O que eu fiz</h3><ul><li>Estudei as regras da transição e defini o modelo de formação de preço</li><li>Montei a planilha com cenários por ano, memória de cálculo e parâmetros editáveis</li><li>Transformei a planilha neste simulador, com os mesmos resultados centavo por centavo</li><li>Produzi um tutorial em vídeo que explica cada campo e cada resultado</li></ul><div class="tags"><span>Precificação</span><span>Tributos</span><span>Modelagem</span></div></div>
+    <div class="panelc" data-rise><h3>Como foi construído</h3><ul><li>Planilha em Excel com fórmulas conferidas linha a linha</li><li>Simulador em HTML e JavaScript, sem biblioteca, que roda no navegador</li><li>Base legal: EC 132/2023, LC 214/2025, STF Tema 69 e Lei 14.592/2023</li><li>Desenvolvimento acelerado com apoio de IA, sob a minha definição de regras e validação</li></ul><div class="tags"><span>Excel</span><span>JavaScript</span><span>Reforma tributária</span></div></div>
+  </div>
+</section>
+
+<nav class="next" aria-label="Navegação entre casos"><a class="btn ghost" href="../index.html#casos">← Todos os casos</a><a class="btn" href="ninho-impact.html">Próximo caso: Ninho Impact →</a></nav>
+</main>
+
+<footer><div class="wrap"><span>© 2026 Natã Campos de Oliveira</span><span><a href="https://wa.me/5511967020373?text=Ol%C3%A1%2C%20Nat%C3%A3!%20Vi%20seu%20portf%C3%B3lio%20e%20quero%20conversar." target="_blank" rel="noopener">WhatsApp</a> · <a href="mailto:natacamposoliveira@gmail.com">E-mail</a> · <a href="https://www.linkedin.com/in/natacamposoliveira/">LinkedIn</a></span></div></footer>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="../assets/js/site.js?v=feb0e715"></script>
+</body>
+</html>
